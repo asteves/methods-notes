@@ -1,0 +1,18 @@
+---
+title: "Lecture Notes"
+description: |
+  Lecture Notes and Resources
+author: 
+  - name: Alex Stephenson
+site: distill::distill_website
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+This will be the lecture notes repository
+
+
+
+

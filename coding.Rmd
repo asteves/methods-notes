@@ -1,0 +1,19 @@
+---
+title: "Coding Notes"
+description: |
+  Coding Notes and Resources
+author: 
+  - name: Alex Stephenson
+site: distill::distill_website
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+This is going to be the coding notes repository
+
+
+
+
+

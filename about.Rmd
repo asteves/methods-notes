@@ -1,10 +1,18 @@
 ---
-title: "About this site"
-description: |
-  Some additional details about the website
+title: "Alex Stephenson"
+links:
+  - label: Github
+    url: https://github.com/asteves
+  - label: Twitter 
+    url: https://twitter.com/adastephenson
+  - label: My Website
+    url: https://alexstephenson.me
+output:
+  postcards::jolla
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+I am a PhD Candidate at the University of California, Berkeley.

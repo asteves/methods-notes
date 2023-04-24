@@ -1,5 +1,9 @@
 name: "methods-notes"
 title: "Methods Tutoring Notes"
+repository_url: https://github.com/asteves/methods-notes
+creative_commons: CC BY
+twitter:
+  site: "@adastephenson"
 description: |
   Methods Tutoring Notes
 output_dir: "docs"
@@ -7,6 +11,10 @@ navbar:
   right:
     - text: "Home"
       href: index.html
-    - text: "About"
+    - text: "Creator"
       href: about.html
+    - text: "Lecture Notes"
+      href: lectures.html
+    - text: "Coding Notes"
+      href: coding.html
 output: distill::distill_article

@@ -2,19 +2,49 @@
   "articles": [
     {
       "path": "about.html",
-      "title": "About this site",
-      "description": "Some additional details about the website",
+      "title": "Alex Stephenson",
       "author": [],
-      "contents": "\n\n\n\n",
-      "last_modified": "2023-04-24T15:37:51-07:00"
+      "contents": "\n\n          \n          \n          Methods Tutoring Notes\n          \n          \n          Home\n          Creator\n          Lecture Notes\n          Coding Notes\n          ☰\n          \n          \n      \n        \n          \n            Alex Stephenson\n          \n          \n            \n              I am a PhD Candidate at the University of California,\n              Berkeley.\n            \n            \n              I am a PhD Candidate at the University of California,\n              Berkeley.\n            \n          \n\n          \n            \n              \n                  \n                    \n                      Github\n                    \n                  \n                \n                                \n                  \n                    \n                      Twitter\n                    \n                  \n                \n                                \n                  \n                    \n                      My Website\n                    \n                  \n                \n                              \n          \n\n          \n            \n              \n                                \n                  \n                    Github\n                  \n                \n                                \n                  \n                    Twitter\n                  \n                \n                                \n                  \n                    My Website\n                  \n                \n                              \n            \n          \n        \n      \n    \n\n    \n    \n    ",
+      "last_modified": "2023-04-24T16:19:51-07:00"
+    },
+    {
+      "path": "coding.html",
+      "title": "Coding Notes",
+      "description": "Coding Notes and Resources\n",
+      "author": [
+        {
+          "name": "Alex Stephenson",
+          "url": {}
+        }
+      ],
+      "contents": "\nThis is going to be the coding notes repository\n\n\n\n",
+      "last_modified": "2023-04-24T16:19:52-07:00"
     },
     {
       "path": "index.html",
       "title": "Methods Tutoring Notes",
-      "description": "Test change\n",
-      "author": [],
-      "contents": "\n\n\n\n",
-      "last_modified": "2023-04-24T15:37:52-07:00"
+      "description": "Welcome to the main course site\n",
+      "author": [
+        {
+          "name": "Alex Stephenson",
+          "url": {}
+        }
+      ],
+      "contents": "\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\n\n\n",
+      "last_modified": "2023-04-24T16:19:53-07:00"
+    },
+    {
+      "path": "lectures.html",
+      "title": "Lecture Notes",
+      "description": "Lecture Notes and Resources\n",
+      "author": [
+        {
+          "name": "Alex Stephenson",
+          "url": {}
+        }
+      ],
+      "contents": "\nThis will be the lecture notes repository\n\n\n\n",
+      "last_modified": "2023-04-24T16:19:54-07:00"
     }
   ],
   "collections": []
