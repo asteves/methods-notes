@@ -1,0 +1,209 @@
+---
+title: "Matrix Algebra in R"
+description: |
+  A Crash Course in Matrix Algebra using R
+author: 
+  - name: Alex Stephenson
+output:
+  distill::distill_article:
+    toc: true
+    toc_depth: 2
+    hightlight: haddock
+site: distill::distill_website
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Vectors 
+
+The simplest way to represent vectors in R is by using the vector data structure. 
+
+```{r}
+x = c(-1.1, 0.0, 3.6, -7.2)
+length(x) ## 4 
+```
+
+### Block and stacked vectors 
+
+In addition to creating vectors, we can concatenate vectors together to produce blocked and stacked vectors using the `c()` function.
+
+```{r}
+x = c(1,-2)
+y = c(1,1,0)
+z = c(x,y)
+z
+```
+
+### Some special vectors 
+
+The Zeros vector is a default behavior of creating a vector with a given length. 
+
+```{r}
+z = numeric(3)
+z
+```
+The Ones vector can be made by way of the `rep()` function. 
+
+```{r}
+o = rep(1,3)
+o
+```
+
+## Vector Addition and Multiplication 
+
+If x and y are vectors of the same size, then x+y and x-y give their element wise sum and difference respectively. R by default computes most vector operations element wise. 
+
+```{r}
+x = c(1,2,3)
+y = c(100,200,300)
+x+y
+```
+
+### Scalar Multiplication and division 
+
+If a is a number and x is a vector, then we can express the scalar vector product as either `a*x` or `x*a`
+
+```{r}
+a = 2 
+x = c(1,2,3)
+a*x
+x*a
+```
+
+### Using what we've learned to confirm the distributive property 
+
+The distributive property $\beta(a+b) = \beta a + \beta b$ holds for any two n-vector *a* and *b* and any scalar $\beta$. 
+
+```{r}
+set.seed(123)
+a = c(3,5,6)
+b = c(2,4,9)
+beta = 5
+lhs = beta*(a+b)
+rhs = beta*a + beta*b
+print(lhs)
+print(rhs)
+lhs == rhs
+```
+
+### Inner Product 
+
+The inner product of n-vector x and y is denoted $x^Ty$ 
+
+```{r}
+x = c(1,2,3,4)
+y = c(3,4,6,7)
+
+## t() is the transpose function in R
+t(x)%*% y
+```
+
+## Matrices 
+
+A matrix $\textbf{X}$ is an $m$ x $n$ data structure that is a rectangular array of scalar numbers. The numbers $x_{ij}$ are components or elements of $\textbf{X}$. The transpose of a matrix is the $n$ x $m$ matrix $\textbf{X}'$
+
+```{r}
+## Creating a matrix in R 
+X = matrix(seq(1,16,1), 
+           nrow = 4, 
+           byrow = T)
+X
+```
+We can also create matrices from vectors or from data frames
+
+```{r}
+## Equivalent to above but with vectors 
+X2 = rbind(1:4, 5:8,9:12,13:16)
+X2
+```
+
+```{r}
+## via a data frame 
+df = data.frame(
+  x = 1:4,
+  y = 5:8,
+  z = 9:12,
+  w = 13:16
+)
+X3 = as.matrix(df)
+X3
+```
+### Additional Definitions 
+
+The transpose in R 
+
+```{r}
+X_transpose = t(X)
+X_transpose
+```
+A diagonal matrix with all elements not on the diagonal equal to zero is a diagonal matrix. By default, R creates an identity matrix with the `diag()` function.
+
+```{r}
+dM = diag(4)
+dM
+```
+The trace of a matrix is the sum of the diagonal elements 
+
+$$trace(X) = \sum_{i=1}^n x_{ii}$$ 
+
+```{r}
+matrix_trace = function(mat){
+  return(sum(diag(mat)))
+}
+
+matrix_trace(X)
+```
+
+### Matrix Arithmetic 
+
+Addition and subtraction of matrices of the same order are performed element by element. Scalar multiplication is element by element 
+
+```{r}
+A = matrix(data = seq(1,9,1), nrow = 3, byrow = T)
+B = matrix(data = seq(1,9,1), nrow = 3, byrow = T)
+A+B
+```
+
+Provided that the number of columns of A equals the number of rows of B, we can multiple A by B. 
+
+```{r}
+## To get the appropriate multiplication, we wrap * in %*%
+A%*%B
+```
+
+Note that we can perform X'X in one of two ways. 
+
+```{r}
+t(A)%*%A 
+
+## same but can be slightly faster 
+crossprod(A)
+
+```
+
+## Ordinary Least Squares
+
+The simplest linear model expresses the dependence of a dependent or response variable y on independent variables $x_1,.., x_p$ and is usually written $y = X\beta + \epsilon$. See the [Lecture Notes](lectures.html) for more details on the properties of this model. 
+
+Define the design matrix as the $n \times p$ matrix of independent variables $x_1,..,x_p$ and assume that the first columns is a column of ones and that the design matrix has full rank. Then the usual OLS estimator is defined as $(X'X)^-1X'Y$
+
+```{r}
+beta_estimator = function(X,y){
+  X = cbind(rep(1,nrow(X)), X)
+  betas = solve(t(X)%*%X)%*%t(X)%*%y
+  return(betas)
+}
+
+## example data 
+x1 = rnorm(10000)
+x2 = rnorm(10000)
+y = 2*x1 + 4*x2 + runif(10000)
+
+X = cbind(x1, x2)
+beta_estimator(X,y)
+
+```
+ 
+

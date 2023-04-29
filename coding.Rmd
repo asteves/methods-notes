@@ -4,6 +4,10 @@ description: |
   Coding Notes and Resources
 author: 
   - name: Alex Stephenson
+output:
+  distill::distill_article:
+    toc: true
+    toc_depth: 2
 site: distill::distill_website
 ---
 
@@ -11,8 +15,72 @@ site: distill::distill_website
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-This is going to be the coding notes repository
+## Basic R Operations 
 
+There are a voluminous amount of resources on R online. Here is a very minimal crash course. 
+
+### Data Types 
+
+R has six basic data types. The four most common types we work with are vectors, lists, matrices, and data frames. 
+
+#### Vectors 
+
+```{r}
+## Three ways to create a vector
+v = c(1,2,3,4,5)
+v2 = seq(from=1,to=5, by = 1)
+
+## Since the sequence is counting with no breaks we can also do this
+v3 = 1:5
+```
+
+Vectors can also be characters (strings in other languages) 
+
+```{r}
+w = c("A", "B", "C")
+w2 = c("1","2","3")
+
+## We can convert to other types by the as.* series 
+w3 = as.character(v)
+w4 = as.numeric(w2)
+```
+
+
+#### Lists 
+
+```{r}
+l = list(v, w)
+l
+```
+
+#### Matrices 
+
+```{r}
+m = matrix(seq(1,16,1), nrow = 4, byrow = T)
+m
+```
+
+#### Data Frames 
+
+```{r}
+df = data.frame(
+  var1 = letters[1:5],
+  var2 = c(1,2,3,4,5)
+)
+df
+```
+
+### Subsetting 
+
+### Control Operations 
+
+### Functions
+
+## Graphing in R 
+
+## Simulations in R 
+
+### The Birthday Problem 
 
 
 

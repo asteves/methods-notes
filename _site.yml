@@ -17,4 +17,7 @@ navbar:
       href: lectures.html
     - text: "Coding Notes"
       href: coding.html
+    - text: "Linear Algebra"
+      href: matrix.html
+  search: true
 output: distill::distill_article
