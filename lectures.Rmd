@@ -11,7 +11,7 @@ site: distill::distill_website
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-This will be the lecture notes repository
+
 
 
 

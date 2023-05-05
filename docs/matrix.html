@@ -2371,7 +2371,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <h2 id="ordinary-least-squares">Ordinary Least Squares</h2>
 <p>The simplest linear model expresses the dependence of a dependent or response variable y on independent variables <span class="math inline">\(x_1,.., x_p\)</span> and is usually written <span class="math inline">\(y = X\beta + \epsilon\)</span>. See the <a href="lectures.html">Lecture Notes</a> for more details on the properties of this model.</p>
-<p>Define the design matrix as the <span class="math inline">\(n \times p\)</span> matrix of independent variables <span class="math inline">\(x_1,..,x_p\)</span> and assume that the first columns is a column of ones and that the design matrix has full rank. Then the usual OLS estimator is defined as <span class="math inline">\((X&#39;X)^-1X&#39;Y\)</span></p>
+<p>Define the design matrix as the <span class="math inline">\(n \times p\)</span> matrix of independent variables <span class="math inline">\(x_1,..,x_p\)</span> and assume that the first columns is a column of ones and that the design matrix has full rank. Then the usual OLS estimator is defined as <span class="math inline">\((X&#39;X)^{-1}X&#39;Y\)</span></p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>beta_estimator</span> <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>X</span>,<span class='va'>y</span><span class='op'>)</span><span class='op'>{</span></span>

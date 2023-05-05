@@ -2146,20 +2146,48 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </ul>
 </nav>
 </div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://broom.tidymodels.org/'>broom</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://lrberge.github.io/fixest/'>fixest</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://vincentarelbundock.github.io/marginaleffects/'>marginaleffects</a></span><span class='op'>)</span></span></code></pre>
+</div>
+</div>
 <h2 id="basic-r-operations">Basic R Operations</h2>
 <p>There are a voluminous amount of resources on R online. Here is a very minimal crash course.</p>
+<p>The most important underlying concept in R is that (almost) everything is an object.</p>
 <h3 id="data-types">Data Types</h3>
 <p>R has six basic data types. The four most common types we work with are vectors, lists, matrices, and data frames.</p>
 <h4 id="vectors">Vectors</h4>
 <div class="layout-chunk" data-layout="l-body">
-
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>## Three ways to create a vector</span></span>
+<span><span class='va'>v</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>,<span class='fl'>4</span>,<span class='fl'>5</span><span class='op'>)</span></span>
+<span><span class='va'>v2</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span>from<span class='op'>=</span><span class='fl'>1</span>,to<span class='op'>=</span><span class='fl'>5</span>, by <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='co'>## Since the sequence is counting with no breaks we can also do this</span></span>
+<span><span class='va'>v3</span> <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span></span></code></pre>
+</div>
 </div>
 <p>Vectors can also be characters (strings in other languages)</p>
 <div class="layout-chunk" data-layout="l-body">
-
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>w</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"A"</span>, <span class='st'>"B"</span>, <span class='st'>"C"</span><span class='op'>)</span></span>
+<span><span class='va'>w2</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"1"</span>,<span class='st'>"2"</span>,<span class='st'>"3"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='co'>## We can convert to other types by the as.* series </span></span>
+<span><span class='va'>w3</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span></span>
+<span><span class='va'>w4</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>w2</span><span class='op'>)</span></span></code></pre>
+</div>
 </div>
 <h4 id="lists">Lists</h4>
 <div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>l</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>v</span>, <span class='va'>w</span><span class='op'>)</span></span>
+<span><span class='va'>l</span></span></code></pre>
+</div>
 <pre><code>[[1]]
 [1] 1 2 3 4 5
 
@@ -2168,14 +2196,26 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <h4 id="matrices">Matrices</h4>
 <div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>m</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>16</span>,<span class='fl'>1</span><span class='op'>)</span>, nrow <span class='op'>=</span> <span class='fl'>4</span>, byrow <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span></span>
+<span><span class='va'>m</span></span></code></pre>
+</div>
 <pre><code>     [,1] [,2] [,3] [,4]
 [1,]    1    2    3    4
 [2,]    5    6    7    8
 [3,]    9   10   11   12
 [4,]   13   14   15   16</code></pre>
 </div>
+<p>For much more about linear algebra in R, consult the <a href="matrix.html">Matrix Algebra in R</a> section.</p>
 <h4 id="data-frames">Data Frames</h4>
 <div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>df</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span></span>
+<span>  var1 <span class='op'>=</span> <span class='va'>letters</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>]</span>,</span>
+<span>  var2 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>,<span class='fl'>4</span>,<span class='fl'>5</span><span class='op'>)</span></span>
+<span><span class='op'>)</span></span>
+<span><span class='va'>df</span></span></code></pre>
+</div>
 <pre><code>  var1 var2
 1    a    1
 2    b    2
@@ -2187,9 +2227,80 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h3 id="control-operations">Control Operations</h3>
 <h3 id="functions">Functions</h3>
 <h2 id="graphing-in-r">Graphing in R</h2>
+<h3 id="the-basics">The Basics</h3>
+<p>R has default plotting, but for the purpose of these notes I exclusively use <code>ggplot2</code>. A main distinction between base plotting and <code>ggplot2</code> is that <code>ggplot2</code> requires a data frame and presumes that your data is tidy.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>## Using the built-in dataset diamonds</span></span>
+<span><span class='va'>df</span> <span class='op'>=</span> <span class='va'>diamonds</span></span>
+<span></span>
+<span><span class='co'>## Data</span></span>
+<span><span class='va'>df</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='co'>## Mapping</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>carat</span>, y <span class='op'>=</span> <span class='va'>price</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='co'>## geom</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='co'>## we can have multiple geoms </span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"lm"</span>, se <span class='op'>=</span> <span class='cn'>F</span><span class='op'>)</span><span class='op'>+</span></span>
+<span>  <span class='co'>## Labels</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Carat"</span>,</span>
+<span>       y <span class='op'>=</span> <span class='st'>"Price"</span>,</span>
+<span>       title <span class='op'>=</span> <span class='st'>"Example Chart"</span><span class='op'>)</span><span class='op'>+</span></span>
+<span>  <span class='co'>## theme </span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_minimal</a></span><span class='op'>(</span><span class='op'>)</span></span></code></pre>
+</div>
+<p><img src="coding_files/figure-html5/unnamed-chunk-7-1.png" width="624" /></p>
+</div>
+<p>For more extensive discussion of graphing capabilities in R, check out <a href="https://socviz.co/">Data Visualization: A Practical Introduction by Healy</a>.</p>
+<h3 id="useful-plots-for-political-science">Useful Plots for Political Science</h3>
+<h4 id="coefficient-plot">Coefficient Plot</h4>
+<p>First let’s make a model using the gapminder dataset.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>## Make a model with robust standard errors using the gapminder</span></span>
+<span><span class='co'>## dataset</span></span>
+<span><span class='va'>m1</span> <span class='op'>=</span> <span class='fu'>fixest</span><span class='fu'>::</span><span class='fu'><a href='https://lrberge.github.io/fixest/reference/feols.html'>feols</a></span><span class='op'>(</span><span class='va'>lifeExp</span> <span class='op'>~</span> <span class='va'>gdpPercap</span> <span class='op'>+</span> <span class='va'>pop</span> <span class='op'>+</span> <span class='va'>continent</span>, data <span class='op'>=</span> <span class='fu'>gapminder</span><span class='fu'>::</span><span class='va'><a href='https://jennybc.github.io/gapminder/reference/gapminder.html'>gapminder</a></span>, vcov <span class='op'>=</span> <span class='st'>"HC1"</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span>conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>m1</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code># A tibble: 6 × 7
+  term        estimate std.error statistic  p.value conf.low conf.high
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)  4.78e+1   3.79e-1    126.   0         4.71e+1   4.86e+1
+2 gdpPercap    4.50e-4   7.27e-5      6.19 7.67e-10  3.07e-4   5.92e-4
+3 pop          6.57e-9   1.52e-9      4.32 1.66e- 5  3.59e-9   9.55e-9
+4 continentA…  1.35e+1   6.98e-1     19.3  3.06e-75  1.21e+1   1.48e+1
+5 continentA…  8.19e+0   6.87e-1     11.9  1.44e-31  6.85e+0   9.54e+0
+6 continentE…  1.75e+1   9.88e-1     17.7  2.47e-64  1.55e+1   1.94e+1</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>m1</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>term</span>, y <span class='op'>=</span> <span class='va'>estimate</span>, </span>
+<span>             ymin <span class='op'>=</span> <span class='va'>conf.low</span>, </span>
+<span>             ymax <span class='op'>=</span> <span class='va'>conf.high</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_linerange.html'>geom_pointrange</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> </span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/coord_flip.html'>coord_flip</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_minimal</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>""</span>,</span>
+<span>       y <span class='op'>=</span> <span class='st'>"Coefficient Estimates"</span>,</span>
+<span>       title <span class='op'>=</span> <span class='st'>"Coefficient Plot"</span><span class='op'>)</span></span></code></pre>
+</div>
+<p><img src="coding_files/figure-html5/unnamed-chunk-9-1.png" width="624" /></p>
+</div>
+<h3 id="added-variable-plots">Added Variable Plots</h3>
+<h3 id="marginal-effects-plots">Marginal Effects Plots</h3>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>marginModel</span> <span class='op'>=</span> <span class='fu'>fixest</span><span class='fu'>::</span><span class='fu'><a href='https://lrberge.github.io/fixest/reference/feglm.html'>feglm</a></span><span class='op'>(</span><span class='va'>lifeExp</span> <span class='op'>~</span> <span class='va'>gdpPercap</span> <span class='op'>+</span> <span class='va'>pop</span> <span class='op'>+</span> <span class='va'>continent</span>, data <span class='op'>=</span> <span class='fu'>gapminder</span><span class='fu'>::</span><span class='va'><a href='https://jennybc.github.io/gapminder/reference/gapminder.html'>gapminder</a></span>, vcov <span class='op'>=</span> <span class='st'>"HC1"</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'>marginaleffects</span><span class='fu'>::</span><span class='fu'><a href='https://vincentarelbundock.github.io/marginaleffects/reference/slopes.html'>slopes</a></span><span class='op'>(</span>by <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span></code></pre>
+</div>
+</div>
 <h2 id="simulations-in-r">Simulations in R</h2>
 <h3 id="the-birthday-problem">The Birthday Problem</h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

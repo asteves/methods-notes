@@ -12,12 +12,24 @@ site: distill::distill_website
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
+options(scipen = 999)
+```
+
+```{r, message = F, warning = F}
+library(broom)
+library(data.table)
+library(dplyr)
+library(fixest)
+library(ggplot2)
+library(marginaleffects)
 ```
 
 ## Basic R Operations 
 
 There are a voluminous amount of resources on R online. Here is a very minimal crash course. 
+
+The most important underlying concept in R is that (almost) everything is an object. 
 
 ### Data Types 
 
@@ -60,6 +72,8 @@ m = matrix(seq(1,16,1), nrow = 4, byrow = T)
 m
 ```
 
+For much more about linear algebra in R, consult the [Matrix Algebra in R](matrix.html) section. 
+
 #### Data Frames 
 
 ```{r}
@@ -77,6 +91,75 @@ df
 ### Functions
 
 ## Graphing in R 
+
+### The Basics 
+
+R has default plotting, but for the purpose of these notes I exclusively use `ggplot2`. A main distinction between base plotting and `ggplot2` is that `ggplot2` requires a data frame and presumes that your data is tidy.
+
+
+```{r, echo = TRUE, message = F, warning = F}
+## Using the built-in dataset diamonds
+df = diamonds
+
+## Data
+df |>
+  ## Mapping
+  ggplot(aes(x = carat, y = price)) +
+  ## geom
+  geom_point() +
+  ## we can have multiple geoms 
+  geom_smooth(method = "lm", se = F)+
+  ## Labels
+  labs(x = "Carat",
+       y = "Price",
+       title = "Example Chart")+
+  ## theme 
+  theme_minimal()
+```
+
+
+For more extensive discussion of graphing capabilities in R, check out [Data Visualization: A Practical Introduction by Healy](https://socviz.co/). 
+
+### Useful Plots for Political Science 
+
+#### Coefficient Plot 
+
+First let's make a model using the gapminder dataset. 
+
+```{r}
+## Make a model with robust standard errors using the gapminder
+## dataset
+m1 = fixest::feols(lifeExp ~ gdpPercap + pop + continent, data = gapminder::gapminder, vcov = "HC1") |>
+  tidy(conf.int = TRUE)
+
+head(m1)
+```
+
+
+```{r}
+m1 |>
+  ggplot(aes(x = term, y = estimate, 
+             ymin = conf.low, 
+             ymax = conf.high))+
+  geom_point() +
+  geom_pointrange() + 
+  coord_flip() +
+  theme_minimal() +
+  labs(x = "",
+       y = "Coefficient Estimates",
+       title = "Coefficient Plot")
+```
+### Added Variable Plots 
+
+
+### Marginal Effects Plots 
+
+```{r}
+marginModel = fixest::feglm(lifeExp ~ gdpPercap + pop + continent, data = gapminder::gapminder, vcov = "HC1") |>
+  marginaleffects::slopes(by = TRUE)
+
+
+```
 
 ## Simulations in R 
 
