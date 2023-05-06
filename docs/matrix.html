@@ -2145,7 +2145,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <li><a href="#matrices" id="toc-matrices">Matrices</a></li>
 <li><a href="#norms" id="toc-norms">Norms</a></li>
 <li><a href="#ordinary-least-squares" id="toc-ordinary-least-squares">Ordinary Least Squares</a></li>
-<li><a href="#covariance-matrices" id="toc-covariance-matrices">Covariance Matrices</a></li>
+<li><a href="#covariance-matrices-and-standard-errors" id="toc-covariance-matrices-and-standard-errors">Covariance Matrices and Standard Errors</a></li>
 <li><a href="#principal-components-analysis" id="toc-principal-components-analysis">Principal Components Analysis</a></li>
 </ul>
 </nav>
@@ -2610,9 +2610,164 @@ x2 4.0020879</code></pre>
 <span id="cb81-10"><a href="#cb81-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb81-11"><a href="#cb81-11" aria-hidden="true" tabindex="-1"></a><span class="co"># (X&#39;X)^-1X&#39;y</span></span>
 <span id="cb81-12"><a href="#cb81-12" aria-hidden="true" tabindex="-1"></a>np.linalg.inv(X.T <span class="op">@</span> X) <span class="op">@</span> X.T <span class="op">@</span> y</span></code></pre></div>
-<pre><code>array([0.49962749, 1.99290428, 4.0017834 ])</code></pre>
+<pre><code>array([0.49364612, 2.00709351, 3.98956255])</code></pre>
 </div>
-<h2 id="covariance-matrices">Covariance Matrices</h2>
+<h2 id="covariance-matrices-and-standard-errors">Covariance Matrices and Standard Errors</h2>
+<h3 id="classical-standard-errors">Classical Standard Errors</h3>
+<p>The least squares solution gives us point estimates for coefficients, but if we want to do inference, we need to get standard errors. See the <a href="lectures.html">Lecture Notes</a> for more details.</p>
+<p>To get standard errors, we must first calculate the covariance matrix of our estimates and then take the square root of the diagonal.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>beta_estimator</span> <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>X</span>,<span class='va'>y</span><span class='op'>)</span><span class='op'>{</span></span>
+<span>  <span class='va'>X</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span><span class='op'>)</span>, <span class='va'>X</span><span class='op'>)</span></span>
+<span>  <span class='va'>betas</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/solve.html'>solve</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span><span class='op'><a href='https://rdrr.io/r/base/matmult.html'>%*%</a></span><span class='va'>X</span><span class='op'>)</span><span class='op'><a href='https://rdrr.io/r/base/matmult.html'>%*%</a></span><span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span><span class='op'><a href='https://rdrr.io/r/base/matmult.html'>%*%</a></span><span class='va'>y</span></span>
+<span>  <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='va'>betas</span><span class='op'>)</span></span>
+<span><span class='op'>}</span></span>
+<span></span>
+<span><span class='va'>betas_and_std_errors</span> <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>X</span>,<span class='va'>y</span><span class='op'>)</span><span class='op'>{</span></span>
+<span>  <span class='va'>betas</span> <span class='op'>=</span> <span class='fu'>beta_estimator</span><span class='op'>(</span><span class='va'>X</span>,<span class='va'>y</span><span class='op'>)</span></span>
+<span>  <span class='co'>## get the design matrix again</span></span>
+<span>  <span class='va'>X</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span><span class='op'>)</span>, <span class='va'>X</span><span class='op'>)</span></span>
+<span>  <span class='va'>residuals</span> <span class='op'>=</span> <span class='va'>y</span> <span class='op'>-</span> <span class='va'>X</span> <span class='op'><a href='https://rdrr.io/r/base/matmult.html'>%*%</a></span> <span class='va'>betas</span> </span>
+<span>  </span>
+<span>  <span class='co'>## Degree of freedom calculation </span></span>
+<span>  <span class='va'>p</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span> <span class='op'>-</span> <span class='fl'>1</span> </span>
+<span>  <span class='va'>df</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span> <span class='op'>-</span> <span class='va'>p</span> <span class='op'>-</span> <span class='fl'>1</span> </span>
+<span>  </span>
+<span>  <span class='co'>## Residual variance </span></span>
+<span>  <span class='va'>res_var</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>residuals</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>)</span> <span class='op'>/</span> <span class='va'>df</span> </span>
+<span>  </span>
+<span>  <span class='co'>## Covariance matrix of estimate </span></span>
+<span>  <span class='co'>## cov(\hat{\beta}|X) = (X'X)^-1X'cov(\epsilon|X)X(X'X)^-1</span></span>
+<span>  <span class='va'>beta_cov</span> <span class='op'>=</span> <span class='va'>res_var</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/solve.html'>solve</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span><span class='op'><a href='https://rdrr.io/r/base/matmult.html'>%*%</a></span><span class='va'>X</span><span class='op'>)</span></span>
+<span>  </span>
+<span>  <span class='co'>## Standard errors are square root of diagonal </span></span>
+<span>  <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>beta <span class='op'>=</span> <span class='va'>betas</span>, se <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span><span class='op'>(</span><span class='va'>beta_cov</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='op'>}</span></span>
+<span></span>
+<span><span class='co'>## example data </span></span>
+<span><span class='co'>## To keep consistent with python examples I use pre-generated </span></span>
+<span><span class='co'>## random variables created in python with:</span></span>
+<span><span class='co'># x1 = np.random.default_rng(seed=123).normal(0, 1, size =1000)</span></span>
+<span><span class='co'># x2 = np.random.default_rng().normal(0, 1, size =1000)</span></span>
+<span><span class='co'># ones = np.ones(1000)</span></span>
+<span><span class='co'># y = 2*x1 + 4*x2 + np.random.default_rng().uniform(size = 1000)</span></span>
+<span></span>
+<span><span class='va'>x1</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span><span class='st'>"x1.csv"</span>, header <span class='op'>=</span> <span class='cn'>F</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://rdrr.io/r/base/unlist.html'>unlist</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span><span class='va'>x2</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span><span class='st'>"x2.csv"</span>, header <span class='op'>=</span> <span class='cn'>F</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://rdrr.io/r/base/unlist.html'>unlist</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span><span class='va'>y</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span><span class='st'>"y.csv"</span>, header <span class='op'>=</span> <span class='cn'>F</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://rdrr.io/r/base/unlist.html'>unlist</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span><span class='va'>X</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>x1</span>, <span class='va'>x2</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'>betas_and_std_errors</span><span class='op'>(</span><span class='va'>X</span>,<span class='va'>y</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>$beta
+       [,1]
+   0.484434
+x1 2.005286
+x2 3.994715
+
+$se
+                     x1          x2 
+0.009244982 0.009198621 0.009201766 </code></pre>
+</div>
+<p>In python</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode" id="cb84"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> betas_and_se(X,y):</span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>  betas <span class="op">=</span> np.linalg.inv(X.T <span class="op">@</span> X) <span class="op">@</span> X.T <span class="op">@</span> y</span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>  residuals <span class="op">=</span> y <span class="op">-</span> X <span class="op">@</span> betas</span>
+<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a>  df <span class="op">=</span> X.shape[<span class="dv">0</span>] <span class="op">-</span> X.shape[<span class="dv">1</span>]</span>
+<span id="cb84-5"><a href="#cb84-5" aria-hidden="true" tabindex="-1"></a>  res_var <span class="op">=</span> np.<span class="bu">sum</span>(residuals<span class="op">**</span><span class="dv">2</span>) <span class="op">/</span> df</span>
+<span id="cb84-6"><a href="#cb84-6" aria-hidden="true" tabindex="-1"></a>  cov_mat <span class="op">=</span> res_var <span class="op">*</span> np.linalg.inv(X.T <span class="op">@</span> X)</span>
+<span id="cb84-7"><a href="#cb84-7" aria-hidden="true" tabindex="-1"></a>  se <span class="op">=</span> np.sqrt(np.diag(cov_mat))</span>
+<span id="cb84-8"><a href="#cb84-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> betas, se</span>
+<span id="cb84-9"><a href="#cb84-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-10"><a href="#cb84-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-11"><a href="#cb84-11" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> np.loadtxt(<span class="st">&quot;x1.csv&quot;</span>, delimiter <span class="op">=</span> <span class="st">&quot;,&quot;</span>, dtype <span class="op">=</span> <span class="bu">float</span>)</span>
+<span id="cb84-12"><a href="#cb84-12" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> np.loadtxt(<span class="st">&quot;x2.csv&quot;</span>, delimiter <span class="op">=</span> <span class="st">&quot;,&quot;</span>, dtype <span class="op">=</span> <span class="bu">float</span>)</span>
+<span id="cb84-13"><a href="#cb84-13" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.loadtxt(<span class="st">&quot;y.csv&quot;</span>, delimiter <span class="op">=</span> <span class="st">&quot;,&quot;</span>, dtype <span class="op">=</span> <span class="bu">float</span>)</span>
+<span id="cb84-14"><a href="#cb84-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-15"><a href="#cb84-15" aria-hidden="true" tabindex="-1"></a><span class="co"># One way to make a matrix from vectors </span></span>
+<span id="cb84-16"><a href="#cb84-16" aria-hidden="true" tabindex="-1"></a><span class="co"># X = np.concatenate((ones, x1, x2)).reshape((-1,3), order = &#39;F&#39;)</span></span>
+<span id="cb84-17"><a href="#cb84-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-18"><a href="#cb84-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternatively we can make a matrix with column_stack()</span></span>
+<span id="cb84-19"><a href="#cb84-19" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.column_stack((ones, x1, x2))</span>
+<span id="cb84-20"><a href="#cb84-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-21"><a href="#cb84-21" aria-hidden="true" tabindex="-1"></a>betas_and_se(X,y)</span></code></pre></div>
+<pre><code>(array([0.48443399, 2.00528572, 3.99471469]), array([0.00924498, 0.00919862, 0.00920177]))</code></pre>
+</div>
+<h3 id="sandwich-standard-errors">Sandwich Standard Errors</h3>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>betas_and_std_errors_sandwich</span> <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>X</span>,<span class='va'>y</span><span class='op'>)</span><span class='op'>{</span></span>
+<span>  <span class='va'>betas</span> <span class='op'>=</span> <span class='fu'>beta_estimator</span><span class='op'>(</span><span class='va'>X</span>,<span class='va'>y</span><span class='op'>)</span></span>
+<span>  <span class='co'>## get the design matrix again</span></span>
+<span>  <span class='va'>X</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span><span class='op'>)</span>, <span class='va'>X</span><span class='op'>)</span></span>
+<span>  <span class='va'>residuals</span> <span class='op'>=</span> <span class='va'>y</span> <span class='op'>-</span> <span class='va'>X</span> <span class='op'><a href='https://rdrr.io/r/base/matmult.html'>%*%</a></span> <span class='va'>betas</span> </span>
+<span></span>
+<span>  <span class='co'>## Degree of freedom calculation </span></span>
+<span>  <span class='va'>p</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span> <span class='op'>-</span> <span class='fl'>1</span> </span>
+<span>  <span class='va'>df</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span> <span class='op'>-</span> <span class='va'>p</span> <span class='op'>-</span> <span class='fl'>1</span> </span>
+<span>  </span>
+<span>  </span>
+<span>  <span class='co'>## HC1 or Eicker-Huber_White Variance Estimator </span></span>
+<span>  <span class='co'>## This is a way of creating a diagonal matrix from a matrix</span></span>
+<span>  <span class='co'>## with one column in R. </span></span>
+<span>  <span class='va'>u2</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/vector.html'>as.vector</a></span><span class='op'>(</span><span class='va'>residuals</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>, ncol <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span><span class='op'>)</span></span>
+<span>  <span class='va'>beta_cov</span> <span class='op'>=</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span><span class='op'>/</span><span class='va'>df</span><span class='op'>)</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/solve.html'>solve</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span><span class='op'><a href='https://rdrr.io/r/base/matmult.html'>%*%</a></span><span class='va'>X</span><span class='op'>)</span> <span class='op'><a href='https://rdrr.io/r/base/matmult.html'>%*%</a></span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span> <span class='op'><a href='https://rdrr.io/r/base/matmult.html'>%*%</a></span> <span class='va'>u2</span> <span class='op'><a href='https://rdrr.io/r/base/matmult.html'>%*%</a></span> <span class='va'>X</span>  <span class='op'><a href='https://rdrr.io/r/base/matmult.html'>%*%</a></span> <span class='fu'><a href='https://rdrr.io/r/base/solve.html'>solve</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span><span class='op'><a href='https://rdrr.io/r/base/matmult.html'>%*%</a></span><span class='va'>X</span><span class='op'>)</span></span>
+<span>  </span>
+<span>  <span class='co'>## Standard errors are square root of diagonal </span></span>
+<span>  <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>beta <span class='op'>=</span> <span class='va'>betas</span>, se <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span><span class='op'>(</span><span class='va'>beta_cov</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='op'>}</span></span>
+<span></span>
+<span><span class='co'>## example data </span></span>
+<span><span class='va'>x1</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span><span class='st'>"x1.csv"</span>, header <span class='op'>=</span> <span class='cn'>F</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://rdrr.io/r/base/unlist.html'>unlist</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span><span class='va'>x2</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span><span class='st'>"x2.csv"</span>, header <span class='op'>=</span> <span class='cn'>F</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://rdrr.io/r/base/unlist.html'>unlist</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span><span class='va'>y</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span><span class='st'>"y.csv"</span>, header <span class='op'>=</span> <span class='cn'>F</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://rdrr.io/r/base/unlist.html'>unlist</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span><span class='va'>X</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>x1</span>, <span class='va'>x2</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'>betas_and_std_errors_sandwich</span><span class='op'>(</span><span class='va'>X</span>,<span class='va'>y</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>$beta
+       [,1]
+   0.484434
+x1 2.005286
+x2 3.994715
+
+$se
+                     x1          x2 
+0.009248444 0.009296868 0.009105095 </code></pre>
+</div>
+<p>In python</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode" id="cb87"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> betas_and_std_errors_sandwich(X,y):</span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">## Calculate Beta coefficients</span></span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>  betas <span class="op">=</span> np.linalg.inv(X.T <span class="op">@</span> X) <span class="op">@</span> X.T <span class="op">@</span> y</span>
+<span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb87-5"><a href="#cb87-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">## Get residuals, degree of freedom, and squared residuals</span></span>
+<span id="cb87-6"><a href="#cb87-6" aria-hidden="true" tabindex="-1"></a>  residuals <span class="op">=</span> y <span class="op">-</span> X <span class="op">@</span> betas</span>
+<span id="cb87-7"><a href="#cb87-7" aria-hidden="true" tabindex="-1"></a>  df <span class="op">=</span> X.shape[<span class="dv">0</span>] <span class="op">-</span> X.shape[<span class="dv">1</span>]</span>
+<span id="cb87-8"><a href="#cb87-8" aria-hidden="true" tabindex="-1"></a>  u2 <span class="op">=</span> residuals<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb87-9"><a href="#cb87-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-10"><a href="#cb87-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">## apply the HC1 formula with appropriate correction </span></span>
+<span id="cb87-11"><a href="#cb87-11" aria-hidden="true" tabindex="-1"></a>  beta_cov <span class="op">=</span> (X.shape[<span class="dv">0</span>]<span class="op">/</span>df) <span class="op">*</span> np.linalg.inv(X.T <span class="op">@</span> X) <span class="op">@</span> X.T <span class="op">@</span> np.diag(u2) <span class="op">@</span> X <span class="op">@</span> np.linalg.inv(X.T <span class="op">@</span> X)</span>
+<span id="cb87-12"><a href="#cb87-12" aria-hidden="true" tabindex="-1"></a>  se <span class="op">=</span> np.sqrt(np.diag(beta_cov))</span>
+<span id="cb87-13"><a href="#cb87-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> betas, se</span>
+<span id="cb87-14"><a href="#cb87-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-15"><a href="#cb87-15" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> np.loadtxt(<span class="st">&quot;x1.csv&quot;</span>, delimiter <span class="op">=</span> <span class="st">&quot;,&quot;</span>, dtype <span class="op">=</span> <span class="bu">float</span>)</span>
+<span id="cb87-16"><a href="#cb87-16" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> np.loadtxt(<span class="st">&quot;x2.csv&quot;</span>, delimiter <span class="op">=</span> <span class="st">&quot;,&quot;</span>, dtype <span class="op">=</span> <span class="bu">float</span>)</span>
+<span id="cb87-17"><a href="#cb87-17" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.loadtxt(<span class="st">&quot;y.csv&quot;</span>, delimiter <span class="op">=</span> <span class="st">&quot;,&quot;</span>, dtype <span class="op">=</span> <span class="bu">float</span>)</span>
+<span id="cb87-18"><a href="#cb87-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-19"><a href="#cb87-19" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.column_stack((ones, x1, x2))</span>
+<span id="cb87-20"><a href="#cb87-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-21"><a href="#cb87-21" aria-hidden="true" tabindex="-1"></a>betas_and_std_errors_sandwich(X,y)</span></code></pre></div>
+<pre><code>(array([0.48443399, 2.00528572, 3.99471469]), array([0.00924844, 0.00929687, 0.00910509]))</code></pre>
+</div>
 <h2 id="principal-components-analysis">Principal Components Analysis</h2>
 <p>Suppose we have a collection of points in <span class="math inline">\(\mathbb{R}^n\)</span> and we want to encode these points to represent a lower-dimensional version of them. If <span class="math inline">\(X&#39;\)</span> is a <span class="math inline">\(n \times p\)</span> matrix, then the first principal component of <span class="math inline">\(X&#39;\)</span> is the linear combination of the <span class="math inline">\(p\)</span> variables <span class="math inline">\(y&#39;_1 = (X-\bar{X})&#39;a_1\)</span> s.t <span class="math inline">\(V(y_1)&#39;\)</span> is maximized subject to the constraint that <span class="math inline">\(a_1&#39;a_1 =1\)</span>. Subsequent principal components are defined successively in a similar way.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2688,41 +2843,41 @@ Colorado    1.4993407 -0.9776297  1.08400162 -0.001450164</code></pre>
 </div>
 <p>In python</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode" id="cb87"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>np.set_printoptions(suppress<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> scale(mat):</span>
-<span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a>  center <span class="op">=</span> mat <span class="op">-</span> np.mean(mat, axis <span class="op">=</span> <span class="dv">0</span>)</span>
-<span id="cb87-5"><a href="#cb87-5" aria-hidden="true" tabindex="-1"></a>  scale <span class="op">=</span> center <span class="op">/</span> np.std(mat, axis <span class="op">=</span> <span class="dv">0</span>, ddof <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb87-6"><a href="#cb87-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> scale</span>
-<span id="cb87-7"><a href="#cb87-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb87-8"><a href="#cb87-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pca(mat):</span>
-<span id="cb87-9"><a href="#cb87-9" aria-hidden="true" tabindex="-1"></a>  center <span class="op">=</span> mat <span class="op">-</span> np.mean(mat, axis <span class="op">=</span> <span class="dv">0</span>)</span>
-<span id="cb87-10"><a href="#cb87-10" aria-hidden="true" tabindex="-1"></a>  scale <span class="op">=</span> center <span class="op">/</span> np.std(mat, axis <span class="op">=</span> <span class="dv">0</span>, ddof <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb87-11"><a href="#cb87-11" aria-hidden="true" tabindex="-1"></a>  cov_mat <span class="op">=</span> np.cov(scale, rowvar <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb87-12"><a href="#cb87-12" aria-hidden="true" tabindex="-1"></a>  vals, vec <span class="op">=</span> np.linalg.eig(cov_mat)</span>
-<span id="cb87-13"><a href="#cb87-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb87-14"><a href="#cb87-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">## Sort eigen vectors and eigen values in order </span></span>
-<span id="cb87-15"><a href="#cb87-15" aria-hidden="true" tabindex="-1"></a>  idx <span class="op">=</span> (<span class="op">-</span>vals).argsort()</span>
-<span id="cb87-16"><a href="#cb87-16" aria-hidden="true" tabindex="-1"></a>  vals <span class="op">=</span> vals[idx]</span>
-<span id="cb87-17"><a href="#cb87-17" aria-hidden="true" tabindex="-1"></a>  vec <span class="op">=</span> vec[:, idx]</span>
-<span id="cb87-18"><a href="#cb87-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">## Calculate new dataset </span></span>
-<span id="cb87-19"><a href="#cb87-19" aria-hidden="true" tabindex="-1"></a>  A_new <span class="op">=</span> (vec.T <span class="op">@</span> scale.T).T</span>
-<span id="cb87-20"><a href="#cb87-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> vec, A_new</span>
-<span id="cb87-21"><a href="#cb87-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb87-22"><a href="#cb87-22" aria-hidden="true" tabindex="-1"></a><span class="co">## Test with the same UArrests dataset </span></span>
-<span id="cb87-23"><a href="#cb87-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb87-24"><a href="#cb87-24" aria-hidden="true" tabindex="-1"></a><span class="co">## We need to do a bit of cleaning of the raw dataset to </span></span>
-<span id="cb87-25"><a href="#cb87-25" aria-hidden="true" tabindex="-1"></a><span class="co">## turn it into an appropriate matrix</span></span>
-<span id="cb87-26"><a href="#cb87-26" aria-hidden="true" tabindex="-1"></a>usarrests <span class="op">=</span> np.loadtxt(<span class="st">&quot;https://raw.githubusercontent.com/JWarmenhoven/ISLR-python/master/Notebooks/Data/USArrests.csv&quot;</span>, delimiter <span class="op">=</span> <span class="st">&quot;,&quot;</span>, dtype <span class="op">=</span> <span class="bu">str</span>, skiprows <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb87-27"><a href="#cb87-27" aria-hidden="true" tabindex="-1"></a>usarrests <span class="op">=</span> np.delete(usarrests, (<span class="dv">0</span>), axis <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb87-28"><a href="#cb87-28" aria-hidden="true" tabindex="-1"></a>usarrests <span class="op">=</span> usarrests.astype(dtype <span class="op">=</span> <span class="st">&quot;float&quot;</span>)</span>
-<span id="cb87-29"><a href="#cb87-29" aria-hidden="true" tabindex="-1"></a>vec, transformed <span class="op">=</span> pca(usarrests)</span>
-<span id="cb87-30"><a href="#cb87-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;Principal Components:&#39;</span>, vec)</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>np.set_printoptions(suppress<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> scale(mat):</span>
+<span id="cb93-4"><a href="#cb93-4" aria-hidden="true" tabindex="-1"></a>  center <span class="op">=</span> mat <span class="op">-</span> np.mean(mat, axis <span class="op">=</span> <span class="dv">0</span>)</span>
+<span id="cb93-5"><a href="#cb93-5" aria-hidden="true" tabindex="-1"></a>  scale <span class="op">=</span> center <span class="op">/</span> np.std(mat, axis <span class="op">=</span> <span class="dv">0</span>, ddof <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb93-6"><a href="#cb93-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> scale</span>
+<span id="cb93-7"><a href="#cb93-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-8"><a href="#cb93-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pca(mat):</span>
+<span id="cb93-9"><a href="#cb93-9" aria-hidden="true" tabindex="-1"></a>  center <span class="op">=</span> mat <span class="op">-</span> np.mean(mat, axis <span class="op">=</span> <span class="dv">0</span>)</span>
+<span id="cb93-10"><a href="#cb93-10" aria-hidden="true" tabindex="-1"></a>  scale <span class="op">=</span> center <span class="op">/</span> np.std(mat, axis <span class="op">=</span> <span class="dv">0</span>, ddof <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb93-11"><a href="#cb93-11" aria-hidden="true" tabindex="-1"></a>  cov_mat <span class="op">=</span> np.cov(scale, rowvar <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb93-12"><a href="#cb93-12" aria-hidden="true" tabindex="-1"></a>  vals, vec <span class="op">=</span> np.linalg.eig(cov_mat)</span>
+<span id="cb93-13"><a href="#cb93-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb93-14"><a href="#cb93-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">## Sort eigen vectors and eigen values in order </span></span>
+<span id="cb93-15"><a href="#cb93-15" aria-hidden="true" tabindex="-1"></a>  idx <span class="op">=</span> (<span class="op">-</span>vals).argsort()</span>
+<span id="cb93-16"><a href="#cb93-16" aria-hidden="true" tabindex="-1"></a>  vals <span class="op">=</span> vals[idx]</span>
+<span id="cb93-17"><a href="#cb93-17" aria-hidden="true" tabindex="-1"></a>  vec <span class="op">=</span> vec[:, idx]</span>
+<span id="cb93-18"><a href="#cb93-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">## Calculate new dataset </span></span>
+<span id="cb93-19"><a href="#cb93-19" aria-hidden="true" tabindex="-1"></a>  A_new <span class="op">=</span> (vec.T <span class="op">@</span> scale.T).T</span>
+<span id="cb93-20"><a href="#cb93-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> vec, A_new</span>
+<span id="cb93-21"><a href="#cb93-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-22"><a href="#cb93-22" aria-hidden="true" tabindex="-1"></a><span class="co">## Test with the same UArrests dataset </span></span>
+<span id="cb93-23"><a href="#cb93-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-24"><a href="#cb93-24" aria-hidden="true" tabindex="-1"></a><span class="co">## We need to do a bit of cleaning of the raw dataset to </span></span>
+<span id="cb93-25"><a href="#cb93-25" aria-hidden="true" tabindex="-1"></a><span class="co">## turn it into an appropriate matrix</span></span>
+<span id="cb93-26"><a href="#cb93-26" aria-hidden="true" tabindex="-1"></a>usarrests <span class="op">=</span> np.loadtxt(<span class="st">&quot;https://raw.githubusercontent.com/JWarmenhoven/ISLR-python/master/Notebooks/Data/USArrests.csv&quot;</span>, delimiter <span class="op">=</span> <span class="st">&quot;,&quot;</span>, dtype <span class="op">=</span> <span class="bu">str</span>, skiprows <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb93-27"><a href="#cb93-27" aria-hidden="true" tabindex="-1"></a>usarrests <span class="op">=</span> np.delete(usarrests, (<span class="dv">0</span>), axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb93-28"><a href="#cb93-28" aria-hidden="true" tabindex="-1"></a>usarrests <span class="op">=</span> usarrests.astype(dtype <span class="op">=</span> <span class="st">&quot;float&quot;</span>)</span>
+<span id="cb93-29"><a href="#cb93-29" aria-hidden="true" tabindex="-1"></a>vec, transformed <span class="op">=</span> pca(usarrests)</span>
+<span id="cb93-30"><a href="#cb93-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;Principal Components:&#39;</span>, vec)</span></code></pre></div>
 <pre><code>Principal Components: [[ 0.53589947  0.41818087 -0.34123273  0.6492278 ]
  [ 0.58318363  0.1879856  -0.26814843 -0.74340748]
  [ 0.27819087 -0.87280619 -0.37801579  0.13387773]
  [ 0.54343209 -0.16731864  0.81777791  0.08902432]]</code></pre>
-<div class="sourceCode" id="cb89"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>transformed[:<span class="dv">6</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>transformed[:<span class="dv">6</span>]</span></code></pre></div>
 <pre><code>array([[ 0.97566045,  1.12200121, -0.43980366,  0.15469658],
        [ 1.93053788,  1.06242692,  2.01950027, -0.43417545],
        [ 1.74544285, -0.73845954,  0.05423025, -0.82626424],
@@ -2730,7 +2885,7 @@ Colorado    1.4993407 -0.9776297  1.08400162 -0.001450164</code></pre>
        [ 2.49861285, -1.52742672,  0.592541  , -0.33855924],
        [ 1.49934074, -0.97762966,  1.08400162,  0.00145016]])</code></pre>
 </div>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
