@@ -474,7 +474,7 @@ A confidence interval is if random samples were obtained infinitely many times w
 
 Under the CLM assumptions, a confidence interval is 
 
-$\hat{\beta_j} \pm \alpha se(\hat{\beta_j})$
+$\hat{\beta_j} \pm \alpha SE(\hat{\beta_j})$
 
 where $\alpha$ is a critical value
 
@@ -551,7 +551,7 @@ Under MLR Assumptions 1-5
 
  1. $\sqrt{n}(\hat{\beta_j} - \beta_j) \xrightarrow{a} N(0, \frac{\sigma^2}{a_j^2}$ where $a_j^2$ is the asymptotic variance of $\sqrt{n}(\hat{\beta_j} - \beta_j)$. For the slope coefficients $a\_j^2 = plim(\frac{1}{n} \sum\_{i=1}^n \hat{r\_{ij}^2})$ where the $r\_{ij}$ are the residuals from regressing $x_j$ on the other independent variables. 
 
- 2. $\hat{\sigma^2} is a consistent estimator of \sigma^2)
+ 2. $\hat{\sigma^2}$ is a consistent estimator of $\sigma^2$
 
  3. For each j 
 

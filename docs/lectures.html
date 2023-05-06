@@ -2409,7 +2409,7 @@ Under assumptions 1-5 conditional on the sample values of the independent variab
 <h3 id="confidence-intervals">Confidence Intervals</h3>
 <p>A confidence interval is if random samples were obtained infinitely many times with <span class="math inline">\(\tilde{\beta_j}, \hat{\beta_j}\)</span> computed each time then the (unknown) <span class="math inline">\(\beta_j\)</span> population value would lie in the interval <span class="math inline">\((\tilde{\beta_j}, \hat{\beta_j})\)</span> for 95% of the samples.</p>
 <p>Under the CLM assumptions, a confidence interval is</p>
-<p><span class="math inline">\(\hat{\beta_j} \pm \alpha se(\hat{\beta_j})\)</span></p>
+<p><span class="math inline">\(\hat{\beta_j} \pm \alpha SE(\hat{\beta_j})\)</span></p>
 <p>where <span class="math inline">\(\alpha\)</span> is a critical value</p>
 <h3 id="testing-multiple-linear-restrictions-the-f-test">Testing Multiple Linear Restrictions: The F-test</h3>
 <p>Often we want to test whether a group of variables have no effect on the dependenet variables.</p>
@@ -2453,7 +2453,7 @@ Under assumptions 1-5 conditional on the sample values of the independent variab
 <p>Under MLR Assumptions 1-5</p>
 <ol type="1">
 <li><p><span class="math inline">\(\sqrt{n}(\hat{\beta_j} - \beta_j) \xrightarrow{a} N(0, \frac{\sigma^2}{a_j^2}\)</span> where <span class="math inline">\(a_j^2\)</span> is the asymptotic variance of <span class="math inline">\(\sqrt{n}(\hat{\beta_j} - \beta_j)\)</span>. For the slope coefficients <span class="math inline">\(a\_j^2 = plim(\frac{1}{n} \sum\_{i=1}^n \hat{r\_{ij}^2})\)</span> where the <span class="math inline">\(r\_{ij}\)</span> are the residuals from regressing <span class="math inline">\(x_j\)</span> on the other independent variables.</p></li>
-<li><p>$ is a consistent estimator of ^2)</p></li>
+<li><p><span class="math inline">\(\hat{\sigma^2}\)</span> is a consistent estimator of <span class="math inline">\(\sigma^2\)</span></p></li>
 <li><p>For each j</p></li>
 </ol>
 <p><span class="math inline">\(\frac{\hat{\beta_j} - \beta_j}{sd(\hat{\beta_j})} \xrightarrow{a} N(0,1)\)</span> which we cannot compute from data and</p>
