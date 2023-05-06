@@ -487,7 +487,9 @@ y = np.loadtxt("y.csv", delimiter = ",", dtype = float)
 # Alternatively we can make a matrix with column_stack()
 X = np.column_stack((ones, x1, x2))
 
-betas_and_se(X,y)
+betas, se = betas_and_se(X,y)
+print("betas:", betas)
+print("SE:", se)
 ```
 
 ### Sandwich Standard Errors 
@@ -549,7 +551,9 @@ y = np.loadtxt("y.csv", delimiter = ",", dtype = float)
 
 X = np.column_stack((ones, x1, x2))
 
-betas_and_std_errors_sandwich(X,y)
+betas, se = betas_and_std_errors_sandwich(X,y)
+print("betas:", betas)
+print("SE:", se)
 ```
 
 
