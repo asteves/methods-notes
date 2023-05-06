@@ -2456,11 +2456,11 @@ Under assumptions 1-5 conditional on the sample values of the independent variab
 <li><p>$ is a consistent estimator of ^2)</p></li>
 <li><p>For each j</p></li>
 </ol>
-<p>$ N(0,1)\] which we cannot compute from data and</p>
-<p>$ N(0,1)\] which we can compute from data.</p>
+<p><span class="math inline">\(\frac{\hat{\beta_j} - \beta_j}{sd(\hat{\beta_j})} \xrightarrow{a} N(0,1)\)</span> which we cannot compute from data and</p>
+<p><span class="math inline">\(\frac{\hat{\beta_j} - \beta_j}{se(\hat{\beta_j})} \xrightarrow{a} N(0,1)\)</span> which we can compute from data.</p>
 <p>This theorem does not require MLR 6 from the list of required assupmtions. What this theorem says is that regardless of the population distribution of u, the OLS estimators when properly standardized have approximate standard normal distributions.</p>
 <p>Further,</p>
-<p>$ t_{df}\]</p>
+<p><span class="math inline">\(\frac{\hat{\beta_j} - \beta_j}{se(\hat{\beta_j})} \xrightarrow{a} t\_{df}\)</span></p>
 <p>because <span class="math inline">\(t\_{df}\)</span> approaches $ N(0,1)$ as the degrees of freedom gets large so we can carry out t-tests and confidence intervals in the same way as the CLM assumptions.</p>
 <p>Recall that <span class="math inline">\(\widehat{V(\hat{\beta_j})} = \frac{\hat{\sigma^2}}{SST_j(1-R_j^2)}\)</span> where <span class="math inline">\(SST_j\)</span> is the total sum of squares of <span class="math inline">\(x_j\)</span> in the sample and <span class="math inline">\(R_j^2\)</span> is the R-squared from regressing <span class="math inline">\(x_j\)</span> on all other independent variables. As the sample size increases:</p>
 <ul>

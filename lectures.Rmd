@@ -555,16 +555,16 @@ Under MLR Assumptions 1-5
 
  3. For each j 
 
- $\frac{\hat{\beta_j} - \beta_j}{sd(\hat{\beta_j})} \xrightarrow{a} N(0,1)\\] which we cannot compute from data and
+ $\frac{\hat{\beta_j} - \beta_j}{sd(\hat{\beta_j})} \xrightarrow{a} N(0,1)$ which we cannot compute from data and
 
-$\frac{\hat{\beta_j} - \beta_j}{se(\hat{\beta_j})} \xrightarrow{a} N(0,1)\\] which we can compute from data. 
+$\frac{\hat{\beta_j} - \beta_j}{se(\hat{\beta_j})} \xrightarrow{a} N(0,1)$ which we can compute from data. 
 
 
 This theorem does not require MLR 6 from the list of required assupmtions. What this theorem says is that regardless of the population distribution of u, the OLS estimators when properly standardized have approximate standard normal distributions. 
 
 Further, 
 
-$\frac{\hat{\beta_j} - \beta_j}{se(\hat{\beta_j})} \xrightarrow{a} t\_{df}\\]
+$\frac{\hat{\beta_j} - \beta_j}{se(\hat{\beta_j})} \xrightarrow{a} t\_{df}$
 
 because $t\_{df}$ approaches $ N(0,1)$ as the degrees of freedom gets large so we can carry out t-tests and confidence intervals in the same way as the CLM assumptions. 
 
