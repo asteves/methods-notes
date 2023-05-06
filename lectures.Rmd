@@ -4,6 +4,11 @@ description: |
   Lecture Notes and Resources
 author: 
   - name: Alex Stephenson
+output:
+  distill::distill_article:
+    toc: true
+    toc_depth: 2
+    hightlight: haddock
 site: distill::distill_website
 ---
 
@@ -11,8 +16,577 @@ site: distill::distill_website
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+## Simple Linear Regression 
+
+We are interested in studying models that take the following form: 
+
+$y = \beta_0 + \beta_1x + u$
+
+where $\beta_0$ is the intercept, $\beta_1$ is the slope parameter and u is the error term. In the next set of notes, we will extend this model to situations where we have more than one covariate. 
+
+We can think of $\beta_0 + \beta_1x$ as the systematic part of y whereas u is the unsystematic part of y. That is, u represents y not explained by x. 
+
+### Error Term Assumptions 
+
+In order to make progress, we make the following assumptions about the error term. 
+
+1. $E[u] = 0$ as long as an intercept term is included in the equation. Note that this essentially defines the intercept. 
+
+2. $E[u|x] = E[u] = 0$. This is the Zero Conditional Mean Assumption for the error term. 
+ - The average value of the unobservables is the same across all slices of the population determined by the value of x and is equal to the average of u over the entire population 
+ - By EA.1 that means the average is 0
+
+### Deriving OLS Estimates 
+
+To estimate the Population Regression Function (PRF), we need a sample. 
+
+Let $(x_i, y_i): i = 1,...,n$ be a random sample of size n from the population. We can estimate the PRF by a model: 
+
+$y = \beta_0 + \beta_1x_i + u_i$ (E.2)
+
+Error Assumption 2 implies that in the popuation x and u are uncorrelated, and the zero conditional mean assumption for the error implies that $E[u] = 0$. This implies that the covariance between x and u is 0 or formally: 
+$Cov(x,u) = E(xu) = 0$ 
+
+We can rewrite previous equations as follows 
+
+$E[u] = E[ y - \beta_0 + \beta_1x]$ (E.3)
 
 
+$Cov(x,u) = E[x(y - \beta_0 + \beta_1x)]$ (E.4)
+
+Our goal is to choose sample $\hat{\beta_0}$,$\hat{\beta_1}$ to solve the sample equations: 
+
+$\frac{1}{n}\sum_{i=1}^n y - \hat{\beta_0} + \hat{\beta_1}x = 0$ (E.5)
+
+$\frac{1}{n}\sum_{i=1}^n x_i(y - \hat{\beta_0} + \hat{\beta_1}x) = 0$ (E.6)
+
+Rewrite E.4 
+
+$\bar{y} = \hat{\beta_0} + \hat{\beta_1}\bar{x}$ which implies 
+
+$\beta_0 = \bar{y} - \hat{\beta_1}\bar{x}$
+
+#### Estimating The Slope Parameter
+
+Drop the $\frac{1}{n}$ in E.5 because it does not affect the solution. Plug in $\bar{y} - \hat{\beta_1}\bar{x}$ for $\beta_0$ which yields the equation 
+
+$\sum_{i=1}^n x_i(\bar{y} - \hat{\beta_1}\bar{x}) - \hat{\beta_1}x) = 0$
+
+Rearrange terms to get the y's and the x's on opposite sides of the equation. 
+$\sum_{i=1}^n x_i(y_i - \bar{y})$ 
+$\hat{\beta_1}\sum x_i(x_i - \bar{x})$ 
+
+Setting these equal to each other and using properties of the sum operator, we can rewrite the the top sum to be $Cov(x,y)$ and the bottom sum to $V(x)$. As long as $V(x) > 0$, 
+
+$\hat{\beta_1} = \frac{\hat{Cov(x,y)}}{\hat{V(x)}}$
+
+In words, the slope parameter estimate is the sample covariance of x and y divided by the sample variance of x. We refer to this as the OLS procedure and the OLS regression line as 
+
+$\hat{y} = \hat{\beta_0} + \hat{\beta_1}x$
+
+### Algebraic Properties of OLS on Any Sample of Data 
+
+The following hold by construction for any sample of data estimated by OLS 
+
+1. The sum and therefore sample average of the residuals is 0. This is because the OLS estimates are chosen to make the residuals sum to 0. 
+2. Sample covariance between regressors and OLS residuals is 0 
+3. The point $(\bar{x}, \bar{y})$ is always on the OLS regression line 
+
+### Variation in Y 
+
+We can view OLS as decomposing each $y_i$ into two parts, a fitted value and a residual. There are three parts of this decomposition: the total sum of squares (SST), the explained sum of squares (SSE), and the residual sum of squares (SSR). 
+
+$SST = \sum_{i=1}^n (y_i -\bar{y})^2$
+
+$SSE = \sum_{i=1}^n (\hat{y_i} -\bar{y})^2$
+
+$SSR = \sum_{i=1}^n \hat{u}^2$
+
+SST is a measure of total sample variation in the $y_i$'s. Dividing SST by n-1 gets us the sample variance of y. 
+
+The Total Variation in y is SST = SSE + SSR. 
+
+To derive
+
+$\sum_{i=1}^n (y_i -\bar{y})^2$
+
+$\sum_{i=1}^n [(y_i - \hat{y_i}) + (\hat{y_i}-\bar{y})]^2$
+
+$\sum_{i=1}^n \hat{u_i} + (\hat{y_i}-\bar{y})]^2$
+
+Expand out the sum and replace with definitions to get 
+
+$SSR + 2Cov(\hat{u}, \hat{y}) + SSE$
+
+Since the covariance between u and y is 0, that term drops out. 
+
+### Goodness of Fit 
+
+The ratio of the explained sample variation in y by x is known as $R^2$ and defined: 
+
+$R^2 = 1 - \frac{SSR}{SST}$
+
+### Expected Values and Unbiasedness of OLS Estimators
+
+OLS is an unbiased estimator of the population model provided the following assumptions hold. These assumptions are also known as Gauss-Markov assumptions. 
+
+#### A1. Linear in paramters
+
+In the population model, y is related to x and u 
+
+$y = \beta_0 + \beta_1x + u $
+
+#### A2. Random Sample
+
+We have a random sample of size n from the population model 
+
+#### A3. Sample variation in x 
+
+The sample outcomes $x_i: i = 1,2,..., n$ are not all the same value. If they are, there is no variance of X and so $\beta_1$ cannot be estimated. 
+
+#### A4. Zero Conditional Mean of the Error
+
+For a random sample, this assumption implies 
+
+$E(u_i|x_i) = 0: \forall i \in [0,1,...n]$
+
+A4 is violated whenever we think that u and x are correlated. In the simple bivariate case, an example might be using the variable education to predict salary. education is correlated with many variables, including income and family history. These may affect salary and therefore will give us biased results. 
+
+*Note: We can write the slope estimator $\beta_1$ in a slightly different way* 
+
+$\hat{\beta_1} = \frac{\sum\_{i=1}^n (x_i - \bar{x})*(\beta_0 - \beta_1x + u_i)}{SST_x}$
+
+$\hat{\beta_1} = \beta\_0 \sum\_{i=1}^n$ + \beta\_1\sum\_{i=1}^n x_i(x_i -\bar{x}) + \sum\_{i=1}^n u_i(x_i - \bar{x})$ 
+
+The first term sums to 0 and drops out. Thus: 
+
+$\hat{\beta_1} = \beta_1 + \frac{\sum\_{i=1}^n u_i(x_i - \bar{x})}{SST_x}$
+
+We now have all the information we need to prove that OLS is unbiased. Unbiasedness is a feature of the sampling distributions of $\hat{\beta_0}$ and $\hat{\beta_1}$. Unbiasedness says nothing about the estimates for any *given sample* we may draw.  
+
+#### Theorem 1: Using A1-A4 OLS produces unbiased estimates 
+
+$E(\hat{\beta_0}) = \beta_0$ and $E(\hat{\beta_1}) = \beta_1$for any values of $\beta_0$ and $\beta_1$. 
+
+Proof: 
+
+In this proof the expected values are conditional on sample values of the independent variable x. Because $SST_x$ and $(x_i - \bar(x))$ are functions on of $x_i$ they are non-random once we condition on x. 
+
+$E\hat{\beta_1}] = E\beta_1 + \frac{\sum\_{i=1}^n u_i(x_i - \bar{x})}{SST_x}]$
+
+$E\hat{\beta_1}] = \beta_1 + \frac{\sum\_{i=1}^n E[u_i(x_i - \bar{x})]}{SST_x}$ 
+
+$E\hat{\beta_1}] = \beta_1 + \frac{\sum\_{i=1}^n 0 (x_i - \bar{x})}{SST_x}$ 
+
+$E\hat{\beta_1}] = \beta_1$ 
+
+We can also prove the same for $\beta_0$. 
+
+$E\hat{\beta_0}] = \beta_0 + E[(\beta_1 - \hat{\beta_1}\bar{x} + E\bar{u}]$ 
+
+$E\hat{\beta_0}] = \beta_0 + E[(\beta_1 - \hat{\beta_1}\bar{x} + 0$ 
+
+$E\hat{\beta_0}] = \beta_0$ 
+
+In the last equation, because $\hat{\beta_1} = \beta_1$ the second term drops out. 
+
+### Variances of OLS Estimators 
+
+An additional assumption we can make about the variance of the OLS estimators is that the error u has the same variances conditional on any value of the explanatory variable. 
+
+$V(u|x) = \sigma^2$
+
+By adding this assumption, which to be clear will break down horribly if it is violated, we can prove the following theorem. 
+
+#### Theorem 2: Using assumptions 1-4 and homoskedastic error assumption
+
+$V(\hat{\beta_1}) = \frac{\sigma^2}{SST_x}$ and $V(\hat{\beta_0}) = \frac{\sigma^2\frac{1}{n}\sum\_{i=1}^n x_i^2}{\sum\_{i=1}^n(x_i - \bar{x})^2}$
+
+where these are conditioned on the sample values. 
+
+Proof for $V(\hat{\beta_1})$
+
+$V(\hat{\beta_1}) = \frac{1^2}{SST_x^2}V(\sum\_{i=1}^n u_i(x_i - \bar{x}))$
+
+Substitute $d_i = (x_i - \bar{x})$
+
+$V(\hat{\beta_1}) = \frac{1^2}{SST_x^2}\sum\_{i=1}^n u_i d_i^2$
+
+Since $V(u_i) = \sigma^2 : \forall i$ we can substitute that constant into the equation. 
+
+$V(\hat{\beta_1}) = \frac{1}{SST_x^2}\sigma^2 \sum\_{i=1}^n d_i^2$
+
+Observe that the second RHS term is just $SST_x$ after pulling out the constant, we can rewrite as 
+
+$V(\hat{\beta_1}) = \frac{\sigma^2 SST_x}{SST_x^2}$
+
+which reduces to our stated result. 
+
+Now that we know the way to estimate the variance, we can ask the following question. How does $V(\hat{\beta_1})$ depend on error variance? 
+
+1. The larger the error variance, the larger $V(\hat{\beta_1})$. 
+2. The larger the $V(x)$, the smaller $V(\hat{\beta_1})$
+3. As sample size increases, the total variation in x increases which leads to a decrease in $V(\hat{\beta_1})$
+
+### Estimating the Error Variance 
+
+Errors are never observed. Instead, we observe residuals that we can compute from our sample data. We can write the errors as a function of the residuals. 
+
+$\hat{u_i} = u_i - (\hat{\beta_0} - \beta_0) - (\hat{\beta_1} - \beta_1)x$
+
+One problem that we run into is that using the residuals as an estimator is biased without correction because it does not take into account two restrictions for OLS residuals. OLS residuals have to sum to 0 and have a 0 covariance between x and u. Formally, 
+
+$\sum\_{i=1}^n \hat{u_i} = 0$ 
+
+and 
+
+$\sum\_{i=1}^n \hat{u_i}x_i = 0$. 
+
+Thus we need to correct by n-2 degrees of freedom for an unbiased estimator. When we do so, we get the following. 
+
+$\hat{\sigma}^2 = \hat{s}^2 = \frac{1}{n-2}\sum\_{i=1}^n\hat{u_i}^2$
+
+$\hat{\sigma}^2 = \frac{SSR}{n-2}$
 
 
+## Multiple Linear Regression 
+
+We are now going to extend our previous discussion of Simple Linear Regression into the multiple variate case. Here we consider models that include more than one independent variable. 
+
+$y = \beta_0 + \beta_1x_1 + \beta_2x\_2 + ... + \beta_kx\_k + u$
+
+where $\beta_0$ is the intercept, $\beta_1$ measures change in y with respect to $x_1$ holding all other covariates fixed and so on. 
+
+As shorthand we refer to parameters other than the intercept as slope parameters. 
+
+We can generalize the zero conditional mean assumption for the errors to be 
+
+$E(U|x\_1, x\_2, ..., x\_k) = 0$
+
+### Mechanics and Interpretation of OLS
+
+Our goal is to get estimates $\beta_0, \beta_1,...,\beta_k$. We choose these to minimize the sum of squared residuals 
+
+$\sum_{i=1}^n\hat{y_i} = \hat{\beta_0} + \hat{\beta_1}x\_{i1}+...+ \hat{\beta_k}x\_{ik}$
+
+This minimization leads to k + 1 linear equations in k + 1 unknowns. We call these the OLS first order equations. 
+
+### OLS Fitted Values and Residuals 
+
+For observation i the fitted values are: 
+
+$\sum_{i=1}^n\hat{y_i} = \hat{\beta_0} + \hat{\beta_1}x\_{i1}+...+ \hat{\beta_k}x\_{ik}$
+
+Recall that OLS minimizes the average square prediction error which says nothing about any given prediction. The residual is generalized from the simple linear regression case to be: 
+
+$\hat{u_i} = y_i - \hat{y_i}$
+
+#### Properties of fitted values and residuals 
+
+1. The sample average of the residuals is 0. $\bar{y} = \hat{\bar{y}}$
+2. Sample covariance between each independent variable and the residuals is 0 by construction 
+3. The average point is always on the regression line by construction. 
+
+### Goodness of Fit 
+
+Like before SST = SSE + SSR and $R^2 = 1 - \frac{SSR}{SST}$
+
+### Expected Value of OLS Estimators 
+
+We restate the assumptions needed for OLS regressions 
+
+1. Linear in Parameters 
+
+The model can be written as $y = \beta_0 + \beta_1x\_1 + \.\.\. + \beta_kx\_k$
+
+2. Random sampling 
+
+We have a random sample of n observations ${(x\_{i1}, x\_{i2}, ..., x\_{ik}): i = 1,2,..., n}$
+
+3. No perfect collinearity 
+
+In the sample (and therefore population) none of the independent variables is constant and there are no exact linear relationships among the independent variables 
+
+4. Zero Conditional Mean of Error 
+
+$E(u|x_1, x_2, ..., x_k) = 0$
+
+This implies that none of the independent variables are correlated with the error term 
+
+If these four assumptions hold 
+
+*Theorem 3.1: OLS is unbiased*
+
+$E(\hat{\beta_j} = \beta_j : j = 1,2,\.\.\.,k)$ 
+
+for any values of the population parameter $\beta_j$
+
+Note: Adding irrelevant independent variables does not effect unbiasedness. These terms will on average be 0 across many samples. Adding irrelevant independent variables **will** hurt the estimator's variances. 
+
+### Omitted Variable Bias 
+
+A major problem that will lead to bias in our estimates is omitting a relevant variable from our model. To see why suppose we have the following population model 
+
+$y = \beta_0 + \beta_1x_1 + \beta_2x_2 + u$
+
+but we only run the regression 
+
+$y = \hat{\beta_0} + \beta_1x$
+
+For example, we want to estimate the effect of education on wages but do not include some measure of innate ability. 
+
+Since the model is misspecified, we can define bias as:
+
+$\tilde{\beta_1} = \hat{\beta_1} + \hat{\beta_2}\tilde{\delta_1}$
+
+where $\hat{\beta_1}, \hat{\beta_2}$ are slope estimator from the regression $y_i $ on $x_1, x_2$ and $\tilde{\delta_1}$ is the slope from the regression $x\_{i2}$ on $x\_{i1}$. 
+
+$\tilde{\delta_1}$ depends only on the independent variables in the sample so we can treat it as a fixed quanitty when computing $E[\tilde{\beta_1}]$
+
+$E[\tilde{\beta_1}] = E[\hat{\beta_1} + \hat{\beta_2}\tilde{\delta_1}]$
+
+$E[\tilde{\beta_1}] = E[\hat{\beta_1} + \tilde\delta_1\hat{\beta_2}]$
+
+$E[\tilde{\beta_1}] = \beta_1 + \tilde\delta_1\beta_2$
+
+which implies that the omitted variable bias is $\beta_2\tilde{\delta_1}$
+
+The bias in the model is 0 if: 
+
+1. $\beta_2 = 0$
+2. $\tilde{\delta_1}=0$
+
+which occurs if and only if $x_1$ and $x_2$ are uncorrelated in the sample. 
+
+### Variance of OLS Estimators 
+
+Keeping our previous Multiple Linear Regression assumptions we add 
+
+Assumption 5: Homoskedasticity of errors 
+The error u has the same variance given any values of the explanatory variables. 
+
+$V(u| x_1, x_2, ..., x_k)=\sigma^2$
+
+*Theorem 2* 
+Under assumptions 1-5 conditional on the sample values of the independent variables 
+
+$v(\hat{\beta_j}) = \frac{\sigma^2}{{SST}_j(1-R_j^2)}$
+
+and 
+
+$E[\hat{\sigma%^2}= \sigma^2]$
+
+The unbiased estimator of $\sigma^2$ is $\hat{\sigma^2}= \frac{1}{n-k-1}\sum_{i=1}^n \hat{u_i}^2$ where n is the number of observations and k + 1 is the number of parameters. 
+
+The standard error of $\hat{\beta_j}$ is
+
+$se(\hat{\beta_j})= \frac{\hat{\sigma}}{\sqrt{{SST}_j(1-\hat{R_j}^2)}}$
+
+### Efficiency Properties of OLS 
+
+The OLS estimator $\hat{\beta_j}$ for $\beta_j$ is BLUE: The Best Linear Unbiased Estimator. 
+
+ - estimator: rule that can be applied to data to generate an estimate 
+ - unbiased $E[\hat{\beta_j}]=\beta_j$ for any estimator
+ - linear: An estimator is linear if it can be expressed as a linear function of the data on the dependent variable 
+ - best: Gauss-Markov holds that for any estimator $\tilde{\beta_j}$ that is linear and unbiased $V(\hat{\beta_j}) \leq V(\tilde{\beta_j})$. That is the OLS estimator has at least as small if not smaller variance than any other linear unbiased estimator.
+
+
+From our previous assumptions we add an additional assumption. 
+
+*Assumption 6: Normality*
+
+The population error u is independent of the explanatory variables $x_1, x_2, ..., x_k$ and is normally distributed as $u \sim N(0, \sigma^2)$
+
+Assumption 6 is strong and amounts to also assuming MLR Assumption 4 and MLR Assumption 5. Taken together, the six assumptions we've made so far collectively are the classical linear model (CLM) assumptions. 
+
+We can summarise the CLM as: 
+
+$y|\textbf{x} \sim N(\beta_0 + \beta_1x\_{ik} + ... + \beta_kx\_{ik}, \sigma^2)$
+
+where $\textbf{x}$ is shorthand for $x_1, x_2, ..., x_k$
+
+*Note: Problems with Normal Error Assumption* 
+
+1. Factors in u can have very different distributions in the population. While central limit theorems can still hold, the normal approximation can be poor. 
+
+2. Central limit theorem arguments assume all error affects y in separate additive fashion which has no guarantee of truth. Any breakdown in this assumption will break this assumption 
+
+3. In any given application, normal error assumptions are an empirical matter. In general the assumption will be false if y takes on just a few possible values. 
+
+*Theorem 4.1: Normality of error terms lead to normality of sampling distributions of OLS estimators*
+
+Under the CLM assumptions (MLR Assumptions 1-6) conditional on the sample values of the independent variables 
+
+$\hat{\beta_j} \sim N(\beta_j, V(\beta_j))$ which implies 
+
+$\frac{\hat{\beta_j} - \beta_j}{V(\hat{\beta_j})} \sim N(0,1)$
+
+### Testing hypotheses about a single population parameter: The t-test
+
+*Theorem 4.2: t distribution for standard errors* 
+
+Under the CLM assumptions (MLR Assumptions 1-6)
+
+$\frac{\hat{\beta_j} - \beta_j}{se(\hat{\beta_j})} \sim t\_{n-k-1} = t\_{df}$
+
+where k+1 is the number of paramters in the population model and n-k-1 is the degrees of freedom.
+
+Theorem 2 is important because it allows us to test hypotheses involving $\beta_j$. The test statistic we use is the t-statistic. 
+
+$t_{\hat{\beta_j}} = \frac{\hat{\beta_j}}{se(\hat{\beta_j})}$
+
+### Null Hypothesis Tests
+
+The most common hypothesis test is a two-sided alternative 
+
+$H_0: \beta_j = 0$
+$H_a: \beta_j \neq 0$
+
+We can also test against one sided alternatives where we expect 
+
+$H_0: \beta_j \leq 0$
+$H_a: \beta_j > 0$
+
+or the reverse. 
+
+A p-value is the probability of observing a test statistic, in this case a t-statistic, as extreme as the one we observed given that the null hypothesis is true. 
+
+### Testing Hypotheses about a single linear combination of Parameters 
+
+Our t-statistic keeps the same general format but changes slightly. 
+
+$t = \frac{\hat{\beta_j} - \hat{\beta_k}}{se(\hat{\beta_j} - \hat{\beta_k})}$
+
+where
+
+$se(\hat{\beta_j} - \hat{\beta_k}) = \sqrt{se(\hat{\beta_j})^2 + se(\hat{\beta_k})^2 + 2Cov(\hat{\beta_j},\hat{\beta_k})}$
+
+Some guidelines for discussing signficance of a variable in a MLR model 
+
+1. Check for statistical significance. If yes, discuss the magnitude of the coefficient to get an idea of its practical importance. 
+
+2. If variable isn't significant, look at whether the variable has the expected effect and if it is practically large. 
+
+### Confidence Intervals 
+
+A confidence interval is if random samples were obtained infinitely many times with $\tilde{\beta_j}, \hat{\beta_j}$ computed each time then the (unknown) $\beta_j$ population value would lie in the interval $(\tilde{\beta_j}, \hat{\beta_j})$ for 95% of the samples. 
+
+Under the CLM assumptions, a confidence interval is 
+
+$\hat{\beta_j} \pm \alpha se(\hat{\beta_j})$
+
+where $\alpha$ is a critical value
+
+### Testing Multiple Linear Restrictions: The F-test 
+
+Often we want to test whether a group of variables have no effect on the dependenet variables. 
+
+The null hypothesis is that a set of variables has no effect on y, once another set of variables have been controlled. 
+
+In contest to hypothesis testing:
+
+ - The restricted model is the model without hte groups of variables we are testing 
+ - The unrestricted model is the model of all the parameters
+
+For the general case: 
+
+ - The unrestricted model with k independent variables $y = \beta_0 + \beta_1x_1 +...+ \beta_k x_k + u$
+
+ - The null hypothesis is $H_0: \beta\_{k-q-1} = 0,..., \beta_k = 0$ which puts q exclusion restrictions on the model 
+
+The F-statistic is: 
+
+$F = \frac{\frac{SSR_r - SSR\_{ur}}{q}}{\frac{SSR\_{ur}}{n-k-1}}$
+
+where $SSR_r$ is the sum of squared residuals from the restricted model and $SSR\_{ur}$ is the sum of squared residuals from the unrestricted model and q is the numerator degrees of freedom which is the degrees of freedom in the restricted model minus the degrees of freedom in the unrestricted model. 
+
+The F-statistic is always non-negative. If $H_0$ is rejected then we say that $x\_{k-q+1},...x_k$ are jointly statistically significant. If we fail to reject then the variables are jointly statistically insignificant. 
+
+### The R-Squared Form of the F-statistic
+
+Using the fact that $SSR_r = SST(1-R_r^2)$ and $SSR\_{ur} = SST(1 - R\_{ur}^2)$ we can substitute in to the F-statistic to get 
+
+$F = \frac{\frac{R\_{ur}^2 - R_r^2}{q}}{\frac{1-R\_{ur}^2}{n-k-1}}$
+
+This is often more convenient for testing exclusion restrictions in models but cannot test all linear restrictions. 
+
+## OLS Asympotics 
+
+We know under certain assumptions that OLS estimators are unbiased, but unbiasedness cannot always be achieved for an estimator. Another property that we are interested in is whether an estimator is *consistent*. 
+
+*Theorem 5.1: OLS is a consistent estimator*
+
+Under MLR Assumptions 1-4, the OLS estimator $\hat{\beta_j}$ is consistent for $\beta_j \forall \\ j \in 1,2,...,k$. 
+
+Informally, as n tends to infinitythe distribution of $\hat{\beta_j}$ collapses to the single point $\beta_j$
+
+We can add an assumption MLR 4': 
+
+$E(u) = 0,Cov(x_j, u) = 0 \forall j \in 1,2,...,k$
+
+This is a weaker assumption than MLR 4. MLR 4' requires only that $x_j$ is uncorrelated with u and that u has zero mean in the population. Indeed MLR 4 implies MLR 4'. 
+
+We use MLR4 as an assumption because OLS is biased but consistent under MLR 4' if $E[u| x_1, ..., x_k]$ depends on any of the $x_j$. Second, if MLR 4 holds, then we have properly modeled the population regression function. 
+
+### Deriving Inconsistency of OLS 
+
+Correlation between u and any of the $x_1, ..., x_k]$ generally causes all of the OLS estimators to be inconsistent. **If the error is correlated with any of the independent variables then OLS is biased and inconsistent.**
+
+There is an asymptotic analogue to Omitted Variable Bias. Suppose the model $y = \beta_0 + \beta_1x_1 + \beta_2x_2 + v$ satisfies MLR assumptions 1-4. If we omit $x_2$ then: 
+
+$plim\tilde{\beta_1} = \beta_1 + \beta_2\delta_1$
+
+$plim\tilde{\beta_1} = \beta_1 + \beta_2\frac{Cov(x_1,x_2)}{V(x_1)}$
+
+If the covariance term is zero then the estimator is still consistent. Otherwise, the inconsistency takes on the same sign as the covariance term. 
+
+### Asymptotic Normality and Large Sample Inference
+
+In cases where the $y_i$ do not follow normal distributions we can still get asymptotic normality. 
+
+*Theorem 5.2: Asymptotic Normality*
+
+Under MLR Assumptions 1-5
+
+ 1. $\sqrt{n}(\hat{\beta_j} - \beta_j) \xrightarrow{a} N(0, \frac{\sigma^2}{a_j^2}$ where $a_j^2$ is the asymptotic variance of $\sqrt{n}(\hat{\beta_j} - \beta_j)$. For the slope coefficients $a\_j^2 = plim(\frac{1}{n} \sum\_{i=1}^n \hat{r\_{ij}^2})$ where the $r\_{ij}$ are the residuals from regressing $x_j$ on the other independent variables. 
+
+ 2. $\hat{\sigma^2} is a consistent estimator of \sigma^2)
+
+ 3. For each j 
+
+ $\frac{\hat{\beta_j} - \beta_j}{sd(\hat{\beta_j})} \xrightarrow{a} N(0,1)\\] which we cannot compute from data and
+
+$\frac{\hat{\beta_j} - \beta_j}{se(\hat{\beta_j})} \xrightarrow{a} N(0,1)\\] which we can compute from data. 
+
+
+This theorem does not require MLR 6 from the list of required assupmtions. What this theorem says is that regardless of the population distribution of u, the OLS estimators when properly standardized have approximate standard normal distributions. 
+
+Further, 
+
+$\frac{\hat{\beta_j} - \beta_j}{se(\hat{\beta_j})} \xrightarrow{a} t\_{df}\\]
+
+because $t\_{df}$ approaches $ N(0,1)$ as the degrees of freedom gets large so we can carry out t-tests and confidence intervals in the same way as the CLM assumptions. 
+
+Recall that $\widehat{V(\hat{\beta_j})} = \frac{\hat{\sigma^2}}{SST_j(1-R_j^2)}$ where $SST_j$ is the total sum of squares of $x_j$ in the sample and $R_j^2$ is the R-squared from regressing $x_j$ on all other independent variables. As the sample size increases: 
+
+ - $\hat{\sigma^2} \xrightarrow{d} \sigma^2$
+ - $R_j^2 \xrightarrow{d} c$ which is some number between 0 and 1 
+ - The sample variance $\frac{SST_j}{n} \xrightarrow{d} V(x_j)$
+
+These imply that $\widehat{V(\hat{\beta_j})}$ shrinks to 0 at the rate of $\frac{1}{n}$ and $se(\hat{\beta_j}) = \frac{c_j}{\sqrt{n}}$ where $c_j = \frac{\sigma}{\sigma\sqrt{1 - \rho_j^2}}$. 
+
+This last equation is an approximation. A good rule of thumb is that standard eerrors can be expected to shrink at a rate that is the inverse of the square root of the sample size. 
+
+### Asymptotic Efficiency of OLS 
+
+*Theorem 5.3*
+
+Under Gauss-Markov assumptions, let $\tilde{\beta_j}$ denote estimators that solve the equation
+
+$\sum\_{i=1}^n g_j(\textbf{x}_i)(y_i - \tilde{\beta_0}-\tilde{\beta_1}x\_{i1} - ... - \tilde{\beta_k}x\_{ik}) = 0$ 
+
+Let $\hat{\beta_j}$ denote the OLS estimators. The OLS estimators have the smallest asymptotic variance. 
+
+$AVar(\sqrt{n}(\hat{\beta_j} - \beta_j)) \leq AVar(\sqrt{n}(\tilde{\beta_j} - \beta_j))$
 
