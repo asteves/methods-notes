@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Self-Guided Summer Methods Program 
 
-The self-guided summer methods program is based on a suggested syllabus for preparing for the Political Science program at UC Berkeley's formal and quantitative methods course. The purpose of the self-guided course is to help students prepare for the summer math camp and the introductory courses. The primary books for the self-guided course are [A Mathematics Course for Political and Social Research](https://press.princeton.edu/books/paperback/9780691159171/a-mathematics-course-for-political-and-social-research) herein dubbed M+S and (Statistics: Fourth Edition)[https://wwnorton.com/books/Statistics/] herein dubbed as FPP. 
+The self-guided summer methods program is based on a suggested syllabus for preparing for the Political Science program at UC Berkeley's formal and quantitative methods course. The purpose of the self-guided course is to help students prepare for the summer math camp and the introductory courses. The primary books for the self-guided course are [A Mathematics Course for Political and Social Research](https://press.princeton.edu/books/paperback/9780691159171/a-mathematics-course-for-political-and-social-research) herein dubbed M+S and [Statistics: Fourth Edition](https://wwnorton.com/books/Statistics/) herein dubbed as FPP. 
 
 ## Linear Algebra Sequence {#la}
 
