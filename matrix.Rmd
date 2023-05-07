@@ -7,7 +7,7 @@ author:
 output:
   distill::distill_article:
     toc: true
-    toc_depth: 2
+    toc_depth: 3
     hightlight: haddock
 site: distill::distill_website
 ---
@@ -314,9 +314,9 @@ Informally, the norm of a vector tells us how *big* it is. Formally, a norm is a
 
 1. Given any vector **x** $\lVert \alpha x \rVert = \lVert \alpha \rVert \lvert x \rVert$. 
 2. For any vectors **x**, **y**, norms satisfy the triangle inequality $\lVert x + y \rVert \leq \lVert x \rVert + \lVert y \rVert$
-3. The norm of a vector $\lVert x \rVert > 0\hspace \forall x \neq 0$
+3. The norm of a vector $\lVert x \rVert > 0,\forall x \neq 0$
 
-The most common norm is the $\ell_2$ norm or Euclidean norm which is defined as $ \lVert x \rVert_2 = \sqrt{\sum_{i=1}^n x_i^2}$
+The most common norm is the $\ell_2$ norm or Euclidean norm which is defined as $\lVert x \rVert_2 = \sqrt{\sum_{i=1}^n x_i^2}$
 
 ```{r}
 x = c(3,-4)
@@ -597,7 +597,9 @@ Using built-in function in R.
 
 ```{r}
 ## As Brian Ripley pointed out on R-help back in 2003
-## using different compilers on the same machine and the same version of R may give different signs for the eigenvectors. The moral is, don't rely on the signs of eigenvectors! (This is on the help page.)
+## using different compilers on the same machine and the same version of R may give different signs for the eigenvectors. 
+## The moral is, don't rely on the signs of eigenvectors! 
+## (This is on the help page.)
 t = prcomp(USArrests, center = T,scale = T)
 head(-1*t$rotation)
 head(-1*t$x) 

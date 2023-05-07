@@ -113,7 +113,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","output","site"]}},"value":[{"type":"character","attributes":{},"value":["Linear Algebra"]},{"type":"character","attributes":{},"value":["A Crash Course in Linear Algebra using R and Python\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Alex Stephenson"]}]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_depth","hightlight"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[2]},{"type":"character","attributes":{},"value":["haddock"]}]}]},{"type":"character","attributes":{},"value":["distill::distill_website"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","output","site"]}},"value":[{"type":"character","attributes":{},"value":["Linear Algebra"]},{"type":"character","attributes":{},"value":["A Crash Course in Linear Algebra using R and Python\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Alex Stephenson"]}]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_depth","hightlight"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[3]},{"type":"character","attributes":{},"value":["haddock"]}]}]},{"type":"character","attributes":{},"value":["distill::distill_website"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2141,12 +2141,29 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
-<li><a href="#vectors" id="toc-vectors">Vectors</a></li>
-<li><a href="#vector-addition-and-multiplication" id="toc-vector-addition-and-multiplication">Vector Addition and Multiplication</a></li>
-<li><a href="#matrices" id="toc-matrices">Matrices</a></li>
+<li><a href="#vectors" id="toc-vectors">Vectors</a>
+<ul>
+<li><a href="#block-and-stacked-vectors" id="toc-block-and-stacked-vectors">Block and stacked vectors</a></li>
+<li><a href="#some-special-vectors" id="toc-some-special-vectors">Some special vectors</a></li>
+</ul></li>
+<li><a href="#vector-addition-and-multiplication" id="toc-vector-addition-and-multiplication">Vector Addition and Multiplication</a>
+<ul>
+<li><a href="#scalar-multiplication-and-division" id="toc-scalar-multiplication-and-division">Scalar Multiplication and division</a></li>
+<li><a href="#using-what-weve-learned-to-confirm-the-distributive-property" id="toc-using-what-weve-learned-to-confirm-the-distributive-property">Using what we’ve learned to confirm the distributive property</a></li>
+<li><a href="#inner-product" id="toc-inner-product">Inner Product</a></li>
+</ul></li>
+<li><a href="#matrices" id="toc-matrices">Matrices</a>
+<ul>
+<li><a href="#additional-definitions" id="toc-additional-definitions">Additional Definitions</a></li>
+<li><a href="#matrix-arithmetic" id="toc-matrix-arithmetic">Matrix Arithmetic</a></li>
+</ul></li>
 <li><a href="#norms" id="toc-norms">Norms</a></li>
 <li><a href="#ordinary-least-squares" id="toc-ordinary-least-squares">Ordinary Least Squares</a></li>
-<li><a href="#covariance-matrices-and-standard-errors" id="toc-covariance-matrices-and-standard-errors">Covariance Matrices and Standard Errors</a></li>
+<li><a href="#covariance-matrices-and-standard-errors" id="toc-covariance-matrices-and-standard-errors">Covariance Matrices and Standard Errors</a>
+<ul>
+<li><a href="#classical-standard-errors" id="toc-classical-standard-errors">Classical Standard Errors</a></li>
+<li><a href="#sandwich-standard-errors" id="toc-sandwich-standard-errors">Sandwich Standard Errors</a></li>
+</ul></li>
 <li><a href="#principal-components-analysis" id="toc-principal-components-analysis">Principal Components Analysis</a></li>
 </ul>
 </nav>
@@ -2507,13 +2524,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
        [ 90, 108, 126]])</code></pre>
 </div>
 <h2 id="norms">Norms</h2>
-<p>Informally, the norm of a vector tells us how <em>big</em> it is. Formally, a norm is a function <span class="math inline">\(||\cdot||\)</span> that maps a vector to a scalar which satisfies:</p>
+<p>Informally, the norm of a vector tells us how <em>big</em> it is. Formally, a norm is a function <span class="math inline">\(\lVert \cdot \rVert\)</span> that maps a vector to a scalar which satisfies:</p>
 <ol type="1">
-<li>Given any vector <strong>x</strong> <span class="math inline">\(||\alpha x|| = |\alpha|||x||\)</span>.</li>
-<li>For any vectors <strong>x</strong>, <strong>y</strong>, norms satisfy the triangle inequality <span class="math inline">\(||x + y|| \leq ||x|| + ||y||\)</span></li>
-<li>The norm of a vector <span class="math inline">\(||x|| &gt; 0\hspace \forall x \neq 0\)</span></li>
+<li>Given any vector <strong>x</strong> <span class="math inline">\(\lVert \alpha x \rVert = \lVert \alpha \rVert \lvert x \rVert\)</span>.</li>
+<li>For any vectors <strong>x</strong>, <strong>y</strong>, norms satisfy the triangle inequality <span class="math inline">\(\lVert x + y \rVert \leq \lVert x \rVert + \lVert y \rVert\)</span></li>
+<li>The norm of a vector <span class="math inline">\(\lVert x \rVert &gt; 0,\forall x \neq 0\)</span></li>
 </ol>
-<p>The most common norm is the <span class="math inline">\(\ell_2\)</span> norm or Euclidean norm which is defined as <span class="math inline">\(||x||_2 = \sqrt{\sum_{i=1}^n x_i^2}\)</span></p>
+<p>The most common norm is the <span class="math inline">\(\ell_2\)</span> norm or Euclidean norm which is defined as <span class="math inline">\(\lVert x \rVert_2 = \sqrt{\sum_{i=1}^n x_i^2}\)</span></p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>x</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>,<span class='op'>-</span><span class='fl'>4</span><span class='op'>)</span></span>
@@ -2534,7 +2551,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>np.linalg.norm(x)</span></code></pre></div>
 <pre><code>5.0</code></pre>
 </div>
-<p>We sometimes take the Manhattan norm (<span class="math inline">\(\ell_1\)</span>) which sums the absolute values of a vectors elements <span class="math inline">\(||x||_1 = \sum_{i=1}^n|x_i|\)</span></p>
+<p>We sometimes take the Manhattan norm (<span class="math inline">\(\ell_1\)</span>) which sums the absolute values of a vectors elements <span class="math inline">\(\lVert x \rVert_1 = \sum_{i=1}^n|x_i|\)</span></p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>x</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>,<span class='op'>-</span><span class='fl'>4</span><span class='op'>)</span></span>
@@ -2551,7 +2568,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>np.linalg.norm(x, <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>7.0</code></pre>
 </div>
-<p>The infinity norm or max norm (<span class="math inline">\(\ell_\infty\)</span>) is common in machine learning applications defined as <span class="math inline">\(||x||_\infty = \max_i |x_i|\)</span>, which simplifies to the absolute value of the element with the largest magnitude in the vector.</p>
+<p>The infinity norm or max norm (<span class="math inline">\(\ell_\infty\)</span>) is common in machine learning applications defined as <span class="math inline">\(\lVert x \rVert_\infty = \max_i |x_i|\)</span>, which simplifies to the absolute value of the element with the largest magnitude in the vector.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>x</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>,<span class='op'>-</span><span class='fl'>4</span><span class='op'>)</span>, byrow <span class='op'>=</span> <span class='cn'>T</span>, nrow <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span>
@@ -2611,7 +2628,7 @@ x2 4.0020879</code></pre>
 <span id="cb81-10"><a href="#cb81-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb81-11"><a href="#cb81-11" aria-hidden="true" tabindex="-1"></a><span class="co"># (X&#39;X)^-1X&#39;y</span></span>
 <span id="cb81-12"><a href="#cb81-12" aria-hidden="true" tabindex="-1"></a>np.linalg.inv(X.T <span class="op">@</span> X) <span class="op">@</span> X.T <span class="op">@</span> y</span></code></pre></div>
-<pre><code>array([0.50363514, 2.00932221, 4.00052328])</code></pre>
+<pre><code>array([0.50021752, 1.99417978, 3.99632083])</code></pre>
 </div>
 <h2 id="covariance-matrices-and-standard-errors">Covariance Matrices and Standard Errors</h2>
 <h3 id="classical-standard-errors">Classical Standard Errors</h3>
@@ -2828,7 +2845,9 @@ Colorado    1.4993407 -0.9776297  1.08400162  0.001450164</code></pre>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>## As Brian Ripley pointed out on R-help back in 2003</span></span>
-<span><span class='co'>## using different compilers on the same machine and the same version of R may give different signs for the eigenvectors. The moral is, don't rely on the signs of eigenvectors! (This is on the help page.)</span></span>
+<span><span class='co'>## using different compilers on the same machine and the same version of R may give different signs for the eigenvectors. </span></span>
+<span><span class='co'>## The moral is, don't rely on the signs of eigenvectors! </span></span>
+<span><span class='co'>## (This is on the help page.)</span></span>
 <span><span class='va'>t</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/prcomp.html'>prcomp</a></span><span class='op'>(</span><span class='va'>USArrests</span>, center <span class='op'>=</span> <span class='cn'>T</span>,scale <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span></span>
 <span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>*</span><span class='va'>t</span><span class='op'>$</span><span class='va'>rotation</span><span class='op'>)</span></span></code></pre>
 </div>

@@ -1,5 +1,6 @@
 ---
 title: "Alex Stephenson"
+image: "image.jpg"
 links:
   - label: Github
     url: https://github.com/asteves
