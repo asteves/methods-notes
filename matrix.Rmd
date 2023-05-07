@@ -310,13 +310,13 @@ np.matmul(A.T, A)
 ```
 ## Norms 
 
-Informally, the norm of a vector tells us how *big* it is. Formally, a norm is a function $||\cdot||$ that maps a vector to a scalar which satisfies:
+Informally, the norm of a vector tells us how *big* it is. Formally, a norm is a function $\lVert \cdot \rVert$ that maps a vector to a scalar which satisfies:
 
-1. Given any vector **x** $||\alpha x|| = |\alpha|||x||$. 
-2. For any vectors **x**, **y**, norms satisfy the triangle inequality $||x + y|| \leq ||x|| + ||y||$
-3. The norm of a vector $||x|| > 0\hspace \forall x \neq 0$
+1. Given any vector **x** $\lVert \alpha x \rVert = \lVert \alpha \rVert \lvert x \rVert$. 
+2. For any vectors **x**, **y**, norms satisfy the triangle inequality $\lVert x + y \rVert \leq \lVert x \rVert + \lVert y \rVert$
+3. The norm of a vector $\lVert x \rVert > 0\hspace \forall x \neq 0$
 
-The most common norm is the $\ell_2$ norm or Euclidean norm which is defined as $||x||_2 = \sqrt{\sum_{i=1}^n x_i^2}$
+The most common norm is the $\ell_2$ norm or Euclidean norm which is defined as $ \lVert x \rVert_2 = \sqrt{\sum_{i=1}^n x_i^2}$
 
 ```{r}
 x = c(3,-4)
@@ -332,7 +332,7 @@ In python
 x = np.array([3,-4])
 np.linalg.norm(x)
 ```
-We sometimes take the Manhattan norm ($\ell_1$) which sums the absolute values of a vectors elements $||x||_1 = \sum_{i=1}^n|x_i|$
+We sometimes take the Manhattan norm ($\ell_1$) which sums the absolute values of a vectors elements $\lVert x \rVert_1 = \sum_{i=1}^n|x_i|$
 
 ```{r}
 x = c(3,-4)
@@ -350,7 +350,7 @@ np.linalg.norm(x, 1)
 
 ```
 
-The infinity norm or max norm ($\ell_\infty$) is common in machine learning applications defined as $||x||_\infty = \max_i |x_i|$, which simplifies to the absolute value of the element with the largest magnitude in the vector. 
+The infinity norm or max norm ($\ell_\infty$) is common in machine learning applications defined as $\lVert x \rVert_\infty = \max_i |x_i|$, which simplifies to the absolute value of the element with the largest magnitude in the vector. 
 
 ```{r}
 x = matrix(c(3,-4), byrow = T, nrow = 2)
