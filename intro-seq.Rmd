@@ -7,7 +7,7 @@ author:
 output:
   distill::distill_article:
     toc: true
-    toc_depth: 2
+    toc_depth: 3
     hightlight: haddock
 ---
 
@@ -116,7 +116,7 @@ Suppose for the sake of contradiction that an integer $x$ was both odd and even.
 
 #### Exercises 
 
-##### 1-4 
+##### Exercise 1-4 
 
 The expression on the left hand side is the problem. The goal is to complete the following equations. 
 
@@ -128,7 +128,7 @@ The expression on the left hand side is the problem. The goal is to complete the
 
 4. $\prod_{m=6}^9x_m = x_5x_6x_7x_8x_9$
 
-##### 10 
+##### Exercise 10 
 
 Represent the following as a ratio, a proporition, and a percentage: 
 
@@ -144,13 +144,13 @@ c. Following B but now Republican relative to Democrats
 
 The ratio is 312:432. The proportion is $\approx.42$. The percentage is $42\%$. 
 
-##### 13 
+##### Exercise 13 
 
 If voter turnout in the United States in 1996 was $56\%$ and in 2000 it was $62\%$, what was the percentage change in turnout from 1996 to 2000?
 
 The formula for percentage change is $\frac{x_2 - x_1}{x_1}$. Plugging in values we get $\approx 10.7\%$
 
-##### 15 
+##### Exercise 15 
 
 Simplify the following expressions into one term. 
 
@@ -159,19 +159,19 @@ b. $mn + ln - pn = n(m + l - p)$
 c. $zyx - 2yx = yx(z-2)$ 
 d. $(z+x)y\frac{1}{x} = \frac{y(x+z)}{x}$
 
-##### 17 
+##### Exercise 17 
 
 Simplify $\frac{5 + 17x + 4x + 7}{42x}$
 
 $\frac{1}{2} + \frac{2}{7x}$. Group and add like terms. Split the fraction. Cancel out the common terms and reduce both fractions. 
 
-##### 22 
+##### Exercise 22 
 
 Factor and reduce $\frac{\beta - \alpha}{\alpha^2- \beta^2}$
 
 $\frac{-1}{\alpha+\beta}$. The denominator can be reduced to $(\alpha+\beta)(\alpha-\beta)$. Multiply both the numerator and the denominator by $-1$ makes the numerator $\alpha - \beta$ and the denominator $-(\alpha+\beta)(\alpha-\beta)$. We cancel the common factor to complete the reduction. 
 
-##### 23 
+##### Exercise 23 
 
 Solve 
 
@@ -183,7 +183,7 @@ $$\begin{aligned}
 \delta &= -1 
 \end{aligned}$$
 
-##### 29 
+##### Exercise 29 
 
 Solve using the quadratic formula $2x^2 + 5x - 7$ 
 
@@ -191,7 +191,7 @@ The quadratic formula is $\frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$.
 
 Plugging in values we get $x = 1 \mid x = \frac{-7}{2}$
 
-##### 30 
+##### Exercise 30 
 
 Derive the quadratic formula by completing the sequare for the equation $ax^2 + bx + c = 0$
 
@@ -207,9 +207,9 @@ Derive the quadratic formula by completing the sequare for the equation $ax^2 + 
 
 6. Rearrange and combine terms $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$
 
-##### 31
+##### Exercise 31
 
-Solve $-\delta &> \frac{\delta + 4}{7}$ 
+Solve
 
 $$\begin{aligned}
 -\delta &> \frac{\delta + 4}{7} \\
@@ -224,7 +224,7 @@ There are discussions of the essentials of Linear Algebra in the [Lecture Notes]
 
 #### Exercises 
 
-##### 1 
+##### Exercise 1 
 
 Let $\textbf{a} = \begin{pmatrix} 10\\ 2\\ 5 \\ 2\end{pmatrix}$, $\textbf{b} = \begin{pmatrix} 4\\ 15\\ 6 \\ 8\end{pmatrix}$, $\textbf{c} = (2,6,8), \textbf{d} = (1,15,12), \textbf{e} = (14, 17, 11, 10)^T, \textbf{f} = (20, 4, 10, 4)^T$. Calculate each of the following, indicating that it's not possible if there is a calculation you cannot perform. 
 
@@ -240,7 +240,7 @@ e. $-3\textbf{f} = (-60, -12, -30, -12)^T$
 
 f. $\lVert b \rVert = \sqrt{\sum_{i=1}^n b_i^2} = \approx 18.46$. 
 
-g. $\lVert c + d \rVert= \sqrt{\sum_{i=1}^n (c_i + d_i)^2} = \sqrt{3^2 + 21^2 + 20^2} = ~approx 29.2$. The triangle inequality states $\lVert c + d \rVert \leq \lVert c \rVert + \lVert d \rVert$. Focusing on the right hand side, the first term is $\sqrt{4+36 + 64}= \sqrt{104} \approx 10.2$ and the second term is $\sqrt{1 + 15^2 + 12^2} = \sqrt{370} \approx 19.2$ or $29.4$ showing the triangle inequality holds. 
+g. $\lVert c + d \rVert= \sqrt{\sum_{i=1}^n (c_i + d_i)^2} = \sqrt{3^2 + 21^2 + 20^2} = \approx 29.2$. The triangle inequality states $\lVert c + d \rVert \leq \lVert c \rVert + \lVert d \rVert$. Focusing on the right hand side, the first term is $\sqrt{4+36 + 64}= \sqrt{104} \approx 10.2$ and the second term is $\sqrt{1 + 15^2 + 12^2} = \sqrt{370} \approx 19.2$ or $29.4$ showing the triangle inequality holds. 
 
 h. $\lVert c - d\rVert = \sqrt{\sum_{i=1}^n (c_i - d_i)^2} = \sqrt{1 + 9^2 + 4^2} \approx 9.9$
 
@@ -248,10 +248,24 @@ i. $a \cdot b = a^Tb = 10(4) + 2(15) + 5(6) + 2(8) = 116$
 
 j. $c \cdot d = c^Td = 2(1) + 6(15) + 8(12) = 188$
 
-##### 2 
+##### Exercise 2 
 
 Identify the following matrices as diagonal, identity, square, symmetric, triangular, or none of the above. Note all that apply. 
 
+```{r}
+A = cbind(c(0,1,5), c(1,-2,-1), c(5,-1,2))
+B = diag(3)
+C = cbind(c(1,3),c(1,-2))
+D = cbind(c(0,5,2,1), c(1,1,4,1), c(2,-1,0,0))
+print("The matrix A is")
+A
+print("The matrix B is")
+B
+print("The matrix C is")
+C
+print("The matrix D is")
+D
+```
 a. Square and symmetric matrix 
 
 b. The identity matrix is square, symmetric, triangular, and of course the identity. 
@@ -260,19 +274,24 @@ c. This is just a square matrix.
 
 d. The matrix identified is none of the above. 
 
-##### 3 
+##### Exercise 3 
 
 ```{r}
 A = cbind(c(0,1,5), c(1,-2,-1), c(5,-1,2))
 B = diag(3)
 C = cbind(c(1,3),c(1,-2))
 D = cbind(c(0,5,2,1), c(1,1,4,1), c(2,-1,0,0))
+print("The transpose of A is")
 t(A)
+print("The transpose of B is")
 t(B)
+print("The transpose of C is")
 t(C)
+print("The transpose of D is")
 t(D)
 ```
-##### 4
+
+##### Exercise 4
 
 Given the matrices in the problem, perform the following calculations. 
 
@@ -286,9 +305,11 @@ B
 C
 D
 ```
+
 a. $A + C$ is not possible because there are not the same dimensions. 
 
 b. $A-B$
+
 ```{r}
 A - B
 ```
@@ -298,6 +319,7 @@ c. $A + 5B$
 ```{r}
 A + 5*B
 ```
+
 d. $3A$
 
 ```{r}
@@ -309,6 +331,7 @@ e. $2B - 5A$
 ```{r}
 2*B - 5*A
 ```
+
 f. $B^T - C$
 
 ```{r}
@@ -326,6 +349,7 @@ D %*% A
 i. $AD$ is not possible because the dimensions are not correct. 
 
 j. $CD$
+
 ```{r}
 C %*% D
 ```
@@ -335,14 +359,16 @@ k. $BC$
 ```{r}
 B %*% C
 ```
-l $CB$ 
+
+l. $CB$ 
 
 ```{r}
 C %*% B
 ```
-Note that $BC \neq CB$! This is common with matrix multiplication whenever both $BC$ and $CB$ exist. 
 
-##### 6
+Note that $BC \neq CB$ This is common with matrix multiplication whenever both $BC$ and $CB$ exist. 
+
+##### Exercise 6
 
 Find the inverse of the following two matrices or explain why it does not exist. 
 
@@ -361,7 +387,7 @@ $B^{-1}$ does have an inverse. The determinant is $ad - bc = 2 - 12 = -10$. We s
 solve(B)
 
 ```
-##### 9 
+##### Exercise 9 
 
 True or False?
 
@@ -373,7 +399,7 @@ b. $XX^-1 \neq I$. False. Plug in the identity matrix for X as a counter example
 
 c. $M_{i \times j}N_{j\times k} = (MN)_{i \times k}$. True. 
 
-##### 10 
+##### Exercise 10 
 
 Why are the following useful?
 
@@ -381,13 +407,13 @@ The determinant is useful because it determines whether a matrix is invertible. 
 
 The inverse is useful because we can use it to solve the system of equations represented by the matrix. An inverse indicates whether the system has a solution. 
 
-##### 11 
+##### Exercise 11 
 
 What does it mean if you have a singular matrix?
 
 It means that the matrix is not invertible. For most applied political science research, it means that you have a perfect collinearity between two of your variables, and the error will show up when you try to run a regression via OLS. 
 
-##### 12
+##### Exercise 12
 
 Fill in the blanks: 
 
@@ -399,15 +425,15 @@ b. AB indicates that you *left-multiply* B by A
 
 #### Exercises 
 
-##### 1 
+##### Exercise 1 
 
-##### 2
+##### Exercise 2
 
-##### 4
+##### Exercise 4
 
-##### 6 
+##### Exercise 6 
 
-##### 7 
+##### Exercise 7 
 
 ## Calculus Sequence 
 
