@@ -1,5 +1,5 @@
 name: "methods-notes"
-title: "Methods Tutoring Notes"
+title: "Methods Tutoring"
 repository_url: https://github.com/asteves/methods-notes
 creative_commons: CC BY
 twitter:
@@ -15,7 +15,7 @@ navbar:
       href: about.html
     - text: "Lecture Notes"
       href: lectures.html
-    - text: "Math Camp Notes"
+    - text: "Math Camp Solutions"
       href: intro-seq.html
     - text: "Coding Notes"
       href: coding.html

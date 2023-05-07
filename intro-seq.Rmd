@@ -584,9 +584,9 @@ This material is already discussed in the [Linear Algebra Sequence](#prelim)
 
 ##### FPP Chapter 8 Exercise Set C(1) and D(1)
 
-##### FPP Chpater 9 Exercise Set A (2,6,9)
+##### FPP Chapter 9 Exercise Set A (2,6,9)
 
-##### FPP Chpater 9 Exercise Set B(4), C(1,4), E(all)
+##### FPP Chapter 9 Exercise Set B(4), C(1,4), E(all)
 
 ### M+S Chapter 11: Continuous Distributions 
 
