@@ -1,0 +1,500 @@
+---
+title: "Math Camp Pre-track Solutions"
+description: |
+  A set of solutions for UC Berkeley's Math Camp Pre-track
+author: 
+  - name: Alex Stephenson
+output:
+  distill::distill_article:
+    toc: true
+    toc_depth: 2
+    hightlight: haddock
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Self-Guided Summer Methods Program 
+
+The self-guided summer methods program is based on a suggested syllabus for preparing for the Political Science program at UC Berkeley's formal and quantitative methods course. The purpose of the self-guided course is to help students prepare for the summer math camp and the introductory courses. The primary books for the self-guided course are [A Mathematics Course for Political and Social Research](https://press.princeton.edu/books/paperback/9780691159171/a-mathematics-course-for-political-and-social-research) herein dubbed M+S and (Statistics: Fourth Edition)[https://wwnorton.com/books/Statistics/] herein dubbed as FPP. 
+
+## Linear Algebra Sequence {#la}
+
+The Linear Algebra sequence suggested timeline is 2-4 weeks. It is entirely composed of chapters from M+S and comprises mathematical preliminaries, vectors and matrices, and vector spaces and systems of equation. 
+
+### M+S Chapter 1: Preliminaries {#prelim}
+
+#### Exercises 
+
+##### Exercise 1 
+
+a. Party identification of delegates at a political convention is a *constant* 
+
+b. War participation of the Great Powers is a *variable* 
+
+c. Voting record of members of Congress relative to the stated position of the president is a *variable* 
+
+d. REvolutions in France, Russia, China, Iran, and Nicaragua are *constants*
+
+e. An individual voter's vote choice in the 1992 presidential election is a *constant*. 
+
+f. An individual voter's vote choice in the 1960-1992 presidential elections is a *variable* 
+
+g. Vote choice in the 1992 presidential election is a *variable* 
+
+##### Exercise 4 
+
+```{r, message=F, warning=F}
+library(ggplot2)
+
+df = data.frame(
+  party = c("SQ", "Proposal", "1","2", "3"),
+  x = c(45,60, 40,45,55),
+  y = c(45, 30, 20, 50, 25)
+)
+
+df2 = data.frame(x = seq(0,100,0.01), y = seq(100, 0, -0.01))
+df |>
+  ggplot(aes(x = x, y = y))+
+  geom_point(aes(color = party)) +
+  geom_line(data = df2, aes(x = x, y = y))+
+  theme_minimal()+
+  labs(x = "Guns",
+       y = "Butter")+
+  scale_color_viridis_d(name = "")
+```
+
+##### Exercise 5 
+
+Let $A = \{1,5,10\}$ and $B = \{1,2,...,10\}$
+
+a. $A \subset B$ is true. All elements of A are contained in B. The reverse is not true. For example $3 \not\subset A$ but is in $B$. 
+
+b. $A \cup B = \{1,2,3,4,5,6,7,8,9,10\}$ because A is entirely contained within B, so the union of the two sets is just the set B itself. 
+
+c. $A \cap B = A$ because A is entirely contained within B, so the intersection between the two sets is just the set A itself.
+
+d. Partition $B$ into two sets $A = \{1,5,10\}$ and $C = \{2,3,4,6,7,8,9\}$. $C = A^C$ or the set of elements in B that are not in A. $A^C$ is known as the complement of A.
+
+e. Perhaps unsurprisingly $A \cup C = A \cup A^C = B$.
+
+f. $A \cap C = \emptyset$ or the empty set. There are no elements simultaneously within both A and C. 
+
+##### Exercise 8 
+
+**Prove that the sum of any two even numbers is even, the sum of any two odd numbers is even, and the sum of any odd number with any even number is odd.**
+
+*A*
+
+Define the set of even numbers as the set of integers multiplied by 2 so the set of even numbers can be described as $\{2n: \forall n \in \mathbb{I}\}$. Any two even numbers can be written as $2n + 2m$. For example, we can write $4+2$ as $2(1) + 2(2)$ where $n=1, m = 2$. Since both numbers have the common factor 2, we can pull it out and rearrange $2(n+m) = 2n + 2m$. Now we can simply rewrite $n+m = k$ and the expression simplifies to $2k$ which is the equivalent definition of an even number since we have proved that this is also even. 
+
+*B* 
+
+The same set up as above for evens also reveals that any odd number is an even number + 1. For example, 3 is odd and $3 = 2+1$, or more generally any odd number $\{k : 2n +1, \forall i \in \mathbb{I}$. The sum of any two odd numbers can be written $(2n + 1) + (2m +1) = 2(n+m) + 2$. To get a little intuition that this is correct, consider $1 + 1 = 2(0+0) + 2$, while $1 + 3 = 2(0+1)+2$. Since any even number added to another even number yields an even number, and the first part of the expression $2(n+m)$ we have already proven to be even, we are done. 
+
+*C*
+
+We now have $2n + 2m + 1$, for example $2 + 3 = 2(1) + 2(1)+1$. We know from part A, that $2n + 2m$ is even, and we can note that the definition of an odd number is an even number plus 1. Note that we can equivalently define the odd numbers as $2k - 1$ (think 3 as either being $2(1) + 1 \mid 2(2) - 1$)
+
+Assume that any even number plus an odd number is equal to some even number $2p$. Then: 
+
+$$\begin{aligned}
+2n + 2m + 1 &= 2p \\
+2(n + m) + 1 &= 2p \\
+2(n + m) &= 2p - 1 \\
+2k &= 2p - 1
+\end{aligned}$$
+
+which yields a contradiction because this states that an even number is equal to an odd number. 
+
+While not explicitly required, it's worth pointing out why the above is a contradiction. 
+
+Suppose for the sake of contradiction that an integer $x$ was both odd and even. Then $x = 2y$ for some integer $y$ by the definition of evenness and $x = 2y + 1$ by the definition of oddness. Thus, $2y = 2y +1$ or $1 = 2(y - z) \implies \frac{1}{2} = y-z$ but we know that $\frac{1}{2}$ is not an integer and any integer added to another integer must always yield an integer.  
+
+### M + S Chapter 2: Arithmetic Review
+
+#### Exercises 
+
+##### 1-4 
+
+The expression on the left hand side is the problem. The goal is to complete the following equations. 
+
+1. $x^1 = x$ 
+
+2. $-a \times (-b)^2 = -ab^2$
+
+3. $\sum_{i=1}^4x_i = x_1 + x_2 + x_3 + x_4$ 
+
+4. $\prod_{m=6}^9x_m = x_5x_6x_7x_8x_9$
+
+##### 10 
+
+Represent the following as a ratio, a proporition, and a percentage: 
+
+a. Latinos relative to all others: African American 98,642, Asian 62,346, Caucasian 436,756, Latino 105,342, Other 32,654
+
+The ratio is 105342:630398. The proportion is $\approx.14$. The percentage is $\approx14.\%$
+
+b. Independent registered voters relative to Republicans: Democrats 432, Independent 221; Republicans 312. 
+
+The ratio is 221:312. The proportion is $\approx.41$. The percentage is $41\%$.
+
+c. Following B but now Republican relative to Democrats 
+
+The ratio is 312:432. The proportion is $\approx.42$. The percentage is $42\%$. 
+
+##### 13 
+
+If voter turnout in the United States in 1996 was $56\%$ and in 2000 it was $62\%$, what was the percentage change in turnout from 1996 to 2000?
+
+The formula for percentage change is $\frac{x_2 - x_1}{x_1}$. Plugging in values we get $\approx 10.7\%$
+
+##### 15 
+
+Simplify the following expressions into one term. 
+
+a. $xz + yz = z(x+y)$. 
+b. $mn + ln - pn = n(m + l - p)$
+c. $zyx - 2yx = yx(z-2)$ 
+d. $(z+x)y\frac{1}{x} = \frac{y(x+z)}{x}$
+
+##### 17 
+
+Simplify $\frac{5 + 17x + 4x + 7}{42x}$
+
+$\frac{1}{2} + \frac{2}{7x}$. Group and add like terms. Split the fraction. Cancel out the common terms and reduce both fractions. 
+
+##### 22 
+
+Factor and reduce $\frac{\beta - \alpha}{\alpha^2- \beta^2}$
+
+$\frac{-1}{\alpha+\beta}$. The denominator can be reduced to $(\alpha+\beta)(\alpha-\beta)$. Multiply both the numerator and the denominator by $-1$ makes the numerator $\alpha - \beta$ and the denominator $-(\alpha+\beta)(\alpha-\beta)$. We cancel the common factor to complete the reduction. 
+
+##### 23 
+
+Solve 
+
+$$\begin{aligned}
+15\delta + 45 - 6\delta &= 36 \\
+15\delta + 45 - 6\delta - 36 &= 0 \\
+15\delta + 6\delta - 9 &= 0 \\
+9\delta - 9 &= 0 \\
+\delta &= -1 
+\end{aligned}$$
+
+##### 29 
+
+Solve using the quadratic formula $2x^2 + 5x - 7$ 
+
+The quadratic formula is $\frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$. 
+
+Plugging in values we get $x = 1 \mid x = \frac{-7}{2}$
+
+##### 30 
+
+Derive the quadratic formula by completing the sequare for the equation $ax^2 + bx + c = 0$
+
+1. Start with a quadratic of interest and divide through by the coefficient on on $x^2$ yielding $x^2 - \frac{bx}{a} = -\frac{c}{a}$ after rearranging. 
+
+2. Divide the coefficient on x by 2 and then square it. Add that value to both sides of the equation. $x^2 - \frac{bx}{a} + (\frac{b}{2a})^2 = \frac{c}{a} + (\frac{b}{2a})^2$. 
+
+3. Factor the left hand side into a $(x \pm z)^2$ form and simplify the right hand side. $(x + \frac{b}{2a})^2 = \frac{c}{a} + (\frac{b}{2a})^2$. 
+
+4. $(x + \frac{b}{2a})^2 = \frac{b^2 - 4ac}{4a^2}$ where we've multiplied $\frac{-c}{a}$ by $4a^2$ and eliminated an a. 
+
+5. $x+\frac{b}{2a} = \pm \frac{\sqrt{b^2 - 4ac}}{2a}$. Taking the square root of both sides. 
+
+6. Rearrange and combine terms $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$
+
+##### 31
+
+Solve $-\delta &> \frac{\delta + 4}{7}$ 
+
+$$\begin{aligned}
+-\delta &> \frac{\delta + 4}{7} \\
+-7\delta &> \delta + 4 \\
+-8\delta &> 4 \\
+\delta &< -\frac{1}{2}
+\end{aligned}$$
+
+### M+S Chapter 12: Vectors and Matrices 
+
+There are discussions of the essentials of Linear Algebra in the [Lecture Notes](lectures.html) and in the [Linear Algebra](matrix.html) computation section. 
+
+#### Exercises 
+
+##### 1 
+
+Let $\textbf{a} = \begin{pmatrix} 10\\ 2\\ 5 \\ 2\end{pmatrix}$, $\textbf{b} = \begin{pmatrix} 4\\ 15\\ 6 \\ 8\end{pmatrix}$, $\textbf{c} = (2,6,8), \textbf{d} = (1,15,12), \textbf{e} = (14, 17, 11, 10)^T, \textbf{f} = (20, 4, 10, 4)^T$. Calculate each of the following, indicating that it's not possible if there is a calculation you cannot perform. 
+
+a. $\textbf{a} + \textbf{b} = (14, 17, 11, 10)^T$ 
+
+b. This is not possible because the vectors are not of equal length. 
+
+c. $\textbf{b} - \textbf{e} = (-10, -2, -5, -2)^T$
+
+d. $15\textbf{c} = (30, 90, 120)$
+
+e. $-3\textbf{f} = (-60, -12, -30, -12)^T$
+
+f. $\lVert b \rVert = \sqrt{\sum_{i=1}^n b_i^2} = \approx 18.46$. 
+
+g. $\lVert c + d \rVert= \sqrt{\sum_{i=1}^n (c_i + d_i)^2} = \sqrt{3^2 + 21^2 + 20^2} = ~approx 29.2$. The triangle inequality states $\lVert c + d \rVert \leq \lVert c \rVert + \lVert d \rVert$. Focusing on the right hand side, the first term is $\sqrt{4+36 + 64}= \sqrt{104} \approx 10.2$ and the second term is $\sqrt{1 + 15^2 + 12^2} = \sqrt{370} \approx 19.2$ or $29.4$ showing the triangle inequality holds. 
+
+h. $\lVert c - d\rVert = \sqrt{\sum_{i=1}^n (c_i - d_i)^2} = \sqrt{1 + 9^2 + 4^2} \approx 9.9$
+
+i. $a \cdot b = a^Tb = 10(4) + 2(15) + 5(6) + 2(8) = 116$
+
+j. $c \cdot d = c^Td = 2(1) + 6(15) + 8(12) = 188$
+
+##### 2 
+
+Identify the following matrices as diagonal, identity, square, symmetric, triangular, or none of the above. Note all that apply. 
+
+a. Square and symmetric matrix 
+
+b. The identity matrix is square, symmetric, triangular, and of course the identity. 
+
+c. This is just a square matrix. 
+
+d. The matrix identified is none of the above. 
+
+##### 3 
+
+```{r}
+A = cbind(c(0,1,5), c(1,-2,-1), c(5,-1,2))
+B = diag(3)
+C = cbind(c(1,3),c(1,-2))
+D = cbind(c(0,5,2,1), c(1,1,4,1), c(2,-1,0,0))
+t(A)
+t(B)
+t(C)
+t(D)
+```
+##### 4
+
+Given the matrices in the problem, perform the following calculations. 
+
+```{r, echo=T}
+A = rbind(c(5,1,2), c(6,2,3))
+B = rbind(c(3,4,5), c(-2,-3,6))
+C = cbind(c(1,-5,-3), c(2,3,1))
+D = rbind(c(2,1),c(4,3))
+A
+B
+C
+D
+```
+a. $A + C$ is not possible because there are not the same dimensions. 
+
+b. $A-B$
+```{r}
+A - B
+```
+
+c. $A + 5B$
+
+```{r}
+A + 5*B
+```
+d. $3A$
+
+```{r}
+3*A
+```
+
+e. $2B - 5A$
+
+```{r}
+2*B - 5*A
+```
+f. $B^T - C$
+
+```{r}
+t(B) - C
+```
+
+g. $BA$ is not possible because the dimensions are not correct $2 \times 3$ and $2 \times 3$
+
+h. $DA$
+
+```{r}
+D %*% A
+```
+
+i. $AD$ is not possible because the dimensions are not correct. 
+
+j. $CD$
+```{r}
+C %*% D
+```
+
+k. $BC$ 
+
+```{r}
+B %*% C
+```
+l $CB$ 
+
+```{r}
+C %*% B
+```
+Note that $BC \neq CB$! This is common with matrix multiplication whenever both $BC$ and $CB$ exist. 
+
+##### 6
+
+Find the inverse of the following two matrices or explain why it does not exist. 
+
+```{r}
+A = cbind(c(4,6), c(2,3))
+B = cbind(c(1,3), c(4,2))
+A
+B
+```
+
+$A$ does not have full rank because the first column is just the second column muliplied by 2. As a result, the matrix is not square (and singular) so there is no inverse. 
+
+$B^{-1}$ does have an inverse. The determinant is $ad - bc = 2 - 12 = -10$. We swap the two diagonal elements and flip the signs on the off diagonal and then multiply by 1 over the determinant $\frac{-1}{10}$.
+
+```{r}
+solve(B)
+
+```
+##### 9 
+
+True or False?
+
+a. $BA = AB$ for all matrices $A,B$. 
+
+False. We've already shown this to be the case in 4 so the matrices B and C from that problem serve as a counter example. 
+
+b. $XX^-1 \neq I$. False. Plug in the identity matrix for X as a counter example. More generally, we can produce the identity matrix by either left or right multiplying any matrix $X$ with the inverse matrix provided the inverse matrix exists. 
+
+c. $M_{i \times j}N_{j\times k} = (MN)_{i \times k}$. True. 
+
+##### 10 
+
+Why are the following useful?
+
+The determinant is useful because it determines whether a matrix is invertible. If the determinant is 0, then a matrix is not invertible. 
+
+The inverse is useful because we can use it to solve the system of equations represented by the matrix. An inverse indicates whether the system has a solution. 
+
+##### 11 
+
+What does it mean if you have a singular matrix?
+
+It means that the matrix is not invertible. For most applied political science research, it means that you have a perfect collinearity between two of your variables, and the error will show up when you try to run a regression via OLS. 
+
+##### 12
+
+Fill in the blanks: 
+
+a. AB indicates that you *right-multiply* A by B. 
+
+b. AB indicates that you *left-multiply* B by A
+
+### M+S Chapter 13: Vector Spaces and Systems of Equations 
+
+#### Exercises 
+
+##### 1 
+
+##### 2
+
+##### 4
+
+##### 6 
+
+##### 7 
+
+## Calculus Sequence 
+
+The Calculus sequence suggested timeline is 2-4 weeks. It is entirely composed of chapters from M+S and comprises mathematical preliminaries, functions, limits and continuity, sequences and series and sets, introduction to derivatives and integrals, and an introduction to extrema and multivariate calculus. 
+
+### M+S Chapter 3: Functions  
+
+### M+S Chapter 4: Limits and Continuity, Sequences and Series, and More on Sets
+
+### M+S Chapter 5: Introduction to Derivatives
+
+### M+S Chapter 6: Rules of Derivatives 
+
+### M+S Chapter 7: Integrals 
+
+### M+S Chapter 8: Extrema in One Dimension 
+
+### M+S Chapter 15: Multivariate Calculus
+
+## Random Variables and Probability Sequence 
+
+The Random Variables and Probability sequence suggested timeline is 1-2 weeks. It is entirely composed of chapters from M+S and FPP and comprises mathematical preliminaries, introduction to probability, and an introduction to discrete distributions and continuous distributions. 
+
+
+### M+S Chapter 1: Preliminaries 
+
+This material is already discussed in the [Linear Algebra Sequence](#prelim)
+
+### FPP Chapter 4,6
+
+#### Exercises 
+
+### FPP Chapter 13, 14
+
+#### Exercises 
+
+##### 13 Exercise Set A (2,4,5)
+
+##### 13 Exercise Set B (1,4)
+
+##### 13 Exercise Set C (1,4,7)
+
+##### 13 Exercise Set D (1,2,8)
+
+##### 14 Exercise Set A (1,4)
+
+##### 14 Exercise Set B (2,3,6)
+
+##### 14 Exercise Set C (1,3)
+
+##### 14 Exercise Set D (3,5)
+
+### M+S Chapter 9: Introduction to Probability 
+
+### M+S Chapter 10: Introduction to Discrete Distributions 
+
+### FPP Chapter 8, 9
+
+#### Exercises 
+
+##### FPP Chapter 8 Exercise Set A (1,5,6)
+
+##### FPP Chapter 8 Exercise Set B (1,2,6,9)
+
+##### FPP Chapter 8 Exercise Set C(1) and D(1)
+
+##### FPP Chpater 9 Exercise Set A (2,6,9)
+
+##### FPP Chpater 9 Exercise Set B(4), C(1,4), E(all)
+
+### M+S Chapter 11: Continuous Distributions 
+
+### FPP Chapter 10,11,12,16,17
+
+#### Exercises 
+
+##### FPP Chapter 10 Exercise Set A (1,4,5), B (1,3), D(all), E(all)
+
+##### FPP Chapter 11 Exercise Set A (3,4,6), B(1), C(all), D(3,7), E(1)
+
+##### FPP Chapter 12 Exercise Set A (1,3,4), B (1,3)
+
+##### FPP Chapter 16 Exercise Set A (1,4,6,9) B (2,5,7), C(1)
+
+##### FPP Chapter 17 Exercise Set A (1), B (1,3,4), C(1,8), D(1), E(1,4,9)
+
+## R Sequence 
+
+The R sequence suggested timeline is 2-4 weeks, though learning to and practicing coding will occupy much of one's time in quantitative research. Much of the material contained in the R sequence prep is available on the [Coding Notes](coding.html) page, which offers both R and Python coding notes and exercises. 
+
