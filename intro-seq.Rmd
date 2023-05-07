@@ -31,17 +31,17 @@ The Linear Algebra sequence suggested timeline is 2-4 weeks. It is entirely comp
 
 a. Party identification of delegates at a political convention is a *constant* 
 
-b. War participation of the Great Powers is a *variable* 
+b. War participation of the Great Powers is a *variable*. 
 
 c. Voting record of members of Congress relative to the stated position of the president is a *variable* 
 
-d. REvolutions in France, Russia, China, Iran, and Nicaragua are *constants*
+d. Revolutions in France, Russia, China, Iran, and Nicaragua are *constants*
 
 e. An individual voter's vote choice in the 1992 presidential election is a *constant*. 
 
-f. An individual voter's vote choice in the 1960-1992 presidential elections is a *variable* 
+f. An individual voter's vote choice in the 1960-1992 presidential elections is a *variable*. 
 
-g. Vote choice in the 1992 presidential election is a *variable* 
+g. Vote choice in the 1992 presidential election is a *variable*. 
 
 ##### Exercise 4 
 
