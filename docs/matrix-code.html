@@ -2191,12 +2191,20 @@ Coding
 <li><a href="#sandwich-standard-errors" id="toc-sandwich-standard-errors">Sandwich Standard Errors</a></li>
 </ul></li>
 <li><a href="#principal-components-analysis" id="toc-principal-components-analysis">Principal Components Analysis</a></li>
+<li><a href="#tensors" id="toc-tensors">Tensors</a></li>
 </ul>
 </nav>
 </div>
-<p>This page provides code in R and Python for doing linear algebra. In Python, we make use of the <a href="https://numpy.org/doc/stable/index.html">NumPy</a> library.</p>
+<p>This page provides code in R and Python for doing linear algebra. In Python, we make use of the <a href="https://numpy.org/doc/stable/index.html">NumPy</a> library and the PyTorch library.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span></code></pre></div>
+</div>
+<p>For tensor processing in R, we’ll use the R port of <code>torch</code></p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://torch.mlverse.org/docs'>torch</a></span><span class='op'>)</span></span></code></pre>
+</div>
 </div>
 <h2 id="vectors">Vectors</h2>
 <p>The simplest way to represent vectors in R is by using the vector data structure.</p>
@@ -2654,7 +2662,7 @@ x2 4.0020879</code></pre>
 <span id="cb81-10"><a href="#cb81-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb81-11"><a href="#cb81-11" aria-hidden="true" tabindex="-1"></a><span class="co"># (X&#39;X)^-1X&#39;y</span></span>
 <span id="cb81-12"><a href="#cb81-12" aria-hidden="true" tabindex="-1"></a>np.linalg.inv(X.T <span class="op">@</span> X) <span class="op">@</span> X.T <span class="op">@</span> y</span></code></pre></div>
-<pre><code>array([0.51102722, 1.98960644, 3.98178588])</code></pre>
+<pre><code>array([0.49218337, 1.99041926, 3.98608319])</code></pre>
 </div>
 <h2 id="covariance-matrices-and-standard-errors">Covariance Matrices and Standard Errors</h2>
 <h3 id="classical-standard-errors">Classical Standard Errors</h3>
@@ -2937,7 +2945,20 @@ Colorado    1.4993407 -0.9776297  1.08400162 -0.001450164</code></pre>
        [ 2.49861285, -1.52742672,  0.592541  , -0.33855924],
        [ 1.49934074, -0.97762966,  1.08400162,  0.00145016]])</code></pre>
 </div>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<h2 id="tensors">Tensors</h2>
+<p>Tensors are generic <span class="math inline">\(n^{th}\)</span> order arrays. Vectors are a 1st order tensor. Matrices are a second order tensor.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>t1</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/torch/man/torch_tensor.html'>torch_tensor</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span></span></code></pre>
+</div>
+</div>
+<p>In python using <code>PyTorch</code></p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode" id="cb101"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> torch.tensor(<span class="fl">1.0</span>)</span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>t1</span></code></pre></div>
+<pre><code>tensor(1.)</code></pre>
+</div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
