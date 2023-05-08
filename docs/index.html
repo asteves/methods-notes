@@ -88,7 +88,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--radix_placeholder_meta_tags-->
-  <title>Methods Tutoring: Methods Tutoring Notes</title>
+  <title>Methods Tutoring</title>
 
   <meta property="description" itemprop="description" content="Welcome to the main course site"/>
 
@@ -97,7 +97,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <meta name="article:author" content="Alex Stephenson"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Methods Tutoring: Methods Tutoring Notes"/>
+  <meta property="og:title" content="Methods Tutoring"/>
   <meta property="og:type" content="article"/>
   <meta property="og:description" content="Welcome to the main course site"/>
   <meta property="og:locale" content="en_US"/>
@@ -105,7 +105,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Methods Tutoring: Methods Tutoring Notes"/>
+  <meta property="twitter:title" content="Methods Tutoring"/>
   <meta property="twitter:description" content="Welcome to the main course site"/>
   <meta property="twitter:site" content="@adastephenson"/>
 
@@ -113,7 +113,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","site"]}},"value":[{"type":"character","attributes":{},"value":["Methods Tutoring Notes"]},{"type":"character","attributes":{},"value":["Welcome to the main course site\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Alex Stephenson"]}]}]},{"type":"character","attributes":{},"value":["distill::distill_website"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","site"]}},"value":[{"type":"character","attributes":{},"value":["Methods Tutoring"]},{"type":"character","attributes":{},"value":["Welcome to the main course site\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Alex Stephenson"]}]}]},{"type":"character","attributes":{},"value":["distill::distill_website"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2097,7 +2097,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Methods Tutoring Notes","description":"Welcome to the main course site","authors":[{"author":"Alex Stephenson","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}]}
+{"title":"Methods Tutoring","description":"Welcome to the main course site","authors":[{"author":"Alex Stephenson","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2111,10 +2111,36 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="nav-right">
 <a href="index.html">Home</a>
 <a href="about.html">Creator</a>
-<a href="lectures.html">Lecture Notes</a>
-<a href="intro-seq.html">Math Camp Solutions</a>
-<a href="coding.html">Coding Notes</a>
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+Lecture Notes
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="lectures.html">Causal Inference</a>
+<a href="lectures.html">Game Theory</a>
 <a href="matrix.html">Linear Algebra</a>
+<a href="ml.html">Machine Learning</a>
+<a href="lectures.html">Optimization</a>
+<a href="lectures.html">Probability</a>
+<a href="lectures.html">Statistics</a>
+<a href="survey.html">Survey Design and Sampling</a>
+</div>
+</div>
+<a href="intro-seq.html">Math Camp Solutions</a>
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+Coding
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="coding.html">Python</a>
+<a href="coding.html">R</a>
+<a href="matrix.html">Applied Linear Algebra</a>
+</div>
+</div>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
 </div>
 </nav>
@@ -2124,7 +2150,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Methods Tutoring Notes</h1>
+<h1>Methods Tutoring</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
 <p><p>Welcome to the main course site</p></p>
@@ -2137,9 +2163,64 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-article">
-<p>Welcome to the Methods Tutoring Notes site. I put this together based on my methods training and years being a graduate quantitative methods
-tutor at UC Berkeley.</p>
+<p>Welcome to the Methods Tutoring Notes site. I put this together based on my methods training and years being a graduate quantitative methods tutor at UC Berkeley.</p>
+<p>The site contains several different resources. First and foremost are notes on the primary quantitative methods topics that are common to a graduate course sequence in political science. Second, there are coding notes for both R and Python.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. I have endeavored to provide an introduction to both languages, with a focus on topics that have proved more difficult for graduate students at UC Berkeley. Third, I provide code to common research techniques and methods currently in use in top political science journals. For pedagogical reasons, every single example and application on this website has both an R and a Python implementation.</p>
+<h2 id="texts">Texts</h2>
+<p>I have benefited greatly in my own methods education from the teaching of professors at Berkeley. All errors on this website are entirely my own and should in no way reflect on their excellent guidance.</p>
+<p>In addition to classroom teaching and tutoring, the underlying materials on this website are drawn from many resources. A non-exhaustive list of books from which these materials are drawn by subject are below. I encourage individuals who reach this page for self-study consult them for more detail. I have put in <strong>bold</strong> the text or sets of texts that strikes me as the most reasonable one to begin with in each category.</p>
+<h3 id="causal-inference">Causal Inference</h3>
+<p>Angrist, J, &amp; Pischke J.S. 2009. Mostly Harmless Econometrics: An Empiricist’s Companion. Princeton: Princeton University Press.</p>
+<p>Angrist, J., &amp; Pischke J.S. 2015. Mastering ’Metrics: The Path from Cause to Effect. Princeton: Princeton University Press.</p>
+<p><strong>Cunningham, S. 2021. Causal Inference: The Mixtape. New Haven: Yale University Press. <a href="https://mixtape.scunning.com/" class="uri">https://mixtape.scunning.com/</a></strong></p>
+<p>Dunning, T. 2012. Natural Experiments in the Social Sciences: A Design-Based Approach. Cambridge: Cambridge University Press.</p>
+<p>Gerber, Alan S, and Donald P Green. 2012. Field Experiments: Design, Analysis and Interpretation. New York: W.W. Norton &amp; Co.</p>
+<p>Imbens, G., &amp; Rubin, D. (2015). Causal Inference for Statistics, Social, and Biomedical Sciences: An Introduction. Cambridge: Cambridge University Press.</p>
+<p>Hernán, M.A, &amp; Robins,J.A.. 2021. Causal Inference: What If. Boca Raton: Chapman &amp; Hall/CRC Press</p>
+<p>Morgan, S.L., &amp; Winship, C. 2014. Counterfactuals and Causal Inference: Methods and Principles for Social Research. 2nd ed. Cambridge: Cambridge University Press.</p>
+<p>Rosenbaum, P.R., 2020. Design of Observational Studies. Cham: Springer International Publishing.</p>
+<h3 id="game-theory">Game Theory</h3>
+<p>Fudenberg, Drew, and Jean Tirole. 1991. Game Theory. Cambridge: MIT Press.</p>
+<p>Gehlbach, S. 2013. Formal Models of Domestic Politics. Cambridge: Cambridge University Press.</p>
+<p>McCarty, N., &amp; Meirowitz, A. 2007. Political Game Theory: An Introduction. Cambridge: Cambridge University Press.</p>
+<p><strong>Tadelis, Steve. 2013. Game Theory: An Introduction. Princeton; Oxford: Princeton University Press.</strong></p>
+<h3 id="linear-algebra">Linear Algebra</h3>
+<p><strong>Boyd, S., &amp; Vandenberghe, L. 2018. Introduction to Applied Linear Algebra: Vectors, Matrices, and Least Squares. 1st ed. Cambridge University Press.</strong></p>
+<p>Harville, D.A., 1997. Matrix Algebra from a Statistician’s Perspective. New York: Springer.</p>
+<h3 id="machine-learning">Machine Learning</h3>
+<p>Goodfellow, I., Bengio, Y. &amp; Courville, A. 2016. Deep Learning. Cambridge: MIT Press.</p>
+<p>Hastie, T., Tibshirani, R., &amp; Friedman, J. 2013. Elements of Statistical Learning. 2nd ed. Springer.</p>
+<p><strong>James, G., Witten, D., Hastie, T, &amp; Tibshirani, R. 2021. An Introduction to Statistical Learning: With Applications in R. Second edition. New York: Springer.</strong></p>
+<p>Kneusel, R. T., 2021. Practical Deep Learning. No Starch Press.</p>
+<p>Murphy, K. 2020. Probablistic Machine Learning. MIT Press.</p>
+<p>Zhang, Aston, Zachary C Lipton, Mu Li, and Alexander J Smola. 2022. Dive into Deep Learning.</p>
+<h3 id="math-prefreshers">Math Prefreshers</h3>
+<p>Gill, J. 2006. Essential Mathematics for Political and Social Research. Cambridge: Cambridge University Press.</p>
+<p><strong>Moore, Will H., and David A. Siegel. 2013. A Mathematics Course for Political and Social Research. Princeton, NJ: Princeton University Pres.</strong></p>
+<h3 id="optimization">Optimization</h3>
+<p>Simon, Carl P., and Lawrence E. Blume. 1994. Mathematics for Economists. 1. ed. New York: Norton.</p>
+<p><strong>Stewart, J. 2016. Calculus: Early Transcendentals. 8th ed. Boston, MA, USA: Cengage Learning.</strong></p>
+<h3 id="probability">Probability</h3>
+<p><strong>Pitman, J. 1993. Probability. New York, NY: Springer New York.</strong></p>
+<h3 id="statistics">Statistics</h3>
+<p><strong>Aronow, P., &amp; Miller, B. 2019. Foundations of Agnostic Statistics. 1st ed. Cambridge University Press.</strong></p>
+<p>Casella, G., &amp; Berger, R. 2002. Statistical Inference. 2nd ed. Pacific Grove: Duxbury.</p>
+<p>Davidson, R., &amp; MacKinnon, J.G. 2004. Econometric Theory and Methods. New York: Oxford University Press.</p>
+<p>Freedman, D. (2009). Statistical Models: Theory and Practice (2nd ed.). Cambridge: Cambridge University Press. <a href="doi:10.1017/CBO9780511815867" class="uri">doi:10.1017/CBO9780511815867</a></p>
+<p><strong>Freedman, David, Robert Pisani, and Roger Purves. 2007. Statistics. 4th ed. New York: W.W. Norton &amp; Co.</strong></p>
+<p>Gailmard, S. 2014. Statistical Modeling and Inference for Social Science: 1st ed. Cambridge University Press.</p>
+<p>Greene, W. 2017. Econometric Analysis. 8th ed. Upper Saddle River: Prentice Hall.</p>
+<p>Wooldridge, J. M. 2010. Econometric Analysis of Cross Section and Panel Data. 2nd ed. Cambridge: MIT Press.</p>
+<p><strong>Wooldridge, J. M. 2016. Introductory Econometrics: A Modern Approach. 7th ed. Adrian MI: South-Western Cengage Learning.</strong></p>
+<h3 id="survey-design-and-sampling">Survey Design and Sampling</h3>
+<p><strong>Lohr, S. 2021. Sampling: Design and Analysis. 3rd ed. Boca Raton: Chapman and Hall/CRC.</strong></p>
+<p>Thompson, Steven K. 2012. Sampling. 3rd ed. Hoboken, N.J: Wiley.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p>There are no resources for Stata by choice. Stata is not free software, rarely used in industry, and not needed to do research.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

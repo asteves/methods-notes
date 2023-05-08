@@ -7,7 +7,7 @@ author:
 output:
   distill::distill_article:
     toc: true
-    toc_depth: 2
+    toc_depth: 3
 site: distill::distill_website
 ---
 
@@ -149,6 +149,7 @@ m1 |>
        y = "Coefficient Estimates",
        title = "Coefficient Plot")
 ```
+
 ### Added Variable Plots 
 
 

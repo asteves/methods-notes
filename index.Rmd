@@ -1,5 +1,5 @@
 ---
-title: "Methods Tutoring Notes"
+title: "Methods Tutoring"
 description: |
   Welcome to the main course site
 author: 
@@ -19,5 +19,105 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```
 
-Welcome to the Methods Tutoring Notes site. I put this together based on my methods training and years being a graduate quantitative methods
-tutor at UC Berkeley. 
+Welcome to the Methods Tutoring Notes site. I put this together based on my methods training and years being a graduate quantitative methods tutor at UC Berkeley. 
+
+The site contains several different resources. First and foremost are notes on the primary quantitative methods topics that are common to a graduate course sequence in political science. Second, there are coding notes for both R and Python.^[There are no resources for Stata by choice. Stata is not free software, rarely used in industry, and not needed to do research.]. I have endeavored to provide an introduction to both languages, with a focus on topics that have proved more difficult for graduate students at UC Berkeley. Third, I provide code to common research techniques and methods currently in use in top political science journals. For pedagogical reasons, every single example and application on this website has both an R and a Python implementation. 
+
+## Texts 
+
+I have benefited greatly in my own methods education from the teaching of professors at Berkeley. All errors on this website are entirely my own and should in no way reflect on their excellent guidance.
+
+In addition to classroom teaching and tutoring, the underlying materials on this website are drawn from many resources. A non-exhaustive list of books from which these materials are drawn by subject are below. I encourage individuals who reach this page for self-study consult them for more detail. I have put in **bold** the text or sets of texts that strikes me as the most reasonable one to begin with in each category. 
+
+### Causal Inference 
+
+Angrist, J, & Pischke J.S. 2009. Mostly Harmless Econometrics: An Empiricist’s Companion. Princeton: Princeton University Press.
+
+Angrist, J., & Pischke J.S. 2015. Mastering ’Metrics: The Path from Cause to Effect. Princeton: Princeton University Press.
+
+**Cunningham, S. 2021. Causal Inference: The Mixtape. New Haven: Yale University Press. https://mixtape.scunning.com/**
+
+Dunning, T. 2012. Natural Experiments in the Social Sciences: A Design-Based Approach. Cambridge: Cambridge University Press.
+
+Gerber, Alan S, and Donald P Green. 2012. Field Experiments: Design, Analysis and Interpretation. New York: W.W. Norton & Co.
+
+Imbens, G., & Rubin, D. (2015). Causal Inference for Statistics, Social, and Biomedical Sciences: An Introduction. Cambridge: Cambridge University Press. 
+
+Hernán, M.A, & Robins,J.A.. 2021. Causal Inference: What If. Boca Raton: Chapman & Hall/CRC Press
+
+Morgan, S.L., & Winship, C. 2014. Counterfactuals and Causal Inference: Methods and Principles for Social Research. 2nd ed. Cambridge: Cambridge University Press. 
+
+Rosenbaum, P.R., 2020. Design of Observational Studies. Cham: Springer International Publishing. 
+
+### Game Theory 
+
+Fudenberg, Drew, and Jean Tirole. 1991. Game Theory. Cambridge: MIT Press.
+
+Gehlbach, S. 2013. Formal Models of Domestic Politics. Cambridge: Cambridge University Press. 
+
+McCarty, N., & Meirowitz, A. 2007. Political Game Theory: An Introduction. Cambridge: Cambridge University Press. 
+
+**Tadelis, Steve. 2013. Game Theory: An Introduction. Princeton; Oxford: Princeton University Press.**
+
+### Linear Algebra 
+
+**Boyd, S., & Vandenberghe, L. 2018. Introduction to Applied Linear Algebra: Vectors, Matrices, and Least Squares. 1st ed. Cambridge University Press.**
+
+Harville, D.A., 1997. Matrix Algebra from a Statistician’s Perspective. New York: Springer.
+
+### Machine Learning 
+
+Goodfellow, I., Bengio, Y. & Courville, A. 2016. Deep Learning. Cambridge: MIT Press.
+
+Hastie, T., Tibshirani, R., & Friedman, J. 2013. Elements of Statistical Learning. 2nd ed. Springer.
+
+**James, G., Witten, D., Hastie, T, & Tibshirani, R. 2021. An Introduction to Statistical Learning: With Applications in R. Second edition. New York: Springer.**
+
+Kneusel, R. T., 2021. Practical Deep Learning. No Starch Press.
+
+Murphy, K. 2020. Probablistic Machine Learning. MIT Press.
+
+Zhang, Aston, Zachary C Lipton, Mu Li, and Alexander J Smola. 2022. Dive into Deep Learning.
+
+### Math Prefreshers 
+
+Gill, J. 2006. Essential Mathematics for Political and Social Research. Cambridge: Cambridge University Press. 
+
+**Moore, Will H., and David A. Siegel. 2013. A Mathematics Course for Political and Social Research. Princeton, NJ: Princeton University Pres.**
+
+### Optimization 
+
+Simon, Carl P., and Lawrence E. Blume. 1994. Mathematics for Economists. 1. ed. New York: Norton.
+
+**Stewart, J. 2016. Calculus: Early Transcendentals. 8th ed. Boston, MA, USA: Cengage Learning.**
+
+### Probability 
+
+**Pitman, J. 1993. Probability. New York, NY: Springer New York.**
+
+### Statistics 
+
+**Aronow, P., & Miller, B. 2019. Foundations of Agnostic Statistics. 1st ed. Cambridge University Press.**
+
+Casella, G., & Berger, R. 2002. Statistical Inference. 2nd ed. Pacific Grove: Duxbury.
+
+Davidson, R., & MacKinnon, J.G. 2004. Econometric Theory and Methods. New York: Oxford University Press.
+
+Freedman, D. (2009). Statistical Models: Theory and Practice (2nd ed.). Cambridge: Cambridge University Press. doi:10.1017/CBO9780511815867
+
+**Freedman, David, Robert Pisani, and Roger Purves. 2007. Statistics. 4th ed. New York: W.W. Norton & Co.**
+
+Gailmard, S. 2014. Statistical Modeling and Inference for Social Science: 1st ed. Cambridge University Press. 
+
+Greene, W. 2017. Econometric Analysis. 8th ed. Upper Saddle River: Prentice Hall.
+
+Wooldridge, J. M. 2010. Econometric Analysis of Cross Section and Panel Data. 2nd ed. Cambridge: MIT Press.
+
+**Wooldridge, J. M. 2016. Introductory Econometrics: A Modern Approach. 7th ed. Adrian MI: South-Western Cengage Learning.**
+
+### Survey Design and Sampling 
+
+**Lohr, S. 2021. Sampling: Design and Analysis. 3rd ed. Boca Raton: Chapman and Hall/CRC.**
+
+Thompson, Steven K. 2012. Sampling. 3rd ed. Hoboken, N.J: Wiley.
+
