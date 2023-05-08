@@ -16,19 +16,19 @@ navbar:
     - text: "Lecture Notes"
       menu:
         - text: "Causal Inference"
-          href: lectures.html
+          href: causal.html
         - text: "Game Theory"
-          href: lectures.html
+          href: game.html
         - text: "Linear Algebra"
-          href: matrix.html
+          href: linalg.html
         - text: "Machine Learning"
           href: ml.html
         - text: "Optimization"
-          href: lectures.html 
+          href: optim.html 
         - text: "Probability"
-          href: lectures.html 
+          href: prob.html 
         - text: "Statistics"
-          href: lectures.html 
+          href: stats.html 
         - text: "Survey Design and Sampling"
           href: survey.html
     - text: "Math Camp Solutions"
@@ -36,11 +36,11 @@ navbar:
     - text: "Coding"
       menu: 
         - text: "Python"
-          href: coding.html 
+          href: py-coding.html 
         - text: "R"
-          href: coding.html
+          href: r-coding.html
         - text: "Applied Linear Algebra"
-          href: matrix.html
+          href: matrix-code.html
 
   search: true
 output: distill::distill_article

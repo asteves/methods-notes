@@ -1,0 +1,2539 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <meta name="generator" content="distill" />
+
+  <style type="text/css">
+  /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
+  body {
+    visibility: hidden;
+  }
+  </style>
+
+ <!--radix_placeholder_import_source-->
+ <!--/radix_placeholder_import_source-->
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { color: #00769e; background-color: #f1f3f5; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span { color: #00769e; } /* Normal */
+code span.al { color: #ad0000; } /* Alert */
+code span.an { color: #5e5e5e; } /* Annotation */
+code span.at { color: #657422; } /* Attribute */
+code span.bn { color: #ad0000; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #00769e; } /* ControlFlow */
+code span.ch { color: #20794d; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #5e5e5e; } /* Comment */
+code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+code span.dt { color: #ad0000; } /* DataType */
+code span.dv { color: #ad0000; } /* DecVal */
+code span.er { color: #ad0000; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #ad0000; } /* Float */
+code span.fu { color: #4758ab; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #5e5e5e; } /* Information */
+code span.kw { color: #00769e; } /* Keyword */
+code span.op { color: #5e5e5e; } /* Operator */
+code span.ot { color: #00769e; } /* Other */
+code span.pp { color: #ad0000; } /* Preprocessor */
+code span.sc { color: #5e5e5e; } /* SpecialChar */
+code span.ss { color: #20794d; } /* SpecialString */
+code span.st { color: #20794d; } /* String */
+code span.va { color: #111111; } /* Variable */
+code span.vs { color: #20794d; } /* VerbatimString */
+code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+</style>
+
+
+  <!--radix_placeholder_meta_tags-->
+  <title>Methods Tutoring: Lecture Notes</title>
+
+  <meta property="description" itemprop="description" content="Lecture Notes and Resources"/>
+
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
+
+  <meta name="article:author" content="Alex Stephenson"/>
+
+  <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
+  <meta property="og:title" content="Methods Tutoring: Lecture Notes"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:description" content="Lecture Notes and Resources"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:site_name" content="Methods Tutoring"/>
+
+  <!--  https://dev.twitter.com/cards/types/summary -->
+  <meta property="twitter:card" content="summary"/>
+  <meta property="twitter:title" content="Methods Tutoring: Lecture Notes"/>
+  <meta property="twitter:description" content="Lecture Notes and Resources"/>
+  <meta property="twitter:site" content="@adastephenson"/>
+
+  <!--/radix_placeholder_meta_tags-->
+  <!--radix_placeholder_rmarkdown_metadata-->
+
+  <script type="text/json" id="radix-rmarkdown-metadata">
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","output","site"]}},"value":[{"type":"character","attributes":{},"value":["Lecture Notes"]},{"type":"character","attributes":{},"value":["Lecture Notes and Resources\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Alex Stephenson"]}]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_depth","hightlight"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[2]},{"type":"character","attributes":{},"value":["haddock"]}]}]},{"type":"character","attributes":{},"value":["distill::distill_website"]}]}
+  </script>
+  <!--/radix_placeholder_rmarkdown_metadata-->
+  <!--radix_placeholder_navigation_in_header-->
+  <meta name="distill:offset" content=""/>
+
+  <script type="application/javascript">
+
+    window.headroom_prevent_pin = false;
+
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+
+      // initialize headroom for banner
+      var header = $('header').get(0);
+      var headerHeight = header.offsetHeight;
+      var headroom = new Headroom(header, {
+        tolerance: 5,
+        onPin : function() {
+          if (window.headroom_prevent_pin) {
+            window.headroom_prevent_pin = false;
+            headroom.unpin();
+          }
+        }
+      });
+      headroom.init();
+      if(window.location.hash)
+        headroom.unpin();
+      $(header).addClass('headroom--transition');
+
+      // offset scroll location for banner on hash change
+      // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
+      window.addEventListener("hashchange", function(event) {
+        window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
+      });
+
+      // responsive menu
+      $('.distill-site-header').each(function(i, val) {
+        var topnav = $(this);
+        var toggle = topnav.find('.nav-toggle');
+        toggle.on('click', function() {
+          topnav.toggleClass('responsive');
+        });
+      });
+
+      // nav dropdowns
+      $('.nav-dropbtn').click(function(e) {
+        $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
+        $(this).parent().siblings('.nav-dropdown')
+           .children('.nav-dropdown-content').removeClass('nav-dropdown-active');
+      });
+      $("body").click(function(e){
+        $('.nav-dropdown-content').removeClass('nav-dropdown-active');
+      });
+      $(".nav-dropdown").click(function(e){
+        e.stopPropagation();
+      });
+    });
+  </script>
+
+  <style type="text/css">
+
+  /* Theme (user-documented overrideables for nav appearance) */
+
+  .distill-site-nav {
+    color: rgba(255, 255, 255, 0.8);
+    background-color: #0F2E3D;
+    font-size: 15px;
+    font-weight: 300;
+  }
+
+  .distill-site-nav a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .distill-site-nav a:hover {
+    color: white;
+  }
+
+  @media print {
+    .distill-site-nav {
+      display: none;
+    }
+  }
+
+  .distill-site-header {
+
+  }
+
+  .distill-site-footer {
+
+  }
+
+
+  /* Site Header */
+
+  .distill-site-header {
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 3;
+  }
+
+  .distill-site-header .nav-left {
+    display: inline-block;
+    margin-left: 8px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .distill-site-header .nav-left {
+      margin-left: 0;
+    }
+  }
+
+
+  .distill-site-header .nav-right {
+    float: right;
+    margin-right: 8px;
+  }
+
+  .distill-site-header a,
+  .distill-site-header .title {
+    display: inline-block;
+    text-align: center;
+    padding: 14px 10px 14px 10px;
+  }
+
+  .distill-site-header .title {
+    font-size: 18px;
+    min-width: 150px;
+  }
+
+  .distill-site-header .logo {
+    padding: 0;
+  }
+
+  .distill-site-header .logo img {
+    display: none;
+    max-height: 20px;
+    width: auto;
+    margin-bottom: -4px;
+  }
+
+  .distill-site-header .nav-image img {
+    max-height: 18px;
+    width: auto;
+    display: inline-block;
+    margin-bottom: -3px;
+  }
+
+
+
+  @media screen and (min-width: 1000px) {
+    .distill-site-header .logo img {
+      display: inline-block;
+    }
+    .distill-site-header .nav-left {
+      margin-left: 20px;
+    }
+    .distill-site-header .nav-right {
+      margin-right: 20px;
+    }
+    .distill-site-header .title {
+      padding-left: 12px;
+    }
+  }
+
+
+  .distill-site-header .nav-toggle {
+    display: none;
+  }
+
+  .nav-dropdown {
+    display: inline-block;
+    position: relative;
+  }
+
+  .nav-dropdown .nav-dropbtn {
+    border: none;
+    outline: none;
+    color: rgba(255, 255, 255, 0.8);
+    padding: 16px 10px;
+    background-color: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    margin: 0;
+    margin-top: 1px;
+    z-index: 2;
+  }
+
+  .nav-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 200px;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 4px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+    z-index: 1;
+    margin-top: 2px;
+    white-space: nowrap;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+
+  .nav-dropdown-content hr {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-dropdown-active {
+    display: block;
+  }
+
+  .nav-dropdown-content a, .nav-dropdown-content .nav-dropdown-header {
+    color: black;
+    padding: 6px 24px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+
+  .nav-dropdown-content .nav-dropdown-header {
+    display: block;
+    padding: 5px 24px;
+    padding-bottom: 0;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #999999;
+    white-space: nowrap;
+  }
+
+  .nav-dropdown:hover .nav-dropbtn {
+    color: white;
+  }
+
+  .nav-dropdown-content a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+
+  .nav-right .nav-dropdown-content {
+    margin-left: -45%;
+    right: 0;
+  }
+
+  @media screen and (max-width: 768px) {
+    .distill-site-header a, .distill-site-header .nav-dropdown  {display: none;}
+    .distill-site-header a.nav-toggle {
+      float: right;
+      display: block;
+    }
+    .distill-site-header .title {
+      margin-left: 0;
+    }
+    .distill-site-header .nav-right {
+      margin-right: 0;
+    }
+    .distill-site-header {
+      overflow: hidden;
+    }
+    .nav-right .nav-dropdown-content {
+      margin-left: 0;
+    }
+  }
+
+
+  @media screen and (max-width: 768px) {
+    .distill-site-header.responsive {position: relative; min-height: 500px; }
+    .distill-site-header.responsive a.nav-toggle {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .distill-site-header.responsive a,
+    .distill-site-header.responsive .nav-dropdown {
+      display: block;
+      text-align: left;
+    }
+    .distill-site-header.responsive .nav-left,
+    .distill-site-header.responsive .nav-right {
+      width: 100%;
+    }
+    .distill-site-header.responsive .nav-dropdown {float: none;}
+    .distill-site-header.responsive .nav-dropdown-content {position: relative;}
+    .distill-site-header.responsive .nav-dropdown .nav-dropbtn {
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+  }
+
+  /* Site Footer */
+
+  .distill-site-footer {
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    z-index: 3;
+    margin-top: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    text-align: center;
+  }
+
+  /* Headroom */
+
+  d-title {
+    padding-top: 6rem;
+  }
+
+  @media print {
+    d-title {
+      padding-top: 4rem;
+    }
+  }
+
+  .headroom {
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .headroom--transition {
+    transition: all .4s ease-in-out;
+  }
+
+  .headroom--unpinned {
+    top: -100px;
+  }
+
+  .headroom--pinned {
+    top: 0;
+  }
+
+  /* adjust viewport for navbar height */
+  /* helps vertically center bootstrap (non-distill) content */
+  .min-vh-100 {
+    min-height: calc(100vh - 100px) !important;
+  }
+
+  </style>
+
+  <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+  <link href="site_libs/font-awesome-6.4.0/css/all.min.css" rel="stylesheet"/>
+  <link href="site_libs/font-awesome-6.4.0/css/v4-shims.min.css" rel="stylesheet"/>
+  <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
+  <script src="site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
+  <script src="site_libs/fuse-6.4.1/fuse.min.js"></script>
+
+  <script type="application/javascript">
+
+  function getMeta(metaName) {
+    var metas = document.getElementsByTagName('meta');
+    for (let i = 0; i < metas.length; i++) {
+      if (metas[i].getAttribute('name') === metaName) {
+        return metas[i].getAttribute('content');
+      }
+    }
+    return '';
+  }
+
+  function offsetURL(url) {
+    var offset = getMeta('distill:offset');
+    return offset ? offset + '/' + url : url;
+  }
+
+  function createFuseIndex() {
+
+    // create fuse index
+    var options = {
+      keys: [
+        { name: 'title', weight: 20 },
+        { name: 'categories', weight: 15 },
+        { name: 'description', weight: 10 },
+        { name: 'contents', weight: 5 },
+      ],
+      ignoreLocation: true,
+      threshold: 0
+    };
+    var fuse = new window.Fuse([], options);
+
+    // fetch the main search.json
+    return fetch(offsetURL('search.json'))
+      .then(function(response) {
+        if (response.status == 200) {
+          return response.json().then(function(json) {
+            // index main articles
+            json.articles.forEach(function(article) {
+              fuse.add(article);
+            });
+            // download collections and index their articles
+            return Promise.all(json.collections.map(function(collection) {
+              return fetch(offsetURL(collection)).then(function(response) {
+                if (response.status === 200) {
+                  return response.json().then(function(articles) {
+                    articles.forEach(function(article) {
+                      fuse.add(article);
+                    });
+                  })
+                } else {
+                  return Promise.reject(
+                    new Error('Unexpected status from search index request: ' +
+                              response.status)
+                  );
+                }
+              });
+            })).then(function() {
+              return fuse;
+            });
+          });
+
+        } else {
+          return Promise.reject(
+            new Error('Unexpected status from search index request: ' +
+                        response.status)
+          );
+        }
+      });
+  }
+
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+
+    // get search element (bail if we don't have one)
+    var searchEl = window.document.getElementById('distill-search');
+    if (!searchEl)
+      return;
+
+    createFuseIndex()
+      .then(function(fuse) {
+
+        // make search box visible
+        searchEl.classList.remove('hidden');
+
+        // initialize autocomplete
+        var options = {
+          autoselect: true,
+          hint: false,
+          minLength: 2,
+        };
+        window.autocomplete(searchEl, options, [{
+          source: function(query, callback) {
+            const searchOptions = {
+              isCaseSensitive: false,
+              shouldSort: true,
+              minMatchCharLength: 2,
+              limit: 10,
+            };
+            var results = fuse.search(query, searchOptions);
+            callback(results
+              .map(function(result) { return result.item; })
+            );
+          },
+          templates: {
+            suggestion: function(suggestion) {
+              var img = suggestion.preview && Object.keys(suggestion.preview).length > 0
+                ? `<img src="${offsetURL(suggestion.preview)}"</img>`
+                : '';
+              var html = `
+                <div class="search-item">
+                  <h3>${suggestion.title}</h3>
+                  <div class="search-item-description">
+                    ${suggestion.description || ''}
+                  </div>
+                  <div class="search-item-preview">
+                    ${img}
+                  </div>
+                </div>
+              `;
+              return html;
+            }
+          }
+        }]).on('autocomplete:selected', function(event, suggestion) {
+          window.location.href = offsetURL(suggestion.path);
+        });
+        // remove inline display style on autocompleter (we want to
+        // manage responsive display via css)
+        $('.algolia-autocomplete').css("display", "");
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+
+  });
+
+  </script>
+
+  <style type="text/css">
+
+  .nav-search {
+    font-size: x-small;
+  }
+
+  /* Algolioa Autocomplete */
+
+  .algolia-autocomplete {
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: sub;
+    background-color: white;
+    color: black;
+    padding: 6px;
+    padding-top: 8px;
+    padding-bottom: 0;
+    border-radius: 6px;
+    border: 1px #0F2E3D solid;
+    width: 180px;
+  }
+
+
+  @media screen and (max-width: 768px) {
+    .distill-site-nav .algolia-autocomplete {
+      display: none;
+      visibility: hidden;
+    }
+    .distill-site-nav.responsive .algolia-autocomplete {
+      display: inline-block;
+      visibility: visible;
+    }
+    .distill-site-nav.responsive .algolia-autocomplete .aa-dropdown-menu {
+      margin-left: 0;
+      width: 400px;
+      max-height: 400px;
+    }
+  }
+
+  .algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
+    width: 90%;
+    outline: none;
+    border: none;
+  }
+
+  .algolia-autocomplete .aa-hint {
+    color: #999;
+  }
+  .algolia-autocomplete .aa-dropdown-menu {
+    width: 550px;
+    max-height: 70vh;
+    overflow-x: visible;
+    overflow-y: scroll;
+    padding: 5px;
+    margin-top: 3px;
+    margin-left: -150px;
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid #999;
+    border-top: none;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
+    cursor: pointer;
+    padding: 5px 4px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion:last-of-type {
+    border-bottom: none;
+    margin-bottom: 2px;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item {
+    overflow: hidden;
+    font-size: 0.8em;
+    line-height: 1.4em;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item h3 {
+    font-size: 1rem;
+    margin-block-start: 0;
+    margin-block-end: 5px;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-description {
+    display: inline-block;
+    overflow: hidden;
+    height: 2.8em;
+    width: 80%;
+    margin-right: 4%;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview {
+    display: inline-block;
+    width: 15%;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img {
+    height: 3em;
+    width: auto;
+    display: none;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img[src] {
+    display: initial;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
+    background-color: #eee;
+  }
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
+    font-weight: bold;
+    font-style: normal;
+  }
+
+  </style>
+
+
+  <!--/radix_placeholder_navigation_in_header-->
+  <!--radix_placeholder_distill-->
+
+  <style type="text/css">
+
+  body {
+    background-color: white;
+  }
+
+  .pandoc-table {
+    width: 100%;
+  }
+
+  .pandoc-table>caption {
+    margin-bottom: 10px;
+  }
+
+  .pandoc-table th:not([align]) {
+    text-align: left;
+  }
+
+  .pagedtable-footer {
+    font-size: 15px;
+  }
+
+  d-byline .byline {
+    grid-template-columns: 2fr 2fr;
+  }
+
+  d-byline .byline h3 {
+    margin-block-start: 1.5em;
+  }
+
+  d-byline .byline .authors-affiliations h3 {
+    margin-block-start: 0.5em;
+  }
+
+  .authors-affiliations .orcid-id {
+    width: 16px;
+    height:16px;
+    margin-left: 4px;
+    margin-right: 4px;
+    vertical-align: middle;
+    padding-bottom: 2px;
+  }
+
+  d-title .dt-tags {
+    margin-top: 1em;
+    grid-column: text;
+  }
+
+  .dt-tags .dt-tag {
+    text-decoration: none;
+    display: inline-block;
+    color: rgba(0,0,0,0.6);
+    padding: 0em 0.4em;
+    margin-right: 0.5em;
+    margin-bottom: 0.4em;
+    font-size: 70%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  d-article table.gt_table td,
+  d-article table.gt_table th {
+    border-bottom: none;
+    font-size: 100%;
+  }
+
+  .html-widget {
+    margin-bottom: 2.0em;
+  }
+
+  .l-screen-inset {
+    padding-right: 16px;
+  }
+
+  .l-screen .caption {
+    margin-left: 10px;
+  }
+
+  .shaded {
+    background: rgb(247, 247, 247);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .shaded .html-widget {
+    margin-bottom: 0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .shaded .shaded-content {
+    background: white;
+  }
+
+  .text-output {
+    margin-top: 0;
+    line-height: 1.5em;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  d-article {
+    padding-top: 2.5rem;
+    padding-bottom: 30px;
+  }
+
+  d-appendix {
+    padding-top: 30px;
+  }
+
+  d-article>p>img {
+    width: 100%;
+  }
+
+  d-article h2 {
+    margin: 1rem 0 1.5rem 0;
+  }
+
+  d-article h3 {
+    margin-top: 1.5rem;
+  }
+
+  d-article iframe {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 2.0em;
+    width: 100%;
+  }
+
+  /* Tweak code blocks */
+
+  d-article div.sourceCode code,
+  d-article pre code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: auto;
+  }
+
+  d-article div.sourceCode {
+    background-color: white;
+  }
+
+  d-article div.sourceCode pre {
+    padding-left: 10px;
+    font-size: 12px;
+    border-left: 2px solid rgba(0,0,0,0.1);
+  }
+
+  d-article pre {
+    font-size: 12px;
+    color: black;
+    background: none;
+    margin-top: 0;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+
+  d-article pre a {
+    border-bottom: none;
+  }
+
+  d-article pre a:hover {
+    border-bottom: none;
+    text-decoration: underline;
+  }
+
+  d-article details {
+    grid-column: text;
+    margin-bottom: 0.8em;
+  }
+
+  @media(min-width: 768px) {
+
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: visible !important;
+  }
+
+  d-article div.sourceCode pre {
+    padding-left: 18px;
+    font-size: 14px;
+  }
+
+  d-article pre {
+    font-size: 14px;
+  }
+
+  }
+
+  figure img.external {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+    padding: 18px;
+    box-sizing: border-box;
+  }
+
+  /* CSS for d-contents */
+
+  .d-contents {
+    grid-column: text;
+    color: rgba(0,0,0,0.8);
+    font-size: 0.9em;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+    padding-left: 0.25em;
+    justify-self: start;
+  }
+
+  @media(min-width: 1000px) {
+    .d-contents.d-contents-float {
+      height: 0;
+      grid-column-start: 1;
+      grid-column-end: 4;
+      justify-self: center;
+      padding-right: 3em;
+      padding-left: 2em;
+    }
+  }
+
+  .d-contents nav h3 {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 1em;
+  }
+
+  .d-contents li {
+    list-style-type: none
+  }
+
+  .d-contents nav > ul {
+    padding-left: 0;
+  }
+
+  .d-contents ul {
+    padding-left: 1em
+  }
+
+  .d-contents nav ul li {
+    margin-top: 0.6em;
+    margin-bottom: 0.2em;
+  }
+
+  .d-contents nav a {
+    font-size: 13px;
+    border-bottom: none;
+    text-decoration: none
+    color: rgba(0, 0, 0, 0.8);
+  }
+
+  .d-contents nav a:hover {
+    text-decoration: underline solid rgba(0, 0, 0, 0.6)
+  }
+
+  .d-contents nav > ul > li > a {
+    font-weight: 600;
+  }
+
+  .d-contents nav > ul > li > ul {
+    font-weight: inherit;
+  }
+
+  .d-contents nav > ul > li > ul > li {
+    margin-top: 0.2em;
+  }
+
+
+  .d-contents nav ul {
+    margin-top: 0;
+    margin-bottom: 0.25em;
+  }
+
+  .d-article-with-toc h2:nth-child(2) {
+    margin-top: 0;
+  }
+
+
+  /* Figure */
+
+  .figure {
+    position: relative;
+    margin-bottom: 2.5em;
+    margin-top: 1.5em;
+  }
+
+  .figure .caption {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 12px;
+    line-height: 1.5em;
+  }
+
+  .figure img.external {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+    padding: 18px;
+    box-sizing: border-box;
+  }
+
+  .figure .caption a {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .figure .caption b,
+  .figure .caption strong, {
+    font-weight: 600;
+    color: rgba(0, 0, 0, 1.0);
+  }
+
+  /* Citations */
+
+  d-article .citation {
+    color: inherit;
+    cursor: inherit;
+  }
+
+  div.hanging-indent{
+    margin-left: 1em; text-indent: -1em;
+  }
+
+  /* Citation hover box */
+
+  .tippy-box[data-theme~=light-border] {
+    background-color: rgba(250, 250, 250, 0.95);
+  }
+
+  .tippy-content > p {
+    margin-bottom: 0;
+    padding: 2px;
+  }
+
+
+  /* Tweak 1000px media break to show more text */
+
+  @media(min-width: 1000px) {
+    .base-grid,
+    distill-header,
+    d-title,
+    d-abstract,
+    d-article,
+    d-appendix,
+    distill-appendix,
+    d-byline,
+    d-footnote-list,
+    d-citation-list,
+    distill-footer {
+      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 80px [middle-start] 50px [text-start kicker-end] 65px 65px 65px 65px 65px 65px 65px 65px [text-end gutter-start] 65px [middle-end] 65px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 16px;
+    }
+
+    .grid {
+      grid-column-gap: 16px;
+    }
+
+    d-article {
+      font-size: 1.06rem;
+      line-height: 1.7em;
+    }
+    figure .caption, .figure .caption, figure figcaption {
+      font-size: 13px;
+    }
+  }
+
+  @media(min-width: 1180px) {
+    .base-grid,
+    distill-header,
+    d-title,
+    d-abstract,
+    d-article,
+    d-appendix,
+    distill-appendix,
+    d-byline,
+    d-footnote-list,
+    d-citation-list,
+    distill-footer {
+      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 60px [middle-start] 60px [text-start kicker-end] 60px 60px 60px 60px 60px 60px 60px 60px [text-end gutter-start] 60px [middle-end] 60px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 32px;
+    }
+
+    .grid {
+      grid-column-gap: 32px;
+    }
+  }
+
+
+  /* Get the citation styles for the appendix (not auto-injected on render since
+     we do our own rendering of the citation appendix) */
+
+  d-appendix .citation-appendix,
+  .d-appendix .citation-appendix {
+    font-size: 11px;
+    line-height: 15px;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    padding-left: 18px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background: rgba(0, 0, 0, 0.02);
+    padding: 10px 18px;
+    border-radius: 3px;
+    color: rgba(150, 150, 150, 1);
+    overflow: hidden;
+    margin-top: -12px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  /* Include appendix styles here so they can be overridden */
+
+  d-appendix {
+    contain: layout style;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    margin-top: 60px;
+    margin-bottom: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    color: rgba(0,0,0,0.5);
+    padding-top: 60px;
+    padding-bottom: 48px;
+  }
+
+  d-appendix h3 {
+    grid-column: page-start / text-start;
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 1em;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.65);
+  }
+
+  d-appendix h3 + * {
+    margin-top: 1em;
+  }
+
+  d-appendix ol {
+    padding: 0 0 0 15px;
+  }
+
+  @media (min-width: 768px) {
+    d-appendix ol {
+      padding: 0 0 0 30px;
+      margin-left: -30px;
+    }
+  }
+
+  d-appendix li {
+    margin-bottom: 1em;
+  }
+
+  d-appendix a {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  d-appendix > * {
+    grid-column: text;
+  }
+
+  d-appendix > d-footnote-list,
+  d-appendix > d-citation-list,
+  d-appendix > distill-appendix {
+    grid-column: screen;
+  }
+
+  /* Include footnote styles here so they can be overridden */
+
+  d-footnote-list {
+    contain: layout style;
+  }
+
+  d-footnote-list > * {
+    grid-column: text;
+  }
+
+  d-footnote-list a.footnote-backlink {
+    color: rgba(0,0,0,0.3);
+    padding-left: 0.5em;
+  }
+
+
+
+  /* Anchor.js */
+
+  .anchorjs-link {
+    /*transition: all .25s linear; */
+    text-decoration: none;
+    border-bottom: none;
+  }
+  *:hover > .anchorjs-link {
+    margin-left: -1.125em !important;
+    text-decoration: none;
+    border-bottom: none;
+  }
+
+  /* Social footer */
+
+  .social_footer {
+    margin-top: 30px;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.67);
+  }
+
+  .disqus-comments {
+    margin-right: 30px;
+  }
+
+  .disqus-comment-count {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+  }
+
+  #disqus_thread {
+    margin-top: 30px;
+  }
+
+  .article-sharing a {
+    border-bottom: none;
+    margin-right: 8px;
+  }
+
+  .article-sharing a:hover {
+    border-bottom: none;
+  }
+
+  .sidebar-section.subscribe {
+    font-size: 12px;
+    line-height: 1.6em;
+  }
+
+  .subscribe p {
+    margin-bottom: 0.5em;
+  }
+
+
+  .article-footer .subscribe {
+    font-size: 15px;
+    margin-top: 45px;
+  }
+
+
+  .sidebar-section.custom {
+    font-size: 12px;
+    line-height: 1.6em;
+  }
+
+  .custom p {
+    margin-bottom: 0.5em;
+  }
+
+  /* Styles for listing layout (hide title) */
+  .layout-listing d-title, .layout-listing .d-title {
+    display: none;
+  }
+
+  /* Styles for posts lists (not auto-injected) */
+
+
+  .posts-with-sidebar {
+    padding-left: 45px;
+    padding-right: 45px;
+  }
+
+  .posts-list .description h2,
+  .posts-list .description p {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .posts-list .description h2 {
+    font-weight: 700;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .posts-list h2.post-tag {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding-bottom: 12px;
+  }
+  .posts-list {
+    margin-top: 60px;
+    margin-bottom: 24px;
+  }
+
+  .posts-list .post-preview {
+    text-decoration: none;
+    overflow: hidden;
+    display: block;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 24px 0;
+  }
+
+  .post-preview-last {
+    border-bottom: none !important;
+  }
+
+  .posts-list .posts-list-caption {
+    grid-column: screen;
+    font-weight: 400;
+  }
+
+  .posts-list .post-preview h2 {
+    margin: 0 0 6px 0;
+    line-height: 1.2em;
+    font-style: normal;
+    font-size: 24px;
+  }
+
+  .posts-list .post-preview p {
+    margin: 0 0 12px 0;
+    line-height: 1.4em;
+    font-size: 16px;
+  }
+
+  .posts-list .post-preview .thumbnail {
+    box-sizing: border-box;
+    margin-bottom: 24px;
+    position: relative;
+    max-width: 500px;
+  }
+  .posts-list .post-preview img {
+    width: 100%;
+    display: block;
+  }
+
+  .posts-list .metadata {
+    font-size: 12px;
+    line-height: 1.4em;
+    margin-bottom: 18px;
+  }
+
+  .posts-list .metadata > * {
+    display: inline-block;
+  }
+
+  .posts-list .metadata .publishedDate {
+    margin-right: 2em;
+  }
+
+  .posts-list .metadata .dt-authors {
+    display: block;
+    margin-top: 0.3em;
+    margin-right: 2em;
+  }
+
+  .posts-list .dt-tags {
+    display: block;
+    line-height: 1em;
+  }
+
+  .posts-list .dt-tags .dt-tag {
+    display: inline-block;
+    color: rgba(0,0,0,0.6);
+    padding: 0.3em 0.4em;
+    margin-right: 0.2em;
+    margin-bottom: 0.4em;
+    font-size: 60%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .posts-list img {
+    opacity: 1;
+  }
+
+  .posts-list img[data-src] {
+    opacity: 0;
+  }
+
+  .posts-more {
+    clear: both;
+  }
+
+
+  .posts-sidebar {
+    font-size: 16px;
+  }
+
+  .posts-sidebar h3 {
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .sidebar-section {
+    margin-bottom: 30px;
+  }
+
+  .categories ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .categories li {
+    color: rgba(0, 0, 0, 0.8);
+    margin-bottom: 0;
+  }
+
+  .categories li>a {
+    border-bottom: none;
+  }
+
+  .categories li>a:hover {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  }
+
+  .categories .active {
+    font-weight: 600;
+  }
+
+  .categories .category-count {
+    color: rgba(0, 0, 0, 0.4);
+  }
+
+
+  @media(min-width: 768px) {
+    .posts-list .post-preview h2 {
+      font-size: 26px;
+    }
+    .posts-list .post-preview .thumbnail {
+      float: right;
+      width: 30%;
+      margin-bottom: 0;
+    }
+    .posts-list .post-preview .description {
+      float: left;
+      width: 45%;
+    }
+    .posts-list .post-preview .metadata {
+      float: left;
+      width: 20%;
+      margin-top: 8px;
+    }
+    .posts-list .post-preview p {
+      margin: 0 0 12px 0;
+      line-height: 1.5em;
+      font-size: 16px;
+    }
+    .posts-with-sidebar .posts-list {
+      float: left;
+      width: 75%;
+    }
+    .posts-with-sidebar .posts-sidebar {
+      float: right;
+      width: 20%;
+      margin-top: 60px;
+      padding-top: 24px;
+      padding-bottom: 24px;
+    }
+  }
+
+
+  /* Improve display for browsers without grid (IE/Edge <= 15) */
+
+  .downlevel {
+    line-height: 1.6em;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+  }
+
+  .downlevel .d-title {
+    padding-top: 6rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .downlevel .d-title h1 {
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 1.1em;
+    margin: 0 0 0.5rem;
+  }
+
+  .downlevel .d-title p {
+    font-weight: 300;
+    font-size: 1.2rem;
+    line-height: 1.55em;
+    margin-top: 0;
+  }
+
+  .downlevel .d-byline {
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+    font-size: 0.8rem;
+    line-height: 1.8em;
+  }
+
+  .downlevel .section-separator {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .downlevel .d-article {
+    font-size: 1.06rem;
+    line-height: 1.7em;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+  }
+
+
+  .downlevel .d-appendix {
+    padding-left: 0;
+    padding-right: 0;
+    max-width: none;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.5);
+    padding-top: 40px;
+    padding-bottom: 48px;
+  }
+
+  .downlevel .footnotes ol {
+    padding-left: 13px;
+  }
+
+  .downlevel .base-grid,
+  .downlevel .distill-header,
+  .downlevel .d-title,
+  .downlevel .d-abstract,
+  .downlevel .d-article,
+  .downlevel .d-appendix,
+  .downlevel .distill-appendix,
+  .downlevel .d-byline,
+  .downlevel .d-footnote-list,
+  .downlevel .d-citation-list,
+  .downlevel .distill-footer,
+  .downlevel .appendix-bottom,
+  .downlevel .posts-container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  @media(min-width: 768px) {
+    .downlevel .base-grid,
+    .downlevel .distill-header,
+    .downlevel .d-title,
+    .downlevel .d-abstract,
+    .downlevel .d-article,
+    .downlevel .d-appendix,
+    .downlevel .distill-appendix,
+    .downlevel .d-byline,
+    .downlevel .d-footnote-list,
+    .downlevel .d-citation-list,
+    .downlevel .distill-footer,
+    .downlevel .appendix-bottom,
+    .downlevel .posts-container {
+    padding-left: 150px;
+    padding-right: 150px;
+    max-width: 900px;
+  }
+  }
+
+  .downlevel pre code {
+    display: block;
+    border-left: 2px solid rgba(0, 0, 0, .1);
+    padding: 0 0 0 20px;
+    font-size: 14px;
+  }
+
+  .downlevel code, .downlevel pre {
+    color: black;
+    background: none;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+
+  .downlevel .posts-list .post-preview {
+    color: inherit;
+  }
+
+
+
+  </style>
+
+  <script type="application/javascript">
+
+  function is_downlevel_browser() {
+    if (bowser.isUnsupportedBrowser({ msie: "12", msedge: "16"},
+                                   window.navigator.userAgent)) {
+      return true;
+    } else {
+      return window.load_distill_framework === undefined;
+    }
+  }
+
+  // show body when load is complete
+  function on_load_complete() {
+
+    // add anchors
+    if (window.anchors) {
+      window.anchors.options.placement = 'left';
+      window.anchors.add('d-article > h2, d-article > h3, d-article > h4, d-article > h5');
+    }
+
+
+    // set body to visible
+    document.body.style.visibility = 'visible';
+
+    // force redraw for leaflet widgets
+    if (window.HTMLWidgets) {
+      var maps = window.HTMLWidgets.findAll(".leaflet");
+      $.each(maps, function(i, el) {
+        var map = this.getMap();
+        map.invalidateSize();
+        map.eachLayer(function(layer) {
+          if (layer instanceof L.TileLayer)
+            layer.redraw();
+        });
+      });
+    }
+
+    // trigger 'shown' so htmlwidgets resize
+    $('d-article').trigger('shown');
+  }
+
+  function init_distill() {
+
+    init_common();
+
+    // create front matter
+    var front_matter = $('<d-front-matter></d-front-matter>');
+    $('#distill-front-matter').wrap(front_matter);
+
+    // create d-title
+    $('.d-title').changeElementType('d-title');
+
+    // create d-byline
+    var byline = $('<d-byline></d-byline>');
+    $('.d-byline').replaceWith(byline);
+
+    // create d-article
+    var article = $('<d-article></d-article>');
+    $('.d-article').wrap(article).children().unwrap();
+
+    // move posts container into article
+    $('.posts-container').appendTo($('d-article'));
+
+    // create d-appendix
+    $('.d-appendix').changeElementType('d-appendix');
+
+    // flag indicating that we have appendix items
+    var appendix = $('.appendix-bottom').children('h3').length > 0;
+
+    // replace footnotes with <d-footnote>
+    $('.footnote-ref').each(function(i, val) {
+      appendix = true;
+      var href = $(this).attr('href');
+      var id = href.replace('#', '');
+      var fn = $('#' + id);
+      var fn_p = $('#' + id + '>p');
+      fn_p.find('.footnote-back').remove();
+      var text = fn_p.html();
+      var dtfn = $('<d-footnote></d-footnote>');
+      dtfn.html(text);
+      $(this).replaceWith(dtfn);
+    });
+    // remove footnotes
+    $('.footnotes').remove();
+
+    // move refs into #references-listing
+    $('#references-listing').replaceWith($('#refs'));
+
+    $('h1.appendix, h2.appendix').each(function(i, val) {
+      $(this).changeElementType('h3');
+    });
+    $('h3.appendix').each(function(i, val) {
+      var id = $(this).attr('id');
+      $('.d-contents a[href="#' + id + '"]').parent().remove();
+      appendix = true;
+      $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('d-appendix'));
+    });
+
+    // show d-appendix if we have appendix content
+    $("d-appendix").css('display', appendix ? 'grid' : 'none');
+
+    // localize layout chunks to just output
+    $('.layout-chunk').each(function(i, val) {
+
+      // capture layout
+      var layout = $(this).attr('data-layout');
+
+      // apply layout to markdown level block elements
+      var elements = $(this).children().not('details, div.sourceCode, pre, script');
+      elements.each(function(i, el) {
+        var layout_div = $('<div class="' + layout + '"></div>');
+        if (layout_div.hasClass('shaded')) {
+          var shaded_content = $('<div class="shaded-content"></div>');
+          $(this).wrap(shaded_content);
+          $(this).parent().wrap(layout_div);
+        } else {
+          $(this).wrap(layout_div);
+        }
+      });
+
+
+      // unwrap the layout-chunk div
+      $(this).children().unwrap();
+    });
+
+    // remove code block used to force  highlighting css
+    $('.distill-force-highlighting-css').parent().remove();
+
+    // remove empty line numbers inserted by pandoc when using a
+    // custom syntax highlighting theme
+    $('code.sourceCode a:empty').remove();
+
+    // load distill framework
+    load_distill_framework();
+
+    // wait for window.distillRunlevel == 4 to do post processing
+    function distill_post_process() {
+
+      if (!window.distillRunlevel || window.distillRunlevel < 4)
+        return;
+
+      // hide author/affiliations entirely if we have no authors
+      var front_matter = JSON.parse($("#distill-front-matter").html());
+      var have_authors = front_matter.authors && front_matter.authors.length > 0;
+      if (!have_authors)
+        $('d-byline').addClass('hidden');
+
+      // article with toc class
+      $('.d-contents').parent().addClass('d-article-with-toc');
+
+      // strip links that point to #
+      $('.authors-affiliations').find('a[href="#"]').removeAttr('href');
+
+      // add orcid ids
+      $('.authors-affiliations').find('.author').each(function(i, el) {
+        var orcid_id = front_matter.authors[i].orcidID;
+        if (orcid_id) {
+          var a = $('<a></a>');
+          a.attr('href', 'https://orcid.org/' + orcid_id);
+          var img = $('<img></img>');
+          img.addClass('orcid-id');
+          img.attr('alt', 'ORCID ID');
+          img.attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==');
+          a.append(img);
+          $(this).append(a);
+        }
+      });
+
+      // hide elements of author/affiliations grid that have no value
+      function hide_byline_column(caption) {
+        $('d-byline').find('h3:contains("' + caption + '")').parent().css('visibility', 'hidden');
+      }
+
+      // affiliations
+      var have_affiliations = false;
+      for (var i = 0; i<front_matter.authors.length; ++i) {
+        var author = front_matter.authors[i];
+        if (author.affiliation !== "&nbsp;") {
+          have_affiliations = true;
+          break;
+        }
+      }
+      if (!have_affiliations)
+        $('d-byline').find('h3:contains("Affiliations")').css('visibility', 'hidden');
+
+      // published date
+      if (!front_matter.publishedDate)
+        hide_byline_column("Published");
+
+      // document object identifier
+      var doi = $('d-byline').find('h3:contains("DOI")');
+      var doi_p = doi.next().empty();
+      if (!front_matter.doi) {
+        // if we have a citation and valid citationText then link to that
+        if ($('#citation').length > 0 && front_matter.citationText) {
+          doi.html('Citation');
+          $('<a href="#citation"></a>')
+            .text(front_matter.citationText)
+            .appendTo(doi_p);
+        } else {
+          hide_byline_column("DOI");
+        }
+      } else {
+        $('<a></a>')
+           .attr('href', "https://doi.org/" + front_matter.doi)
+           .html(front_matter.doi)
+           .appendTo(doi_p);
+      }
+
+       // change plural form of authors/affiliations
+      if (front_matter.authors.length === 1) {
+        var grid = $('.authors-affiliations');
+        grid.children('h3:contains("Authors")').text('Author');
+        grid.children('h3:contains("Affiliations")').text('Affiliation');
+      }
+
+      // remove d-appendix and d-footnote-list local styles
+      $('d-appendix > style:first-child').remove();
+      $('d-footnote-list > style:first-child').remove();
+
+      // move appendix-bottom entries to the bottom
+      $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
+      $('.appendix-bottom').remove();
+
+      // hoverable references
+      $('span.citation[data-cites]').each(function() {
+        const citeChild = $(this).children()[0]
+        // Do not process if @xyz has been used without escaping and without bibliography activated
+        // https://github.com/rstudio/distill/issues/466
+        if (citeChild === undefined) return true
+
+        if (citeChild.nodeName == "D-FOOTNOTE") {
+          var fn = citeChild
+          $(this).html(fn.shadowRoot.querySelector("sup"))
+          $(this).id = fn.id
+          fn.remove()
+        }
+        var refs = $(this).attr('data-cites').split(" ");
+        var refHtml = refs.map(function(ref) {
+          // Could use CSS.escape too here, we insure backward compatibility in navigator
+          return "<p>" + $('div[id="ref-' + ref + '"]').html() + "</p>";
+        }).join("\n");
+        window.tippy(this, {
+          allowHTML: true,
+          content: refHtml,
+          maxWidth: 500,
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        });
+      });
+
+      // fix footnotes in tables (#411)
+      // replacing broken distill.pub feature
+      $('table d-footnote').each(function() {
+        // we replace internal showAtNode methode which is triggered when hovering a footnote
+        this.hoverBox.showAtNode = function(node) {
+          // ported from https://github.com/distillpub/template/pull/105/files
+          calcOffset = function(elem) {
+              let x = elem.offsetLeft;
+              let y = elem.offsetTop;
+              // Traverse upwards until an `absolute` element is found or `elem`
+              // becomes null.
+              while (elem = elem.offsetParent && elem.style.position != 'absolute') {
+                  x += elem.offsetLeft;
+                  y += elem.offsetTop;
+              }
+
+              return { left: x, top: y };
+          }
+          // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetTop
+          const bbox = node.getBoundingClientRect();
+          const offset = calcOffset(node);
+          this.show([offset.left + bbox.width, offset.top + bbox.height]);
+        }
+      })
+
+      // clear polling timer
+      clearInterval(tid);
+
+      // show body now that everything is ready
+      on_load_complete();
+    }
+
+    var tid = setInterval(distill_post_process, 50);
+    distill_post_process();
+
+  }
+
+  function init_downlevel() {
+
+    init_common();
+
+     // insert hr after d-title
+    $('.d-title').after($('<hr class="section-separator"/>'));
+
+    // check if we have authors
+    var front_matter = JSON.parse($("#distill-front-matter").html());
+    var have_authors = front_matter.authors && front_matter.authors.length > 0;
+
+    // manage byline/border
+    if (!have_authors)
+      $('.d-byline').remove();
+    $('.d-byline').after($('<hr class="section-separator"/>'));
+    $('.d-byline a').remove();
+
+    // remove toc
+    $('.d-contents').remove();
+
+    // move appendix elements
+    $('h1.appendix, h2.appendix').each(function(i, val) {
+      $(this).changeElementType('h3');
+    });
+    $('h3.appendix').each(function(i, val) {
+      $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('.d-appendix'));
+    });
+
+
+    // inject headers into references and footnotes
+    var refs_header = $('<h3></h3>');
+    refs_header.text('References');
+    $('#refs').prepend(refs_header);
+
+    var footnotes_header = $('<h3></h3');
+    footnotes_header.text('Footnotes');
+    $('.footnotes').children('hr').first().replaceWith(footnotes_header);
+
+    // move appendix-bottom entries to the bottom
+    $('.appendix-bottom').appendTo('.d-appendix').children().unwrap();
+    $('.appendix-bottom').remove();
+
+    // remove appendix if it's empty
+    if ($('.d-appendix').children().length === 0)
+      $('.d-appendix').remove();
+
+    // prepend separator above appendix
+    $('.d-appendix').before($('<hr class="section-separator" style="clear: both"/>'));
+
+    // trim code
+    $('pre>code').each(function(i, val) {
+      $(this).html($.trim($(this).html()));
+    });
+
+    // move posts-container right before article
+    $('.posts-container').insertBefore($('.d-article'));
+
+    $('body').addClass('downlevel');
+
+    on_load_complete();
+  }
+
+
+  function init_common() {
+
+    // jquery plugin to change element types
+    (function($) {
+      $.fn.changeElementType = function(newType) {
+        var attrs = {};
+
+        $.each(this[0].attributes, function(idx, attr) {
+          attrs[attr.nodeName] = attr.nodeValue;
+        });
+
+        this.replaceWith(function() {
+          return $("<" + newType + "/>", attrs).append($(this).contents());
+        });
+      };
+    })(jQuery);
+
+    // prevent underline for linked images
+    $('a > img').parent().css({'border-bottom' : 'none'});
+
+    // mark non-body figures created by knitr chunks as 100% width
+    $('.layout-chunk').each(function(i, val) {
+      var figures = $(this).find('img, .html-widget');
+      // ignore leaflet img layers (#106)
+      figures = figures.filter(':not(img[class*="leaflet"])')
+      if ($(this).attr('data-layout') !== "l-body") {
+        figures.css('width', '100%');
+      } else {
+        figures.css('max-width', '100%');
+        figures.filter("[width]").each(function(i, val) {
+          var fig = $(this);
+          fig.css('width', fig.attr('width') + 'px');
+        });
+
+      }
+    });
+
+    // auto-append index.html to post-preview links in file: protocol
+    // and in rstudio ide preview
+    $('.post-preview').each(function(i, val) {
+      if (window.location.protocol === "file:")
+        $(this).attr('href', $(this).attr('href') + "index.html");
+    });
+
+    // get rid of index.html references in header
+    if (window.location.protocol !== "file:") {
+      $('.distill-site-header a[href]').each(function(i,val) {
+        $(this).attr('href', $(this).attr('href').replace(/^index[.]html/, "./"));
+      });
+    }
+
+    // add class to pandoc style tables
+    $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
+    $('.kable-table').children('table').addClass('pandoc-table');
+
+    // add figcaption style to table captions
+    $('caption').parent('table').addClass("figcaption");
+
+    // initialize posts list
+    if (window.init_posts_list)
+      window.init_posts_list();
+
+    // implmement disqus comment link
+    $('.disqus-comment-count').click(function() {
+      window.headroom_prevent_pin = true;
+      $('#disqus_thread').toggleClass('hidden');
+      if (!$('#disqus_thread').hasClass('hidden')) {
+        var offset = $(this).offset();
+        $(window).resize();
+        $('html, body').animate({
+          scrollTop: offset.top - 35
+        });
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    if (is_downlevel_browser())
+      init_downlevel();
+    else
+      window.addEventListener('WebComponentsReady', init_distill);
+  });
+
+  </script>
+
+  <!--/radix_placeholder_distill-->
+  <script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+  <script src="site_libs/popper-2.6.0/popper.min.js"></script>
+  <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="site_libs/tippy-6.2.7/tippy.umd.min.js"></script>
+  <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
+  <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
+  <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="site_libs/distill-2.2.21/template.v2.js"></script>
+  <!--radix_placeholder_site_in_header-->
+  <!--/radix_placeholder_site_in_header-->
+
+
+</head>
+
+<body>
+
+<!--radix_placeholder_front_matter-->
+
+<script id="distill-front-matter" type="text/json">
+{"title":"Lecture Notes","description":"Lecture Notes and Resources","authors":[{"author":"Alex Stephenson","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}]}
+</script>
+
+<!--/radix_placeholder_front_matter-->
+<!--radix_placeholder_navigation_before_body-->
+<header class="header header--fixed" role="banner">
+<nav class="distill-site-nav distill-site-header">
+<div class="nav-left">
+<a href="index.html" class="title">Methods Tutoring</a>
+<input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
+</div>
+<div class="nav-right">
+<a href="index.html">Home</a>
+<a href="about.html">Creator</a>
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+Lecture Notes
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="causal.html">Causal Inference</a>
+<a href="game.html">Game Theory</a>
+<a href="linalg.html">Linear Algebra</a>
+<a href="ml.html">Machine Learning</a>
+<a href="optim.html">Optimization</a>
+<a href="prob.html">Probability</a>
+<a href="stats.html">Statistics</a>
+<a href="survey.html">Survey Design and Sampling</a>
+</div>
+</div>
+<a href="intro-seq.html">Math Camp Solutions</a>
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+Coding
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="py-coding.html">Python</a>
+<a href="r-coding.html">R</a>
+<a href="matrix-code.html">Applied Linear Algebra</a>
+</div>
+</div>
+<a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
+</div>
+</nav>
+</header>
+<!--/radix_placeholder_navigation_before_body-->
+<!--radix_placeholder_site_before_body-->
+<!--/radix_placeholder_site_before_body-->
+
+<div class="d-title">
+<h1>Lecture Notes</h1>
+<!--radix_placeholder_categories-->
+<!--/radix_placeholder_categories-->
+<p><p>Lecture Notes and Resources</p></p>
+</div>
+
+<div class="d-byline">
+  Alex Stephenson  
+  
+
+</div>
+
+<div class="d-article">
+<div class="d-contents d-contents-float">
+<nav class="l-text toc figcaption" id="TOC">
+<h3>Contents</h3>
+<ul>
+<li><a href="#simple-linear-regression" id="toc-simple-linear-regression">Simple Linear Regression</a></li>
+<li><a href="#multiple-linear-regression" id="toc-multiple-linear-regression">Multiple Linear Regression</a></li>
+<li><a href="#ols-asympotics" id="toc-ols-asympotics">OLS Asympotics</a></li>
+</ul>
+</nav>
+</div>
+<h2 id="simple-linear-regression">Simple Linear Regression</h2>
+<p>We are interested in studying models that take the following form:</p>
+<p><span class="math inline">\(y = \beta_0 + \beta_1x + u\)</span></p>
+<p>where <span class="math inline">\(\beta_0\)</span> is the intercept, <span class="math inline">\(\beta_1\)</span> is the slope parameter and u is the error term. In the next set of notes, we will extend this model to situations where we have more than one covariate.</p>
+<p>We can think of <span class="math inline">\(\beta_0 + \beta_1x\)</span> as the systematic part of y whereas u is the unsystematic part of y. That is, u represents y not explained by x.</p>
+<h3 id="error-term-assumptions">Error Term Assumptions</h3>
+<p>In order to make progress, we make the following assumptions about the error term.</p>
+<ol type="1">
+<li><p><span class="math inline">\(E[u] = 0\)</span> as long as an intercept term is included in the equation. Note that this essentially defines the intercept.</p></li>
+<li><p><span class="math inline">\(E[u|x] = E[u] = 0\)</span>. This is the Zero Conditional Mean Assumption for the error term.</p></li>
+</ol>
+<ul>
+<li>The average value of the unobservables is the same across all slices of the population determined by the value of x and is equal to the average of u over the entire population</li>
+<li>By EA.1 that means the average is 0</li>
+</ul>
+<h3 id="deriving-ols-estimates">Deriving OLS Estimates</h3>
+<p>To estimate the Population Regression Function (PRF), we need a sample.</p>
+<p>Let <span class="math inline">\((x_i, y_i): i = 1,...,n\)</span> be a random sample of size n from the population. We can estimate the PRF by a model:</p>
+<p><span class="math inline">\(y = \beta_0 + \beta_1x_i + u_i\)</span> (E.2)</p>
+<p>Error Assumption 2 implies that in the popuation x and u are uncorrelated, and the zero conditional mean assumption for the error implies that <span class="math inline">\(E[u] = 0\)</span>. This implies that the covariance between x and u is 0 or formally:
+<span class="math inline">\(Cov(x,u) = E(xu) = 0\)</span></p>
+<p>We can rewrite previous equations as follows</p>
+<p><span class="math inline">\(E[u] = E[ y - \beta_0 + \beta_1x]\)</span> (E.3)</p>
+<p><span class="math inline">\(Cov(x,u) = E[x(y - \beta_0 + \beta_1x)]\)</span> (E.4)</p>
+<p>Our goal is to choose sample <span class="math inline">\(\hat{\beta_0}\)</span>,<span class="math inline">\(\hat{\beta_1}\)</span> to solve the sample equations:</p>
+<p><span class="math inline">\(\frac{1}{n}\sum_{i=1}^n y - \hat{\beta_0} + \hat{\beta_1}x = 0\)</span> (E.5)</p>
+<p><span class="math inline">\(\frac{1}{n}\sum_{i=1}^n x_i(y - \hat{\beta_0} + \hat{\beta_1}x) = 0\)</span> (E.6)</p>
+<p>Rewrite E.4</p>
+<p><span class="math inline">\(\bar{y} = \hat{\beta_0} + \hat{\beta_1}\bar{x}\)</span> which implies</p>
+<p><span class="math inline">\(\beta_0 = \bar{y} - \hat{\beta_1}\bar{x}\)</span></p>
+<h4 id="estimating-the-slope-parameter">Estimating The Slope Parameter</h4>
+<p>Drop the <span class="math inline">\(\frac{1}{n}\)</span> in E.5 because it does not affect the solution. Plug in <span class="math inline">\(\bar{y} - \hat{\beta_1}\bar{x}\)</span> for <span class="math inline">\(\beta_0\)</span> which yields the equation</p>
+<p><span class="math inline">\(\sum_{i=1}^n x_i(\bar{y} - \hat{\beta_1}\bar{x}) - \hat{\beta_1}x) = 0\)</span></p>
+<p>Rearrange terms to get the y’s and the x’s on opposite sides of the equation.
+<span class="math inline">\(\sum_{i=1}^n x_i(y_i - \bar{y})\)</span>
+<span class="math inline">\(\hat{\beta_1}\sum x_i(x_i - \bar{x})\)</span></p>
+<p>Setting these equal to each other and using properties of the sum operator, we can rewrite the the top sum to be <span class="math inline">\(Cov(x,y)\)</span> and the bottom sum to <span class="math inline">\(V(x)\)</span>. As long as <span class="math inline">\(V(x) &gt; 0\)</span>,</p>
+<p><span class="math inline">\(\hat{\beta_1} = \frac{\hat{Cov(x,y)}}{\hat{V(x)}}\)</span></p>
+<p>In words, the slope parameter estimate is the sample covariance of x and y divided by the sample variance of x. We refer to this as the OLS procedure and the OLS regression line as</p>
+<p><span class="math inline">\(\hat{y} = \hat{\beta_0} + \hat{\beta_1}x\)</span></p>
+<h3 id="algebraic-properties-of-ols-on-any-sample-of-data">Algebraic Properties of OLS on Any Sample of Data</h3>
+<p>The following hold by construction for any sample of data estimated by OLS</p>
+<ol type="1">
+<li>The sum and therefore sample average of the residuals is 0. This is because the OLS estimates are chosen to make the residuals sum to 0.</li>
+<li>Sample covariance between regressors and OLS residuals is 0</li>
+<li>The point <span class="math inline">\((\bar{x}, \bar{y})\)</span> is always on the OLS regression line</li>
+</ol>
+<h3 id="variation-in-y">Variation in Y</h3>
+<p>We can view OLS as decomposing each <span class="math inline">\(y_i\)</span> into two parts, a fitted value and a residual. There are three parts of this decomposition: the total sum of squares (SST), the explained sum of squares (SSE), and the residual sum of squares (SSR).</p>
+<p><span class="math inline">\(SST = \sum_{i=1}^n (y_i -\bar{y})^2\)</span></p>
+<p><span class="math inline">\(SSE = \sum_{i=1}^n (\hat{y_i} -\bar{y})^2\)</span></p>
+<p><span class="math inline">\(SSR = \sum_{i=1}^n \hat{u}^2\)</span></p>
+<p>SST is a measure of total sample variation in the <span class="math inline">\(y_i\)</span>’s. Dividing SST by n-1 gets us the sample variance of y.</p>
+<p>The Total Variation in y is SST = SSE + SSR.</p>
+<p>To derive</p>
+<p><span class="math inline">\(\sum_{i=1}^n (y_i -\bar{y})^2\)</span></p>
+<p><span class="math inline">\(\sum_{i=1}^n [(y_i - \hat{y_i}) + (\hat{y_i}-\bar{y})]^2\)</span></p>
+<p><span class="math inline">\(\sum_{i=1}^n \hat{u_i} + (\hat{y_i}-\bar{y})]^2\)</span></p>
+<p>Expand out the sum and replace with definitions to get</p>
+<p><span class="math inline">\(SSR + 2Cov(\hat{u}, \hat{y}) + SSE\)</span></p>
+<p>Since the covariance between u and y is 0, that term drops out.</p>
+<h3 id="goodness-of-fit">Goodness of Fit</h3>
+<p>The ratio of the explained sample variation in y by x is known as <span class="math inline">\(R^2\)</span> and defined:</p>
+<p><span class="math inline">\(R^2 = 1 - \frac{SSR}{SST}\)</span></p>
+<h3 id="expected-values-and-unbiasedness-of-ols-estimators">Expected Values and Unbiasedness of OLS Estimators</h3>
+<p>OLS is an unbiased estimator of the population model provided the following assumptions hold. These assumptions are also known as Gauss-Markov assumptions.</p>
+<h4 id="a1.-linear-in-paramters">A1. Linear in paramters</h4>
+<p>In the population model, y is related to x and u</p>
+<p>$y = _0 + _1x + u $</p>
+<h4 id="a2.-random-sample">A2. Random Sample</h4>
+<p>We have a random sample of size n from the population model</p>
+<h4 id="a3.-sample-variation-in-x">A3. Sample variation in x</h4>
+<p>The sample outcomes <span class="math inline">\(x_i: i = 1,2,..., n\)</span> are not all the same value. If they are, there is no variance of X and so <span class="math inline">\(\beta_1\)</span> cannot be estimated.</p>
+<h4 id="a4.-zero-conditional-mean-of-the-error">A4. Zero Conditional Mean of the Error</h4>
+<p>For a random sample, this assumption implies</p>
+<p><span class="math inline">\(E(u_i|x_i) = 0: \forall i \in [0,1,...n]\)</span></p>
+<p>A4 is violated whenever we think that u and x are correlated. In the simple bivariate case, an example might be using the variable education to predict salary. education is correlated with many variables, including income and family history. These may affect salary and therefore will give us biased results.</p>
+<p><em>Note: We can write the slope estimator <span class="math inline">\(\beta_1\)</span> in a slightly different way</em></p>
+<p><span class="math inline">\(\hat{\beta_1} = \frac{\sum\_{i=1}^n (x_i - \bar{x})*(\beta_0 - \beta_1x + u_i)}{SST_x}\)</span></p>
+<p><span class="math inline">\(\hat{\beta_1} = \beta\_0 \sum\_{i=1}^n\)</span> + _1_{i=1}^n x_i(x_i -{x}) + _{i=1}^n u_i(x_i - {x})$</p>
+<p>The first term sums to 0 and drops out. Thus:</p>
+<p><span class="math inline">\(\hat{\beta_1} = \beta_1 + \frac{\sum\_{i=1}^n u_i(x_i - \bar{x})}{SST_x}\)</span></p>
+<p>We now have all the information we need to prove that OLS is unbiased. Unbiasedness is a feature of the sampling distributions of <span class="math inline">\(\hat{\beta_0}\)</span> and <span class="math inline">\(\hat{\beta_1}\)</span>. Unbiasedness says nothing about the estimates for any <em>given sample</em> we may draw.</p>
+<h4 id="theorem-1-using-a1-a4-ols-produces-unbiased-estimates">Theorem 1: Using A1-A4 OLS produces unbiased estimates</h4>
+<p><span class="math inline">\(E(\hat{\beta_0}) = \beta_0\)</span> and <span class="math inline">\(E(\hat{\beta_1}) = \beta_1\)</span>for any values of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>.</p>
+<p>Proof:</p>
+<p>In this proof the expected values are conditional on sample values of the independent variable x. Because <span class="math inline">\(SST_x\)</span> and <span class="math inline">\((x_i - \bar(x))\)</span> are functions on of <span class="math inline">\(x_i\)</span> they are non-random once we condition on x.</p>
+<p><span class="math inline">\(E\hat{\beta_1}] = E\beta_1 + \frac{\sum\_{i=1}^n u_i(x_i - \bar{x})}{SST_x}]\)</span></p>
+<p><span class="math inline">\(E\hat{\beta_1}] = \beta_1 + \frac{\sum\_{i=1}^n E[u_i(x_i - \bar{x})]}{SST_x}\)</span></p>
+<p><span class="math inline">\(E\hat{\beta_1}] = \beta_1 + \frac{\sum\_{i=1}^n 0 (x_i - \bar{x})}{SST_x}\)</span></p>
+<p><span class="math inline">\(E\hat{\beta_1}] = \beta_1\)</span></p>
+<p>We can also prove the same for <span class="math inline">\(\beta_0\)</span>.</p>
+<p><span class="math inline">\(E\hat{\beta_0}] = \beta_0 + E[(\beta_1 - \hat{\beta_1}\bar{x} + E\bar{u}]\)</span></p>
+<p><span class="math inline">\(E\hat{\beta_0}] = \beta_0 + E[(\beta_1 - \hat{\beta_1}\bar{x} + 0\)</span></p>
+<p><span class="math inline">\(E\hat{\beta_0}] = \beta_0\)</span></p>
+<p>In the last equation, because <span class="math inline">\(\hat{\beta_1} = \beta_1\)</span> the second term drops out.</p>
+<h3 id="variances-of-ols-estimators">Variances of OLS Estimators</h3>
+<p>An additional assumption we can make about the variance of the OLS estimators is that the error u has the same variances conditional on any value of the explanatory variable.</p>
+<p><span class="math inline">\(V(u|x) = \sigma^2\)</span></p>
+<p>By adding this assumption, which to be clear will break down horribly if it is violated, we can prove the following theorem.</p>
+<h4 id="theorem-2-using-assumptions-1-4-and-homoskedastic-error-assumption">Theorem 2: Using assumptions 1-4 and homoskedastic error assumption</h4>
+<p><span class="math inline">\(V(\hat{\beta_1}) = \frac{\sigma^2}{SST_x}\)</span> and <span class="math inline">\(V(\hat{\beta_0}) = \frac{\sigma^2\frac{1}{n}\sum\_{i=1}^n x_i^2}{\sum\_{i=1}^n(x_i - \bar{x})^2}\)</span></p>
+<p>where these are conditioned on the sample values.</p>
+<p>Proof for <span class="math inline">\(V(\hat{\beta_1})\)</span></p>
+<p><span class="math inline">\(V(\hat{\beta_1}) = \frac{1^2}{SST_x^2}V(\sum\_{i=1}^n u_i(x_i - \bar{x}))\)</span></p>
+<p>Substitute <span class="math inline">\(d_i = (x_i - \bar{x})\)</span></p>
+<p><span class="math inline">\(V(\hat{\beta_1}) = \frac{1^2}{SST_x^2}\sum\_{i=1}^n u_i d_i^2\)</span></p>
+<p>Since <span class="math inline">\(V(u_i) = \sigma^2 : \forall i\)</span> we can substitute that constant into the equation.</p>
+<p><span class="math inline">\(V(\hat{\beta_1}) = \frac{1}{SST_x^2}\sigma^2 \sum\_{i=1}^n d_i^2\)</span></p>
+<p>Observe that the second RHS term is just <span class="math inline">\(SST_x\)</span> after pulling out the constant, we can rewrite as</p>
+<p><span class="math inline">\(V(\hat{\beta_1}) = \frac{\sigma^2 SST_x}{SST_x^2}\)</span></p>
+<p>which reduces to our stated result.</p>
+<p>Now that we know the way to estimate the variance, we can ask the following question. How does <span class="math inline">\(V(\hat{\beta_1})\)</span> depend on error variance?</p>
+<ol type="1">
+<li>The larger the error variance, the larger <span class="math inline">\(V(\hat{\beta_1})\)</span>.</li>
+<li>The larger the <span class="math inline">\(V(x)\)</span>, the smaller <span class="math inline">\(V(\hat{\beta_1})\)</span></li>
+<li>As sample size increases, the total variation in x increases which leads to a decrease in <span class="math inline">\(V(\hat{\beta_1})\)</span></li>
+</ol>
+<h3 id="estimating-the-error-variance">Estimating the Error Variance</h3>
+<p>Errors are never observed. Instead, we observe residuals that we can compute from our sample data. We can write the errors as a function of the residuals.</p>
+<p><span class="math inline">\(\hat{u_i} = u_i - (\hat{\beta_0} - \beta_0) - (\hat{\beta_1} - \beta_1)x\)</span></p>
+<p>One problem that we run into is that using the residuals as an estimator is biased without correction because it does not take into account two restrictions for OLS residuals. OLS residuals have to sum to 0 and have a 0 covariance between x and u. Formally,</p>
+<p><span class="math inline">\(\sum\_{i=1}^n \hat{u_i} = 0\)</span></p>
+<p>and</p>
+<p><span class="math inline">\(\sum\_{i=1}^n \hat{u_i}x_i = 0\)</span>.</p>
+<p>Thus we need to correct by n-2 degrees of freedom for an unbiased estimator. When we do so, we get the following.</p>
+<p><span class="math inline">\(\hat{\sigma}^2 = \hat{s}^2 = \frac{1}{n-2}\sum\_{i=1}^n\hat{u_i}^2\)</span></p>
+<p><span class="math inline">\(\hat{\sigma}^2 = \frac{SSR}{n-2}\)</span></p>
+<h2 id="multiple-linear-regression">Multiple Linear Regression</h2>
+<p>We are now going to extend our previous discussion of Simple Linear Regression into the multiple variate case. Here we consider models that include more than one independent variable.</p>
+<p><span class="math inline">\(y = \beta_0 + \beta_1x_1 + \beta_2x\_2 + ... + \beta_kx\_k + u\)</span></p>
+<p>where <span class="math inline">\(\beta_0\)</span> is the intercept, <span class="math inline">\(\beta_1\)</span> measures change in y with respect to <span class="math inline">\(x_1\)</span> holding all other covariates fixed and so on.</p>
+<p>As shorthand we refer to parameters other than the intercept as slope parameters.</p>
+<p>We can generalize the zero conditional mean assumption for the errors to be</p>
+<p><span class="math inline">\(E(U|x\_1, x\_2, ..., x\_k) = 0\)</span></p>
+<h3 id="mechanics-and-interpretation-of-ols">Mechanics and Interpretation of OLS</h3>
+<p>Our goal is to get estimates <span class="math inline">\(\beta_0, \beta_1,...,\beta_k\)</span>. We choose these to minimize the sum of squared residuals</p>
+<p><span class="math inline">\(\sum_{i=1}^n\hat{y_i} = \hat{\beta_0} + \hat{\beta_1}x\_{i1}+...+ \hat{\beta_k}x\_{ik}\)</span></p>
+<p>This minimization leads to k + 1 linear equations in k + 1 unknowns. We call these the OLS first order equations.</p>
+<h3 id="ols-fitted-values-and-residuals">OLS Fitted Values and Residuals</h3>
+<p>For observation i the fitted values are:</p>
+<p><span class="math inline">\(\sum_{i=1}^n\hat{y_i} = \hat{\beta_0} + \hat{\beta_1}x\_{i1}+...+ \hat{\beta_k}x\_{ik}\)</span></p>
+<p>Recall that OLS minimizes the average square prediction error which says nothing about any given prediction. The residual is generalized from the simple linear regression case to be:</p>
+<p><span class="math inline">\(\hat{u_i} = y_i - \hat{y_i}\)</span></p>
+<h4 id="properties-of-fitted-values-and-residuals">Properties of fitted values and residuals</h4>
+<ol type="1">
+<li>The sample average of the residuals is 0. <span class="math inline">\(\bar{y} = \hat{\bar{y}}\)</span></li>
+<li>Sample covariance between each independent variable and the residuals is 0 by construction</li>
+<li>The average point is always on the regression line by construction.</li>
+</ol>
+<h3 id="goodness-of-fit-1">Goodness of Fit</h3>
+<p>Like before SST = SSE + SSR and <span class="math inline">\(R^2 = 1 - \frac{SSR}{SST}\)</span></p>
+<h3 id="expected-value-of-ols-estimators">Expected Value of OLS Estimators</h3>
+<p>We restate the assumptions needed for OLS regressions</p>
+<ol type="1">
+<li>Linear in Parameters</li>
+</ol>
+<p>The model can be written as <span class="math inline">\(y = \beta_0 + \beta_1x\_1 + \.\.\. + \beta_kx\_k\)</span></p>
+<ol start="2" type="1">
+<li>Random sampling</li>
+</ol>
+<p>We have a random sample of n observations <span class="math inline">\({(x\_{i1}, x\_{i2}, ..., x\_{ik}): i = 1,2,..., n}\)</span></p>
+<ol start="3" type="1">
+<li>No perfect collinearity</li>
+</ol>
+<p>In the sample (and therefore population) none of the independent variables is constant and there are no exact linear relationships among the independent variables</p>
+<ol start="4" type="1">
+<li>Zero Conditional Mean of Error</li>
+</ol>
+<p><span class="math inline">\(E(u|x_1, x_2, ..., x_k) = 0\)</span></p>
+<p>This implies that none of the independent variables are correlated with the error term</p>
+<p>If these four assumptions hold</p>
+<p><em>Theorem 3.1: OLS is unbiased</em></p>
+<p><span class="math inline">\(E(\hat{\beta_j} = \beta_j : j = 1,2,\.\.\.,k)\)</span></p>
+<p>for any values of the population parameter <span class="math inline">\(\beta_j\)</span></p>
+<p>Note: Adding irrelevant independent variables does not effect unbiasedness. These terms will on average be 0 across many samples. Adding irrelevant independent variables <strong>will</strong> hurt the estimator’s variances.</p>
+<h3 id="omitted-variable-bias">Omitted Variable Bias</h3>
+<p>A major problem that will lead to bias in our estimates is omitting a relevant variable from our model. To see why suppose we have the following population model</p>
+<p><span class="math inline">\(y = \beta_0 + \beta_1x_1 + \beta_2x_2 + u\)</span></p>
+<p>but we only run the regression</p>
+<p><span class="math inline">\(y = \hat{\beta_0} + \beta_1x\)</span></p>
+<p>For example, we want to estimate the effect of education on wages but do not include some measure of innate ability.</p>
+<p>Since the model is misspecified, we can define bias as:</p>
+<p><span class="math inline">\(\tilde{\beta_1} = \hat{\beta_1} + \hat{\beta_2}\tilde{\delta_1}\)</span></p>
+<p>where <span class="math inline">\(\hat{\beta_1}, \hat{\beta_2}\)</span> are slope estimator from the regression $y_i $ on <span class="math inline">\(x_1, x_2\)</span> and <span class="math inline">\(\tilde{\delta_1}\)</span> is the slope from the regression <span class="math inline">\(x\_{i2}\)</span> on <span class="math inline">\(x\_{i1}\)</span>.</p>
+<p><span class="math inline">\(\tilde{\delta_1}\)</span> depends only on the independent variables in the sample so we can treat it as a fixed quanitty when computing <span class="math inline">\(E[\tilde{\beta_1}]\)</span></p>
+<p><span class="math inline">\(E[\tilde{\beta_1}] = E[\hat{\beta_1} + \hat{\beta_2}\tilde{\delta_1}]\)</span></p>
+<p><span class="math inline">\(E[\tilde{\beta_1}] = E[\hat{\beta_1} + \tilde\delta_1\hat{\beta_2}]\)</span></p>
+<p><span class="math inline">\(E[\tilde{\beta_1}] = \beta_1 + \tilde\delta_1\beta_2\)</span></p>
+<p>which implies that the omitted variable bias is <span class="math inline">\(\beta_2\tilde{\delta_1}\)</span></p>
+<p>The bias in the model is 0 if:</p>
+<ol type="1">
+<li><span class="math inline">\(\beta_2 = 0\)</span></li>
+<li><span class="math inline">\(\tilde{\delta_1}=0\)</span></li>
+</ol>
+<p>which occurs if and only if <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> are uncorrelated in the sample.</p>
+<h3 id="variance-of-ols-estimators">Variance of OLS Estimators</h3>
+<p>Keeping our previous Multiple Linear Regression assumptions we add</p>
+<p>Assumption 5: Homoskedasticity of errors
+The error u has the same variance given any values of the explanatory variables.</p>
+<p><span class="math inline">\(V(u| x_1, x_2, ..., x_k)=\sigma^2\)</span></p>
+<p><em>Theorem 2</em>
+Under assumptions 1-5 conditional on the sample values of the independent variables</p>
+<p><span class="math inline">\(v(\hat{\beta_j}) = \frac{\sigma^2}{{SST}_j(1-R_j^2)}\)</span></p>
+<p>and</p>
+<p><span class="math inline">\(E[\hat{\sigma%^2}= \sigma^2]\)</span></p>
+<p>The unbiased estimator of <span class="math inline">\(\sigma^2\)</span> is <span class="math inline">\(\hat{\sigma^2}= \frac{1}{n-k-1}\sum_{i=1}^n \hat{u_i}^2\)</span> where n is the number of observations and k + 1 is the number of parameters.</p>
+<p>The standard error of <span class="math inline">\(\hat{\beta_j}\)</span> is</p>
+<p><span class="math inline">\(se(\hat{\beta_j})= \frac{\hat{\sigma}}{\sqrt{{SST}_j(1-\hat{R_j}^2)}}\)</span></p>
+<h3 id="efficiency-properties-of-ols">Efficiency Properties of OLS</h3>
+<p>The OLS estimator <span class="math inline">\(\hat{\beta_j}\)</span> for <span class="math inline">\(\beta_j\)</span> is BLUE: The Best Linear Unbiased Estimator.</p>
+<ul>
+<li>estimator: rule that can be applied to data to generate an estimate</li>
+<li>unbiased <span class="math inline">\(E[\hat{\beta_j}]=\beta_j\)</span> for any estimator</li>
+<li>linear: An estimator is linear if it can be expressed as a linear function of the data on the dependent variable</li>
+<li>best: Gauss-Markov holds that for any estimator <span class="math inline">\(\tilde{\beta_j}\)</span> that is linear and unbiased <span class="math inline">\(V(\hat{\beta_j}) \leq V(\tilde{\beta_j})\)</span>. That is the OLS estimator has at least as small if not smaller variance than any other linear unbiased estimator.</li>
+</ul>
+<p>From our previous assumptions we add an additional assumption.</p>
+<p><em>Assumption 6: Normality</em></p>
+<p>The population error u is independent of the explanatory variables <span class="math inline">\(x_1, x_2, ..., x_k\)</span> and is normally distributed as <span class="math inline">\(u \sim N(0, \sigma^2)\)</span></p>
+<p>Assumption 6 is strong and amounts to also assuming MLR Assumption 4 and MLR Assumption 5. Taken together, the six assumptions we’ve made so far collectively are the classical linear model (CLM) assumptions.</p>
+<p>We can summarise the CLM as:</p>
+<p><span class="math inline">\(y|\textbf{x} \sim N(\beta_0 + \beta_1x\_{ik} + ... + \beta_kx\_{ik}, \sigma^2)\)</span></p>
+<p>where <span class="math inline">\(\textbf{x}\)</span> is shorthand for <span class="math inline">\(x_1, x_2, ..., x_k\)</span></p>
+<p><em>Note: Problems with Normal Error Assumption</em></p>
+<ol type="1">
+<li><p>Factors in u can have very different distributions in the population. While central limit theorems can still hold, the normal approximation can be poor.</p></li>
+<li><p>Central limit theorem arguments assume all error affects y in separate additive fashion which has no guarantee of truth. Any breakdown in this assumption will break this assumption</p></li>
+<li><p>In any given application, normal error assumptions are an empirical matter. In general the assumption will be false if y takes on just a few possible values.</p></li>
+</ol>
+<p><em>Theorem 4.1: Normality of error terms lead to normality of sampling distributions of OLS estimators</em></p>
+<p>Under the CLM assumptions (MLR Assumptions 1-6) conditional on the sample values of the independent variables</p>
+<p><span class="math inline">\(\hat{\beta_j} \sim N(\beta_j, V(\beta_j))\)</span> which implies</p>
+<p><span class="math inline">\(\frac{\hat{\beta_j} - \beta_j}{V(\hat{\beta_j})} \sim N(0,1)\)</span></p>
+<h3 id="testing-hypotheses-about-a-single-population-parameter-the-t-test">Testing hypotheses about a single population parameter: The t-test</h3>
+<p><em>Theorem 4.2: t distribution for standard errors</em></p>
+<p>Under the CLM assumptions (MLR Assumptions 1-6)</p>
+<p><span class="math inline">\(\frac{\hat{\beta_j} - \beta_j}{se(\hat{\beta_j})} \sim t\_{n-k-1} = t\_{df}\)</span></p>
+<p>where k+1 is the number of paramters in the population model and n-k-1 is the degrees of freedom.</p>
+<p>Theorem 2 is important because it allows us to test hypotheses involving <span class="math inline">\(\beta_j\)</span>. The test statistic we use is the t-statistic.</p>
+<p><span class="math inline">\(t_{\hat{\beta_j}} = \frac{\hat{\beta_j}}{se(\hat{\beta_j})}\)</span></p>
+<h3 id="null-hypothesis-tests">Null Hypothesis Tests</h3>
+<p>The most common hypothesis test is a two-sided alternative</p>
+<p><span class="math inline">\(H_0: \beta_j = 0\)</span>
+<span class="math inline">\(H_a: \beta_j \neq 0\)</span></p>
+<p>We can also test against one sided alternatives where we expect</p>
+<p><span class="math inline">\(H_0: \beta_j \leq 0\)</span>
+<span class="math inline">\(H_a: \beta_j &gt; 0\)</span></p>
+<p>or the reverse.</p>
+<p>A p-value is the probability of observing a test statistic, in this case a t-statistic, as extreme as the one we observed given that the null hypothesis is true.</p>
+<h3 id="testing-hypotheses-about-a-single-linear-combination-of-parameters">Testing Hypotheses about a single linear combination of Parameters</h3>
+<p>Our t-statistic keeps the same general format but changes slightly.</p>
+<p><span class="math inline">\(t = \frac{\hat{\beta_j} - \hat{\beta_k}}{se(\hat{\beta_j} - \hat{\beta_k})}\)</span></p>
+<p>where</p>
+<p><span class="math inline">\(se(\hat{\beta_j} - \hat{\beta_k}) = \sqrt{se(\hat{\beta_j})^2 + se(\hat{\beta_k})^2 + 2Cov(\hat{\beta_j},\hat{\beta_k})}\)</span></p>
+<p>Some guidelines for discussing signficance of a variable in a MLR model</p>
+<ol type="1">
+<li><p>Check for statistical significance. If yes, discuss the magnitude of the coefficient to get an idea of its practical importance.</p></li>
+<li><p>If variable isn’t significant, look at whether the variable has the expected effect and if it is practically large.</p></li>
+</ol>
+<h3 id="confidence-intervals">Confidence Intervals</h3>
+<p>A confidence interval is if random samples were obtained infinitely many times with <span class="math inline">\(\tilde{\beta_j}, \hat{\beta_j}\)</span> computed each time then the (unknown) <span class="math inline">\(\beta_j\)</span> population value would lie in the interval <span class="math inline">\((\tilde{\beta_j}, \hat{\beta_j})\)</span> for 95% of the samples.</p>
+<p>Under the CLM assumptions, a confidence interval is</p>
+<p><span class="math inline">\(\hat{\beta_j} \pm \alpha SE(\hat{\beta_j})\)</span></p>
+<p>where <span class="math inline">\(\alpha\)</span> is a critical value</p>
+<h3 id="testing-multiple-linear-restrictions-the-f-test">Testing Multiple Linear Restrictions: The F-test</h3>
+<p>Often we want to test whether a group of variables have no effect on the dependenet variables.</p>
+<p>The null hypothesis is that a set of variables has no effect on y, once another set of variables have been controlled.</p>
+<p>In contest to hypothesis testing:</p>
+<ul>
+<li>The restricted model is the model without hte groups of variables we are testing</li>
+<li>The unrestricted model is the model of all the parameters</li>
+</ul>
+<p>For the general case:</p>
+<ul>
+<li><p>The unrestricted model with k independent variables <span class="math inline">\(y = \beta_0 + \beta_1x_1 +...+ \beta_k x_k + u\)</span></p></li>
+<li><p>The null hypothesis is <span class="math inline">\(H_0: \beta\_{k-q-1} = 0,..., \beta_k = 0\)</span> which puts q exclusion restrictions on the model</p></li>
+</ul>
+<p>The F-statistic is:</p>
+<p><span class="math inline">\(F = \frac{\frac{SSR_r - SSR\_{ur}}{q}}{\frac{SSR\_{ur}}{n-k-1}}\)</span></p>
+<p>where <span class="math inline">\(SSR_r\)</span> is the sum of squared residuals from the restricted model and <span class="math inline">\(SSR\_{ur}\)</span> is the sum of squared residuals from the unrestricted model and q is the numerator degrees of freedom which is the degrees of freedom in the restricted model minus the degrees of freedom in the unrestricted model.</p>
+<p>The F-statistic is always non-negative. If <span class="math inline">\(H_0\)</span> is rejected then we say that <span class="math inline">\(x\_{k-q+1},...x_k\)</span> are jointly statistically significant. If we fail to reject then the variables are jointly statistically insignificant.</p>
+<h3 id="the-r-squared-form-of-the-f-statistic">The R-Squared Form of the F-statistic</h3>
+<p>Using the fact that <span class="math inline">\(SSR_r = SST(1-R_r^2)\)</span> and <span class="math inline">\(SSR\_{ur} = SST(1 - R\_{ur}^2)\)</span> we can substitute in to the F-statistic to get</p>
+<p><span class="math inline">\(F = \frac{\frac{R\_{ur}^2 - R_r^2}{q}}{\frac{1-R\_{ur}^2}{n-k-1}}\)</span></p>
+<p>This is often more convenient for testing exclusion restrictions in models but cannot test all linear restrictions.</p>
+<h2 id="ols-asympotics">OLS Asympotics</h2>
+<p>We know under certain assumptions that OLS estimators are unbiased, but unbiasedness cannot always be achieved for an estimator. Another property that we are interested in is whether an estimator is <em>consistent</em>.</p>
+<p><em>Theorem 5.1: OLS is a consistent estimator</em></p>
+<p>Under MLR Assumptions 1-4, the OLS estimator <span class="math inline">\(\hat{\beta_j}\)</span> is consistent for <span class="math inline">\(\beta_j \forall \\ j \in 1,2,...,k\)</span>.</p>
+<p>Informally, as n tends to infinitythe distribution of <span class="math inline">\(\hat{\beta_j}\)</span> collapses to the single point <span class="math inline">\(\beta_j\)</span></p>
+<p>We can add an assumption MLR 4’:</p>
+<p><span class="math inline">\(E(u) = 0,Cov(x_j, u) = 0 \forall j \in 1,2,...,k\)</span></p>
+<p>This is a weaker assumption than MLR 4. MLR 4’ requires only that <span class="math inline">\(x_j\)</span> is uncorrelated with u and that u has zero mean in the population. Indeed MLR 4 implies MLR 4’.</p>
+<p>We use MLR4 as an assumption because OLS is biased but consistent under MLR 4’ if <span class="math inline">\(E[u| x_1, ..., x_k]\)</span> depends on any of the <span class="math inline">\(x_j\)</span>. Second, if MLR 4 holds, then we have properly modeled the population regression function.</p>
+<h3 id="deriving-inconsistency-of-ols">Deriving Inconsistency of OLS</h3>
+<p>Correlation between u and any of the <span class="math inline">\(x_1, ..., x_k]\)</span> generally causes all of the OLS estimators to be inconsistent. <strong>If the error is correlated with any of the independent variables then OLS is biased and inconsistent.</strong></p>
+<p>There is an asymptotic analogue to Omitted Variable Bias. Suppose the model <span class="math inline">\(y = \beta_0 + \beta_1x_1 + \beta_2x_2 + v\)</span> satisfies MLR assumptions 1-4. If we omit <span class="math inline">\(x_2\)</span> then:</p>
+<p><span class="math inline">\(plim\tilde{\beta_1} = \beta_1 + \beta_2\delta_1\)</span></p>
+<p><span class="math inline">\(plim\tilde{\beta_1} = \beta_1 + \beta_2\frac{Cov(x_1,x_2)}{V(x_1)}\)</span></p>
+<p>If the covariance term is zero then the estimator is still consistent. Otherwise, the inconsistency takes on the same sign as the covariance term.</p>
+<h3 id="asymptotic-normality-and-large-sample-inference">Asymptotic Normality and Large Sample Inference</h3>
+<p>In cases where the <span class="math inline">\(y_i\)</span> do not follow normal distributions we can still get asymptotic normality.</p>
+<p><em>Theorem 5.2: Asymptotic Normality</em></p>
+<p>Under MLR Assumptions 1-5</p>
+<ol type="1">
+<li><p><span class="math inline">\(\sqrt{n}(\hat{\beta_j} - \beta_j) \xrightarrow{a} N(0, \frac{\sigma^2}{a_j^2}\)</span> where <span class="math inline">\(a_j^2\)</span> is the asymptotic variance of <span class="math inline">\(\sqrt{n}(\hat{\beta_j} - \beta_j)\)</span>. For the slope coefficients <span class="math inline">\(a\_j^2 = plim(\frac{1}{n} \sum\_{i=1}^n \hat{r\_{ij}^2})\)</span> where the <span class="math inline">\(r\_{ij}\)</span> are the residuals from regressing <span class="math inline">\(x_j\)</span> on the other independent variables.</p></li>
+<li><p><span class="math inline">\(\hat{\sigma^2}\)</span> is a consistent estimator of <span class="math inline">\(\sigma^2\)</span></p></li>
+<li><p>For each j</p></li>
+</ol>
+<p><span class="math inline">\(\frac{\hat{\beta_j} - \beta_j}{sd(\hat{\beta_j})} \xrightarrow{a} N(0,1)\)</span> which we cannot compute from data and</p>
+<p><span class="math inline">\(\frac{\hat{\beta_j} - \beta_j}{se(\hat{\beta_j})} \xrightarrow{a} N(0,1)\)</span> which we can compute from data.</p>
+<p>This theorem does not require MLR 6 from the list of required assupmtions. What this theorem says is that regardless of the population distribution of u, the OLS estimators when properly standardized have approximate standard normal distributions.</p>
+<p>Further,</p>
+<p><span class="math inline">\(\frac{\hat{\beta_j} - \beta_j}{se(\hat{\beta_j})} \xrightarrow{a} t\_{df}\)</span></p>
+<p>because <span class="math inline">\(t\_{df}\)</span> approaches $ N(0,1)$ as the degrees of freedom gets large so we can carry out t-tests and confidence intervals in the same way as the CLM assumptions.</p>
+<p>Recall that <span class="math inline">\(\widehat{V(\hat{\beta_j})} = \frac{\hat{\sigma^2}}{SST_j(1-R_j^2)}\)</span> where <span class="math inline">\(SST_j\)</span> is the total sum of squares of <span class="math inline">\(x_j\)</span> in the sample and <span class="math inline">\(R_j^2\)</span> is the R-squared from regressing <span class="math inline">\(x_j\)</span> on all other independent variables. As the sample size increases:</p>
+<ul>
+<li><span class="math inline">\(\hat{\sigma^2} \xrightarrow{d} \sigma^2\)</span></li>
+<li><span class="math inline">\(R_j^2 \xrightarrow{d} c\)</span> which is some number between 0 and 1</li>
+<li>The sample variance <span class="math inline">\(\frac{SST_j}{n} \xrightarrow{d} V(x_j)\)</span></li>
+</ul>
+<p>These imply that <span class="math inline">\(\widehat{V(\hat{\beta_j})}\)</span> shrinks to 0 at the rate of <span class="math inline">\(\frac{1}{n}\)</span> and <span class="math inline">\(se(\hat{\beta_j}) = \frac{c_j}{\sqrt{n}}\)</span> where <span class="math inline">\(c_j = \frac{\sigma}{\sigma\sqrt{1 - \rho_j^2}}\)</span>.</p>
+<p>This last equation is an approximation. A good rule of thumb is that standard eerrors can be expected to shrink at a rate that is the inverse of the square root of the sample size.</p>
+<h3 id="asymptotic-efficiency-of-ols">Asymptotic Efficiency of OLS</h3>
+<p><em>Theorem 5.3</em></p>
+<p>Under Gauss-Markov assumptions, let <span class="math inline">\(\tilde{\beta_j}\)</span> denote estimators that solve the equation</p>
+<p><span class="math inline">\(\sum\_{i=1}^n g_j(\textbf{x}_i)(y_i - \tilde{\beta_0}-\tilde{\beta_1}x\_{i1} - ... - \tilde{\beta_k}x\_{ik}) = 0\)</span></p>
+<p>Let <span class="math inline">\(\hat{\beta_j}\)</span> denote the OLS estimators. The OLS estimators have the smallest asymptotic variance.</p>
+<p><span class="math inline">\(AVar(\sqrt{n}(\hat{\beta_j} - \beta_j)) \leq AVar(\sqrt{n}(\tilde{\beta_j} - \beta_j))\)</span></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<!--radix_placeholder_article_footer-->
+<!--/radix_placeholder_article_footer-->
+</div>
+
+<div class="d-appendix">
+</div>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!--radix_placeholder_site_after_body-->
+<!--/radix_placeholder_site_after_body-->
+<!--radix_placeholder_appendices-->
+<div class="appendix-bottom">
+<h3 id="updates-and-corrections">Corrections</h3>
+<p>If you see mistakes or want to suggest changes, please <a href="https://github.com/asteves/methods-notes/issues/new">create an issue</a> on the source repository.</p>
+<h3 id="reuse">Reuse</h3>
+<p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/asteves/methods-notes">https://github.com/asteves/methods-notes</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
+</div>
+<!--/radix_placeholder_appendices-->
+<!--radix_placeholder_navigation_after_body-->
+<!--/radix_placeholder_navigation_after_body-->
+
+</body>
+
+</html>
