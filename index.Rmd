@@ -21,13 +21,13 @@ knitr::opts_chunk$set(echo = FALSE)
 
 Welcome to the Methods Tutoring Notes site. I put this together based on my methods training and years being a graduate quantitative methods tutor at UC Berkeley. 
 
-The site contains several different resources. First and foremost are notes on the primary quantitative methods topics that are common to a graduate course sequence in political science. Second, there are coding notes for both R and Python.^[There are no resources for Stata by choice. Stata is not free software, rarely used in industry, and not needed to do research.]. I have endeavored to provide an introduction to both languages, with a focus on topics that have proved more difficult for graduate students at UC Berkeley. Third, I provide code to common research techniques and methods currently in use in top political science journals. For pedagogical reasons, every single example and application on this website has both an R and a Python implementation. 
+The site contains several different resources. First and foremost, it includes notes on the primary quantitative methods topics common to a graduate course sequence in political science. Second, there are coding notes for both R and Python.^[There are no resources for Stata by choice. Stata is not free software, rarely used in industry, and not needed to do research.]. I have endeavored to provide an introduction to both languages, focusing on topics that have proved more difficult for graduate students at UC Berkeley. Third, I provide code for standard research techniques and methods currently in use in top political science journals. For pedagogical reasons, every single example and application on this website has both an R and a Python implementation. 
 
 ## Texts 
 
-I have benefited greatly in my own methods education from the teaching of professors at Berkeley. All errors on this website are entirely my own and should in no way reflect on their excellent guidance.
+I have benefited greatly in my own methods education from the teaching of professors at Berkeley. All errors on this website are entirely my own and should in no way reflect their excellent guidance.
 
-In addition to classroom teaching and tutoring, the underlying materials on this website are drawn from many resources. A non-exhaustive list of books from which these materials are drawn by subject are below. I encourage individuals who reach this page for self-study consult them for more detail. I have put in **bold** the text or sets of texts that strikes me as the most reasonable one to begin with in each category. 
+In addition to classroom teaching and tutoring, the underlying materials on this website are drawn from many resources. Below is a non-exhaustive list of books from which these materials are drawn by subject. I encourage individuals who reach this page for self-study to consult them for more detail. I have put in **bold** the text or sets of texts that strike me as the most reasonable entry point in each category. 
 
 ### Causal Inference 
 
