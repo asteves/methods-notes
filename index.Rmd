@@ -1,7 +1,7 @@
 ---
 title: "Methods Tutoring"
 description: |
-  Welcome to the main course site
+  A depository of quantitative methods notes
 author: 
   - name: Alex Stephenson
 site: distill::distill_website
@@ -61,7 +61,7 @@ McCarty, N., & Meirowitz, A. 2007. Political Game Theory: An Introduction. Cambr
 
 ### Linear Algebra 
 
-**Boyd, S., & Vandenberghe, L. 2018. Introduction to Applied Linear Algebra: Vectors, Matrices, and Least Squares. 1st ed. Cambridge University Press.**
+**Boyd, S., & Vandenberghe, L. 2018. Introduction to Applied Linear Algebra: Vectors, Matrices, and Least Squares. 1st ed. Cambridge University Press.** https://web.stanford.edu/~boyd/vmls/
 
 Harville, D.A., 1997. Matrix Algebra from a Statistician’s Perspective. New York: Springer.
 
@@ -71,7 +71,7 @@ Goodfellow, I., Bengio, Y. & Courville, A. 2016. Deep Learning. Cambridge: MIT P
 
 Hastie, T., Tibshirani, R., & Friedman, J. 2013. Elements of Statistical Learning. 2nd ed. Springer.
 
-**James, G., Witten, D., Hastie, T, & Tibshirani, R. 2021. An Introduction to Statistical Learning: With Applications in R. Second edition. New York: Springer.**
+**James, G., Witten, D., Hastie, T, & Tibshirani, R. 2021. An Introduction to Statistical Learning: With Applications in R. Second edition. New York: Springer.** https://www.statlearning.com/ 
 
 Kneusel, R. T., 2021. Practical Deep Learning. No Starch Press.
 
