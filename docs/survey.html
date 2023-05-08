@@ -2163,8 +2163,568 @@ Coding
 </div>
 
 <div class="d-article">
-<p>Distill is a publication format for scientific and technical writing, native to the web.</p>
-<p>Learn more about using Distill for R Markdown at <a href="https://rstudio.github.io/distill" class="uri">https://rstudio.github.io/distill</a>.</p>
+<div class="d-contents d-contents-float">
+<nav class="l-text toc figcaption" id="TOC">
+<h3>Contents</h3>
+<ul>
+<li><a href="#sampling" id="toc-sampling">Sampling</a></li>
+<li><a href="#sampling-types" id="toc-sampling-types">Sampling Types</a>
+<ul>
+<li><a href="#simple-random-sampling" id="toc-simple-random-sampling">Simple Random Sampling</a></li>
+<li><a href="#underlying-ideas-for-srs" id="toc-underlying-ideas-for-srs">Underlying ideas for SRS</a></li>
+<li><a href="#derivations-for-srs" id="toc-derivations-for-srs">Derivations for SRS</a></li>
+<li><a href="#examples-and-exercises" id="toc-examples-and-exercises">Examples and Exercises</a></li>
+<li><a href="#random-sampling-with-replacement" id="toc-random-sampling-with-replacement">Random Sampling with Replacement</a></li>
+</ul></li>
+<li><a href="#confidence-intervals" id="toc-confidence-intervals">Confidence Intervals</a>
+<ul>
+<li><a href="#exercises" id="toc-exercises">Exercises</a></li>
+</ul></li>
+<li><a href="#sample-size" id="toc-sample-size">Sample Size</a>
+<ul>
+<li><a href="#exercises-1" id="toc-exercises-1">Exercises</a></li>
+</ul></li>
+<li><a href="#estimating-proportions-ratios-and-subpopulation-means" id="toc-estimating-proportions-ratios-and-subpopulation-means">Estimating Proportions, Ratios, and Subpopulation Means</a>
+<ul>
+<li><a href="#estimating-a-population-proportion" id="toc-estimating-a-population-proportion">Estimating a population proportion</a></li>
+<li><a href="#sample-size-for-estimating-a-proportion" id="toc-sample-size-for-estimating-a-proportion">Sample size for estimating a proportion</a></li>
+<li><a href="#estimating-a-ratio" id="toc-estimating-a-ratio">Estimating a Ratio</a></li>
+<li><a href="#estimating-a-mean-total-or-population-of-a-subpopulation" id="toc-estimating-a-mean-total-or-population-of-a-subpopulation">Estimating a Mean, total, or Population of a subpopulation</a></li>
+<li><a href="#exercises-2" id="toc-exercises-2">Exercises</a></li>
+</ul></li>
+<li><a href="#chap6" id="toc-chap6">Unequal Probability Sampling</a>
+<ul>
+<li><a href="#sampling-with-replacement" id="toc-sampling-with-replacement">Sampling with Replacement</a></li>
+<li><a href="#the-horvitz-thompsom-estimator" id="toc-the-horvitz-thompsom-estimator">The Horvitz-Thompsom Estimator</a></li>
+<li><a href="#hajek-estimator" id="toc-hajek-estimator">Hajek Estimator</a></li>
+<li><a href="#examples" id="toc-examples">Examples</a></li>
+<li><a href="#exercises-3" id="toc-exercises-3">Exercises</a></li>
+</ul></li>
+<li><a href="#chap7" id="toc-chap7">Chapter 7</a></li>
+<li><a href="#chapter-8" id="toc-chapter-8">Chapter 8</a></li>
+<li><a href="#chapter-9" id="toc-chapter-9">Chapter 9</a></li>
+<li><a href="#chapter-10" id="toc-chapter-10">Chapter 10</a></li>
+<li><a href="#chap11" id="toc-chap11">Chapter 11</a></li>
+<li><a href="#chap12" id="toc-chap12">Cluster and Systemic Sampling</a>
+<ul>
+<li><a href="#primary-units-selected-via-srs" id="toc-primary-units-selected-via-srs">Primary units selected via SRS</a></li>
+<li><a href="#ratio-estimators" id="toc-ratio-estimators">Ratio Estimators</a></li>
+<li><a href="#the-basic-principle" id="toc-the-basic-principle">The Basic principle</a></li>
+</ul></li>
+<li><a href="#multistage-designs" id="toc-multistage-designs">Multistage Designs</a>
+<ul>
+<li><a href="#srs-without-replacement-at-each-stage" id="toc-srs-without-replacement-at-each-stage">SRS without replacement at each stage</a></li>
+<li><a href="#ratio-estimator" id="toc-ratio-estimator">Ratio Estimator</a></li>
+<li><a href="#any-multistage-design-with-replacement" id="toc-any-multistage-design-with-replacement">Any Multistage Design with replacement</a></li>
+</ul></li>
+<li><a href="#double-sampling" id="toc-double-sampling">Double Sampling</a>
+<ul>
+<li><a href="#ratio-estimation" id="toc-ratio-estimation">Ratio Estimation</a></li>
+<li><a href="#allocation-for-ratio-estimation" id="toc-allocation-for-ratio-estimation">Allocation for ratio estimation</a></li>
+<li><a href="#double-sampling-for-stratification" id="toc-double-sampling-for-stratification">Double Sampling for stratification</a></li>
+<li><a href="#nonresponse-and-double-sampling" id="toc-nonresponse-and-double-sampling">Nonresponse and double sampling</a></li>
+<li><a href="#exercises-4" id="toc-exercises-4">Exercises</a></li>
+</ul></li>
+<li><a href="#network-sampling-and-link-tracing-designs" id="toc-network-sampling-and-link-tracing-designs">Network Sampling and Link-Tracing Designs</a>
+<ul>
+<li><a href="#estimation-of-the-population-total-or-mean" id="toc-estimation-of-the-population-total-or-mean">Estimation of the Population Total or Mean</a></li>
+<li><a href="#horvitz-thompson-estimator" id="toc-horvitz-thompson-estimator">Horvitz-Thompson Estimator</a></li>
+</ul></li>
+<li><a href="#detectability-and-sampling" id="toc-detectability-and-sampling">Detectability and Sampling</a></li>
+</ul>
+</nav>
+</div>
+<h2 id="sampling">Sampling</h2>
+<p><strong>Sampling</strong>: Selecting some part of a population to observe so that we
+can estimate a population parameter</p>
+<p>The basic setup of sampling:</p>
+<ul>
+<li>Population is known and of finite size <em>N</em> units <span class="math inline">\(i \in \{1,...,N\}\)</span></li>
+<li>Each unit has an associated value of interest (y-value) which is
+fixed and unknown</li>
+</ul>
+<p><strong>Sampling Design</strong>: The procedure through which the sample of units is
+selected from the population</p>
+<h2 id="sampling-types">Sampling Types</h2>
+<h3 id="simple-random-sampling">Simple Random Sampling</h3>
+<p><strong>Simple Random Sampling</strong>: A sampling design in which <em>n</em> distinct
+units are selected from <em>N</em> units in the population in such a way that
+every possible combination of <em>n</em> units is equally likely to be in the
+selected sample.</p>
+<p>SRS is also known as random sampling without replacement.</p>
+<p>The inclusion probability for SRS is the same for all units. The
+probability that the <span class="math inline">\(i^{th}\)</span> unit of the population is included is
+<span class="math inline">\(\pi_i = \frac{n}{N}\)</span>. A SRS <strong>guarantees</strong> that each possible sample of
+<em>n</em> units for all units.</p>
+<p>We estimate the population mean with SRS as follows:</p>
+<ul>
+<li><p><span class="math inline">\(\bar{y}\)</span> is unbiased for the population mean <span class="math inline">\(\mu\)</span>. We define
+<span class="math inline">\(\bar{y} = \frac{1}{n}\sum_{i=1}^{n}y_i\)</span></p></li>
+<li><p><span class="math inline">\(s^2\)</span> is unbiased for the population variance <span class="math inline">\(\sigma^2\)</span>. We define
+<span class="math inline">\(s^2 = \frac{1}{n-1}\sum_{i=1}^{n}(y_i - \bar{y})^2\)</span></p></li>
+<li><p>The variance of <span class="math inline">\(\bar{y}\)</span> with SRS is
+<span class="math inline">\(V[\widehat{\bar{y}}] = \frac{N-n}{N}\frac{s^2}{n}\)</span>. The standard
+error is defined by taking the square root of this quantity.</p></li>
+<li><p>To estimate the population total an unbiased estimator
+<span class="math inline">\(\tau = N\mu\)</span>. An unbiased estimator of <span class="math inline">\(V[\tau]\)</span> is
+<span class="math inline">\(N(N-n)\frac{s^2}{n}\)</span></p></li>
+</ul>
+<h3 id="underlying-ideas-for-srs">Underlying ideas for SRS</h3>
+<p><span class="math inline">\(\bar{y}\)</span> is a random variable whose expectation is the population
+parameter where the expectation is taken over all possible samples. This
+makes <span class="math inline">\(\bar{y}\)</span> <em>design-unbiased</em> and this does not depend on any
+assumptions about the population. The variance estimates are design
+unbiased as well.</p>
+<h3 id="derivations-for-srs">Derivations for SRS</h3>
+<p><span class="math display">\[\begin{aligned}
+E[\bar{y}] &amp;= \sum\bar{y_s}P(s) \\
+E[\bar{y}] &amp;= \frac{1}{n} \sum y_i\frac{\binom{N-1}{n-1}}{\binom{N}{n}} \\
+E[\bar{y}] &amp;= \frac{1}{N}\sum y_i
+\end{aligned}\]</span></p>
+<p>An alternative derivation</p>
+<p><span class="math display">\[\begin{aligned}
+E[\bar{y}] &amp;= \frac{1}{n}\sum_{i=1}^{N}y_iE[z_i] \\
+E[\bar{y}] &amp;= \frac{1}{n}\sum_{i = 1}^{N}y_i\frac{n}{N}\\
+E[\bar{y}] &amp;= \frac{1}{n}\frac{n}{N}\sum_{i=1}^{N}y_i \\
+E[\bar{y}] &amp;= \frac{1}{N}\sum_{i=1}^{N} y_i
+\end{aligned}\]</span> To derive the variance of the sample mean, see pages
+21-22.</p>
+<h3 id="examples-and-exercises">Examples and Exercises</h3>
+<p>Example 1 p. 16</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<p>Example 2 p.18</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<p>Example 3 p. 20</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<p>Example 4 p. 32</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<p>Exercise 2 p.36</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<p>Exercise 3 p. 36</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<p>Exercise 4 p.36</p>
+<p>Show that <span class="math inline">\(E[s^2] = \sigma^2\)</span></p>
+<p><span class="math display">\[\begin{aligned}
+E[s^2] &amp;= E[\frac{n}{n-1}(\bar{X^2}-\bar{X}^2)] \\
+E[s^2] &amp;= \frac{n}{n-1}E[\bar{X^2}-\bar{X}^2)]\\
+E[s^2] &amp;= \frac{n}{n-1}\left(\frac{n-1}{n}\sigma^2 \right) \\
+E[s^2] &amp;= \sigma^2
+\end{aligned}\]</span> Exercise 6 p.37</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<h3 id="random-sampling-with-replacement">Random Sampling with Replacement</h3>
+<p><strong>Random Sampling with Replacement</strong>: A sample of <em>n</em> units selected
+from a population of size <em>N</em>, returning each unit to the population
+after it has been drawn.</p>
+<ul>
+<li><p>Every possible sequence of <em>n</em> units has equal probability under the
+design.</p></li>
+<li><p>The plug in estimator <span class="math inline">\(\bar{y_n} = \frac{1}{n}\sum_{i=1}^{n} y_i\)</span>.</p></li>
+<li><p>The variance of the plug-in sample mean estimator is
+<span class="math inline">\(V[\hat{\bar{y_n}}] = \frac{s^2}{n}\)</span> which is unbiased for the
+parameter <span class="math inline">\(V[\bar{y_n}] = \frac{N-1}{nN}\sigma^2\)</span>.</p></li>
+</ul>
+<p>The variance of the SRS sample mean is in general lower than the
+variance of the sample mean taken via random sampling with replacement.</p>
+<p>In random sampling with replacement <span class="math inline">\(\bar{y_n}\)</span> depends on the number of
+times each unit is selected. This is why the notation is a bit
+different. Two surveys that observe the same distinct set of units but
+with different repeats in the sample will generally yield different
+estimates.</p>
+<p><strong>Effective sample size</strong>: In random sampling with replacement, this is
+the number of distinct units in the sample (denoted v).</p>
+<ul>
+<li><span class="math inline">\(\bar{y_v} = \frac{1}{v}\sum_{i=1}^{n}y_i\)</span>. This quantity is an
+unbiased estimator of the population mean.</li>
+</ul>
+<h2 id="confidence-intervals">Confidence Intervals</h2>
+<p>Let <em>I</em> represent a confidence interval for the population mean <span class="math inline">\(\mu\)</span>.
+Choose a small number <span class="math inline">\(\alpha\)</span> as the allowable probability of error
+such that the procedure has a probability <span class="math inline">\(P(\mu \in I) = 1-\alpha\)</span>.</p>
+<p><em>I</em> is a random variable and the endpoints of <em>I</em> will vary from sample
+to sample. Conversely, <span class="math inline">\(\mu\)</span> is fixed and unknown parameter.</p>
+<p>Under SRS a <span class="math inline">\(1-\alpha\)</span> CI means that for <span class="math inline">\(1-\alpha\)</span> of the possible
+samples, the interval contains the true value of the population mean.</p>
+<p>An approximate <span class="math inline">\(100(1-\alpha)\%\)</span> CI for <span class="math inline">\(\mu\)</span> is</p>
+<p><span class="math display">\[\bar{y} \pm t\sqrt{\frac{N-n}{N}\frac{s^2}{n}}\]</span> where t is the upper
+<span class="math inline">\(\frac{\alpha}{2}\)</span> point of a t-distribution with n-1 degrees of
+freedom.</p>
+<p>We rely here for this on the finite population central limit theorem
+which shows that the distribution will converge to a standard normal
+distribution as <em>n</em> and <em>N</em> grow large.</p>
+<h3 id="exercises">Exercises</h3>
+<p>Exercise 3 p.51</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<h2 id="sample-size">Sample Size</h2>
+<p>The first question when planning a survey is what sample size should be
+used. We estimate a statistic <span class="math inline">\(\hat{\theta}\)</span> that is an unbiased
+estimator of <span class="math inline">\(\theta\)</span> which is the population parameter of interest.</p>
+<p>We want to choose a maximum allowable difference <em>d</em> between the true
+parameter and the estimate and allow for some small probability <span class="math inline">\(\alpha\)</span>
+that the error could exceed our chosen specification.</p>
+<p>This means that we choose our sample size <em>n</em> such that
+<span class="math inline">\(P(|\hat{\theta} - \theta) &gt; d &lt; \alpha\)</span></p>
+<p><strong>Sample size for estimating a population mean</strong></p>
+<p>Under SRS</p>
+<p><span class="math display">\[V[\bar{y}] = (N - n)\frac{\sigma^2}{Nn}\]</span></p>
+<p>Thus <span class="math inline">\(d = z \sqrt{V[\bar{y}]}\)</span> assuming that that our estimator is
+normally distributed, which is the case for a population mean.</p>
+<p>Solving for <em>n</em></p>
+<p><span class="math display">\[\begin{aligned}
+n &amp;= \frac{1}{\frac{d^2\sigma^2}{t^2} + \frac{1}{N}} \\
+n &amp;= \frac{1}{\frac{1}{n_0} + \frac{1}{N}}
+\end{aligned}\]</span></p>
+<p>with an appropriate substitution. The only difference to get a
+population total is to multiply <span class="math inline">\(n_0\)</span> by <span class="math inline">\(N^2\)</span> in the above formula.</p>
+<p>Both of these formulas presume knowledge of the population variance,
+which is generally unknown. To get an estimate, we tend to either guess
+completely or use the results of a previous survey.</p>
+<p>If we ignore the finite population correct, then we only have to
+calculate <span class="math inline">\(n_0\)</span>. This sample size will always be larger than the sample
+size with a finite population correction.</p>
+<p><strong>Sample Size for Relative Precision</strong></p>
+<p>The formula is now</p>
+<p><span class="math display">\[n = \frac{1}{\frac{r^2\mu^2}{t^2\sigma^2} + \frac{1}{N}}\]</span> where <em>r</em>
+represents the relative error of interest. In this formula the
+population quantity on which sample size depends when the desire is to
+control relative precision is the coefficient of variation in the
+population.</p>
+<h3 id="exercises-1">Exercises</h3>
+<p>Exercise 1 p.56</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<h2 id="estimating-proportions-ratios-and-subpopulation-means">Estimating Proportions, Ratios, and Subpopulation Means</h2>
+<p>We can use the the same formulas as before, but some special features of
+note: - Formulas simplify considerably with attribute data - Exact
+Confidence Intervals are possible - A sample size sufficient for a
+desired absolute precision may be chosen without any information on
+population parameters</p>
+<h3 id="estimating-a-population-proportion">Estimating a population proportion</h3>
+<p><span class="math display">\[p = \frac{1}{N}\sum_{i=1}^{N}y_i = \mu\]</span></p>
+<p>Finite population variance</p>
+<p><span class="math display">\[s^2 = \frac{n}{n-1}\hat{p}(1-\hat{p})\]</span></p>
+<p>Variance of the estimator</p>
+<p><span class="math display">\[V[\hat{p}] = \frac{N-n}{N-1}\frac{\hat{p}(1-\hat{p})}{n}\]</span> The first
+term is the FPC (I think) so we can ignore it to get an estimator that
+is slightly too large.</p>
+<p>Confidence intervals work as expected</p>
+<p><span class="math display">\[\hat{p} \pm \sqrt{V[\hat{p}]}\]</span></p>
+<h3 id="sample-size-for-estimating-a-proportion">Sample size for estimating a proportion</h3>
+<p>Sample size requirements when we ignore the finite population correction</p>
+<p><span class="math display">\[n_0 = \frac{z^2p(1-p)}{d^2}\]</span></p>
+<p>When including the FPC</p>
+<p><span class="math display">\[n = \frac{1}{\frac{1}{n_0} + \frac{1}{N}}\]</span> where <span class="math inline">\(n_0\)</span> is defined as
+above.</p>
+<p>Like before these formulas depend on an estimate of <span class="math inline">\(p\)</span>. If <span class="math inline">\(p\)</span> is
+unknown use <span class="math inline">\(p = 0.5\)</span> because this is the value for which the function
+above takes on its maximum value as a function of p. To see this, simply
+look at the part of the function that includes <span class="math inline">\(p\)</span>.</p>
+<p><span class="math display">\[\begin{aligned}
+\frac{d}{dp} &amp;= [p(1-p)]&#39; \\
+0 &amp;= 1-2p \\
+p &amp;= \frac{1}{2}
+\end{aligned}\]</span></p>
+<h3 id="estimating-a-ratio">Estimating a Ratio</h3>
+<p>The population ratio is estimated by dividing the total y-values by the
+total x-values in the samples</p>
+<p><span class="math display">\[r = \frac{\sum_{i=1}^{n}y_i}{\sum_{i=1}^{n}x_i} = \frac{\bar{y}}{\bar{x}}\]</span>
+Ratio estimators are not design unbiased. More on this in <a href="#chap7">Chapter
+7</a> and <a href="#chap12">Chapter 12</a></p>
+<h3 id="estimating-a-mean-total-or-population-of-a-subpopulation">Estimating a Mean, total, or Population of a subpopulation</h3>
+<p>An estimator for sub-population with characteristic <span class="math inline">\(a_i\)</span> in a sample of
+<span class="math inline">\(n\)</span> with attribute <span class="math inline">\(n_1\)</span> is:</p>
+<p><span class="math display">\[\hat{p_i} = \frac{a_i}{n_i}\]</span></p>
+<p>This proportion has two random variables: <span class="math inline">\(a_i\)</span> and <span class="math inline">\(n_i\)</span>. To estimate
+the sub-population mean, we have <em>N</em> units in a population. Let <span class="math inline">\(N_k\)</span> be
+the number belonging to the <span class="math inline">\(k^{th}\)</span> sub-population. The variable of
+interest <span class="math inline">\(y_{ik}\)</span>.</p>
+<p>The total is:</p>
+<p><span class="math display">\[\tau_k = \sum_{i=1}^{N}y_{ki}\]</span> The estimator of the mean is design
+unbiased</p>
+<p><span class="math display">\[\bar{y}_k =\frac{1}{n_k} \sum_{i=1}^{n_k}y_{ki}\]</span></p>
+<p>Proof sketch.</p>
+<ol type="1">
+<li><p>Condition on the domain sample size <span class="math inline">\(n_k\)</span>. Given <span class="math inline">\(n_k\)</span> every
+possible combination of <span class="math inline">\(n_k\)</span> of the <span class="math inline">\(N_k\)</span> sub-population units has
+equal probability of being selected via SRS.</p></li>
+<li><p>Given (1), <span class="math inline">\(\bar{y}_k\)</span> behaves as the sample mean of a SRS of <span class="math inline">\(n_k\)</span>
+from <span class="math inline">\(N_k\)</span>: <span class="math inline">\(E[\bar{y}_k|n_k] = \mu_k\)</span></p></li>
+<li><p><span class="math inline">\(E[E[\bar{y}_k|n_k]] = E[\bar{y}_k] = \mu_k\)</span></p></li>
+</ol>
+<p>The variance of the subpopulation mean</p>
+<p><span class="math display">\[\begin{aligned}
+V[\bar{y}_k] &amp;= E[V[\bar{y}_k|n_k]] + V[E[\bar{y}|n_k]] \\
+V[\bar{y}_k] &amp;= E[V[\bar{y}_k|n_k]] + V[\mu_k] \\
+V[\bar{y}_k] &amp;= E[V[\bar{y}_k|n_k]]
+\end{aligned}\]</span></p>
+<p>Given SRS</p>
+<p><span class="math display">\[V[\bar{y}_k | n_k] = \sigma^2_k\left(\frac{1}{n_k} - \frac{1}{N_k}\right)\]</span></p>
+<p>where <span class="math inline">\(\sigma^2_k\)</span> is the population variance for units in the <span class="math inline">\(k^{th}\)</span>
+population.
+<span class="math inline">\(\sigma^2_k = \frac{1}{N_k -1}\sum_{i=1}^{N_k}(y_{ki} - \mu_k)^2\)</span></p>
+<p>The unconditional variance for the estimator is thus:</p>
+<p><span class="math display">\[V[\bar{y}_k] = \frac{N_k - n_k}{N_k n_k}s^2_k\]</span></p>
+<p>where <span class="math inline">\(s^2_k\)</span> is the sample variance of the sub-population of interest.
+Confidence intervals are found in the usual way. If the sub-population
+is unknown, we replace the FPC with its expected value <span class="math inline">\(\frac{N-n}{N}\)</span></p>
+<h3 id="exercises-2">Exercises</h3>
+<p>Exercise 1 p. 66</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<p>Exercise 3 p. 66</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<h2 id="chap6">Unequal Probability Sampling</h2>
+<p>In some sampling procedures different units have different probabilities
+of being included in the sample. The unequal probabilities must be taken
+into account for unbiased estimation of effects.</p>
+<h3 id="sampling-with-replacement">Sampling with Replacement</h3>
+<p>These estimators are <em>Hansen-Hurwitz Estimators</em></p>
+<h3 id="the-horvitz-thompsom-estimator">The Horvitz-Thompsom Estimator</h3>
+<p>With any design with or without replacement given probability <span class="math inline">\(\pi_i\)</span>
+that unit <em>i</em> is included in the sample for <span class="math inline">\(i \in \{1,...,n\}\)</span> the
+Horvitz-Thompson Estimator is:</p>
+<p><span class="math display">\[\hat{\tau}_{HT} = \sum_{i=1}^v \frac{y_i}{\pi_i}\]</span></p>
+<p>where <em>v</em> is the effective sample size (AKA the number of distinct units
+in the sample).</p>
+<p>An unbiased estimator of the variance is:</p>
+<p><span class="math display">\[\hat{V}[\hat{\tau}_{HT}] = \sum_{i=1}^v\left( \frac{1}{\pi_i^2} - \frac{1}{\pi_i}\right)y_i^2 + 2\sum_{i=1}^v\sum_{j&gt;1}\left(\frac{1}{\pi_i\pi_j} - \frac{1}{\pi_{ij}} \right)y_iy_j\]</span>
+where <span class="math inline">\(\pi_j\)</span> is the probability that both units i and j are included in
+the sample. All the joint inclusion probabilities <span class="math inline">\(\pi_{ij} &gt; 0\)</span> are
+required for this to hold.</p>
+<p>An alternative conservative estimator of variance that is guaranteed to
+be non-negative: - For the <span class="math inline">\(i^{th}\)</span> of the v distinct units in the
+sample compute <span class="math inline">\(t_i = \frac{vy_i}{\pi_i}\)</span> - The expectation of <span class="math inline">\(t_i\)</span> is
+the HT estimator - The sample variance of <span class="math inline">\(t_i\)</span> is</p>
+<p><span class="math display">\[\hat{V}[t_i] = \frac{1}{v-1} \sum_{i=1}^v(t_i - \hat{t}_\pi)^2\]</span></p>
+<p>The alternative variance estimator for the population is then:</p>
+<p><span class="math display">\[\hat{V}[\hat{\tau}_{HT}] = \sum_{i=1}^v\sum_{j&lt;i}\left(\frac{\pi_i\pi_j}{\pi_{ij}} \right)\left( \frac{y_i}{\pi} - \frac{y_j}{\pi_j}\right)^2\]</span>
+provided that for all <span class="math inline">\(i,j\)</span> <span class="math inline">\(\pi_{ij}&gt; 0\)</span>.</p>
+<p><strong>NOTE</strong>: While unbiased the HT estimator can have a large variance in
+populations in which variables of interest and inclusion probabilities
+are not well related.</p>
+<h3 id="hajek-estimator">Hajek Estimator</h3>
+<p>A generalized unequal probability estimator (Hajek) of the population
+mean is:</p>
+<p><span class="math display">\[\mu_g = \frac{\sum_{i \in S}\frac{y_i}{\pi_i}}{\sum_{i \in S}\frac{1}{\pi_i}}\]</span>
+The numerator is the HT estimator. The denominator is an unbiased
+estimate of the population size. Since this is a ratio estimator it is
+not precisely unbiased, but the bias is small in large samples.</p>
+<p>A variance estimator for the this is:</p>
+<p><span class="math display">\[\hat{V}[\hat{\mu}_g] = \frac{1}{N^2}\left[\sum_{i=1}^v(\frac{1-\pi_i}{\pi_i^2})(y_i - \hat{\mu}_g)^2 + \sum_{i=1}^v\sum_{i \neq 1} \left(\frac{\pi_{ij}- \pi_i\pi_j}{\pi_i\pi_j}\right)\frac{(y_i - \hat{\mu}_g)(y_j - \hat{\mu}_g)}{\pi_{ij}} \right]\]</span>
+provided that <span class="math inline">\(\pi_{ij} &gt; 0\)</span>. We can replace N with its estimator
+<span class="math inline">\(\sum_{i \in S}\frac{1}{\pi_i}\)</span></p>
+<h3 id="examples">Examples</h3>
+<h3 id="exercises-3">Exercises</h3>
+<h2 id="chap7">Chapter 7</h2>
+<h2 id="chapter-8">Chapter 8</h2>
+<h2 id="chapter-9">Chapter 9</h2>
+<h2 id="chapter-10">Chapter 10</h2>
+<h2 id="chap11">Chapter 11</h2>
+<h2 id="chap12">Cluster and Systemic Sampling</h2>
+<p>Both concepts share the structure populations are partitioned into
+primary units which are composed of secondary units.</p>
+<p><em>Systematic sampling</em>: a single primary unit consists of secondary units
+spaced in some systematic fashion throughout the population.</p>
+<p><em>Cluster sampling</em>: Primary units consists of a cluster of secondary
+units usually in close proximity with each other.</p>
+<h3 id="primary-units-selected-via-srs">Primary units selected via SRS</h3>
+<p>An unbiased estimator the population total</p>
+<p><span class="math display">\[\tau = \frac{N}{n}\sum_{i=1}^n y_i = N\bar{y}\]</span> where <span class="math inline">\(\bar{y}\)</span> is the
+sampling mean of the primary unit total.</p>
+<p>The variance estimator</p>
+<p><span class="math display">\[\hat{V}[\hat{\tau}] = \frac{N(N-n)}{n}\hat{s}^2_u\]</span> where
+<span class="math inline">\(\hat{s}^2_u = \frac{1}{n-1}\sum_{i=1}^n(y_i - \bar{y})^2\)</span></p>
+<h3 id="ratio-estimators">Ratio Estimators</h3>
+<p>If <span class="math inline">\(y_i\)</span> is highly correlated with primary unit size <span class="math inline">\(M_i\)</span> a ratio
+estimator based on size may be efficient.</p>
+<p><span class="math display">\[\hat{\tau}_r = rM\]</span></p>
+<p>where <span class="math inline">\(r = \frac{\sum_{i=1}^ny_i}{\sum_{i=1}^n M_i}\)</span></p>
+<p>Because this is a ratio is is not an unbiased estimator but bias is
+small in large samples.</p>
+<p><span class="math display">\[\hat{V}[\tau_r] = \frac{N(N-n)}{n(n-1)}\sum_{i=1}^n(y_i - rM_i)^2\]</span></p>
+<h3 id="the-basic-principle">The Basic principle</h3>
+<p>Within primary unit variance does not enter into the variance of the
+estimators. Thus the basic systematic and cluster sampling principle is
+to obtain estimators of low variance or MSE. This implies that
+population should be partitioned into clusters such that clusters are
+similar to each other.</p>
+<h2 id="multistage-designs">Multistage Designs</h2>
+<p>Let <em>N</em> denote the number of primary units in the population</p>
+<p><span class="math inline">\(M_i\)</span> is the number of secondary units of the <span class="math inline">\(i^{th}\)</span> primary unit.</p>
+<p><span class="math inline">\(y_{ij}\)</span> is the value of the variable of interest for <span class="math inline">\(j^{th}\)</span>
+secondaryin the <span class="math inline">\(i^{th}\)</span> primary unit.</p>
+<p><span class="math inline">\(\mu_i\)</span> is the mean per secondary unit in the <span class="math inline">\(i^{th}\)</span> primary unit.</p>
+<p><span class="math display">\[\tau = \sum_{i=1}^n\sum_{j=1}^{m_i}y_{ij}\]</span></p>
+<h3 id="srs-without-replacement-at-each-stage">SRS without replacement at each stage</h3>
+<p>In the first stage we take an SRS of n primary units. In the second
+stage from the <span class="math inline">\(i^{th}\)</span> selected primary unit a SRS without replacement
+of <span class="math inline">\(m_i\)</span> secondary units is selected.</p>
+<p>The unbiased estimator:</p>
+<p><span class="math display">\[\hat{y_i} = \frac{M_i}{m_i}\sum_{j=1}^{m_i}y_{ij}\]</span> where
+<span class="math inline">\(\bar{y}_i = \frac{1}{m_i}\sum_{j=1}^{m_i}y_{ij}\)</span>.</p>
+<p>Since SRS is used at the first stage, the overall estimate of the
+population parameter.</p>
+<p><span class="math display">\[\hat{\tau} = \frac{N}{n}\sum_{i=1}^n\hat{y}_i\]</span> with variance
+<span class="math inline">\(V[\hat{\tau}] = N(N-n)\frac{\sigma^2_u}{n} + \frac{N}{n}\sum_{i=1}^N M_i(M_i - m_i)\frac{\sigma^2_i}{m_i}\)</span></p>
+<p>where <span class="math inline">\(\sigma^2_u = \frac{1}{N-1}\sum_{i=1}^N(y_i - \mu_1)^2\)</span> and
+<span class="math inline">\(\sigma^2_i = \frac{1}{M_i -1}\sum_{j=1}^{M_i}(y_{ij} - \mu_i)^2\)</span></p>
+<h3 id="ratio-estimator">Ratio Estimator</h3>
+<p>A ratio estimator of the population total based on the sizes of the
+primary unit is:</p>
+<p><span class="math display">\[\hat{\tau}_r = \hat{r}M\]</span></p>
+<p>where <span class="math inline">\(\hat{r} = \frac{\sum_{i=1}^n\hat{y}_i}{\sum_{i=1}^nM_i}\)</span></p>
+<p>The variance is:</p>
+<p><span class="math display">\[\hat{V}[\\hat{\tau}_r] = \frac{N(N-n)}{n(n-1)}\sum_{i=1}^n(\hat{y}_i - M_i\hat{r})^2 + \frac{N}{n}\sum_{i=1}^nM_i(M_i - m_i)\frac{s^2_i}{m_i}\]</span></p>
+<h3 id="any-multistage-design-with-replacement">Any Multistage Design with replacement</h3>
+<p>The estimator for the population</p>
+<p><span class="math display">\[\hat{\tau}_p = \frac{1}{n}\sum_{i=1}^n\frac{y_i}{p_i}\]</span></p>
+<p>with variance
+<span class="math inline">\(\hat{V}[\hat{\tau}_p] = \frac{1}{n(n-1)}\sum_{i=1}^n(\frac{\hat{y}_i}{p_i}- \hat{\tau})^2\)</span></p>
+<h2 id="double-sampling">Double Sampling</h2>
+<p><strong>Double Sampling</strong>: Designs in which initially a sample of units is
+selected for obtaining auxiliary information only and then a second
+sample is selected for which the variable of interest is observed in
+addition to auxiliary information. - The second sample is often selected
+as a subsample of the first - Purpose is to use relationship between
+auxiliary variables and variable of interst to obtain better estimators.</p>
+<h3 id="ratio-estimation">Ratio Estimation</h3>
+<p>Let <span class="math inline">\(n&#39;\)</span> be the number of units in the first sample and <span class="math inline">\(n\)</span> be the
+number of units in the second sample. The ratio estimator</p>
+<p><span class="math display">\[r = \frac{\sum_{i=1}^ny_i}{\sum_{i=1}^nx_i}\]</span> is taken from the small
+sample containing both y’s and x’s. From the full sample for which the x
+values are obtained.</p>
+<p><span class="math display">\[\tau_x = \frac{N}{n&#39;}\sum_{i=1}^{n&#39;}x_i\]</span></p>
+<p>Then the ratio estimator is <span class="math inline">\(\hat{\tau}_r = r\hat{\tau}_x\)</span></p>
+<p>The variance of the estimator is estimated by</p>
+<p><span class="math display">\[\hat{V}[\hat{\tau}_r] = N(N-n)\frac{s^2}{n&#39;} + N^2\left(\frac{n&#39;-n}{n&#39;n(n-1)}\right)\sum_{i=1}^n(y_i - rx_i)^2\]</span></p>
+<h3 id="allocation-for-ratio-estimation">Allocation for ratio estimation</h3>
+<p>Ratio estimation is effective when the y variable is linearly related to
+an auxilliary variable x with y tending to be 0 when x is zero <em>and</em> it
+is cheaper or easier to measure x than y.</p>
+<p>Suppose the cost observing an x variable per unit is <span class="math inline">\(c&#39;\)</span> and the cost
+for measuring y is <span class="math inline">\(c\)</span>. Then an equation for the total cost is:</p>
+<p><span class="math display">\[C = c&#39;n&#39; + cn\]</span></p>
+<p>For a fixed cost C the lowest variance of <span class="math inline">\(\hat{\tau}_r\)</span> is observed
+with the following subsampling fraction.</p>
+<p><span class="math display">\[\frac{n}{n&#39;} = \sqrt{\frac{c&#39;}{c}\frac{\sigma^2_r}{\sigma^2-\sigma^2_r}}\]</span></p>
+<h3 id="double-sampling-for-stratification">Double Sampling for stratification</h3>
+<p>Suppose units can only be assigned to strata after the sample is
+selected. In <a href="#chap11">Chapter 11</a>, the methods therein were useful
+<em>only if</em> the relative proportion <span class="math inline">\(W_h = \frac{N_h}{N}\)</span> of population
+units in stratum h is known for each strata. When this is not the case,
+double sampling can be used with an initial (large) sample to classify
+units into strata and then stratify the sample selected.</p>
+<p>The estimators for this are:</p>
+<p>Pop mean: <span class="math inline">\(\bar{y}_d = \sum_{h=1}^L w_h\bar{y}_h\)</span></p>
+<p>Variance:
+<span class="math inline">\(\frac{N-1}{N}\sum_{h=1}^L(\frac{n&#39;_h-1}{n&quot;-1}-\frac{n_h-1}{N-1})\frac{w_hs^2_h}{n_h} + \frac{N-n&#39;}{N(n&#39;-1)}\sum_{h=1}^L w_h(\bar{y}_h - \bar{y}_d)^2\)</span></p>
+<h3 id="nonresponse-and-double-sampling">Nonresponse and double sampling</h3>
+<p>In situations of non-response survey often use callbacks to adjust for
+this problem. In these cases nonresponding units may be considered a
+separate stratum. A subsample can then be taken. Divide the population
+into two strata: responders and nonresponders. Suppose <span class="math inline">\(n&#39;\)</span> is the
+initial simple sample, <span class="math inline">\(n&#39;_1\)</span> is the number of responders and <span class="math inline">\(n&#39;_2\)</span> is
+the number of nonresponders.</p>
+<p>In callback stages responses are obtained for a SRS of <span class="math inline">\(n_2\)</span> of the
+initial respondents. An unbiased estimator of the population mean is:</p>
+<p><span class="math display">\[\bar{y}_d = \frac{n&#39;_1}{n&#39;}\bar{y}_1 + \frac{n&#39;_2}{n&#39;}\bar{y}_2\]</span></p>
+<p>with variance:</p>
+<p><span class="math display">\[\hat{V}[\bar{y}_d] = \frac{N-1}{N}\sum_{h=1}^L(\frac{n&#39;_h-1}{n&quot;-1}-\frac{n_h-1}{N-1})\frac{w_hs^2_h}{n_h} + \frac{N-n&#39;}{N(n&#39;-1)}\sum_{h=1}^L w_h(\bar{y}_h - \bar{y}_d)^2\]</span></p>
+<h3 id="exercises-4">Exercises</h3>
+<p>Exercise 1 (p. 198)</p>
+<p>In an aerial survey of four plots selected by simple random sampling,
+the numbers of ducks detected were 44, 55, 4, and 16. Careful
+examination of photoimagery of the first and third of these plots
+(selected as a simple random subsample) revealed the actual presence of
+56 and 6 ducks, respectively. The study area consists of 10 plots.</p>
+<ol type="a">
+<li>Estimate the total number of ducks in the study area by using a
+ratio estimator. Estimate the variance of the estimator.</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<ol start="2" type="a">
+<li>Suppose that the photo analysis doubles the cost of observing a
+plot. Estimate the optimal subsampling fraction.</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<h2 id="network-sampling-and-link-tracing-designs">Network Sampling and Link-Tracing Designs</h2>
+<p><strong>Network Sampling</strong>: Also referred to as multiplicty sampling. A SRS or
+stratified random sample of units is selected and all observation units
+linked to any of the units selected are included or observed. - The
+<em>multiplicity</em> of a unit is the number of selection units to which a
+person is linked.</p>
+<p>Since there are unequal selection probabilities the sample mean is no
+longer an unbiased estimator of the population mean in such a design.
+Therefore, different estimators must be used.</p>
+<h3 id="estimation-of-the-population-total-or-mean">Estimation of the Population Total or Mean</h3>
+<p><span class="math inline">\(y_i\)</span> is the variable of interest for the <span class="math inline">\(i^{th}\)</span> unit in a population.
+<em>N</em> is the number of observation units in the population.</p>
+<p><span class="math inline">\(\tau\)</span> is the population total defined <span class="math inline">\(\tau = \sum_{i=1}^Ny_i\)</span>. <span class="math inline">\(m_i\)</span>
+is the multiplicity of unit i. The number of selection units in the
+population is <em>M</em>. The population mean per selection unit is
+<span class="math inline">\(\mu = \frac{\tau}{M}\)</span>. Consider a SRS of <span class="math inline">\(n_0\)</span> selection units with
+every observational unit linked to any selection unit included in the
+sample.</p>
+<p>The draw by draw selection probability <span class="math inline">\(p_i\)</span> is the probability that any
+one of the <span class="math inline">\(m_i\)</span> selection units to which a unit is linked is selected.</p>
+<p><span class="math display">\[p_i = \frac{m_i}{M}\]</span></p>
+<p>An unbiased estimator of <span class="math inline">\(\tau\)</span> can be formed by dividing each observed
+y-value by the associated selection probability</p>
+<p><span class="math display">\[\hat{\tau}_m = \frac{M}{n}\sum_{i \in s}\frac{y_i}{m_i}\]</span> where s is
+the sequence of observational units in the sample and includes repeat
+selections. An alternative way to write this is to define for the
+<span class="math inline">\(j^{th}\)</span> selection unit in the population with <span class="math inline">\(A_j\)</span> units linked the
+variable <span class="math inline">\(w_j\)</span> which is the sum of <span class="math inline">\(\frac{y_i}{m_i}\)</span> for all
+observational units linked with selection <em>j</em>. In this case the
+estimator for the population is:</p>
+<p><span class="math display">\[\hat{\tau}_m = \frac{M}{m}\sum_{j=1}^nw_j\]</span></p>
+<p>An unbiased estimator for the variance of the population is:</p>
+<p><span class="math display">\[\hat{V}[\hat{\tau}_m] = \frac{M(M-n)}{n}\frac{1}{n-1}\sum_{j=1}^n(y_j - \bar{w})^2\]</span></p>
+<h3 id="horvitz-thompson-estimator">Horvitz-Thompson Estimator</h3>
+<p>The probability that the <span class="math inline">\(i^{th}\)</span> unit is included in the sample is the probability that one or more of the <span class="math inline">\(m_i\)</span> selection units to which it is linked is selected. We can simplify the problem by changing notation to
+be in terms of networks instead of individual observational units
+because the inclusion probabilities are identical for all units within a
+network.</p>
+<p>Define <em>K</em> as the number of networks and <span class="math inline">\(y_k^*\)</span> to be the total of the y-values overall all observational units in the <span class="math inline">\(k^{th}\)</span> network while <span class="math inline">\(m_k*\)</span> is the common multiplicity.</p>
+<p>The inclusion probability is:</p>
+<p><span class="math display">\[\pi_k = 1 - \frac{M-m_k^*\choose{n}}{M \choose n}\]</span></p>
+<p>which in words is 1 minus the probability that the entire SRS of <em>n</em> selection units is selected from the selection units not linked with network k.</p>
+<p>The HT estimator of the population total is:</p>
+<p><span class="math display">\[\hat{\tau}_\pi = \sum_{k=1}^K \frac{y^*_k}{\pi_k}\]</span> This estimator does not depend on the number of times any unit is selected, which is in contrast to the multiplicity estimator above.</p>
+<p>An unbiased estimator of the HT variance is</p>
+<p><span class="math display">\[\hat{V}[\hat{\tau}_\pi] = \sum_{k=1}^k\left(\frac{1}{\pi^2_k}-\frac{1}{\pi_k} \right) {y^*_k}^2 + \sum_{k=1}^K\sum_{l \neq k}\left(\frac{1}{\pi_k\pi_l - \frac{1}{\pi_{kl}}} \right)y^*_ky^*_l\]</span></p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<h2 id="detectability-and-sampling">Detectability and Sampling</h2>
+<p>In the basic sampling framework, we assume that our variable of interest is recorded without error for each unit in the sample. In actuality this is not the case. Some individuals may not be observed (detected).</p>
+<p><strong>Detectability</strong>: is the probabily that an object in a selected unit is observed.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
@@ -2173,6 +2733,15 @@ Coding
 <div class="d-appendix">
 </div>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->

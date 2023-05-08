@@ -18,61 +18,17 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Vectors 
 
-A *vector* is an ordered list of numbers. 
-
-```{r}
-vec <- c(-1.1, 0.0, 3.6, -7.2)
-vec
-```
-
-Vectors are equal $a = b$ when they have the same size and same corresponding entries 
-
-```{r}
-
-# Equal 
-a <- c(1,2,3)
-b <- c(1,2,3)
-
-a == b
-
-# Not Equal 
-a2 <- c(1,2,4)
-b2 <- c(2,5,6)
-
-a2 == b2
-```
-
-Block (or stacked) vectors are made by concatenating two or more vectors 
-
-```{r}
-stack <- c(a,b)
-stack
-```
+A *vector* is an ordered list of numbers. Vectors are equal $a = b$ when they have the same size and same corresponding entries. Block (or stacked) vectors are made by concatenating two or more vectors.
 
 Subvectors are made by slicing a vector into sub-elements. Usually colon notation is used $a_{r:s}$ where the subscript is the *index range*. While most computer languages index starting at 0, R follows standard mathematical notation where vectors are indexed beginning at 1. 
 
-```{r}
-z <- c(1, -1, 2,0)
-z[2:3]
-```
+Zero vectors are vectors with all elements equal to 0. Unsurprisingly, the Ones vector is a vector with all elements equal to 1.
 
-Zero vectors are vectors with all elements equal to 0. Unsurprisingly, the Ones vector is a vector with all elements equal to 1 
-
-Sparsity is an attribute of a vector and a vector is said to be sparse if many of its entries are zero. The number of nonzero entries of a n vector is denoted `nnz()`
+Sparsity is an attribute of a vector and a vector is said to be sparse if many of its entries are zero. The number of nonzero entries of a n vector is denoted `nnz()`.
 
 ### Vector Addition 
 
 Two vectors of the same size can be added together by adding the corresponding elements. This forms a new vector of the same size, called the *sum* of the vectors. Subtraction is a different form of addition so works the same way.
-
-```{r}
-v1 <- c(1,9)
-v2 <- c(1,1)
-
-v1 - v2
-```
-
-Being a computer language R can do something funky when adding different length vectors 
-
 
 
 #### Properties of Vector Addition 
@@ -85,8 +41,6 @@ Being a computer language R can do something funky when adding different length 
 ### Scalar-vector multiplication 
 
 *Scalar multiplication* is when each element of a vector is multiplied by a scalar. A scalar means a number like 1, 46, or 3/5. 
-
-
 
 #### Properties 
 
@@ -173,52 +127,52 @@ where the first feature always has the value 1. This constant guarantees an inte
 
 ## Norm and distance 
 
-**Norm**: The Euclidean norm of an n-vector *x* denoted $||x||$ is the square root of the sum of the squares of its elements. 
+**Norm**: The Euclidean norm of an n-vector *x* denoted $\lVert x \rVert$ is the square root of the sum of the squares of its elements. 
 
 $$\begin{aligned}
-||x|| = \sqrt{x_1^2 + x_2^2 + ... + x_n^2}
+\lVert x \rVert = \sqrt{x_1^2 + x_2^2 + ... + x_n^2}
 \end{aligned}$$
 
-As an example $||\begin{bmatrix} 2 \\ -1 \\2  \end{bmatrix}|| = \sqrt{9} = 3$
+As an example $\lVert \begin{bmatrix} 2 \\ -1 \\2  \end{bmatrix} \rVert = \sqrt{9} = 3$
 
 ##### Properties of norm 
 
-- Nonnegative homogeneity. $||\beta x|| = |\beta|||x||$. Multiplying a vector by a scalar multiplies the norm by the absolute value of the scalar. 
-- Triangle inequality. $||x + y || \leq ||x|| + ||y||$. The norm of a sum of two vectors is no more than the sum of the norms. 
+- Nonnegative homogeneity. $\lVert\beta x\rVert = \lVert\beta\rVert \lVert x \rVert$. Multiplying a vector by a scalar multiplies the norm by the absolute value of the scalar. 
+- Triangle inequality. $\lVert x + y \rVert \leq \lVert x \rVert + \lVert y \rVert$. The norm of a sum of two vectors is no more than the sum of the norms. 
 - Also known as subadditivity. 
-- Nonnegativity. $||x|| > 0$$
-- Definiteness. $||x|| = 0 \iff x = 0$
+- Nonnegativity. $\lVert x \rVert > 0$$
+- Definiteness. $\lVert x \rVert = 0 \iff x = 0$
 
-**Root Mean Square Value** The norm is related the RMSE value of an n-vector x is defined as $\sqrt{\frac{x_1^2 + ... + x_n^2}{n}} = \frac{||x||}{\sqrt{n}}$
+**Root Mean Square Value** The norm is related the RMSE value of an n-vector x is defined as $\sqrt{\frac{x_1^2 + ... + x_n^2}{n}} = \frac{\lVert x \lVert}{\sqrt{n}}$
 
 **Norm of a sum**. The norm of a sum of two vectors x and y 
 
 $$\begin{aligned}
-||x + y ||^2 &= (x+y)^T(x+y) \\
-||x + y ||^2 &= x^Tx + x^ty + y^Tx + y^Ty \\
-||x + y ||^2 &= ||x||^2 + 2x^Ty + ||y||^2 \\
-||x + y || &= \sqrt{||x||^2 + 2x^Ty + ||y||^2}
+\lVert x + y \lVert ^2 &= (x+y)^T(x+y) \\
+\lVert x + y \lVert ^2 &= x^Tx + x^ty + y^Tx + y^Ty \\
+\lVert x + y \lVert ^2 &= \lVert x\lVert ^2 + 2x^Ty + \lVert y\lVert ^2 \\
+\lVert x + y \lVert  &= \sqrt{\lVert x\lVert ^2 + 2x^Ty + \lVert y\lVert ^2}
 \end{aligned}$$
 
 **Norm of blocked vectors**. For the block vector d = (a,b,c) where a,b,c are vectors. 
 
-$||(a,b,c)|| = \sqrt{||a||^2 + ||b||^2 + ||c||^2} = (||a||, ||b||, ||c||) = ||d||$
+$\lVert (a,b,c)\lVert  = \sqrt{\lVert a\lVert ^2 + \lVert b\lVert ^2 + \lVert c\lVert ^2} = (\lVert a\lVert , \lVert b\lVert , \lVert c\lVert ) = \lVert d\lVert $
 
 In words, the norm of a stacked vector is the norm of the vector formed by the norms of the subvectors. 
 
 **Chebyshev's Inequality**. Suppose that x is an n-vector and that k of its entries satisfy $|x_i| \geq a, a > 0$. Then k of its entries satisfy $x_i^2 \geq a^2$. 
 
-It follows from this that $||x||^2 \geq ka^2$ since k of the numbers in the sum are at least $a^2$ and the other n-k numbers are nonnegative. 
+It follows from this that $\lVert x\lVert ^2 \geq ka^2$ since k of the numbers in the sum are at least $a^2$ and the other n-k numbers are nonnegative. 
 
-We conclude from this Chebyshev's Inequality $k \leq \frac{||x||^2}{a^2}$. An alternative way to write this is $\frac{k}{n} \leq (\frac{rms(x)}{a})^2$ where k is the number of entries of x with absolute value at least a. The LHS is the fraction of entries of the vector that are at least a in absolute value. 
+We conclude from this Chebyshev's Inequality $k \leq \frac{\lVert x\lVert ^2}{a^2}$. An alternative way to write this is $\frac{k}{n} \leq (\frac{rms(x)}{a})^2$ where k is the number of entries of x with absolute value at least a. The LHS is the fraction of entries of the vector that are at least a in absolute value. 
 
 ### Distance 
 
-**Euclidean Distance**: dist(a,b) = $||a - b||$. 
+**Euclidean Distance**: dist(a,b) = $\lVert a - b\lVert $. 
 
 As an example consider the following. $u = \begin{bmatrix} 1.8 \\ 2.0 \\ -3.7 \\ 4.7 \end{bmatrix}$, $v = \begin{bmatrix} 0.6 \\ 2.1 \\ 1.9 \\ -1.4 \end{bmatrix}$, $w = \begin{bmatrix} 2.0 \\ 1.9 \\ -4.0 \\ 4.6 \end{bmatrix}$. 
 
-Then, the distances between pairs are $||u - v|| = 8.368$, $||u - w|| = 0.387$, and $||v - w|| = 8.533$
+Then, the distances between pairs are $\lVert u - v\lVert  = 8.368$, $\lVert u - w\lVert  = 0.387$, and $\lVert v - w\lVert  = 8.533$
 
 ### Standard Deviation 
 
@@ -226,7 +180,7 @@ Then, the distances between pairs are $||u - v|| = 8.368$, $||u - w|| = 0.387$, 
 
 **Standard Deviation**: The RMS value of the de-meaned vector. Defined as $\sigma_x = \sqrt{\frac{(x_1 - \bar{x})^2 +...+(x_n - \bar{x})^2}{n}}$. 
 
-We can represent this with inner products as $\sigma_x = \frac{||x - (\textbf{1}^Tx/n)\textbf{1}}{\sqrt{n}}$
+We can represent this with inner products as $\sigma_x = \frac{\lVert x - (\textbf{1}^Tx/n)\textbf{1}}{\sqrt{n}}$
 
 ##### Properties of Standard Deviation 
 
@@ -239,22 +193,22 @@ $z = \frac{1}{\sigma_x}(x - \mu_x\textbf{1})$
 
 ### Angle 
 
-**Cauchy-Schwarz Inequality**: $|a^Tb| \leq ||a|| ||b||$ for any n-vectors a and b. 
+**Cauchy-Schwarz Inequality**: $|a^Tb| \leq \lVert a\lVert  \lVert b\lVert $ for any n-vectors a and b. 
 
-**Angle between vectors**: The angle between two nonzero vectors a, b is defined by $\theta = arccos(\frac{a^Tb}{||a||||b||})$ where arccos denotes the inverse cosine normalized to lie in the interval $[0, \pi]$. 
+**Angle between vectors**: The angle between two nonzero vectors a, b is defined by $\theta = arccos(\frac{a^Tb}{\lVert a\lVert \lVert b\lVert })$ where arccos denotes the inverse cosine normalized to lie in the interval $[0, \pi]$. 
 
-This is equivalent to $\theta$ being the unique number in that interval that satisfies $a^Tb = ||a||||b||cos\theta$ 
+This is equivalent to $\theta$ being the unique number in that interval that satisfies $a^Tb = \lVert a\lVert \lVert b\lVert cos\theta$ 
 
 **Norms of sum via angles**: For vectors x and y: 
 
-$||x+y||^2 = ||x||^2 + 2x^Ty + ||y||^2 = ||x||^2 + 2||x||||y||cos\theta + ||y||^2$ 
+$\lVert x+y\lVert ^2 = \lVert x\lVert ^2 + 2x^Ty + \lVert y\lVert ^2 = \lVert x\lVert ^2 + 2\lVert x\lVert \lVert y\lVert cos\theta + \lVert y\lVert ^2$ 
 
 - If x and y are aligned $\theta = 0$ then the norms add. 
 - If x and y are orthogonal, then we have the pythogorean theorem for norms. 
 
 **Correlation Coefficient**: Suppose a and b are vectors and we de-mean them. Assuming the de-meaned vectors are not zero, we define the correlation coefficient as. 
 
-$\rho = \frac{\tilde{a}^T\tilde{b}}{||\tilde{a}||||\tilde{b}||}$ 
+$\rho = \frac{\tilde{a}^T\tilde{b}}{\lVert \tilde{a}\lVert \lVert \tilde{b}\lVert }$ 
 
 
 **Standard Deviation of a sum**: $\sigma_{a+b} = \sqrt{\sigma_a^2 + 2\rho\sigma_a\sigma_b + \sigma_b^2}$
@@ -315,7 +269,7 @@ Two matrices of the same size can be added together. Addition is element-wise.
 
 Scalar-matrix multiplication is also elementwise and defined similarly as with vectors 
 
-**Matrix Norm**: The norm of a matrix ||A|| is the square root of the sum of the squares of its entries 
+**Matrix Norm**: The norm of a matrix \lVert A\lVert  is the square root of the sum of the squares of its entries 
 
 ### Matrix-vector Multiplication 
 
@@ -400,9 +354,9 @@ For lower triangular matrices with non-zero diagonal elements we can solve using
 Suppose that the $m \times n$ matrix A is tall so that system of linear equations $Ax = b$ where $b$ is an m-vector is over-determined. Such an equation only has a solution if $b$ is a linear combination of the columns of A. 
 
 - This rarely happens in practice, so we seek an x for which $r = Ax -b$ is as small as possible. $r = Ax -b$ is referred to as the *residual* 
-- The best way to do this is to minimize the norm of the residual $||Ax - b||$ 
+- The best way to do this is to minimize the norm of the residual $\lVert Ax - b\lVert $ 
 
-Minimizing the norm of a residual and the square of a norm are the same problem, so we minimize $||Ax - b||^2$. 
+Minimizing the norm of a residual and the square of a norm are the same problem, so we minimize $\lVert Ax - b\lVert ^2$. 
 
 This approximation is often referred to as *linear least squares regression*
 
@@ -412,10 +366,10 @@ We assume that the columns of A are full rank (e.g. linearly independent)
 
 #### Via Calculus 
 
-Minimizing $||Ax -b ||^2$ must satsify $\frac{\partial f}{\partial x_i} = 0$. 
+Minimizing $\lVert Ax -b \lVert ^2$ must satsify $\frac{\partial f}{\partial x_i} = 0$. 
 We can express this as the vector equation $\nabla f(\hat{x}) = 0$ where the LHS is the gradient of $f$ evaluated at $\hat{x}$. In matrix form this is $\nabla f(\hat{x}) = 2A^T(Ax-b)$. 
 
-We can verify this is true by deriving that from scratch. The least squares object as a sum is $f(x) = ||Ax-b||^2 = \sum_{i=1}^m (\sum_{j=1}^n A_{ij}x_j - b_i)^2$ 
+We can verify this is true by deriving that from scratch. The least squares object as a sum is $f(x) = \lVert Ax-b\lVert ^2 = \sum_{i=1}^m (\sum_{j=1}^n A_{ij}x_j - b_i)^2$ 
 
 Take the partial derivative of $f$ with respect to $x_k$. Differentiating by terms we get. 
 
@@ -432,23 +386,23 @@ $\hat{x} = (A^TA)^{-1}A^Tb$ is the only solution of the normal equations and is 
 
 #### Direct Verification 
 
-We will directly show the proceeding derivation without calculus by showing that for any $x \neq \hat{x}$ we have $||A\hat{x}-b||^2 < ||Ax-b||^2$ and that will establish that $\hat{x}$ is the unique vector that minimizes our problem. 
+We will directly show the proceeding derivation without calculus by showing that for any $x \neq \hat{x}$ we have $\lVert A\hat{x}-b\lVert ^2 < \lVert Ax-b\lVert ^2$ and that will establish that $\hat{x}$ is the unique vector that minimizes our problem. 
 
 $$\begin{aligned}
-||Ax-b||^2 &= ||(Ax-A\hat{x}) + (A\hat{x} = b)||^2 \\
-||Ax-b||^2 &= ||Ax-A\hat{x}||^2 + ||A\hat{x} - b||^2 + 2(Ax - A\hat{x})^T(A\hat{x}-b)\\
-||Ax-b||^2 &= ||Ax-A\hat{x}||^2 + ||A\hat{x} - b||^2 + (x-\hat{x})^TA^T(A\hat{x} - b)\\
-||Ax-b||^2 &= ||Ax-A\hat{x}||^2 + ||A\hat{x} - b||^2 + (x-\hat{x})^T(A^TA\hat{x}-A^Tb) \\
-||Ax-b||^2 &= ||Ax-A\hat{x}||^2 + ||A\hat{x} - b||^2 + (x - \hat{x})^T(A^TA\hat{x}- A^Tb) \\
-||Ax-b||^2 &= ||Ax-A\hat{x}||^2 + ||A\hat{x} - b||^2 + (x-\hat{x})0\\
-||Ax-b||^2 &= ||Ax-A\hat{x}||^2 + ||A\hat{x} - b||^2
+\lVert Ax-b\lVert ^2 &= \lVert (Ax-A\hat{x}) + (A\hat{x} = b)\lVert ^2 \\
+\lVert Ax-b\lVert ^2 &= \lVert Ax-A\hat{x}\lVert ^2 + \lVert A\hat{x} - b\lVert ^2 + 2(Ax - A\hat{x})^T(A\hat{x}-b)\\
+\lVert Ax-b\lVert ^2 &= \lVert Ax-A\hat{x}\lVert ^2 + \lVert A\hat{x} - b\lVert ^2 + (x-\hat{x})^TA^T(A\hat{x} - b)\\
+\lVert Ax-b\lVert ^2 &= \lVert Ax-A\hat{x}\lVert ^2 + \lVert A\hat{x} - b\lVert ^2 + (x-\hat{x})^T(A^TA\hat{x}-A^Tb) \\
+\lVert Ax-b\lVert ^2 &= \lVert Ax-A\hat{x}\lVert ^2 + \lVert A\hat{x} - b\lVert ^2 + (x - \hat{x})^T(A^TA\hat{x}- A^Tb) \\
+\lVert Ax-b\lVert ^2 &= \lVert Ax-A\hat{x}\lVert ^2 + \lVert A\hat{x} - b\lVert ^2 + (x-\hat{x})0\\
+\lVert Ax-b\lVert ^2 &= \lVert Ax-A\hat{x}\lVert ^2 + \lVert A\hat{x} - b\lVert ^2
 \end{aligned}$$
 
-Note that we made use of an inequality by plugging in the normal equations to make the 3rd term disappear. We are left with an equation that shows that $||A\hat{x}-b||^2 \leq ||Ax-b||^2$. To show unique minimization suppose the equality holds exactly. 
+Note that we made use of an inequality by plugging in the normal equations to make the 3rd term disappear. We are left with an equation that shows that $\lVert A\hat{x}-b\lVert ^2 \leq \lVert Ax-b\lVert ^2$. To show unique minimization suppose the equality holds exactly. 
 
 $$\begin{aligned}
-||A\hat{x}-b||^2 \leq ||Ax-b||^2 \\
-||A(x-\hat{x})||^2 &= 0 \\
+\lVert A\hat{x}-b\lVert ^2 \leq \lVert Ax-b\lVert ^2 \\
+\lVert A(x-\hat{x})\lVert ^2 &= 0 \\
 A(x-\hat{x}) &= 0 
 \end{aligned}$$
 

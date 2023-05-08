@@ -2214,63 +2214,12 @@ Coding
 </nav>
 </div>
 <h2 id="vectors">Vectors</h2>
-<p>A <em>vector</em> is an ordered list of numbers.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>vec</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>1.1</span>, <span class='fl'>0.0</span>, <span class='fl'>3.6</span>, <span class='op'>-</span><span class='fl'>7.2</span><span class='op'>)</span></span>
-<span><span class='va'>vec</span></span></code></pre>
-</div>
-<pre><code>[1] -1.1  0.0  3.6 -7.2</code></pre>
-</div>
-<p>Vectors are equal <span class="math inline">\(a = b\)</span> when they have the same size and same corresponding entries</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'># Equal </span></span>
-<span><span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span><span class='op'>)</span></span>
-<span><span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>a</span> <span class='op'>==</span> <span class='va'>b</span></span></code></pre>
-</div>
-<pre><code>[1] TRUE TRUE TRUE</code></pre>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'># Not Equal </span></span>
-<span><span class='va'>a2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>4</span><span class='op'>)</span></span>
-<span><span class='va'>b2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>,<span class='fl'>5</span>,<span class='fl'>6</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>a2</span> <span class='op'>==</span> <span class='va'>b2</span></span></code></pre>
-</div>
-<pre><code>[1] FALSE FALSE FALSE</code></pre>
-</div>
-<p>Block (or stacked) vectors are made by concatenating two or more vectors</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>stack</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>a</span>,<span class='va'>b</span><span class='op'>)</span></span>
-<span><span class='va'>stack</span></span></code></pre>
-</div>
-<pre><code>[1] 1 2 3 1 2 3</code></pre>
-</div>
+<p>A <em>vector</em> is an ordered list of numbers. Vectors are equal <span class="math inline">\(a = b\)</span> when they have the same size and same corresponding entries. Block (or stacked) vectors are made by concatenating two or more vectors.</p>
 <p>Subvectors are made by slicing a vector into sub-elements. Usually colon notation is used <span class="math inline">\(a_{r:s}\)</span> where the subscript is the <em>index range</em>. While most computer languages index starting at 0, R follows standard mathematical notation where vectors are indexed beginning at 1.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>z</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='op'>-</span><span class='fl'>1</span>, <span class='fl'>2</span>,<span class='fl'>0</span><span class='op'>)</span></span>
-<span><span class='va'>z</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>]</span></span></code></pre>
-</div>
-<pre><code>[1] -1  2</code></pre>
-</div>
-<p>Zero vectors are vectors with all elements equal to 0. Unsurprisingly, the Ones vector is a vector with all elements equal to 1</p>
-<p>Sparsity is an attribute of a vector and a vector is said to be sparse if many of its entries are zero. The number of nonzero entries of a n vector is denoted <code>nnz()</code></p>
+<p>Zero vectors are vectors with all elements equal to 0. Unsurprisingly, the Ones vector is a vector with all elements equal to 1.</p>
+<p>Sparsity is an attribute of a vector and a vector is said to be sparse if many of its entries are zero. The number of nonzero entries of a n vector is denoted <code>nnz()</code>.</p>
 <h3 id="vector-addition">Vector Addition</h3>
 <p>Two vectors of the same size can be added together by adding the corresponding elements. This forms a new vector of the same size, called the <em>sum</em> of the vectors. Subtraction is a different form of addition so works the same way.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>v1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>9</span><span class='op'>)</span></span>
-<span><span class='va'>v2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>1</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>v1</span> <span class='op'>-</span> <span class='va'>v2</span></span></code></pre>
-</div>
-<pre><code>[1] 0 8</code></pre>
-</div>
-<p>Being a computer language R can do something funky when adding different length vectors</p>
 <h4 id="properties-of-vector-addition">Properties of Vector Addition</h4>
 <ol type="1">
 <li>Commutative: <span class="math inline">\(a + b = b + a\)</span></li>
@@ -2346,41 +2295,41 @@ f(\alpha x + \beta y) &amp;= \alpha f(x) + \beta f(y) \\
 <p><span class="math inline">\(\hat{y} = x^Tb + v = \begin{bmatrix} 1 \\ x \end{bmatrix}^T \begin{bmatrix} v \\ \beta \end{bmatrix} = \tilde{x}^T\tilde{\beta}\)</span></p>
 <p>where the first feature always has the value 1. This constant guarantees an intercept.</p>
 <h2 id="norm-and-distance">Norm and distance</h2>
-<p><strong>Norm</strong>: The Euclidean norm of an n-vector <em>x</em> denoted <span class="math inline">\(||x||\)</span> is the square root of the sum of the squares of its elements.</p>
+<p><strong>Norm</strong>: The Euclidean norm of an n-vector <em>x</em> denoted <span class="math inline">\(\lVert x \rVert\)</span> is the square root of the sum of the squares of its elements.</p>
 <p><span class="math display">\[\begin{aligned}
-||x|| = \sqrt{x_1^2 + x_2^2 + ... + x_n^2}
+\lVert x \rVert = \sqrt{x_1^2 + x_2^2 + ... + x_n^2}
 \end{aligned}\]</span></p>
-<p>As an example <span class="math inline">\(||\begin{bmatrix} 2 \\ -1 \\2 \end{bmatrix}|| = \sqrt{9} = 3\)</span></p>
+<p>As an example <span class="math inline">\(\lVert \begin{bmatrix} 2 \\ -1 \\2 \end{bmatrix} \rVert = \sqrt{9} = 3\)</span></p>
 <h5 id="properties-of-norm">Properties of norm</h5>
 <ul>
-<li>Nonnegative homogeneity. <span class="math inline">\(||\beta x|| = |\beta|||x||\)</span>. Multiplying a vector by a scalar multiplies the norm by the absolute value of the scalar.</li>
-<li>Triangle inequality. <span class="math inline">\(||x + y || \leq ||x|| + ||y||\)</span>. The norm of a sum of two vectors is no more than the sum of the norms.</li>
+<li>Nonnegative homogeneity. <span class="math inline">\(\lVert\beta x\rVert = \lVert\beta\rVert \lVert x \rVert\)</span>. Multiplying a vector by a scalar multiplies the norm by the absolute value of the scalar.</li>
+<li>Triangle inequality. <span class="math inline">\(\lVert x + y \rVert \leq \lVert x \rVert + \lVert y \rVert\)</span>. The norm of a sum of two vectors is no more than the sum of the norms.</li>
 <li>Also known as subadditivity.</li>
-<li>Nonnegativity. <span class="math inline">\(||x|| &gt; 0\)</span>$</li>
-<li>Definiteness. <span class="math inline">\(||x|| = 0 \iff x = 0\)</span></li>
+<li>Nonnegativity. <span class="math inline">\(\lVert x \rVert &gt; 0\)</span>$</li>
+<li>Definiteness. <span class="math inline">\(\lVert x \rVert = 0 \iff x = 0\)</span></li>
 </ul>
-<p><strong>Root Mean Square Value</strong> The norm is related the RMSE value of an n-vector x is defined as <span class="math inline">\(\sqrt{\frac{x_1^2 + ... + x_n^2}{n}} = \frac{||x||}{\sqrt{n}}\)</span></p>
+<p><strong>Root Mean Square Value</strong> The norm is related the RMSE value of an n-vector x is defined as <span class="math inline">\(\sqrt{\frac{x_1^2 + ... + x_n^2}{n}} = \frac{\lVert x \lVert}{\sqrt{n}}\)</span></p>
 <p><strong>Norm of a sum</strong>. The norm of a sum of two vectors x and y</p>
 <p><span class="math display">\[\begin{aligned}
-||x + y ||^2 &amp;= (x+y)^T(x+y) \\
-||x + y ||^2 &amp;= x^Tx + x^ty + y^Tx + y^Ty \\
-||x + y ||^2 &amp;= ||x||^2 + 2x^Ty + ||y||^2 \\
-||x + y || &amp;= \sqrt{||x||^2 + 2x^Ty + ||y||^2}
+\lVert x + y \lVert ^2 &amp;= (x+y)^T(x+y) \\
+\lVert x + y \lVert ^2 &amp;= x^Tx + x^ty + y^Tx + y^Ty \\
+\lVert x + y \lVert ^2 &amp;= \lVert x\lVert ^2 + 2x^Ty + \lVert y\lVert ^2 \\
+\lVert x + y \lVert  &amp;= \sqrt{\lVert x\lVert ^2 + 2x^Ty + \lVert y\lVert ^2}
 \end{aligned}\]</span></p>
 <p><strong>Norm of blocked vectors</strong>. For the block vector d = (a,b,c) where a,b,c are vectors.</p>
-<p><span class="math inline">\(||(a,b,c)|| = \sqrt{||a||^2 + ||b||^2 + ||c||^2} = (||a||, ||b||, ||c||) = ||d||\)</span></p>
+<p>$(a,b,c)= = (a, b, c) = d$</p>
 <p>In words, the norm of a stacked vector is the norm of the vector formed by the norms of the subvectors.</p>
 <p><strong>Chebyshev’s Inequality</strong>. Suppose that x is an n-vector and that k of its entries satisfy <span class="math inline">\(|x_i| \geq a, a &gt; 0\)</span>. Then k of its entries satisfy <span class="math inline">\(x_i^2 \geq a^2\)</span>.</p>
-<p>It follows from this that <span class="math inline">\(||x||^2 \geq ka^2\)</span> since k of the numbers in the sum are at least <span class="math inline">\(a^2\)</span> and the other n-k numbers are nonnegative.</p>
-<p>We conclude from this Chebyshev’s Inequality <span class="math inline">\(k \leq \frac{||x||^2}{a^2}\)</span>. An alternative way to write this is <span class="math inline">\(\frac{k}{n} \leq (\frac{rms(x)}{a})^2\)</span> where k is the number of entries of x with absolute value at least a. The LHS is the fraction of entries of the vector that are at least a in absolute value.</p>
+<p>It follows from this that <span class="math inline">\(\lVert x\lVert ^2 \geq ka^2\)</span> since k of the numbers in the sum are at least <span class="math inline">\(a^2\)</span> and the other n-k numbers are nonnegative.</p>
+<p>We conclude from this Chebyshev’s Inequality <span class="math inline">\(k \leq \frac{\lVert x\lVert ^2}{a^2}\)</span>. An alternative way to write this is <span class="math inline">\(\frac{k}{n} \leq (\frac{rms(x)}{a})^2\)</span> where k is the number of entries of x with absolute value at least a. The LHS is the fraction of entries of the vector that are at least a in absolute value.</p>
 <h3 id="distance">Distance</h3>
-<p><strong>Euclidean Distance</strong>: dist(a,b) = <span class="math inline">\(||a - b||\)</span>.</p>
+<p><strong>Euclidean Distance</strong>: dist(a,b) = $a - b$.</p>
 <p>As an example consider the following. <span class="math inline">\(u = \begin{bmatrix} 1.8 \\ 2.0 \\ -3.7 \\ 4.7 \end{bmatrix}\)</span>, <span class="math inline">\(v = \begin{bmatrix} 0.6 \\ 2.1 \\ 1.9 \\ -1.4 \end{bmatrix}\)</span>, <span class="math inline">\(w = \begin{bmatrix} 2.0 \\ 1.9 \\ -4.0 \\ 4.6 \end{bmatrix}\)</span>.</p>
-<p>Then, the distances between pairs are <span class="math inline">\(||u - v|| = 8.368\)</span>, <span class="math inline">\(||u - w|| = 0.387\)</span>, and <span class="math inline">\(||v - w|| = 8.533\)</span></p>
+<p>Then, the distances between pairs are <span class="math inline">\(\lVert u - v\lVert = 8.368\)</span>, <span class="math inline">\(\lVert u - w\lVert = 0.387\)</span>, and <span class="math inline">\(\lVert v - w\lVert = 8.533\)</span></p>
 <h3 id="standard-deviation">Standard Deviation</h3>
 <p><strong>De-meaned vector</strong>: For any vector x, the vector <span class="math inline">\(\tilde{x} = x - avg(x)\textbf{1}\)</span> is the de-meaned vector.</p>
 <p><strong>Standard Deviation</strong>: The RMS value of the de-meaned vector. Defined as <span class="math inline">\(\sigma_x = \sqrt{\frac{(x_1 - \bar{x})^2 +...+(x_n - \bar{x})^2}{n}}\)</span>.</p>
-<p>We can represent this with inner products as <span class="math inline">\(\sigma_x = \frac{||x - (\textbf{1}^Tx/n)\textbf{1}}{\sqrt{n}}\)</span></p>
+<p>We can represent this with inner products as <span class="math inline">\(\sigma_x = \frac{\lVert x - (\textbf{1}^Tx/n)\textbf{1}}{\sqrt{n}}\)</span></p>
 <h5 id="properties-of-standard-deviation">Properties of Standard Deviation</h5>
 <ul>
 <li>Adding a constant to every entry of a vector does not change its standard deviation</li>
@@ -2389,17 +2338,17 @@ f(\alpha x + \beta y) &amp;= \alpha f(x) + \beta f(y) \\
 <p><strong>Standardization</strong> For any de-meaned vector x, dividing by the standard deviation gives us a standardized version of x.</p>
 <p><span class="math inline">\(z = \frac{1}{\sigma_x}(x - \mu_x\textbf{1})\)</span></p>
 <h3 id="angle">Angle</h3>
-<p><strong>Cauchy-Schwarz Inequality</strong>: <span class="math inline">\(|a^Tb| \leq ||a|| ||b||\)</span> for any n-vectors a and b.</p>
-<p><strong>Angle between vectors</strong>: The angle between two nonzero vectors a, b is defined by <span class="math inline">\(\theta = arccos(\frac{a^Tb}{||a||||b||})\)</span> where arccos denotes the inverse cosine normalized to lie in the interval <span class="math inline">\([0, \pi]\)</span>.</p>
-<p>This is equivalent to <span class="math inline">\(\theta\)</span> being the unique number in that interval that satisfies <span class="math inline">\(a^Tb = ||a||||b||cos\theta\)</span></p>
+<p><strong>Cauchy-Schwarz Inequality</strong>: $|a^Tb| ab$ for any n-vectors a and b.</p>
+<p><strong>Angle between vectors</strong>: The angle between two nonzero vectors a, b is defined by <span class="math inline">\(\theta = arccos(\frac{a^Tb}{\lVert a\lVert \lVert b\lVert })\)</span> where arccos denotes the inverse cosine normalized to lie in the interval <span class="math inline">\([0, \pi]\)</span>.</p>
+<p>This is equivalent to <span class="math inline">\(\theta\)</span> being the unique number in that interval that satisfies <span class="math inline">\(a^Tb = \lVert a\lVert \lVert b\lVert cos\theta\)</span></p>
 <p><strong>Norms of sum via angles</strong>: For vectors x and y:</p>
-<p><span class="math inline">\(||x+y||^2 = ||x||^2 + 2x^Ty + ||y||^2 = ||x||^2 + 2||x||||y||cos\theta + ||y||^2\)</span></p>
+<p><span class="math inline">\(\lVert x+y\lVert ^2 = \lVert x\lVert ^2 + 2x^Ty + \lVert y\lVert ^2 = \lVert x\lVert ^2 + 2\lVert x\lVert \lVert y\lVert cos\theta + \lVert y\lVert ^2\)</span></p>
 <ul>
 <li>If x and y are aligned <span class="math inline">\(\theta = 0\)</span> then the norms add.</li>
 <li>If x and y are orthogonal, then we have the pythogorean theorem for norms.</li>
 </ul>
 <p><strong>Correlation Coefficient</strong>: Suppose a and b are vectors and we de-mean them. Assuming the de-meaned vectors are not zero, we define the correlation coefficient as.</p>
-<p><span class="math inline">\(\rho = \frac{\tilde{a}^T\tilde{b}}{||\tilde{a}||||\tilde{b}||}\)</span></p>
+<p><span class="math inline">\(\rho = \frac{\tilde{a}^T\tilde{b}}{\lVert \tilde{a}\lVert \lVert \tilde{b}\lVert }\)</span></p>
 <p><strong>Standard Deviation of a sum</strong>: <span class="math inline">\(\sigma_{a+b} = \sqrt{\sigma_a^2 + 2\rho\sigma_a\sigma_b + \sigma_b^2}\)</span></p>
 <p>Note when a and b are uncorrelated (<span class="math inline">\(\rho = 0\)</span>) then this reduces to the sum of the standard deviations.</p>
 <h2 id="linear-independence">Linear Independence</h2>
@@ -2441,7 +2390,7 @@ f(\alpha x + \beta y) &amp;= \alpha f(x) + \beta f(y) \\
 <li>Transpose of sum: <span class="math inline">\((A + B)^T = A^T + B^T\)</span></li>
 </ul>
 <p>Scalar-matrix multiplication is also elementwise and defined similarly as with vectors</p>
-<p><strong>Matrix Norm</strong>: The norm of a matrix ||A|| is the square root of the sum of the squares of its entries</p>
+<p><strong>Matrix Norm</strong>: The norm of a matrix Ais the square root of the sum of the squares of its entries</p>
 <h3 id="matrix-vector-multiplication">Matrix-vector Multiplication</h3>
 <p>The matrix vector product y = Ax is the m-vector y with elements <span class="math inline">\(\sum_{k=1}^n A_{ik}x_k\)</span></p>
 <p><strong>Linear Dependence of Columns</strong>: The columns of a matrix are linearly dependent (do not have full rank) if <span class="math inline">\(Ax = 0\)</span> for some <span class="math inline">\(x \neq 0\)</span>. The columns of a matrix are linearly independent if <span class="math inline">\(Ax = 0 \implies x = 0\)</span></p>
@@ -2504,16 +2453,16 @@ f(\alpha x + \beta y) &amp;= \alpha f(x) + \beta f(y) \\
 <p>Suppose that the <span class="math inline">\(m \times n\)</span> matrix A is tall so that system of linear equations <span class="math inline">\(Ax = b\)</span> where <span class="math inline">\(b\)</span> is an m-vector is over-determined. Such an equation only has a solution if <span class="math inline">\(b\)</span> is a linear combination of the columns of A.</p>
 <ul>
 <li>This rarely happens in practice, so we seek an x for which <span class="math inline">\(r = Ax -b\)</span> is as small as possible. <span class="math inline">\(r = Ax -b\)</span> is referred to as the <em>residual</em></li>
-<li>The best way to do this is to minimize the norm of the residual <span class="math inline">\(||Ax - b||\)</span></li>
+<li>The best way to do this is to minimize the norm of the residual $Ax - b$</li>
 </ul>
-<p>Minimizing the norm of a residual and the square of a norm are the same problem, so we minimize <span class="math inline">\(||Ax - b||^2\)</span>.</p>
+<p>Minimizing the norm of a residual and the square of a norm are the same problem, so we minimize <span class="math inline">\(\lVert Ax - b\lVert ^2\)</span>.</p>
 <p>This approximation is often referred to as <em>linear least squares regression</em></p>
 <h3 id="solving-a-least-squares-problem">Solving a Least Squares Problem</h3>
 <p>We assume that the columns of A are full rank (e.g. linearly independent)</p>
 <h4 id="via-calculus">Via Calculus</h4>
-<p>Minimizing <span class="math inline">\(||Ax -b ||^2\)</span> must satsify <span class="math inline">\(\frac{\partial f}{\partial x_i} = 0\)</span>.
+<p>Minimizing <span class="math inline">\(\lVert Ax -b \lVert ^2\)</span> must satsify <span class="math inline">\(\frac{\partial f}{\partial x_i} = 0\)</span>.
 We can express this as the vector equation <span class="math inline">\(\nabla f(\hat{x}) = 0\)</span> where the LHS is the gradient of <span class="math inline">\(f\)</span> evaluated at <span class="math inline">\(\hat{x}\)</span>. In matrix form this is <span class="math inline">\(\nabla f(\hat{x}) = 2A^T(Ax-b)\)</span>.</p>
-<p>We can verify this is true by deriving that from scratch. The least squares object as a sum is <span class="math inline">\(f(x) = ||Ax-b||^2 = \sum_{i=1}^m (\sum_{j=1}^n A_{ij}x_j - b_i)^2\)</span></p>
+<p>We can verify this is true by deriving that from scratch. The least squares object as a sum is <span class="math inline">\(f(x) = \lVert Ax-b\lVert ^2 = \sum_{i=1}^m (\sum_{j=1}^n A_{ij}x_j - b_i)^2\)</span></p>
 <p>Take the partial derivative of <span class="math inline">\(f\)</span> with respect to <span class="math inline">\(x_k\)</span>. Differentiating by terms we get.</p>
 <p><span class="math display">\[\begin{aligned}
 \nabla f(x)_k &amp;= \frac{\partial f}{\partial x_k}(x) \\
@@ -2524,25 +2473,25 @@ We can express this as the vector equation <span class="math inline">\(\nabla f(
 <p>Any minimizer of that must be equal to zero which we can write as <span class="math inline">\(A^TA\hat{x} = A^Tb\)</span>. These are the normal equations. Because <span class="math inline">\(A^TA\)</span> is a Gram matrix and we have assumed full rank, it is invertible. This implies.</p>
 <p><span class="math inline">\(\hat{x} = (A^TA)^{-1}A^Tb\)</span> is the only solution of the normal equations and is therefore unique.</p>
 <h4 id="direct-verification">Direct Verification</h4>
-<p>We will directly show the proceeding derivation without calculus by showing that for any <span class="math inline">\(x \neq \hat{x}\)</span> we have <span class="math inline">\(||A\hat{x}-b||^2 &lt; ||Ax-b||^2\)</span> and that will establish that <span class="math inline">\(\hat{x}\)</span> is the unique vector that minimizes our problem.</p>
+<p>We will directly show the proceeding derivation without calculus by showing that for any <span class="math inline">\(x \neq \hat{x}\)</span> we have <span class="math inline">\(\lVert A\hat{x}-b\lVert ^2 &lt; \lVert Ax-b\lVert ^2\)</span> and that will establish that <span class="math inline">\(\hat{x}\)</span> is the unique vector that minimizes our problem.</p>
 <p><span class="math display">\[\begin{aligned}
-||Ax-b||^2 &amp;= ||(Ax-A\hat{x}) + (A\hat{x} = b)||^2 \\
-||Ax-b||^2 &amp;= ||Ax-A\hat{x}||^2 + ||A\hat{x} - b||^2 + 2(Ax - A\hat{x})^T(A\hat{x}-b)\\
-||Ax-b||^2 &amp;= ||Ax-A\hat{x}||^2 + ||A\hat{x} - b||^2 + (x-\hat{x})^TA^T(A\hat{x} - b)\\
-||Ax-b||^2 &amp;= ||Ax-A\hat{x}||^2 + ||A\hat{x} - b||^2 + (x-\hat{x})^T(A^TA\hat{x}-A^Tb) \\
-||Ax-b||^2 &amp;= ||Ax-A\hat{x}||^2 + ||A\hat{x} - b||^2 + (x - \hat{x})^T(A^TA\hat{x}- A^Tb) \\
-||Ax-b||^2 &amp;= ||Ax-A\hat{x}||^2 + ||A\hat{x} - b||^2 + (x-\hat{x})0\\
-||Ax-b||^2 &amp;= ||Ax-A\hat{x}||^2 + ||A\hat{x} - b||^2
+\lVert Ax-b\lVert ^2 &amp;= \lVert (Ax-A\hat{x}) + (A\hat{x} = b)\lVert ^2 \\
+\lVert Ax-b\lVert ^2 &amp;= \lVert Ax-A\hat{x}\lVert ^2 + \lVert A\hat{x} - b\lVert ^2 + 2(Ax - A\hat{x})^T(A\hat{x}-b)\\
+\lVert Ax-b\lVert ^2 &amp;= \lVert Ax-A\hat{x}\lVert ^2 + \lVert A\hat{x} - b\lVert ^2 + (x-\hat{x})^TA^T(A\hat{x} - b)\\
+\lVert Ax-b\lVert ^2 &amp;= \lVert Ax-A\hat{x}\lVert ^2 + \lVert A\hat{x} - b\lVert ^2 + (x-\hat{x})^T(A^TA\hat{x}-A^Tb) \\
+\lVert Ax-b\lVert ^2 &amp;= \lVert Ax-A\hat{x}\lVert ^2 + \lVert A\hat{x} - b\lVert ^2 + (x - \hat{x})^T(A^TA\hat{x}- A^Tb) \\
+\lVert Ax-b\lVert ^2 &amp;= \lVert Ax-A\hat{x}\lVert ^2 + \lVert A\hat{x} - b\lVert ^2 + (x-\hat{x})0\\
+\lVert Ax-b\lVert ^2 &amp;= \lVert Ax-A\hat{x}\lVert ^2 + \lVert A\hat{x} - b\lVert ^2
 \end{aligned}\]</span></p>
-<p>Note that we made use of an inequality by plugging in the normal equations to make the 3rd term disappear. We are left with an equation that shows that <span class="math inline">\(||A\hat{x}-b||^2 \leq ||Ax-b||^2\)</span>. To show unique minimization suppose the equality holds exactly.</p>
+<p>Note that we made use of an inequality by plugging in the normal equations to make the 3rd term disappear. We are left with an equation that shows that <span class="math inline">\(\lVert A\hat{x}-b\lVert ^2 \leq \lVert Ax-b\lVert ^2\)</span>. To show unique minimization suppose the equality holds exactly.</p>
 <p><span class="math display">\[\begin{aligned}
-||A\hat{x}-b||^2 \leq ||Ax-b||^2 \\
-||A(x-\hat{x})||^2 &amp;= 0 \\
+\lVert A\hat{x}-b\lVert ^2 \leq \lVert Ax-b\lVert ^2 \\
+\lVert A(x-\hat{x})\lVert ^2 &amp;= 0 \\
 A(x-\hat{x}) &amp;= 0
 \end{aligned}\]</span></p>
 <p>Since A has linearly independent columns <span class="math inline">\(x -\hat{x} = 0\)</span>. The only <span class="math inline">\(x\)</span> with the equality property is when <span class="math inline">\(x = \hat{x}\)</span></p>
 <p><strong>Orthogonality Principle</strong>: The optimal residual is orthogonal to the columns of A and therefore is orthogonal to any linear combination of the columns of A.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

@@ -12,14 +12,1115 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, eval = F)
 ```
 
-Distill is a publication format for scientific and technical writing, native to the web. 
+## Sampling
 
-Learn more about using Distill for R Markdown at <https://rstudio.github.io/distill>.
+**Sampling**: Selecting some part of a population to observe so that we
+can estimate a population parameter
+
+The basic setup of sampling:
+
+-   Population is known and of finite size *N* units $i \in \{1,...,N\}$
+-   Each unit has an associated value of interest (y-value) which is
+    fixed and unknown
+
+**Sampling Design**: The procedure through which the sample of units is
+selected from the population
+
+## Sampling Types
+
+### Simple Random Sampling
+
+**Simple Random Sampling**: A sampling design in which *n* distinct
+units are selected from *N* units in the population in such a way that
+every possible combination of *n* units is equally likely to be in the
+selected sample.
+
+SRS is also known as random sampling without replacement.
+
+The inclusion probability for SRS is the same for all units. The
+probability that the $i^{th}$ unit of the population is included is
+$\pi_i = \frac{n}{N}$. A SRS **guarantees** that each possible sample of
+*n* units for all units.
+
+We estimate the population mean with SRS as follows:
+
+-   $\bar{y}$ is unbiased for the population mean $\mu$. We define
+    $\bar{y} = \frac{1}{n}\sum_{i=1}^{n}y_i$
+
+-   $s^2$ is unbiased for the population variance $\sigma^2$. We define
+    $s^2 = \frac{1}{n-1}\sum_{i=1}^{n}(y_i - \bar{y})^2$
+
+-   The variance of $\bar{y}$ with SRS is
+    $V[\widehat{\bar{y}}] = \frac{N-n}{N}\frac{s^2}{n}$. The standard
+    error is defined by taking the square root of this quantity.
+
+-   To estimate the population total an unbiased estimator
+    $\tau = N\mu$. An unbiased estimator of $V[\tau]$ is
+    $N(N-n)\frac{s^2}{n}$
+
+### Underlying ideas for SRS
+
+$\bar{y}$ is a random variable whose expectation is the population
+parameter where the expectation is taken over all possible samples. This
+makes $\bar{y}$ *design-unbiased* and this does not depend on any
+assumptions about the population. The variance estimates are design
+unbiased as well.
+
+### Derivations for SRS
+
+$$\begin{aligned}
+E[\bar{y}] &= \sum\bar{y_s}P(s) \\
+E[\bar{y}] &= \frac{1}{n} \sum y_i\frac{\binom{N-1}{n-1}}{\binom{N}{n}} \\
+E[\bar{y}] &= \frac{1}{N}\sum y_i
+\end{aligned}$$
+
+An alternative derivation
+
+$$\begin{aligned}
+E[\bar{y}] &= \frac{1}{n}\sum_{i=1}^{N}y_iE[z_i] \\
+E[\bar{y}] &= \frac{1}{n}\sum_{i = 1}^{N}y_i\frac{n}{N}\\
+E[\bar{y}] &= \frac{1}{n}\frac{n}{N}\sum_{i=1}^{N}y_i \\
+E[\bar{y}] &= \frac{1}{N}\sum_{i=1}^{N} y_i
+\end{aligned}$$ To derive the variance of the sample mean, see pages
+21-22.
+
+### Examples and Exercises
+
+Example 1 p. 16
+
+```{r}
+# sampling functions 
+sample_mean <- function(vec){
+  return(sum(vec)/length(vec))
+}
+
+sample_var <- function(vec){
+  ybar <- sample_mean(vec)
+  n <- length(vec)
+  # finite population correction
+  return((1/(n-1))*sum((vec - ybar)^2))
+}
+
+var_sample_mean <- function(vec, N){
+  n <- length(vec)
+  # finite population correction 
+  fpc <- (N-n)/N
+  return(fpc*(sample_var(vec)/n))
+}
+
+se_mean <- function(vec, N){
+  return(sqrt(var_sample_mean(vec,N)))
+}
+
+estimate_pop_total <- function(vec, N){
+  return(N*sample_mean(vec))
+}
+
+var_pop_total <- function(vec, N){
+  return(N^2*var_sample_mean(vec,N))
+}
+```
+
+```{r}
+## Caribou Example 1 page 16
+N <- 286
+sample <- c(1,50,21,98,2,36,4,29,7,15,86,10,21,5,4)
+
+# Get sample mean, sample variance, variance and standard error 
+# of the sample mean, the population total estimate, variance of
+# the population total estimate and standard error of pop total 
+# estimate
+sample_mean(sample)
+sample_var(sample)
+var_sample_mean(sample, N)
+se_mean(sample,N)
+estimate_pop_total(sample,N)
+var_pop_total(sample,N)
+sqrt(var_pop_total(sample,N))
+```
+
+Example 2 p.18
+
+```{r}
+## All possible samples 
+lectures <- tibble::tibble(
+  unit = 1:4,
+  y_i = c(10,17,13,20)
+)
+
+## all possible sample of 2 from size 4. Will equal 6 
+choose(4,2)
+
+## Generate the eight unique samples 
+samples <-combn(c(1,2,3,4),2)
+
+mat <- matrix(data = NA, nrow = 12, ncol = 4)
+
+for(i in seq(1,12,by =2)){
+  ys <- lectures$y_i[c(samples[i],samples[i+1])]
+  ybar <- sample_mean(ys)
+  pop_total <- estimate_pop_total(ys,N = 4)
+  s2 <- sample_var(vec = ys)
+  var_ybar <- var_pop_total(ys, 4)
+  mat <- rbind(mat, c(ybar, pop_total, s2, var_ybar))
+}
+
+mat <- mat[rowSums(is.na(mat)) !=ncol(mat),]
+
+## Get Expected totals
+colMeans(mat)
+```
+
+Example 3 p. 20
+
+```{r}
+sample_RS <- c(2,4,0,4,5)
+
+yn_bar <- mean(sample_RS)
+
+yv_bar <- mean(unique(sample_RS))
+yv_bar
+```
+
+Example 4 p. 32
+
+```{r}
+fir <- boot::fir
+
+y <- fir$count
+
+## Get true population mean 
+mu <- mean(y)
+
+# Simulate repeated draws 
+N <- 10000
+ybar <- vector(mode = "logical",length = N)
+
+for(i in 1:N){
+  ybar[i] <- mean(y[sample(1:50, 5)])
+}
+## Expected value of ybar 
+mean(ybar)
+
+## MSE 
+mean((ybar - mu)^2)
+```
+
+Exercise 2 p.36
+
+```{r}
+# A SRS of 10 households is selected from a population of 100 households. 
+N <- 100
+y <- c(2,5,1,4,4,3,2,5,2,3)
+
+## Estimate the total number of people in the population and variance of the estimator 
+estimate_pop_total(y, N)
+
+var_pop_total(y, N)
+
+## Estimate the mean number of people per household and estimate the variance of the estimator 
+sample_mean(y)
+
+var_sample_mean(y, N)
+```
+
+Exercise 3 p. 36
+
+```{r}
+## Consider a population N = 5
+N <- 5
+y <- c(3,1,0,1,5)
+i <- 1:5
+
+# Consider a SRS with a sample size n = 3.
+n <- 3
+## What is the probability of each sample being the one selected 
+pi <- n/N
+pi
+
+## List every possible sample of size n  = 3
+samples <- t(combn(i, 3))
+samples
+
+## Give values of the population parameters mu tau sigma^2
+pop_mean <- mean(y)
+pop_sum <- sum(y)
+pop_var <- var(y)*(N/N-1)
+pop_med <- median(y)
+
+# B) For each sample, compute the sample mean ybar and the sample median demonstrate that the sample mean is unbiased for the population 
+ybar <- vector(mode = "numeric", length = 10)
+ymed <- vector(mode = "numeric", length = 10)
+for(i in 1:length(ybar)){
+  samp <- y[as.vector(samples[i,])]
+  ybar[i] <- mean(samp)
+  ymed[i] <- median(samp)
+}
+## sample mean is an unbiased estimator 
+mean(ybar) - pop_mean == 0
+
+## sample median is not unbiased
+mean(ymed) - pop_med == 0
+```
+
+Exercise 4 p.36
+
+Show that $E[s^2] = \sigma^2$
+
+$$\begin{aligned}
+E[s^2] &= E[\frac{n}{n-1}(\bar{X^2}-\bar{X}^2)] \\
+E[s^2] &= \frac{n}{n-1}E[\bar{X^2}-\bar{X}^2)]\\
+E[s^2] &= \frac{n}{n-1}\left(\frac{n-1}{n}\sigma^2 \right) \\
+E[s^2] &= \sigma^2
+\end{aligned}$$ Exercise 6 p.37
+
+```{r}
+
+trees <- datasets::trees
+y <- trees$Volume
+mu <- mean(y)
+N <- length(y)
+n <- 10
+
+# Repeat the simulation exercise using n = 10 and n = 15 
+ybar <- vector(mode = "logical", length = 10000)
+var_y <- vector(mode = "logical", length = 10000)
+set.seed(1234)
+for(i in 1:length(ybar)){
+  smp <- y[sample(1:N, n)]
+  ybar[i] <- mean(smp)
+  var_y[i] <- var_sample_mean(smp, 31)
+  
+}
+## E_y
+mean(ybar)
+
+## V[ybar]
+mean(var_y)
+
+## MSE 
+mean((ybar - mu)^2)
+
+### B use n = 15 
+n = 15
+ybar <- vector(mode = "logical", length = 10000)
+var_y <- vector(mode = "logical", length = 10000)
+set.seed(1234)
+for(i in 1:length(ybar)){
+  smp <- y[sample(1:N, n)]
+  ybar[i] <- mean(smp)
+  var_y[i] <- var_sample_mean(smp, 31)
+  
+}
+## E_y
+mean(ybar)
+
+## V[ybar]
+mean(var_y)
+
+## MSE 
+mean((ybar - mu)^2)
+```
+
+### Random Sampling with Replacement
+
+**Random Sampling with Replacement**: A sample of *n* units selected
+from a population of size *N*, returning each unit to the population
+after it has been drawn.
+
+-   Every possible sequence of *n* units has equal probability under the
+    design.
+
+-   The plug in estimator $\bar{y_n} = \frac{1}{n}\sum_{i=1}^{n} y_i$.
+
+-   The variance of the plug-in sample mean estimator is
+    $V[\hat{\bar{y_n}}] = \frac{s^2}{n}$ which is unbiased for the
+    parameter $V[\bar{y_n}] = \frac{N-1}{nN}\sigma^2$.
+
+The variance of the SRS sample mean is in general lower than the
+variance of the sample mean taken via random sampling with replacement.
+
+In random sampling with replacement $\bar{y_n}$ depends on the number of
+times each unit is selected. This is why the notation is a bit
+different. Two surveys that observe the same distinct set of units but
+with different repeats in the sample will generally yield different
+estimates.
+
+**Effective sample size**: In random sampling with replacement, this is
+the number of distinct units in the sample (denoted v).
+
+-   $\bar{y_v} = \frac{1}{v}\sum_{i=1}^{n}y_i$. This quantity is an
+    unbiased estimator of the population mean.
+
+## Confidence Intervals
+
+Let *I* represent a confidence interval for the population mean $\mu$.
+Choose a small number $\alpha$ as the allowable probability of error
+such that the procedure has a probability $P(\mu \in I) = 1-\alpha$.
+
+*I* is a random variable and the endpoints of *I* will vary from sample
+to sample. Conversely, $\mu$ is fixed and unknown parameter.
+
+Under SRS a $1-\alpha$ CI means that for $1-\alpha$ of the possible
+samples, the interval contains the true value of the population mean.
+
+An approximate $100(1-\alpha)\%$ CI for $\mu$ is
+
+$$\bar{y} \pm t\sqrt{\frac{N-n}{N}\frac{s^2}{n}}$$ where t is the upper
+$\frac{\alpha}{2}$ point of a t-distribution with n-1 degrees of
+freedom.
+
+We rely here for this on the finite population central limit theorem
+which shows that the distribution will converge to a standard normal
+distribution as *n* and *N* grow large.
+
+### Exercises
+
+Exercise 3 p.51
+
+```{r}
+## Consider a population N = 5
+N <- 5
+n <- 3
+y <- c(3,1,0,1,5)
+i <- 1:5
+
+## List every possible sample of size n  = 3
+samples <- t(combn(i, n))
+samples
+
+## Give values of the population parameters mu tau sigma^2
+pop_mean <- mean(y)
+pop_var <- var(y)
+t <- qt(0.975, df = n -1)
+
+# B) For each sample, compute the sample mean ybar and the sample median demonstrate that the sample mean is unbiased for the population 
+ybar <- vector(mode = "numeric", length = 10)
+var_ybar <- vector(mode = "numeric", length = 10)
+s2 <- vector(mode = "numeric", length = 10)
+
+## Needed for part 3 to compute coverage 
+lwr_bound <- vector(mode = "numeric", length = 10)
+upp_bound <- vector(mode = "numeric", length = 10)
+
+## Simulate all possible samples 
+for(i in 1:length(ybar)){
+  samp <- y[as.vector(samples[i,])]
+  ybar[i] <- mean(samp)
+  s2[i] <- sample_var(samp)
+  var_ybar[i] <- var_sample_mean(samp, N)
+  print(samp)
+  lwr_bound[i] <- mean(samp) -
+    t*sqrt(var_sample_mean(samp, 5))/sqrt(n)
+  upp_bound[i] <- mean(samp) +
+    t*sqrt(var_sample_mean(samp, 5))/sqrt(n)
+}
+
+## sample mean is an unbiased estimator 
+mean(ybar) - pop_mean == 0
+
+## sample var is unbiased
+mean(s2) - pop_var == 0
+
+## sample square root is not 
+mean(sqrt(s2))- sqrt(pop_var) == 0
+
+## Coverage function 
+coverage <- function(theta, lb, ub){
+  if(lb <= theta & theta <= ub){
+    return(TRUE)
+  }
+  else{
+    return(FALSE)
+  }
+}
+covered <- vector(mode = "numeric", length = 10)
+for(i in 1:10){
+  covered[i]<-coverage(pop_mean, lwr_bound[i], upp_bound[i])
+}
+
+# Coverage is 90% of samples
+mean(covered)
+
+```
+
+## Sample Size
+
+The first question when planning a survey is what sample size should be
+used. We estimate a statistic $\hat{\theta}$ that is an unbiased
+estimator of $\theta$ which is the population parameter of interest.
+
+We want to choose a maximum allowable difference *d* between the true
+parameter and the estimate and allow for some small probability $\alpha$
+that the error could exceed our chosen specification.
+
+This means that we choose our sample size *n* such that
+$P(|\hat{\theta} - \theta) > d < \alpha$
+
+**Sample size for estimating a population mean**
+
+Under SRS
+
+$$V[\bar{y}] = (N - n)\frac{\sigma^2}{Nn}$$
+
+Thus $d = z \sqrt{V[\bar{y}]}$ assuming that that our estimator is
+normally distributed, which is the case for a population mean.
+
+Solving for *n*
+
+$$\begin{aligned}
+n &= \frac{1}{\frac{d^2\sigma^2}{t^2} + \frac{1}{N}} \\
+n &= \frac{1}{\frac{1}{n_0} + \frac{1}{N}}
+\end{aligned}$$
+
+with an appropriate substitution. The only difference to get a
+population total is to multiply $n_0$ by $N^2$ in the above formula.
+
+Both of these formulas presume knowledge of the population variance,
+which is generally unknown. To get an estimate, we tend to either guess
+completely or use the results of a previous survey.
+
+If we ignore the finite population correct, then we only have to
+calculate $n_0$. This sample size will always be larger than the sample
+size with a finite population correction.
+
+**Sample Size for Relative Precision**
+
+The formula is now
+
+$$n = \frac{1}{\frac{r^2\mu^2}{t^2\sigma^2} + \frac{1}{N}}$$ where *r*
+represents the relative error of interest. In this formula the
+population quantity on which sample size depends when the desire is to
+control relative precision is the coefficient of variation in the
+population.
+
+### Exercises
+
+Exercise 1 p.56
+
+```{r}
+sample_size_formula<- function(N, sigma_2, t,d){
+  n0_num <- N^2*sigma_2*t^2
+  n0_den <- d^2
+  return(n0_num/n0_den)
+}
+
+ssf_wfpc <- function(N, sigma_2, t, d){
+  n0 = sample_size_formula(N, sigma_2, t, d)
+  return(1/ ((1/n0) + 1/N))
+}
+d <- c(500, 1000, 2000)
+
+# Since n is large, we can get away with this 
+# because it converges to a normal distribution
+t <- 1.96
+
+# A more complete computation is 
+alpha <- 0.05
+# qt() is the quantile function for the t-distribution
+# see ?qt()
+t_better <- qt(1- (alpha/2), df = d-1)
+
+
+## Parameters from problem. N is total population. sigma_2 = $\sigma^2$ = variance given for population
+N <- 1000
+sigma_2 <- 45
+
+## ignore FPC
+for(i in 1:length(d)){
+  n <- sample_size_formula(N = N, sigma_2 = sigma_2, t = t_better[i], d = d[i])
+  print(round(n))
+}
+
+## With FPC 
+for(i in 1:length(d)){
+  print(round(ssf_wfpc(N,sigma_2,t_better[i],d[i])))
+}
+
+```
+
+## Estimating Proportions, Ratios, and Subpopulation Means
+
+We can use the the same formulas as before, but some special features of
+note: - Formulas simplify considerably with attribute data - Exact
+Confidence Intervals are possible - A sample size sufficient for a
+desired absolute precision may be chosen without any information on
+population parameters
+
+### Estimating a population proportion
+
+$$p = \frac{1}{N}\sum_{i=1}^{N}y_i = \mu$$
+
+Finite population variance
+
+$$s^2 = \frac{n}{n-1}\hat{p}(1-\hat{p})$$
+
+Variance of the estimator
+
+$$V[\hat{p}] = \frac{N-n}{N-1}\frac{\hat{p}(1-\hat{p})}{n}$$ The first
+term is the FPC (I think) so we can ignore it to get an estimator that
+is slightly too large.
+
+Confidence intervals work as expected
+
+$$\hat{p} \pm \sqrt{V[\hat{p}]}$$
+
+### Sample size for estimating a proportion
+
+Sample size requirements when we ignore the finite population correction
+
+$$n_0 = \frac{z^2p(1-p)}{d^2}$$
+
+When including the FPC
+
+$$n = \frac{1}{\frac{1}{n_0} + \frac{1}{N}}$$ where $n_0$ is defined as
+above.
+
+Like before these formulas depend on an estimate of $p$. If $p$ is
+unknown use $p = 0.5$ because this is the value for which the function
+above takes on its maximum value as a function of p. To see this, simply
+look at the part of the function that includes $p$.
+
+$$\begin{aligned}
+\frac{d}{dp} &= [p(1-p)]' \\
+0 &= 1-2p \\
+p &= \frac{1}{2}
+\end{aligned}$$
+
+### Estimating a Ratio
+
+The population ratio is estimated by dividing the total y-values by the
+total x-values in the samples
+
+$$r = \frac{\sum_{i=1}^{n}y_i}{\sum_{i=1}^{n}x_i} = \frac{\bar{y}}{\bar{x}}$$
+Ratio estimators are not design unbiased. More on this in [Chapter
+7](#chap7) and [Chapter 12](#chap12)
+
+### Estimating a Mean, total, or Population of a subpopulation
+
+An estimator for sub-population with characteristic $a_i$ in a sample of
+$n$ with attribute $n_1$ is:
+
+$$\hat{p_i} = \frac{a_i}{n_i}$$
+
+This proportion has two random variables: $a_i$ and $n_i$. To estimate
+the sub-population mean, we have *N* units in a population. Let $N_k$ be
+the number belonging to the $k^{th}$ sub-population. The variable of
+interest $y_{ik}$.
+
+The total is:
+
+$$\tau_k = \sum_{i=1}^{N}y_{ki}$$ The estimator of the mean is design
+unbiased
+
+$$\bar{y}_k =\frac{1}{n_k} \sum_{i=1}^{n_k}y_{ki}$$
+
+Proof sketch.
+
+1.  Condition on the domain sample size $n_k$. Given $n_k$ every
+    possible combination of $n_k$ of the $N_k$ sub-population units has
+    equal probability of being selected via SRS.
+
+2.  Given (1), $\bar{y}_k$ behaves as the sample mean of a SRS of $n_k$
+    from $N_k$: $E[\bar{y}_k|n_k] = \mu_k$
+
+3.  $E[E[\bar{y}_k|n_k]] = E[\bar{y}_k] = \mu_k$
+
+The variance of the subpopulation mean
+
+$$\begin{aligned}
+V[\bar{y}_k] &= E[V[\bar{y}_k|n_k]] + V[E[\bar{y}|n_k]] \\
+V[\bar{y}_k] &= E[V[\bar{y}_k|n_k]] + V[\mu_k] \\
+V[\bar{y}_k] &= E[V[\bar{y}_k|n_k]]
+\end{aligned}$$
+
+Given SRS
+
+$$V[\bar{y}_k | n_k] = \sigma^2_k\left(\frac{1}{n_k} - \frac{1}{N_k}\right)$$
+
+where $\sigma^2_k$ is the population variance for units in the $k^{th}$
+population.
+$\sigma^2_k = \frac{1}{N_k -1}\sum_{i=1}^{N_k}(y_{ki} - \mu_k)^2$
+
+The unconditional variance for the estimator is thus:
+
+$$V[\bar{y}_k] = \frac{N_k - n_k}{N_k n_k}s^2_k$$
+
+where $s^2_k$ is the sample variance of the sub-population of interest.
+Confidence intervals are found in the usual way. If the sub-population
+is unknown, we replace the FPC with its expected value $\frac{N-n}{N}$
+
+### Exercises
+
+Exercise 1 p. 66
+
+```{r}
+# Estimate the population proportion in favor and give
+# a 95% CI for population proportion 
+# SRS of 1200 552 reported in favor 
+p_hat <- 552/1200
+
+v_phat <- function(n, p){
+  return((p*(1-p))/n)
+}
+
+N <- 1800000
+n <- 1200
+
+lwr <- round(p_hat - 1.96*sqrt(v_phat(n, p_hat)),2)
+upp <- round(p_hat + 1.96*sqrt(v_phat(n, p_hat)),2)
+
+print(paste(p_hat, "with CI", lwr, upp))
+```
+
+Exercise 3 p. 66
+
+```{r}
+
+## What sample size is required to estimate the proportion of people with blood type O in a population of 1500 people to be within 0.02 of the true proportion with 95% confidence? Assume no prior knowledge about the proportion.
+
+sample_size_prop_nofpc <- function(p, d){
+  n0 <- (1.96^2*p*(1-p))/d^2
+  return(n0)
+}
+
+N <- 1500
+p <- .5
+d <- 0.02
+
+## Without FPC 
+sample_size_prop_nofpc(p, d)
+
+## With FPC 
+round((1)/(1/sample_size_prop_nofpc(p,d) + 1/1500))
+
+```
+
+## Unequal Probability Sampling {#chap6}
+
+In some sampling procedures different units have different probabilities
+of being included in the sample. The unequal probabilities must be taken
+into account for unbiased estimation of effects.
+
+### Sampling with Replacement
+
+These estimators are *Hansen-Hurwitz Estimators*
+
+### The Horvitz-Thompsom Estimator
+
+With any design with or without replacement given probability $\pi_i$
+that unit *i* is included in the sample for $i \in \{1,...,n\}$ the
+Horvitz-Thompson Estimator is:
+
+$$\hat{\tau}_{HT} = \sum_{i=1}^v \frac{y_i}{\pi_i}$$
+
+where *v* is the effective sample size (AKA the number of distinct units
+in the sample).
+
+An unbiased estimator of the variance is:
+
+$$\hat{V}[\hat{\tau}_{HT}] = \sum_{i=1}^v\left( \frac{1}{\pi_i^2} - \frac{1}{\pi_i}\right)y_i^2 + 2\sum_{i=1}^v\sum_{j>1}\left(\frac{1}{\pi_i\pi_j} - \frac{1}{\pi_{ij}} \right)y_iy_j$$
+where $\pi_j$ is the probability that both units i and j are included in
+the sample. All the joint inclusion probabilities $\pi_{ij} > 0$ are
+required for this to hold.
+
+An alternative conservative estimator of variance that is guaranteed to
+be non-negative: - For the $i^{th}$ of the v distinct units in the
+sample compute $t_i = \frac{vy_i}{\pi_i}$ - The expectation of $t_i$ is
+the HT estimator - The sample variance of $t_i$ is
+
+$$\hat{V}[t_i] = \frac{1}{v-1} \sum_{i=1}^v(t_i - \hat{t}_\pi)^2$$
+
+The alternative variance estimator for the population is then:
+
+$$\hat{V}[\hat{\tau}_{HT}] = \sum_{i=1}^v\sum_{j<i}\left(\frac{\pi_i\pi_j}{\pi_{ij}} \right)\left( \frac{y_i}{\pi} - \frac{y_j}{\pi_j}\right)^2$$
+provided that for all $i,j$ $\pi_{ij}> 0$.
+
+**NOTE**: While unbiased the HT estimator can have a large variance in
+populations in which variables of interest and inclusion probabilities
+are not well related.
+
+### Hajek Estimator
+
+A generalized unequal probability estimator (Hajek) of the population
+mean is:
+
+$$\mu_g = \frac{\sum_{i \in S}\frac{y_i}{\pi_i}}{\sum_{i \in S}\frac{1}{\pi_i}}$$
+The numerator is the HT estimator. The denominator is an unbiased
+estimate of the population size. Since this is a ratio estimator it is
+not precisely unbiased, but the bias is small in large samples.
+
+A variance estimator for the this is:
+
+$$\hat{V}[\hat{\mu}_g] = \frac{1}{N^2}\left[\sum_{i=1}^v(\frac{1-\pi_i}{\pi_i^2})(y_i - \hat{\mu}_g)^2 + \sum_{i=1}^v\sum_{i \neq 1} \left(\frac{\pi_{ij}- \pi_i\pi_j}{\pi_i\pi_j}\right)\frac{(y_i - \hat{\mu}_g)(y_j - \hat{\mu}_g)}{\pi_{ij}} \right]$$
+provided that $\pi_{ij} > 0$. We can replace N with its estimator
+$\sum_{i \in S}\frac{1}{\pi_i}$
+
+### Examples
+
+### Exercises
+
+## Chapter 7 {#chap7}
+
+## Chapter 8
+
+## Chapter 9
+
+## Chapter 10
+
+## Chapter 11 {#chap11}
+
+## Cluster and Systemic Sampling {#chap12}
+
+Both concepts share the structure populations are partitioned into
+primary units which are composed of secondary units.
+
+*Systematic sampling*: a single primary unit consists of secondary units
+spaced in some systematic fashion throughout the population.
+
+*Cluster sampling*: Primary units consists of a cluster of secondary
+units usually in close proximity with each other.
+
+### Primary units selected via SRS
+
+An unbiased estimator the population total
+
+$$\tau = \frac{N}{n}\sum_{i=1}^n y_i = N\bar{y}$$ where $\bar{y}$ is the
+sampling mean of the primary unit total.
+
+The variance estimator
+
+$$\hat{V}[\hat{\tau}] = \frac{N(N-n)}{n}\hat{s}^2_u$$ where
+$\hat{s}^2_u = \frac{1}{n-1}\sum_{i=1}^n(y_i - \bar{y})^2$
+
+### Ratio Estimators
+
+If $y_i$ is highly correlated with primary unit size $M_i$ a ratio
+estimator based on size may be efficient.
+
+$$\hat{\tau}_r = rM$$
+
+where $r = \frac{\sum_{i=1}^ny_i}{\sum_{i=1}^n M_i}$
+
+Because this is a ratio is is not an unbiased estimator but bias is
+small in large samples.
+
+$$\hat{V}[\tau_r] = \frac{N(N-n)}{n(n-1)}\sum_{i=1}^n(y_i - rM_i)^2$$
+
+### The Basic principle
+
+Within primary unit variance does not enter into the variance of the
+estimators. Thus the basic systematic and cluster sampling principle is
+to obtain estimators of low variance or MSE. This implies that
+population should be partitioned into clusters such that clusters are
+similar to each other.
+
+## Multistage Designs
+
+Let *N* denote the number of primary units in the population
+
+$M_i$ is the number of secondary units of the $i^{th}$ primary unit.
+
+$y_{ij}$ is the value of the variable of interest for $j^{th}$
+secondaryin the $i^{th}$ primary unit.
+
+$\mu_i$ is the mean per secondary unit in the $i^{th}$ primary unit.
+
+$$\tau = \sum_{i=1}^n\sum_{j=1}^{m_i}y_{ij}$$
+
+### SRS without replacement at each stage
+
+In the first stage we take an SRS of n primary units. In the second
+stage from the $i^{th}$ selected primary unit a SRS without replacement
+of $m_i$ secondary units is selected.
+
+The unbiased estimator:
+
+$$\hat{y_i} = \frac{M_i}{m_i}\sum_{j=1}^{m_i}y_{ij}$$ where
+$\bar{y}_i = \frac{1}{m_i}\sum_{j=1}^{m_i}y_{ij}$.
+
+Since SRS is used at the first stage, the overall estimate of the
+population parameter.
+
+$$\hat{\tau} = \frac{N}{n}\sum_{i=1}^n\hat{y}_i$$ with variance
+$V[\hat{\tau}] = N(N-n)\frac{\sigma^2_u}{n} + \frac{N}{n}\sum_{i=1}^N M_i(M_i - m_i)\frac{\sigma^2_i}{m_i}$
+
+where $\sigma^2_u = \frac{1}{N-1}\sum_{i=1}^N(y_i - \mu_1)^2$ and
+$\sigma^2_i = \frac{1}{M_i -1}\sum_{j=1}^{M_i}(y_{ij} - \mu_i)^2$
+
+### Ratio Estimator
+
+A ratio estimator of the population total based on the sizes of the
+primary unit is:
+
+$$\hat{\tau}_r = \hat{r}M$$
+
+where $\hat{r} = \frac{\sum_{i=1}^n\hat{y}_i}{\sum_{i=1}^nM_i}$
+
+The variance is:
+
+$$\hat{V}[\\hat{\tau}_r] = \frac{N(N-n)}{n(n-1)}\sum_{i=1}^n(\hat{y}_i - M_i\hat{r})^2 + \frac{N}{n}\sum_{i=1}^nM_i(M_i - m_i)\frac{s^2_i}{m_i}$$
+
+### Any Multistage Design with replacement
+
+The estimator for the population
+
+$$\hat{\tau}_p = \frac{1}{n}\sum_{i=1}^n\frac{y_i}{p_i}$$
+
+with variance
+$\hat{V}[\hat{\tau}_p] = \frac{1}{n(n-1)}\sum_{i=1}^n(\frac{\hat{y}_i}{p_i}- \hat{\tau})^2$
+
+## Double Sampling
+
+**Double Sampling**: Designs in which initially a sample of units is
+selected for obtaining auxiliary information only and then a second
+sample is selected for which the variable of interest is observed in
+addition to auxiliary information. - The second sample is often selected
+as a subsample of the first - Purpose is to use relationship between
+auxiliary variables and variable of interst to obtain better estimators.
+
+### Ratio Estimation
+
+Let $n'$ be the number of units in the first sample and $n$ be the
+number of units in the second sample. The ratio estimator
+
+$$r = \frac{\sum_{i=1}^ny_i}{\sum_{i=1}^nx_i}$$ is taken from the small
+sample containing both y's and x's. From the full sample for which the x
+values are obtained.
+
+$$\tau_x = \frac{N}{n'}\sum_{i=1}^{n'}x_i$$
+
+Then the ratio estimator is $\hat{\tau}_r = r\hat{\tau}_x$
+
+The variance of the estimator is estimated by
+
+$$\hat{V}[\hat{\tau}_r] = N(N-n)\frac{s^2}{n'} + N^2\left(\frac{n'-n}{n'n(n-1)}\right)\sum_{i=1}^n(y_i - rx_i)^2$$
+
+### Allocation for ratio estimation
+
+Ratio estimation is effective when the y variable is linearly related to
+an auxilliary variable x with y tending to be 0 when x is zero *and* it
+is cheaper or easier to measure x than y.
+
+Suppose the cost observing an x variable per unit is $c'$ and the cost
+for measuring y is $c$. Then an equation for the total cost is:
+
+$$C = c'n' + cn$$
+
+For a fixed cost C the lowest variance of $\hat{\tau}_r$ is observed
+with the following subsampling fraction.
+
+$$\frac{n}{n'} = \sqrt{\frac{c'}{c}\frac{\sigma^2_r}{\sigma^2-\sigma^2_r}}$$
+
+### Double Sampling for stratification
+
+Suppose units can only be assigned to strata after the sample is
+selected. In [Chapter 11](#chap11), the methods therein were useful
+*only if* the relative proportion $W_h = \frac{N_h}{N}$ of population
+units in stratum h is known for each strata. When this is not the case,
+double sampling can be used with an initial (large) sample to classify
+units into strata and then stratify the sample selected.
+
+The estimators for this are:
+
+Pop mean: $\bar{y}_d = \sum_{h=1}^L w_h\bar{y}_h$
+
+Variance:
+$\frac{N-1}{N}\sum_{h=1}^L(\frac{n'_h-1}{n"-1}-\frac{n_h-1}{N-1})\frac{w_hs^2_h}{n_h} + \frac{N-n'}{N(n'-1)}\sum_{h=1}^L w_h(\bar{y}_h - \bar{y}_d)^2$
+
+### Nonresponse and double sampling
+
+In situations of non-response survey often use callbacks to adjust for
+this problem. In these cases nonresponding units may be considered a
+separate stratum. A subsample can then be taken. Divide the population
+into two strata: responders and nonresponders. Suppose $n'$ is the
+initial simple sample, $n'_1$ is the number of responders and $n'_2$ is
+the number of nonresponders.
+
+In callback stages responses are obtained for a SRS of $n_2$ of the
+initial respondents. An unbiased estimator of the population mean is:
+
+$$\bar{y}_d = \frac{n'_1}{n'}\bar{y}_1 + \frac{n'_2}{n'}\bar{y}_2$$
+
+with variance:
+
+$$\hat{V}[\bar{y}_d] = \frac{N-1}{N}\sum_{h=1}^L(\frac{n'_h-1}{n"-1}-\frac{n_h-1}{N-1})\frac{w_hs^2_h}{n_h} + \frac{N-n'}{N(n'-1)}\sum_{h=1}^L w_h(\bar{y}_h - \bar{y}_d)^2$$
+
+
+### Exercises
+
+Exercise 1 (p. 198)
+
+In an aerial survey of four plots selected by simple random sampling,
+the numbers of ducks detected were 44, 55, 4, and 16. Careful
+examination of photoimagery of the first and third of these plots
+(selected as a simple random subsample) revealed the actual presence of
+56 and 6 ducks, respectively. The study area consists of 10 plots.
+
+(a) Estimate the total number of ducks in the study area by using a
+    ratio estimator. Estimate the variance of the estimator.
+
+```{r}
+
+## population estimation function for double sampling ratio estimator
+ratio_pop <- function(y1, y2, N, units){
+  ## Get ratio 
+  r = sum(y2)/sum(y1[units])
+  ## Get ratio estimation of the population 
+  return(r*mean(y1)*N)
+}
+## variance function for double sampling ratio estimator
+ratio_var <- function(y1, y2, N, units){
+  ## Part 1 
+  r <- sum(y2)/sum(y1[units])
+  n_prime <- length(y1)
+  n <- length(y2)
+  s2 <- var(y2)
+  s2_r <- sum((y2 - r*y1[units])^2)
+
+  ## First expression
+  f1 <- N*(N-n_prime) * s2/n_prime
+  
+  ## Second expression 
+  ## Inner n function 
+  inner <- (n_prime- n)/(n_prime*n*(n-1))
+  f2 <- N^2*(inner)*s2_r
+  
+  ## Combine and return 
+  return(f1 + f2)
+}
+
+
+## The actual problem values 
+stage1 <- c(44,55,4,16)
+# subsample 
+stage2 <- c(56,6)
+# study area 
+N <- c(10)
+units <-c(1,3)
 
 
 
+## population estimate 
+ratio_pop(stage1, stage2, N, units)
+ratio_var(stage1, stage2, N, units)
 
+```
 
+(b) Suppose that the photo analysis doubles the cost of observing a
+    plot. Estimate the optimal subsampling fraction.
+
+```{r}
+sigma2_r <- function(y1, y2, units, c, cprime){
+  r <- sum(y2)/sum(y1[units])
+  s2_r <- sum((y2 - r*y1[units])^2)
+  s2 <- var(y2)
+  cost <- cprime/c 
+  var_f <- s2_r / (s2-s2_r)
+  
+  return(sqrt(cost*var_f))
+}
+
+## Find optimal subsampling fraction
+## normalize cost of c' to 1. Problem states double so c=2
+sigma2_r(stage1, stage2, units, 2, 1)
+
+```
+
+## Network Sampling and Link-Tracing Designs
+
+**Network Sampling**: Also referred to as multiplicty sampling. A SRS or
+stratified random sample of units is selected and all observation units
+linked to any of the units selected are included or observed. - The
+*multiplicity* of a unit is the number of selection units to which a
+person is linked.
+
+Since there are unequal selection probabilities the sample mean is no
+longer an unbiased estimator of the population mean in such a design.
+Therefore, different estimators must be used.
+
+### Estimation of the Population Total or Mean
+
+$y_i$ is the variable of interest for the $i^{th}$ unit in a population.
+*N* is the number of observation units in the population.
+
+$\tau$ is the population total defined $\tau = \sum_{i=1}^Ny_i$. $m_i$
+is the multiplicity of unit i. The number of selection units in the
+population is *M*. The population mean per selection unit is
+$\mu = \frac{\tau}{M}$. Consider a SRS of $n_0$ selection units with
+every observational unit linked to any selection unit included in the
+sample.
+
+The draw by draw selection probability $p_i$ is the probability that any
+one of the $m_i$ selection units to which a unit is linked is selected.
+
+$$p_i = \frac{m_i}{M}$$
+
+An unbiased estimator of $\tau$ can be formed by dividing each observed
+y-value by the associated selection probability
+
+$$\hat{\tau}_m = \frac{M}{n}\sum_{i \in s}\frac{y_i}{m_i}$$ where s is
+the sequence of observational units in the sample and includes repeat
+selections. An alternative way to write this is to define for the
+$j^{th}$ selection unit in the population with $A_j$ units linked the
+variable $w_j$ which is the sum of $\frac{y_i}{m_i}$ for all
+observational units linked with selection *j*. In this case the
+estimator for the population is:
+
+$$\hat{\tau}_m = \frac{M}{m}\sum_{j=1}^nw_j$$
+
+An unbiased estimator for the variance of the population is:
+
+$$\hat{V}[\hat{\tau}_m] = \frac{M(M-n)}{n}\frac{1}{n-1}\sum_{j=1}^n(y_j - \bar{w})^2$$
+
+### Horvitz-Thompson Estimator
+
+The probability that the $i^{th}$ unit is included in the sample is the probability that one or more of the $m_i$ selection units to which it is linked is selected. We can simplify the problem by changing notation to
+be in terms of networks instead of individual observational units
+because the inclusion probabilities are identical for all units within a
+network.
+
+Define *K* as the number of networks and $y_k^*$ to be the total of the y-values overall all observational units in the $k^{th}$ network while $m_k*$ is the common multiplicity.
+
+The inclusion probability is:
+
+$$\pi_k = 1 - \frac{M-m_k^*\choose{n}}{M \choose n}$$
+
+which in words is 1 minus the probability that the entire SRS of *n* selection units is selected from the selection units not linked with network k.
+
+The HT estimator of the population total is:
+
+$$\hat{\tau}_\pi = \sum_{k=1}^K \frac{y^*_k}{\pi_k}$$ This estimator does not depend on the number of times any unit is selected, which is in contrast to the multiplicity estimator above.
+
+An unbiased estimator of the HT variance is
+
+$$\hat{V}[\hat{\tau}_\pi] = \sum_{k=1}^k\left(\frac{1}{\pi^2_k}-\frac{1}{\pi_k} \right) {y^*_k}^2 + \sum_{k=1}^K\sum_{l \neq k}\left(\frac{1}{\pi_k\pi_l - \frac{1}{\pi_{kl}}} \right)y^*_ky^*_l$$
+
+```{r}
+## inclusion probability for four networsk 
+pi1 <- 1 - (choose(4998, 100)/choose(5000,100))
+pi2 <- 1 - (choose(4997, 100)/choose(5000, 100))
+pi3 <- 100/5000
+pi4 <- 100/5000
+
+prevalence <- c(1,2,0,1)
+## HT estimator 
+sum(prevalence/ c(pi1, pi2, pi3, pi4))
+
+## Joint inclusion probabilities 
+pi12 <- 0.020769
+pi14 <- 0.0007844
+pi24 <- 0.0011651
+
+## Variance of HT 
+var_ht <- ((1/pi1^2)- 1/pi1)*1 + ((1/pi2^2)- 1/pi2)*2^2 + ((1/pi3^2) - 1/pi3) + 2*((1/(pi1*pi2) - 1/pi12)*2 + (1/(pi1*pi4) -1/pi14) + (1/(pi2*pi4)- 1/pi24)*2)
+```
+
+## Detectability and Sampling
+
+In the basic sampling framework, we assume that our variable of interest is recorded without error for each unit in the sample. In actuality this is not the case. Some individuals may not be observed (detected).
+
+**Detectability**: is the probabily that an object in a selected unit is observed.
