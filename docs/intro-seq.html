@@ -2632,14 +2632,194 @@ x + 2y - 2z = 3
 <p>This material is already discussed in the <a href="#prelim">Linear Algebra Sequence</a></p>
 <h3 id="fpp-chapter-46">FPP Chapter 4,6</h3>
 <h4 id="exercises-4">Exercises</h4>
+<h5 id="chapter-4-exercise-set-a-3459">Chapter 4 Exercise Set A (3,4,5,9)</h5>
+<ol start="3" type="1">
+<li>Which of the following two lists has a bigger average?</li>
+</ol>
+<ol type="i">
+<li><span class="math inline">\(10, 7, 8, 3,5,9\)</span></li>
+</ol>
+<p><strong>ii) <span class="math inline">\(10, 7, 8, 3,5,9,11\)</span></strong></p>
+<p>The mean will always be pulled in the direction of outliers.</p>
+<ol start="4" type="1">
+<li>Ten people in a room have an average height of 5 feet 6 inches. An 11th person who is 6 feet 5 inches tall enters the room. Find the average height of all 11 people.</li>
+</ol>
+<p>67 inches or 5’7”. We can think of this as having 10 people in a room who are 5’6” and one person who is 6’5” and computing the average.</p>
+<ol start="5" type="1">
+<li>Same as 4 except there are now 21 people in the room and a new person enters who is 6 feet 5 inches.</li>
+</ol>
+<p>The new answer is now 66.5 inches or 5 feet 6 inches.</p>
+<ol start="9" type="1">
+<li>Average hourly earnings are computed each month by the BLS using payroll data from commercial establishments. The BLS figures the total wages paid out (to nonsupervisory personnel), and divides by the total hours worked. During recessions, average hourly earnings typically go up. When the recession ends, average hourly earnings often start going down. How can this be?</li>
+</ol>
+<p><em>During a recession, lower wage workers are often laid off. This will mechanically make the average wage rise. When the recession is over these workers are hired back, driving down the average wage.</em></p>
+<h5 id="chapter-4-exercise-set-b-125">Chapter 4 Exercise Set B (1,2,5)</h5>
+<ol type="1">
+<li><p>There are three histograms. The answers are 50, 25, and 40.</p></li>
+<li><p>The median is equal to the average in the first two histograms but to the left of the third.</p></li>
+<li><p>For registered students at universities in the U.S., which is larger: average age or median age?</p></li>
+</ol>
+<p><em>Average age because we expect most students to be between 18-22 but also older students which does a long right tail.
+</em>
+##### Chapter 4 Exercise Set C (1,3)</p>
+<ol type="1">
+<li>Find the average and RMS size of the numbers on the list: <span class="math inline">\(1, -3, 5, -6, 3\)</span>.</li>
+</ol>
+<p>The RMS is <span class="math inline">\(\sqrt{\frac{1}{n}\sum_{i=1}^n x_i^2}\)</span>. Here that computation yields 0 for the average and 4 for the RMS.</p>
+<ol start="3" type="1">
+<li>Find the RMS size of the list <span class="math inline">\(7,7,7,7\)</span>. Repeat for <span class="math inline">\(7,-7,7,-7\)</span>.</li>
+</ol>
+<p>In both cases, the RMS is 7.</p>
+<h5 id="chapter-4-exercise-set-d-12368">Chapter 4 Exercise Set D (1,2,3,6,8)</h5>
+<ol type="1">
+<li>The public health service found that for boys age 11 in HANES2, the average height was 146cm and the SD was 8cm. Fill in the blanks below.</li>
+</ol>
+<ol type="a">
+<li>One boy was 170cm. He was above average by <strong>3</strong> SDs.</li>
+<li>Another boy was 148cm tall. He was above average by <strong><span class="math inline">\(\frac{1}{4}\)</span></strong> SDs.</li>
+<li>A third boy was 1.5 SDs below average height. He was <strong>134</strong>cm tall.</li>
+<li>If a boy was within 2.25 SDs of average height, the shortest he could have been is <strong>128</strong>cm tall and the tallest he could have been was <strong>164</strong>cm tall.</li>
+</ol>
+<ol start="2" type="1">
+<li>Continuing the previous exercise, there are four boys with heights 150, 130, 165, 140 cm. Match heights with descriptions “unusually short”, “about average”, “unusually tall”</li>
+</ol>
+<p>150 and 140: about average. 130: unusually short. 165: unusually tall.</p>
+<ol start="3" type="1">
+<li>Each of the following lists has an average of 50. For which one is the spread of the numbers around the average biggest? Smallest?</li>
+</ol>
+<ol type="i">
+<li><span class="math inline">\(0,20,40,50,60,80,100\)</span></li>
+<li><span class="math inline">\(0, 48,49,50,51,52,100\)</span> Smallest</li>
+<li><span class="math inline">\(0,1,2,50, 98,99,100\)</span> Biggest</li>
+</ol>
+<ol start="6" type="1">
+<li><p>The problem has sketches of histograms and asks you to match them to choices. The correct choices are i, ii, v respectively.</p></li>
+<li><p>One investigator takes a sample of 100 men age 18-24 in a certain town. Another takes a sample of 1000 such men. Which investigator will get a bigger average for heights or should the averages be about the same. Repeat with standard deviations. Which investigator is likely to get the tallest of the sample men or are the chances about the same? Repeat with shortest of the sample men.</p></li>
+</ol>
+<p><em>The averages and standard deviations will be about the same. In both cases, the samples are drawn from the same underlying population and 100 is reasonably large. The range will be bigger in the larger sample. Here’s a little R simulation showing this principle.</em></p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>123</span><span class='op'>)</span></span>
+<span><span class='va'>pop</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>100000</span>, mean <span class='op'>=</span> <span class='fl'>72</span>, <span class='fl'>4</span><span class='op'>)</span></span>
+<span><span class='va'>small</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='va'>pop</span>, size <span class='op'>=</span> <span class='fl'>100</span>, replace <span class='op'>=</span> <span class='cn'>F</span><span class='op'>)</span></span>
+<span><span class='va'>large</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='va'>pop</span>, size <span class='op'>=</span> <span class='fl'>1000</span>, replace <span class='op'>=</span> <span class='cn'>F</span><span class='op'>)</span></span>
+<span><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"Mean of small: "</span>, <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>small</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>[1] &quot;Mean of small: 72.1097400452601&quot;</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"Mean of large: "</span>, <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>large</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>[1] &quot;Mean of large: 72.1080415819342&quot;</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"SD of small: "</span>, <span class='fu'><a href='https://rdrr.io/r/stats/sd.html'>sd</a></span><span class='op'>(</span><span class='va'>small</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>[1] &quot;SD of small: 3.59422670373852&quot;</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"SD of large: "</span>, <span class='fu'><a href='https://rdrr.io/r/stats/sd.html'>sd</a></span><span class='op'>(</span><span class='va'>large</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>[1] &quot;SD of large: 4.05933961830242&quot;</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"Min of small: "</span>, <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span><span class='op'>(</span><span class='va'>small</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>[1] &quot;Min of small: 63.2414773222852&quot;</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"Min of large: "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span><span class='op'>(</span><span class='va'>large</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>[1] &quot;Min of large: 60.5438232355171&quot;</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"Max of small: "</span>, <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>small</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>[1] &quot;Max of small: 82.6366279193488&quot;</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"Max of large: "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>large</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>[1] &quot;Max of large: 85.4581984517501&quot;</code></pre>
+</div>
+<h5 id="chapter-4-exercise-set-e-581112">Chapter 4 Exercise Set E (5,8,11,12)</h5>
+<ol start="5" type="1">
+<li>For each list below, work out the average, the deviations from average and the standard deviation.</li>
+</ol>
+<ol type="i">
+<li><p><span class="math inline">\(1,3,4,5,7\)</span>. The mean is is 4. The deviations are <span class="math inline">\(-3,-1,0,1,3\)</span>. The standard deviation is 2.</p></li>
+<li><p><span class="math inline">\(6,8,9,10,12\)</span>. The mean is 9. The deviations are identical to i. The standard deviation is also 2.</p></li>
+</ol>
+<p>For part b, the relationship is that the list in ii adds 5 to the values in i. This mechanically increases the average by 5 but has no effect on the deviations and standard deviation.</p>
+<ol start="8" type="1">
+<li>The Governor of California proposes to give all state employees a flat raise of $250 a month. What would this do the average monthly salary of state employees? to the SD?</li>
+</ol>
+<p><em>The average would increase by $250. There would be no change in the SD.</em></p>
+<p>Repeat the same question but with 5% increases in salary across the board?</p>
+<p><em>The average and the standard deviation would increase by 5%.</em></p>
+<ol start="11" type="1">
+<li>Can the SD ever be negative?</li>
+</ol>
+<p><em>No, and if you find a negative standard deviation you have a bug. Partially this is because the standard deviation is a function of a square root, which does not have negative numbers in the domain, and partially because the computation first requires squaring all values.</em></p>
+<ol start="12" type="1">
+<li>For a list of positive numbers, can the SD ever be larger than the average?</li>
+</ol>
+<p><em>Yes. In a world where most numbers are clustered around a point with a big outlier. For example <span class="math inline">\(1,1,25\)</span> will produce a standard deviation of <span class="math inline">\(\approx 14\)</span> but an average of 9.</em></p>
 <h3 id="fpp-chapter-13-14">FPP Chapter 13, 14</h3>
 <h4 id="exercises-5">Exercises</h4>
 <h5 id="exercise-set-a-245">13 Exercise Set A (2,4,5)</h5>
+<ol start="2" type="1">
+<li>A coin will be tossed 1000 times. About how many heads are expected?</li>
+</ol>
+<p><em>Presuming the coin is fair, about 500</em>.</p>
+<ol start="4" type="1">
+<li>In five-card draw poker, the chance of being dealt a full house is 0.14 of 1%. If 10000 hands are dealt, about how many will be a full house.</li>
+</ol>
+<p><em>14</em></p>
+<ol start="5" type="1">
+<li>One hundred tickets will be drawn at random with replacement from one of the two boxes a) [1,2] or b) [1,3]. You’re paid the value of the tickets drawn. Which box is better and why?</li>
+</ol>
+<p><em>The second box because it has a higher range.</em></p>
 <h5 id="exercise-set-b-14">13 Exercise Set B (1,4)</h5>
+<ol type="1">
+<li>Two tickets are drawn at random without replacement from the box [1,2,3,4]. What is the chance that the second ticket is 4? What is the chance that the second ticket is 4, given the first is 2?</li>
+</ol>
+<p><em>The first is 1/4 because the tickets have not been drawn. There are 24 possible orderings, and in 6 of them the 4 is in the second position. The answer to the second is 1/3. Given that the first number is a 2, there are only 3 numbers left one of which is a 4 and all are equally likely to be drawn.</em></p>
+<ol start="4" type="1">
+<li>Five cards are dealt off the top of a well-shuffled deck. What is the probability that the 5th card is the queen of spades? Find the chance that the 5th card is the queen of spades, given the first 4 cards are hearts.</li>
+</ol>
+<p><em>Similar logic to the problem above. The first answer is 1/52. The second answer is 1/48.</em></p>
 <h5 id="exercise-set-c-147">13 Exercise Set C (1,4,7)</h5>
+<ol type="1">
+<li>A deck is shuffled and two cards are dealt. What is the probability that the second card is a heart given the first card is a heart? What is the probability that the first card is a heart and the second card is a heart.</li>
+</ol>
+<p>For the first part, we removed one heart from the deck. The chance is thus <span class="math inline">\(\frac{12}{51}\)</span>. For the second part, there are thirteen hearts to pick on the first draw and 12 on the second. The result is <span class="math inline">\(\frac{13}{52}\frac{12}{51} = \approx 6\ %\)</span></p>
+<ol start="4" type="1">
+<li>A die will be rolled six times. You have a choice to either win $1 if at least one ace shows up or to win $1 if an ace show up on all rolls. Which do you choose?</li>
+</ol>
+<p><em>The former, the probability of at least one ace is <span class="math inline">\(1-P(NA)\)</span> which is equivalent to <span class="math inline">\(1-\left(\frac{5}{6}\right)^6 \approx 67\%\)</span>. The latter is functionally zero.</em></p>
+<ol start="7" type="1">
+<li>A coin is tossed three times. What is chance of getting three heads? What is the chance of not getting three heads? What is the chance of getting at least 1 tail? At least 1 head?</li>
+</ol>
+<p>We’ll assume that the coin is fair. The chance of getting three heads from three independent tosses is <span class="math inline">\(\left(\frac{1}{2}\right)^3 = \frac{1}{8}\)</span>. The chance of not getting three heads is the complement so <span class="math inline">\(\frac{7}{8}\)</span>. The chance of getting at least 1 tail is equivalent to the the chance of not getting three heads. At least one head is the same answer just reversing what we want at least one of.</p>
 <h5 id="exercise-set-d-128">13 Exercise Set D (1,2,8)</h5>
+<ol type="1">
+<li><p>This exercise is a picture question. The first two are independent. The third is dependent.</p></li>
+<li><p>This exercise is also a picture clue. The first two are again independent. The third is dependent.</p></li>
+<li><p>In a certain psychology experiment, each subject is presented with three ordinary playing cards, face down. The subject takes one of these cards. The subject also takes one card at random from a separate full deck of playing cards. If the two cards are from the same suit, the subject wins a prize. What is the chance of winning? If more information is needed, explain what you need and why.</p></li>
+</ol>
+<p>The answer is <span class="math inline">\(\frac{1}{4}\)</span>. To see why, imagine that all three cards are the same card, say the King of Hearts. The probability that you draw a heart from the full deck is the same for each. Now imagine that the three cards are different, say the Kings of Hearts, Spades, and Diamonds. No matter which one you draw, there is no effect on the second full deck of cards, so once again the probability you win is the same.</p>
 <h5 id="exercise-set-a-14">14 Exercise Set A (1,4)</h5>
+<ol type="1">
+<li>What is the chance of throwing a total of 5 spots with two fair die?</li>
+</ol>
+<p><span class="math inline">\(\frac{1}{9}\)</span>. There are four possible combinations of 5 spots <span class="math inline">\((2,3),(3,2),(4,1),(1,4)\)</span> and 36 total possibilities.</p>
+<ol start="4" type="1">
+<li>This is a picture question. The correct probabilities are <span class="math inline">\(\frac{1}{2}, \frac{1}{3}, \frac{1}{2}\)</span>. It is no different than the dice problem conceptually.</li>
+</ol>
 <h5 id="exercise-set-b-236">14 Exercise Set B (2,3,6)</h5>
+<ol start="2" type="1">
+<li><p>This is a picture problem with three overlapping circles. Count the dots in the circles and be careful not to double count.</p></li>
+<li><p>Two cards are dealt off the top of a well-shuffled deck. You have a choice: win $1 if the first card is an ace or the second card is an ace. win $1 if at least one of the two cards is an ace. Which option is better?</p></li>
+</ol>
+<p>They’re the same probability. Or is equivalent to at least one here.</p>
+<ol start="6" type="1">
+<li>A number is drawn at random from a box. There is a 20% chance for it to be 10 or less, a 10% chance for it to be 50 or more. True or False: the chance of getting a number between 10 and 50 (exclusive) is 70%. Explain briefly.</li>
+</ol>
+<p>True. This follows from the addition rule and is in some sense defining the probability density function of this variable.</p>
 <h5 id="exercise-set-c-13">14 Exercise Set C (1,3)</h5>
 <h5 id="exercise-set-d-35">14 Exercise Set D (3,5)</h5>
 <h3 id="ms-chapter-9-introduction-to-probability">M+S Chapter 9: Introduction to Probability</h3>
@@ -2660,8 +2840,8 @@ x + 2y - 2z = 3
 <h5 id="fpp-chapter-16-exercise-set-a-1469-b-257-c1">FPP Chapter 16 Exercise Set A (1,4,6,9) B (2,5,7), C(1)</h5>
 <h5 id="fpp-chapter-17-exercise-set-a-1-b-134-c18-d1-e149">FPP Chapter 17 Exercise Set A (1), B (1,3,4), C(1,8), D(1), E(1,4,9)</h5>
 <h2 id="r-sequence">R Sequence</h2>
-<p>The R sequence suggested timeline is 2-4 weeks, though learning to and practicing coding will occupy much of one’s time in quantitative research. Much of the material contained in the R sequence prep is available on the <a href="coding.html">Coding Notes</a> page, which offers both R and Python coding notes and exercises.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>The R sequence suggested timeline is 2-4 weeks, though learning to and practicing coding will occupy much of one’s time in quantitative research. Much of the material contained in the R sequence prep is available under the Coding tab, which offers both <a href="r-coding.html">R</a> and <a href="py-coding.html">Python</a> coding notes and exercises.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

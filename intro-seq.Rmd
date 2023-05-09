@@ -550,21 +550,186 @@ This material is already discussed in the [Linear Algebra Sequence](#prelim)
 
 #### Exercises 
 
+##### Chapter 4 Exercise Set A (3,4,5,9)
+
+
+3. Which of the following two lists has a bigger average? 
+
+i) $10, 7, 8, 3,5,9$
+
+**ii) $10, 7, 8, 3,5,9,11$**
+
+The mean will always be pulled in the direction of outliers. 
+
+4. Ten people in a room have an average height of 5 feet 6 inches. An 11th person who is 6 feet 5 inches tall enters the room. Find the average height of all 11 people. 
+
+67 inches or 5'7". We can think of this as having 10 people in a room who are 5'6" and one person who is 6'5" and computing the average. 
+
+5. Same as 4 except there are now 21 people in the room and a new person enters who is 6 feet 5 inches. 
+
+The new answer is now 66.5 inches or 5 feet 6 inches. 
+
+9. Average hourly earnings are computed each month by the BLS using payroll data from commercial establishments. The BLS figures the total wages paid out (to nonsupervisory personnel), and divides by the total hours worked. During recessions, average hourly earnings typically go up. When the recession ends, average hourly earnings often start going down. How can this be?
+
+*During a recession, lower wage workers are often laid off. This will mechanically make the average wage rise. When the recession is over these workers are hired back, driving down the average wage.*
+
+##### Chapter 4 Exercise Set B (1,2,5)
+
+1. There are three histograms. The answers are 50, 25, and 40. 
+
+2. The median is equal to the average in the first two histograms but to the left of the third. 
+
+5. For registered students at universities in the U.S., which is larger: average age or median age?
+
+*Average age because we expect most students to be between 18-22 but also older students which does a long right tail.
+*
+##### Chapter 4 Exercise Set C (1,3)
+
+1. Find the average and RMS size of the numbers on the list: $1, -3, 5, -6, 3$. 
+
+The RMS is $\sqrt{\frac{1}{n}\sum_{i=1}^n x_i^2}$. Here that computation yields 0 for the average and 4 for the RMS. 
+
+3. Find the RMS size of the list $7,7,7,7$. Repeat for $7,-7,7,-7$. 
+
+In both cases, the RMS is 7. 
+
+##### Chapter 4 Exercise Set D (1,2,3,6,8)
+
+1. The public health service found that for boys age 11 in HANES2, the average height was 146cm and the SD was 8cm. Fill in the blanks below. 
+
+a. One boy was 170cm. He was above average by **3** SDs. 
+b. Another boy was 148cm tall. He was above average by **$\frac{1}{4}$** SDs. 
+c. A third boy was 1.5 SDs below average height. He was **134**cm tall. 
+d. If a boy was within 2.25 SDs of average height, the shortest he could have been is **128**cm tall and the tallest he could have been was **164**cm tall. 
+
+2. Continuing the previous exercise, there are four boys with heights 150, 130, 165, 140 cm. Match heights with descriptions "unusually short", "about average", "unusually tall" 
+
+150 and 140: about average. 130: unusually short. 165: unusually tall. 
+
+3. Each of the following lists has an average of 50. For which one is the spread of the numbers around the average biggest? Smallest?
+
+i) $0,20,40,50,60,80,100$
+ii) $0, 48,49,50,51,52,100$ Smallest 
+iii) $0,1,2,50, 98,99,100$ Biggest 
+
+6. The problem has sketches of histograms and asks you to match them to choices. The correct choices are i, ii, v respectively.
+
+8. One investigator takes a sample of 100 men age 18-24 in a certain town. Another takes a sample of 1000 such men. Which investigator will get a bigger average for heights or should the averages be about the same. Repeat with standard deviations. Which investigator is likely to get the tallest of the sample men or are the chances about the same? Repeat with shortest of the sample men. 
+
+*The averages and standard deviations will be about the same. In both cases, the samples are drawn from the same underlying population and 100 is reasonably large. The range will be bigger in the larger sample. Here's a little R simulation showing this principle.* 
+
+```{r, echo = TRUE}
+set.seed(123)
+pop = rnorm(100000, mean = 72, 4)
+small = sample(pop, size = 100, replace = F)
+large = sample(pop, size = 1000, replace = F)
+print(paste0("Mean of small: ", mean(small)))
+print(paste0("Mean of large: ", mean(large)))
+print(paste0("SD of small: ", sd(small)))
+print(paste0("SD of large: ", sd(large)))
+print(paste0("Min of small: ", min(small)))
+print(paste0("Min of large: ",min(large)))
+print(paste0("Max of small: ", max(small)))
+print(paste0("Max of large: ",max(large)))
+```
+
+##### Chapter 4 Exercise Set E (5,8,11,12)
+
+5. For each list below, work out the average, the deviations from average and the standard deviation. 
+
+i) $1,3,4,5,7$. The mean is is 4. The deviations are $-3,-1,0,1,3$. The standard deviation is 2. 
+
+ii) $6,8,9,10,12$. The mean is 9. The deviations are identical to i. The standard deviation is also 2. 
+
+For part b, the relationship is that the list in ii adds 5 to the values in i. This mechanically increases the average by 5 but has no effect on the deviations and standard deviation. 
+
+8. The Governor of California proposes to give all state employees a flat raise of $250 a month. What would this do the average monthly salary of state employees? to the SD?
+
+*The average would increase by $250. There would be no change in the SD.*
+
+Repeat the same question but with 5% increases in salary across the board? 
+
+*The average and the standard deviation would increase by 5%.* 
+
+11. Can the SD ever be negative?
+
+*No, and if you find a negative standard deviation you have a bug. Partially this is because the standard deviation is a function of a square root, which does not have negative numbers in the domain, and partially because the computation first requires squaring all values.*
+
+12. For a list of positive numbers, can the SD ever be larger than the average?
+
+*Yes. In a world where most numbers are clustered around a point with a big outlier. For example $1,1,25$ will produce a standard deviation of $\approx 14$ but an average of 9.*
+
 ### FPP Chapter 13, 14
 
 #### Exercises 
 
 ##### 13 Exercise Set A (2,4,5)
 
+2. A coin will be tossed 1000 times. About how many heads are expected?
+
+*Presuming the coin is fair, about 500*. 
+
+4. In five-card draw poker, the chance of being dealt a full house is 0.14 of 1%. If 10000 hands are dealt, about how many will be a full house. 
+
+*14*
+
+5. One hundred tickets will be drawn at random with replacement from one of the two boxes a) [1,2] or b) [1,3]. You're paid the value of the tickets drawn. Which box is better and why?
+
+*The second box because it has a higher range.* 
+
 ##### 13 Exercise Set B (1,4)
+
+1. Two tickets are drawn at random without replacement from the box [1,2,3,4]. What is the chance that the second ticket is 4? What is the chance that the second ticket is 4, given the first is 2?
+
+*The first is 1/4 because the tickets have not been drawn. There are 24 possible orderings, and in 6 of them the 4 is in the second position. The answer to the second is 1/3. Given that the first number is a 2, there are only 3 numbers left one of which is a 4 and all are equally likely to be drawn.*
+
+4. Five cards are dealt off the top of a well-shuffled deck. What is the probability that the 5th card is the queen of spades? Find the chance that the 5th card is the queen of spades, given the first 4 cards are hearts. 
+
+*Similar logic to the problem above. The first answer is 1/52. The second answer is 1/48.*
 
 ##### 13 Exercise Set C (1,4,7)
 
+1. A deck is shuffled and two cards are dealt. What is the probability that the second card is a heart given the first card is a heart? What is the probability that the first card is a heart and the second card is a heart. 
+
+For the first part, we removed one heart from the deck. The chance is thus $\frac{12}{51}$. For the second part, there are thirteen hearts to pick on the first draw and 12 on the second. The result is $\frac{13}{52}\frac{12}{51} = \approx 6\ %$
+
+4. A die will be rolled six times. You have a choice to either win \$1 if at least one ace shows up or to win \$1 if an ace show up on all rolls. Which do you choose?
+
+*The former, the probability of at least one ace is $1-P(NA)$ which is equivalent to $1-\left(\frac{5}{6}\right)^6 \approx 67\%$. The latter is functionally zero.*
+
+7. A coin is tossed three times. What is chance of getting three heads? What is the chance of not getting three heads? What is the chance of getting at least 1 tail? At least 1 head?
+
+We'll assume that the coin is fair. The chance of getting three heads from three independent tosses is $\left(\frac{1}{2}\right)^3 = \frac{1}{8}$. The chance of not getting three heads is the complement so $\frac{7}{8}$. The chance of getting at least 1 tail is equivalent to the the chance of not getting three heads. At least one head is the same answer just reversing what we want at least one of. 
+
 ##### 13 Exercise Set D (1,2,8)
+
+1. This exercise is a picture question. The first two are independent. The third is dependent. 
+
+2. This exercise is also a picture clue. The first two are again independent. The third is dependent.  
+
+8. In a certain psychology experiment, each subject is presented with three ordinary playing cards, face down. The subject takes one of these cards. The subject also takes one card at random from a separate full deck of playing cards. If the two cards are from the same suit, the subject wins a prize. What is the chance of winning? If more information is needed, explain what you need and why. 
+
+The answer is $\frac{1}{4}$. To see why, imagine that all three cards are the same card, say the King of Hearts. The probability that you draw a heart from the full deck is the same for each. Now imagine that the three cards are different, say the Kings of Hearts, Spades, and Diamonds. No matter which one you draw, there is no effect on the second full deck of cards, so once again the probability you win is the same. 
 
 ##### 14 Exercise Set A (1,4)
 
+1. What is the chance of throwing a total of 5 spots with two fair die?
+
+$\frac{1}{9}$. There are four possible combinations of 5 spots $(2,3),(3,2),(4,1),(1,4)$ and 36 total possibilities. 
+
+4. This is a picture question. The correct probabilities are $\frac{1}{2}, \frac{1}{3}, \frac{1}{2}$. It is no different than the dice problem conceptually. 
+
 ##### 14 Exercise Set B (2,3,6)
+
+2. This is a picture problem with three overlapping circles. Count the dots in the circles and be careful not to double count. 
+
+3. Two cards are dealt off the top of a well-shuffled deck. You have a choice: win \$1 if the first card is an ace or the second card is an ace. win \$1 if at least one of the two cards is an ace. Which option is better?
+
+They're the same probability. Or is equivalent to at least one here. 
+
+6. A number is drawn at random from a box. There is a 20% chance for it to be 10 or less, a 10% chance for it to be 50 or more. True or False: the chance of getting a number between 10 and 50 (exclusive) is 70%. Explain briefly. 
+
+True. This follows from the addition rule and is in some sense defining the probability density function of this variable. 
 
 ##### 14 Exercise Set C (1,3)
 
@@ -606,5 +771,5 @@ This material is already discussed in the [Linear Algebra Sequence](#prelim)
 
 ## R Sequence 
 
-The R sequence suggested timeline is 2-4 weeks, though learning to and practicing coding will occupy much of one's time in quantitative research. Much of the material contained in the R sequence prep is available on the [Coding Notes](coding.html) page, which offers both R and Python coding notes and exercises. 
+The R sequence suggested timeline is 2-4 weeks, though learning to and practicing coding will occupy much of one's time in quantitative research. Much of the material contained in the R sequence prep is available under the Coding tab, which offers both [R](r-coding.html) and [Python](py-coding.html) coding notes and exercises. 
 
