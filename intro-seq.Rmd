@@ -15,7 +15,7 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## Self-Guided Summer Methods Program 
+## Self-Guided Summer Methods Program {#top}
 
 The self-guided summer methods program is based on a suggested syllabus for preparing for the Political Science program at UC Berkeley's formal and quantitative methods course. The purpose of the self-guided course is to help students prepare for the summer math camp and the introductory courses. The primary books for the self-guided course are [A Mathematics Course for Political and Social Research](https://press.princeton.edu/books/paperback/9780691159171/a-mathematics-course-for-political-and-social-research) herein dubbed M+S and [Statistics: Fourth Edition](https://wwnorton.com/books/Statistics/) herein dubbed as FPP. 
 
@@ -111,6 +111,8 @@ which yields a contradiction because this states that an even number is equal to
 While not explicitly required, it's worth pointing out why the above is a contradiction. 
 
 Suppose for the sake of contradiction that an integer $x$ was both odd and even. Then $x = 2y$ for some integer $y$ by the definition of evenness and $x = 2y + 1$ by the definition of oddness. Thus, $2y = 2y +1$ or $1 = 2(y - z) \implies \frac{1}{2} = y-z$ but we know that $\frac{1}{2}$ is not an integer and any integer added to another integer must always yield an integer.  
+
+[Return to Top](#top)
 
 ### M + S Chapter 2: Arithmetic Review
 
@@ -217,6 +219,8 @@ $$\begin{aligned}
 -8\delta &> 4 \\
 \delta &< -\frac{1}{2}
 \end{aligned}$$
+
+[Return to Top](#top)
 
 ### M+S Chapter 12: Vectors and Matrices 
 
@@ -421,6 +425,8 @@ a. AB indicates that you *right-multiply* A by B.
 
 b. AB indicates that you *left-multiply* B by A
 
+[Return to Top](#top)
+
 ### M+S Chapter 13: Vector Spaces and Systems of Equations 
 
 #### Exercises 
@@ -519,9 +525,13 @@ What does it mean if you have a singular matrix?
 
 See the answer in [Exercise 11 from Chapter 12](#e11)
 
+[Return to Top](#top)
+
 ## Calculus Sequence 
 
 The Calculus sequence suggested timeline is 2-4 weeks. It is entirely composed of chapters from M+S and comprises mathematical preliminaries, functions, limits and continuity, sequences and series and sets, introduction to derivatives and integrals, and an introduction to extrema and multivariate calculus. 
+
+[Return to Top](#top)
 
 ### M+S Chapter 3: Functions  
 
@@ -563,6 +573,8 @@ ln(y) &= ln(\alpha) + \beta_1ln(x1) + ln(\beta_2x_2) + ln(\beta_3x_3)
 $$\begin{aligned}
 ln(y) &= ln(\alpha) + \beta_1 ln(x_1) + \beta_2 ln(x_2) + \beta_3 ln(x_3)
 \end{aligned}$$
+
+[Return to Top](#top)
 
 ### M+S Chapter 4: Limits and Continuity, Sequences and Series, and More on Sets
 
@@ -608,6 +620,7 @@ continuous? If so, why? If not what changes would make it continuous?
 
 The function is not continuous because it does not have the same right hand side and left hand side limit. The function's limit is 22 at 3, but 9 as it approaches 3 from the right. One could $\pm 13$ to the appropriate part to make it continous. 
 
+[Return to Top](#top)
 
 ### M+S Chapter 5: Introduction to Derivatives
 
@@ -657,6 +670,8 @@ a. $f(x,z) = 3zx + 2z$. The partial derivative is $\frac{\partial_f}{\partial_x}
 b. $f(x,z) = x^2 + 2z^2$. $\frac{\partial_f}{\partial_x} = 2x$. 
 
 c. $f(x,z) = 3z^2 - z + 1$. $\frac{\partial_f}{\partial_x} = 0$
+
+[Return to Top](#top)
 
 ### M+S Chapter 6: Rules of Derivatives 
 
@@ -708,6 +723,8 @@ m. $f(x) = x^2g(x) + 6x^2$ where $g(x) = log_a(x) + x^7$
 
 3. Show that $\frac{dlog_a(x)}{dx} = \frac{1}{x(ln(a))}$
 
+[Return to Top](#top)
+
 ### M+S Chapter 7: Integrals 
 
 #### Exercises 
@@ -747,6 +764,8 @@ e. $\int (xe^{3x^2+1})dx$
 
 i. $\int_{2}^{4}(3x^2 + x + 5)dx$
 
+[Return to Top](#top)
+
 ### M+S Chapter 8: Extrema in One Dimension 
 
 #### Exercises
@@ -771,6 +790,7 @@ We can divide both sides by $-2a$ to get $x-x_0 = 0 \implies x^* = x_0$.
 
 Now check to confirm that the second derivative is negative with respect to x. $U''(x) = -2a < 0, \forall a > 0$, which implies that the stationary point is a global maximum and the proof is completed. 
 
+[Return to Top](#top)
 
 ### M+S Chapter 15: Multivariate Calculus
 
@@ -780,6 +800,7 @@ There are no suggested problems for this chapter, but it is good to read.
 
 The Random Variables and Probability sequence suggested timeline is 1-2 weeks. It is entirely composed of chapters from M+S and FPP and comprises mathematical preliminaries, introduction to probability, and an introduction to discrete distributions and continuous distributions. 
 
+[Return to Top](#top)
 
 ### M+S Chapter 1: Preliminaries 
 
@@ -811,6 +832,8 @@ The new answer is now 66.5 inches or 5 feet 6 inches.
 
 *During a recession, lower wage workers are often laid off. This will mechanically make the average wage rise. When the recession is over these workers are hired back, driving down the average wage.*
 
+[Return to Top](#top)
+
 ##### Chapter 4 Exercise Set B (1,2,5)
 
 1. There are three histograms. The answers are 50, 25, and 40. 
@@ -821,6 +844,8 @@ The new answer is now 66.5 inches or 5 feet 6 inches.
 
 *Average age because we expect most students to be between 18-22 but also older students which does a long right tail.*
 
+[Top](#top)
+
 ##### Chapter 4 Exercise Set C (1,3)
 
 1. Find the average and RMS size of the numbers on the list: $1, -3, 5, -6, 3$. 
@@ -830,6 +855,8 @@ The RMS is $\sqrt{\frac{1}{n}\sum_{i=1}^n x_i^2}$. Here that computation yields 
 3. Find the RMS size of the list $7,7,7,7$. Repeat for $7,-7,7,-7$. 
 
 In both cases, the RMS is 7. 
+
+[Return to Top](#top)
 
 ##### Chapter 4 Exercise Set D (1,2,3,6,8)
 
@@ -1014,7 +1041,13 @@ e. What is the chance of getting the star at least once in the two draws? $1-\fr
 
 ### M+S Chapter 9: Introduction to Probability 
 
+There are no exercises assigned in this chapter, but it is good to read. 
+
 ### M+S Chapter 10: Introduction to Discrete Distributions 
+
+There are no exercises assigned in this chapter, but it is good to read.
+
+[Return to Top](#top)
 
 ### FPP Chapter 8, 9
 
@@ -1031,6 +1064,8 @@ What about the correlation between weight and miles per gallon? *Negative, heavi
 6. These are picture questions
 
 9. True or False, and explain. If the correlation coefficient is .9 then 90% of the points are highly correlated? *False. The correlation coefficient is a measure of linear association between two variables.* 
+
+[Return to Top](#top)
 
 ##### FPP Chapter 8 Exercise Set C(1) and D(1)
 
@@ -1061,7 +1096,7 @@ y = list(c(6,7,5,4,3,1,2), c(2,1,4,3,7,5,6), 7:1)
 lapply(y, r, y = x)
 ```
 
-
+[Return to Top](#top)
 
 ##### FPP Chapter 9 Exercise Set A (2,6,9)
 
@@ -1079,7 +1114,7 @@ c. What happens to the correlation? *Correlation stays the same but the sign fli
 
 9. This problem provides several datasets and asks you to give the correlations. You'll find that the four datasets are just column switched versions of the first two or multiples of the first two. 
 
-##### FPP Chapter 9 Exercise Set B(4), C(1,4), E(all)
+##### FPP Chapter 9 Exercise Set B(4)
 
 B.4. This is a picture clue that asks about calculating $r$ without labels. You'll find that the answer is yes you can. The points are $\{(1,1), (2,1), (2,2), (3,2)\}$ and the same flipped in the other direction. In both cases, the $r$ value is the same, though the sign will flip. 
 
@@ -1087,11 +1122,16 @@ B.4. This is a picture clue that asks about calculating $r$ without labels. You'
 r(c(1,2,2,3), c(1,1,2,2))
 r(c(1,1,2,2), c(2,3,1,2))
 ```
+
+[Return to Top](#top)
+
 ### M+S Chapter 11: Continuous Distributions 
 
 There are no exercises for this chapter, but it is good to read.
 
 ### FPP Chapter 10,11,12,16,17
+
+[Return to Top](#top)
 
 #### Exercises 
 
@@ -1136,6 +1176,8 @@ E.2 In Pearson's study, the sons of the 72 inch fathers only averaged 71 inches 
 *False, this is mixing up the regression lines.* 
 
 E.3. This question will also be false for similar reasons as above. 
+
+[Return to Top](#top)
 
 ##### FPP Chapter 11 
 
@@ -1185,6 +1227,8 @@ d. Find the RMS for the method in c. $3\sqrt{1-.95^2} \approx .9$
 
 E.1 You'll find the answers are 2% and 4% respectively. 
 
+[Return to Top](#top)
+
 ##### FPP Chapter 12
 
 A.1. A regression equation for predicting average income from education is: predicted income = 2000(Edu) + 5000. Predict the income for one of these men who has
@@ -1212,6 +1256,8 @@ a. if a student scores 680 on the M-SAT, the predidcted V-SAT score is *540+110 
 b. If a student scores 560 on the M-SAT, the predicted V-SAT score is *540* 
 
 c. The investigator's rms error is *greater than* $\sqrt{1-.66^2}110$. 
+
+[Return to Top](#top)
 
 ##### FPP Chapter 16
 
@@ -1254,6 +1300,8 @@ $\frac{1}{10}$, $P(X \leq 3) = P(X=1)+P(X=2)+P(X=3) = .3$, $P(X \geq 4) = 1 - P(
 B.7 The first two options to this question are equivalent and correct. 
 
 C.1 The first two options are equivalent for this problem. The third option is worse than the first. 
+
+[Return to Top](#top)
 
 ##### FPP Chapter 17 
 
@@ -1335,7 +1383,10 @@ E.4. The standard error here is $\sqrt{np(1-p)}$. Plugging in 100 and $\frac{1}{
 
 E.9. A die is rolled 100 times. Someone figures the expected number of aces as $100\frac{1}{6}$ and the standard error is $\sqrt{100}\sqrt{\frac{1}{6}\frac{5}{6}}$. Is this right? Answer yes or no and explain. *Yes it's right (at least approximately).* 
 
+[Return to Top](#top)
+
 ## R Sequence 
 
 The R sequence suggested timeline is 2-4 weeks, though learning to and practicing coding will occupy much of one's time in quantitative research. Much of the material contained in the R sequence prep is available under the Coding tab, which offers both [R](r-coding.html) and [Python](py-coding.html) coding notes and exercises. 
 
+[Return to Top](#top)
