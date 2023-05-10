@@ -525,15 +525,81 @@ The Calculus sequence suggested timeline is 2-4 weeks. It is entirely composed o
 
 ### M+S Chapter 3: Functions  
 
+#### Exercises 
+
+2.
+
+3.
+
+4.
+
+5. 
+
+9. 
+
+15. 
+
+16. 
+
+20. 
+
+21.
+
 ### M+S Chapter 4: Limits and Continuity, Sequences and Series, and More on Sets
+
+#### Exercises 
+
+1.
+
+2.
+
+3.
+
+5.
+
+7.
+
+9.
 
 ### M+S Chapter 5: Introduction to Derivatives
 
+#### Exercises 
+
+2.
+
+3.
+
+4.
+
 ### M+S Chapter 6: Rules of Derivatives 
+
+#### Exercises 
+
+1. (Every Other equation)
+
+2. (Every other Equation)
+
+3.
 
 ### M+S Chapter 7: Integrals 
 
+#### Exercises 
+
+1. 
+
+3. (Every other equation)
+
+5.
+
+6 (a,b,c,d,e,i)
+
 ### M+S Chapter 8: Extrema in One Dimension 
+
+#### Exercises
+
+1. (every other equation)
+
+2. 
 
 ### M+S Chapter 15: Multivariate Calculus
 
@@ -733,7 +799,46 @@ True. This follows from the addition rule and is in some sense defining the prob
 
 ##### 14 Exercise Set C (1,3)
 
+1. A large group of people are competing for all-expense-paid weekends in Philadelphia. The MC gives each contestant a well-shuffled deck of cards. The contestant deals two cards off the top of the deck, and wins a weekend in Philadelphia if the first card is the ace of hearts or the second card is the king of hearts 
+
+a. All of the contestants whose first card was the ace of hearts are asked to step forward. What fraction of the contestants do? $\frac{1}{52}$. 
+
+b. The contestants return to their original places. Then, the ones who got the king of hearts for their second card are asked to step forward. What fraction of the contestants do. $\frac{1}{52}$ 
+
+c. Do any of the contestants step forward twice? *Almost surely yes. While unlikely it is possible that someone got both the aces of hearts and then the king of hearts.* $\frac{1}{52}\frac{1}{51}$
+
+d. True or false and explain. The chance of winning a weekend in Philadelphia is $\frac{1}{52} + frac{1}{52}$. *False, we have double counting that we need to deal with $P(A) + P(B) - P(A \cap B)$*
+
+3. A deck of cards is shuffled. True or false and explain briefly. 
+
+a. The chance that the top card is the jack of clubs equals $\frac{1}{52}$. *True, the jack has to go somewhere. It has 52 possible positions. One of them is the first card.*
+
+b. The chance that the bottom card is the jack of diamonds equals $\frac{1}{52}$. *True for a similar argument as above*.
+
+c. The chance that the top card is the jack of clubs or the bottom card is the jack of diamonds equals $\frac{2}{52}$. *False, these aren't mutually exclusive. so we need to take care of the probability where the jacks are both in these places.* 
+
+d. The chance that the top card is the jack of clubs or the bottom card is the jack of clubs is $\frac{2}{52}$. *True. These are two independent events.*
+
+e. The chance that the top card is the jack of clubs and the bottom card is the jack of diamonds equals $\frac{1}{52}\frac{1}{52}$. *False, we have a conditional probability here.*. 
+
+f. The chance that the top card is the jack of clubs and the bottom card is the jack of clubs equals $\frac{1}{52}\frac{1}{52}$. *False, the probability here is 0. This event is impossible*.
+
+
 ##### 14 Exercise Set D (3,5)
+
+3. A box contains four tickets, one of them is marked with a star and the other three are blanks. Two draws are made with replacement from the box. 
+
+a. What is the chance of getting a blank ticket on the first draw? $\frac{3}{4}$. 
+
+b. What is the chance of getting a blank ticket on the second  draw? *Same as a.*
+
+c. What is the chance of getting a blank ticket on the first draw and getting a blank ticket on the second draw? $\frac{3}{4}\frac{3}{4} = \frac{9}{16}$
+
+d. What is the chance of not getting the star in the two draws? *Same as c*. 
+
+e. What is the chance of getting the star at least once in the two draws? $1-\frac{9}{16} = \frac{7}{16}$.
+
+5. A pair of dice is rolled 36 times. What is the chance of getting at least one double ace? *The answer is $1 -\left(\frac{35}{36}\right) \approx 64\%$. You might be tempted to think \frac{1}{36} because there's a \frac{1}{6} chance on the first roll and the same on the second, but this would be incorrect because we are interested in an event happening over time, not the likelihood on any given roll.*
 
 ### M+S Chapter 9: Introduction to Probability 
 
@@ -747,27 +852,235 @@ True. This follows from the addition rule and is in some sense defining the prob
 
 ##### FPP Chapter 8 Exercise Set B (1,2,6,9)
 
+1. Would the correlation between the age of a second hand car and its price be positive or negative? Why? *Negative, in general older cars are cheaper.* 
+
+What about the correlation between weight and miles per gallon? *Negative, heavier cars are less fuel efficient.*
+
+2. These are picture questions
+
+6. These are picture questions
+
+9. True or False, and explain. If the correlation coefficient is .9 then 90% of the points are highly correlated? *False. The correlation coefficient is a measure of linear association between two variables.* 
+
 ##### FPP Chapter 8 Exercise Set C(1) and D(1)
+
+1. True or False: 
+
+a. The standard deviation line always goes through the point of averages. *True* 
+
+b. The standard deviation always goes through the point (0,0). *False*. 
+
+1. For each of the datasets below calculate R. 
+
+*$r = \frac{1}{n}\sum_{i=1}^n x_iy_i$ where $x,y$ are standardized units. To standardize a variable, we compute $\frac{x_i - \bar{x}}{\sqrt{\frac{1}{N}\sum_{i=1}^N(x_i - \bar{x})^2}}$ for all values of $x$. Inspection reveals that the third set are perfectly negatively correlated, but we'll do the calculation anyway.*
+
+```{r, echo = T}
+standardize = function(v){
+  sdv = sqrt((1/length(v))*sum((v-mean(v))^2))
+  return((v-mean(v))/sdv)
+}
+
+r = function(y, x){
+  xs = standardize(x)
+  ys = standardize(y)
+  round(mean(xs*ys),2)
+}
+
+x = 1:7
+y = list(c(6,7,5,4,3,1,2), c(2,1,4,3,7,5,6), 7:1)
+lapply(y, r, y = x)
+```
+
+
 
 ##### FPP Chapter 9 Exercise Set A (2,6,9)
 
+2. A small dataset of two variables has a correlation coefficient of $\approx .76$. If you switch the two columns does this change $r$? 
+
+*No, like covariance, correlation does not depend on the order of the variables.*
+
+6. Suppose the correlation between $x$ and $y$ is 0.73. 
+
+a. Does the scatter diagram slope up or down? *Slopes up.* 
+
+b. If you multiply all the values of $y$ by $-1$, would the new scatter diagram slope up or down? *It would now slope down.*
+
+c. What happens to the correlation? *Correlation stays the same but the sign flips.*
+
+9. This problem provides several datasets and asks you to give the correlations. You'll find that the four datasets are just column switched versions of the first two or multiples of the first two. 
+
 ##### FPP Chapter 9 Exercise Set B(4), C(1,4), E(all)
 
+B.4. This is a picture clue that asks about calculating $r$ without labels. You'll find that the answer is yes you can. The points are $\{(1,1), (2,1), (2,2), (3,2)\}$ and the same flipped in the other direction. In both cases, the $r$ value is the same, though the sign will flip. 
+
+```{r}
+r(c(1,2,2,3), c(1,1,2,2))
+r(c(1,1,2,2), c(2,3,1,2))
+```
 ### M+S Chapter 11: Continuous Distributions 
 
 ### FPP Chapter 10,11,12,16,17
 
 #### Exercises 
 
-##### FPP Chapter 10 Exercise Set A (1,4,5), B (1,3), D(all), E(all)
+##### FPP Chapter 10 
 
-##### FPP Chapter 11 Exercise Set A (3,4,6), B(1), C(all), D(3,7), E(1)
+A.1 In a certain class, midterm scores average out to 60 with an SD of 15, as do scores on the final. The correlation between midterm scores and final scores is about 0.5. Estimate the average final score for the students whose midterm scores were $[75, 30, 60]$. 
 
-##### FPP Chapter 12 Exercise Set A (1,3,4), B (1,3)
+*For the first answer the value is one standard deviation above so $75-7.5 = 67.5$, for the second $30 + 15 = 45$, and for the third it is $60 - .5(0) = 60$.*
 
-##### FPP Chapter 16 Exercise Set A (1,4,6,9) B (2,5,7), C(1)
+A.4. For women age 25-34 in the US in 2005, with full-time jobs, the relationship between education (years of schooling completed) and personal income can be summarized as follows: average education is approximately 14 years with a SD of 2.4 years. Average income is approximately \$32000 with a SD of \$26000 and a correlation of approximately .34. Estimate the average income of those women who have finished high school but have not gone on to college. 
 
-##### FPP Chapter 17 Exercise Set A (1), B (1,3,4), C(1,8), D(1), E(1,4,9)
+*The women in the problem have completed 12 years of schooling, which is two years below average. That implies that they are $\frac{2}{2.4} \approx .83$ SD below average in schooling. The estimate is then $.83r \approx .28$ SD in income or $.28(26000) \approx 7300$. Their average income is estimated as $32000-7300 = 24700$*
+
+A.5 Suppose $r = -1$. Can you explain why a one-SD increase in $x$ is matched by a one-SD decrease in y? 
+
+*In this case, the variables are perfectly negatively correlated. Since in a bivariate regression, the coefficient of interest is $\rho\frac{\sigma_y}{\sigma_x}$, that means that any increase in the standard deviation of $x$ must be meant by a corresponding decrease in the standard deviation of $y$*
+
+B.1
+
+B.3
+
+D.1
+
+D.2
+
+D.3
+
+E.1
+
+E.2
+
+E.3
+
+##### FPP Chapter 11 
+
+A.3
+
+A.4
+
+A.6
+
+B.1
+
+B.2
+
+B.3
+
+D.3
+
+D.7
+
+E.1
+
+##### FPP Chapter 12
+
+A.1. 
+
+A.3. 
+
+A.4. 
+
+B.1
+
+B.3
+##### FPP Chapter 16
+
+A.1
+
+A.4
+
+A.6
+
+A.9
+
+B.2
+
+B.5
+
+B.7
+
+C.1
+
+##### FPP Chapter 17 
+
+A.1 Find the expected value for the sum of 100 draws at random with replacement from the box 
+
+a. [0,1,1,6]. $\sum_{i=1}^{100} E[0,1,1,6] = 100(2)=200$
+
+b. [-2,-1,0,2] $\sum_{i=1}^{100} E[-2,-1,0,2] = 100(-.25)=-25$
+
+c. [-2, -1, 3] $\sum_{i=1}^{100} E[-2, -1, 3] = 100(0)=0$
+
+d. [0,1,1] $\sum_{i=1}^{100} E[0,1,1] = 100(\frac{2}{3}) \approx 66.66$
+
+B.1. One hundred draws are going to be made at random with replacement from the box [1,2,3,4,5,6,7]. 
+
+a. Find the expected value and standard error for the sum. 
+
+$400$. The standard error is $20$. 
+
+b. The sum of the draws will be around *400* give or take *20* or so. 
+
+c. Suppose you had to guess what the sum was going to be. What would you guess? Would you expect to be off by around 2,4, or 20?
+
+$400$ and off by $20$. 
+
+B.3. Option 1 will be the correct answer. 
+
+B.4. Fifty draws are made at random with replacement from the box [1,2,3,4,5]; the sum of the draws turns out to be 157. The expected value for the sum is *150*. The observed value is *157*. The chance error is the difference between the observed value and the expected value, which here is 7. The standard error is *10*.
+
+C.1. One hundred draws will be made at random with replacement from the box [1,1,2,2,2,4]. 
+
+a. The smallest the sum can be is $100(1) = 100$ and the largest is $100(4) = 400$. 
+
+b. The sum of the draws will be around $100(2) = 200$ give or take 10. 
+
+c. The chance that the sum will be bigger than 250 is $\approx 0$.
+
+C.8. A box contains 10 tickets. Each ticket is marked with a whole number between -5 and 5. The numbers are not all the same; their average equals 0. There are two choices: A) 100 draws are made from the box and you win \$1 if the sum is between -15 and 15. B) 200 draws are made from the box, and you win \$1 if the sum is between -30 and 30. Which gives the best chance of winning?
+
+*Option ii does. Multiplying the number of draws by 2 makes the standard error only goes up by $\sqrt{2}$.*
+
+
+D.1 The formula short cut from this chapter is $(B-S)\sqrt{\frac{1}{B}(1-\frac{1}{B}})$
+
+We can write two formulas to compute it. Using R:
+
+```{r, echo = T}
+std = function(x){
+  t = (x - mean(x))^2
+  return(sqrt(mean(t)))
+}
+
+shortcut = function(x){
+  if(mean(x %in% c(0,1)) == 1){
+    return((max(x) - min(x))*sqrt((sum(x)/length(x))*(1- sum(x)/length(x))))
+  }
+  return((max(x) - min(x)) * sqrt((1/max(x))*(1 - (1/max(x)))))
+}
+
+same = function(x){
+  return(std(x) == shortcut(x))
+}
+
+## The four lists of numbers
+l = list(c(7,7,7,7,-2,-2),
+         c(0,0,0,0,5),
+         c(0,0,1),
+         c(2,2,3,4,4,4))
+lapply(X = l, FUN =same)
+```
+
+E.1. A coin is tossed 16 times. 
+
+a. The number of heads is like the sum of 16 draws made at random with replacement from one of the following boxes. Which one and why? *The answer will be [0,1]. The [head, tail] box is out because you cannot add words.*
+
+b. The number of heads will be around *8* give or take *2* or so.
+
+E.4. The standard error here is $\sqrt{np(1-p)}$. Plugging in 100 and $\frac{1}{2}$ gives a standard error of $5$. 
+
+E.9. A die is rolled 100 times. Someone figures the expected number of aces as $100\frac{1}{6}$ and the standard error is $\sqrt{100}\sqrt{\frac{1}{6}\frac{5}{6}}$. Is this right? Answer yes or no and explain. *Yes it's right (at least approximately).* 
 
 ## R Sequence 
 

@@ -21,7 +21,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 Welcome to the Methods Tutoring Notes site. I put this together based on my methods training and years being a graduate quantitative methods tutor at UC Berkeley. 
 
-The site contains several different resources. First and foremost, it includes notes on the primary quantitative methods topics common to a graduate course sequence in political science. Second, there are coding notes for both R and Python.^[There are no resources for Stata by choice. Stata is not free software, rarely used in industry, and not needed to do research.]. I have endeavored to provide an introduction to both languages, focusing on topics that have proved more difficult for graduate students at UC Berkeley. Third, I provide code for standard research techniques and methods currently in use in top political science journals. For pedagogical reasons, every single example and application on this website has both an R and a Python implementation. 
+The site contains several different resources. First and foremost, it includes notes on the primary quantitative methods topics common to a graduate course sequence in political science. Second, there are coding notes for both R and Python.^[There are no resources for Stata by choice. Stata is not free software, rarely used in industry, and not needed to do research.]I have endeavored to provide an introduction to both languages, focusing on topics that have proved more difficult for graduate students at UC Berkeley. Third, I provide code for standard research techniques and methods currently in use in top political science journals. For pedagogical reasons, every single example and application on this website has both an R and a Python implementation. 
 
 ## Texts 
 
