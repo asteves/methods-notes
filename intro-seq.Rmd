@@ -527,81 +527,254 @@ The Calculus sequence suggested timeline is 2-4 weeks. It is entirely composed o
 
 #### Exercises 
 
-2.
+2. Simplify $h(x) = g(f(x))$ where $f(x) = x^2 +2$ and $g(x) = \sqrt{x-4}$. 
 
-3.
+$$\begin{aligned}
+g(f(x)) &= \sqrt{(x^2 +2 ) - 4} \\
+g(f(x)) &= \sqrt{x^2 - 2}
+\end{aligned}$$
 
-4.
+3. Simplify $h(x) = f(g(x))$ with same $f$ and $g$ as previous answer. Is it the same as 2? *No* 
 
-5. 
+$$\begin{aligned}
+h(x) &= (\sqrt{x-4})^2 + 2 \\
+h(x) &= x-2
+\end{aligned}$$
 
-9. 
+4. Find the inverse function of $f(x) = 5x - 2$. 
 
-15. 
+$$\begin{aligned}
+\frac{x + 2}{5}
+\end{aligned}$$
 
-16. 
+5. Simplify $x^{-2}x^3$. $x$
 
-20. 
+9. Simplify into one term $ln(3x) - 2ln(x +2)$. $ln\left(\frac{3x}{x+2} \right)$
 
-21.
+15. Rewrite $y = \alpha + x_1^{\beta_1} + \beta_2x_2 + \beta_3x3$ by taking the log of both sides. Is the result a linear (affine function)?
+
+$$\begin{aligned}
+ln(y) &= ln(\alpha + x_1^{\beta_1} + \beta_2x_2 + \beta_3x_3) \\
+ln(y) &= ln(\alpha) + \beta_1ln(x1) + ln(\beta_2x_2) + ln(\beta_3x_3)
+\end{aligned}$$
+
+16. Rewrite $y = \alpha + x_1^{\beta_1} + x_2^{\beta_2} + x_3^{\beta_3}$ by taking the log of both sides. Is the result a linear (affine) function? *Yes it's affine.*
+
+$$\begin{aligned}
+ln(y) &= ln(\alpha) + \beta_1 ln(x_1) + \beta_2 ln(x_2) + \beta_3 ln(x_3)
+\end{aligned}$$
 
 ### M+S Chapter 4: Limits and Continuity, Sequences and Series, and More on Sets
 
 #### Exercises 
 
-1.
+1. Draw a graph to show that the sequence {1,-1,1,-1,...} is divergent.
 
-2.
+```{r}
+d = data.frame(x = 1:1000,
+               y = c(rep(c(-1,1),5000)))
+d |>
+  ggplot(aes(x,y))+
+  geom_point()+
+  theme_minimal()+
+  labs(x = "",
+       y = "")
+```
 
-3.
+2. Find the sum of the infinite series $\sum_{t=0}^\infty (\delta^t)^2$
 
-5.
+Recall that $\sum_{t=0}^\infty \delta^t = \frac{1}{1-\delta}, \forall \delta < 1$. As long as this condition holds, we can use the same expression giving us $\frac{1}{1-\delta^2}$
 
-7.
+3. Show whether $f(x) = x + x^3$ has a limit at x = 3 and if so, the value of the limit. 
 
-9.
+Yes this has a limit. The limit is 30. $(3) + 3^3 = 30$. 
+
+5. Show whether $f(x) = \frac{3x^2 - 12}{x -2}$ has a limit at $x = 2$ and if so the value of the limit. 
+
+Factor the numerator. $f(x) = \frac{3(x^2 - 4)}{x -2}$. Note that we can factor the () expression as $(x-2)(x+2)$. Cancel out the common term. We are left to plug in the value 2 and the expression is 12. 
+
+7. For each of the following sets, state whether they are (a) open, closed both or neither, (b) bounded (c) compact (d) convex. 
+
+a. $[1,3]$ closed, bounded, compact, convex 
+
+
+9. Is the function 
+$$\begin{aligned}f(x) = \begin{cases} 
+      x^3 - 3x + 4 & x &\leq 3 \\
+      x^2 & x &> 3 
+   \end{cases}\end{aligned}$$ 
+
+continuous? If so, why? If not what changes would make it continuous?
+
+The function is not continuous because it does not have the same right hand side and left hand side limit. The function's limit is 22 at 3, but 9 as it approaches 3 from the right. One could $\pm 13$ to the appropriate part to make it continous. 
+
 
 ### M+S Chapter 5: Introduction to Derivatives
 
 #### Exercises 
 
-2.
+2. 
 
-3.
+a. $y=6$. The derivative of a constant is 0. 
 
-4.
+b. $y = 3x^2$. The derivative is $6x$. 
+
+c. $y = x^2 - 2x^2 - 1$. The derivative is $3x^2 -4x$. 
+
+d. $y = x^4 + 5x$. The derivative is $4x^3 + 5$. 
+
+e. $y = x^8$. The derivative is $8x^7$. 
+
+f. $y = 4x^3 - x + 1$. The derivative is $12x^2 -1$. 
+
+To demonstrate on this problem the specific calculations. 
+
+$$\begin{aligned}
+f'(x) &= lim_{x\rightarrow 0}\frac{4(x+h)^3 -(x+h) + 1 - 4x^3 + x -1}{h} \\
+f'(x) &=lim_{x\rightarrow 0}\frac{12x^2h + 12xh^2 + 4h3 -h}{h} \\
+f'(x) &=lim_{x\rightarrow 0} 12x^2 + 12xh + 4h^2 = 1\\
+f'(x) &=12x^2 -1
+\end{aligned}$$
+
+g. $y = 2x^4 + x^2 - 1$. The derivative is $8x^3 + 2x$.
+
+h. $y = 5x^5 + 4x^4 + 3x^3 + 2x^2 + x + 1$. The derivative is $25x^4 + 16x^3 + 9x^2 + 4x + 1$
+
+i. $y = 7x^4 - 9x^3 + 5x + 117$. The derivative is $28x^3 - 27x^2 + 5$. 
+
+j. $y = 27x^3 + 5x^2 -x + 13$. The derivative is $81x^2 + 10x -1$
+
+3. The graphs are not included. 
+
+a. $f(x) = 2x^2 + 7$. The derivative is $4x$.
+
+b. $f(x) = x^3 - x + 1$. The derivative is $3x^2 -1$
+
+4. For each of the following find the partial derivative with respect to x. 
+
+a. $f(x,z) = 3zx + 2z$. The partial derivative is $\frac{\partial_f}{\partial_x} = 3z$. 
+
+b. $f(x,z) = x^2 + 2z^2$. $\frac{\partial_f}{\partial_x} = 2x$. 
+
+c. $f(x,z) = 3z^2 - z + 1$. $\frac{\partial_f}{\partial_x} = 0$
 
 ### M+S Chapter 6: Rules of Derivatives 
 
 #### Exercises 
 
-1. (Every Other equation)
+1. Find the derivative of (every other) $y$ with respect to $x$ for the following. 
 
-2. (Every other Equation)
+a. $y = 6$. The derivative is $0$. 
 
-3.
+c. $y = x^3 - 2x^2 - 1$. The derivative is $3x^2 - 4x$. 
+
+e. $y = x^8$. The derivative is $8x^7$. 
+
+g. $y = ax^3 + 6$. The derivative is $3ax^2$
+
+i. $y = ax^n - 1$. The derivative is $nax^{n-1}$
+
+k. $f(x)\cdot g(x) = (13x + 2x^3)(x^5 - 4x + r)$
+
+m. $y = (x-3)^3$. The derivative is $3(x-3)^2$
+
+o. $y = 5x^7 + 7x^4 + 3x^2$. The derivative is $35x^6 + 28x^3 + 6x$. 
+
+q. $y = x^3 + x^2 + 1$. The derivative is $3x^2 + 2x$. 
+
+s. $y = (3x^2 + 4)(2x^3 + 3x + 5)$
+
+u. $y = (x+5)^2$. The derivative is $2(x+5)$
+
+w. $y = (\frac{x^2+1}{x+1})^2$
+
+y. $y = \frac{x^3 + x^2 + x + 1}{x^2 + x +1}$
+
+2. Using the rules in this chapter, differentiate the following: 
+
+a. $f(x) = a_nx^n + a_{n-1}x^{n-1} + ... + a_0$. Try also expressing the derivative as a series. 
+
+c. $f(x) = \frac{x^2-4}{x^5 - x^3 + x}$
+
+e. $xg(x) - 7x^2$ where $g(x) = e^xln(x)$
+
+g. $f(x) = e^{5x}$
+
+i. $f(x) = \frac{1}{2}e^{\frac{x}{2}}$
+
+k. $f(x) = e^{ln(2x)}$
+
+m. $f(x) = x^2g(x) + 6x^2$ where $g(x) = log_a(x) + x^7$
+
+3. Show that $\frac{dlog_a(x)}{dx} = \frac{1}{x(ln(a))}$
 
 ### M+S Chapter 7: Integrals 
 
 #### Exercises 
 
-1. 
+3. Integrate the following derivatives to find $y$
 
-3. (Every other equation)
+a. $f'(x) = 4x + 3$
 
-5.
+c. $f'(x) = -2x +3 - 4x^3$
 
-6 (a,b,c,d,e,i)
+e. $f'(x) = -3 + 4x$
+
+g. $f'(x) = 4x^4 + 3x^2$
+
+i. $f'(x) = 4x^4 + 3x^3 + 2x^2 + x + 1$
+
+k. $f'(x) = x^{-1} + 3x^2$
+
+m. $f'(x) = 2e^{5x}$
+
+o. $f'(x) = ln(3x)$
+
+
+5. Which of the following below best describes $\int_{a}^b\frac{dy}{dx}dx$? *It is the integral of the derivative of y with respect to x over the range a to b.*
+
+6 Compute the following integrals:
+
+a. $\int (a_nx^n + a_{n-1}x^{n-1}+...+a_0)dx$
+
+b. $\int (3x^{3/2} - 2x^{-5/4} + 4^x)dx$
+
+c. $\int_{1}^{16} (5x^{3/2}-2x^{-5/4})dx$
+
+d. $\int (-\frac{1}{x}ln(\frac{1}{x}))dx$
+
+e. $\int (xe^{3x^2+1})dx$
+
+i. $\int_{2}^{4}(3x^2 + x + 5)dx$
 
 ### M+S Chapter 8: Extrema in One Dimension 
 
 #### Exercises
 
-1. (every other equation)
+1. Find all extrema (local and global) of the following functions on the specified domains, and state whether each extremum is a minimum or maximum and whether each is only local or global on that domain.
 
-2. 
+a. $f(x) = x^3 - x +1, x\in[0,1]$
+
+c. $f(x) = \frac{x^2}{e^x}, x\in[0,\infty)$
+
+e. $f(x) = 2 - 3x, x \in [-3,10]$
+
+g. $f(x) = 4x^3 + x^2 - 2x + 3, x \in [-1,1]$
+
+i. $f(x) = \frac{1}{4}x^4 - \frac{4}{3}x^3 + \frac{1}{2}x^2 + 6x + 2, x \in [-2,3]$
+
+2. The utility that a legislator extracts from a policy in a one dimensional policy space varies as a quadratic loss function, $U(x)$, of the form $U(x) = -a(x-x_0)^2$, where $x_0$ represents the ideal location of the legislator and $x$ represents the location of the current policy in the one-dimensional policy space. Prove that the legislator's utility is maximized when the policy is located at $x=x_0$. 
+
+First find the derivative and set it to 0. $U'(x) = -2a(x-x_0) = 0$. 
+
+We can divide both sides by $-2a$ to get $x-x_0 = 0 \implies x^* = x_0$. 
+
+Now check to confirm that the second derivative is negative with respect to x. $U''(x) = -2a < 0, \forall a > 0$, which implies that the stationary point is a global maximum and the proof is completed. 
+
 
 ### M+S Chapter 15: Multivariate Calculus
+
+There are no suggested problems for this chapter, but it is good to read. 
 
 ## Random Variables and Probability Sequence 
 
@@ -617,7 +790,6 @@ This material is already discussed in the [Linear Algebra Sequence](#prelim)
 #### Exercises 
 
 ##### Chapter 4 Exercise Set A (3,4,5,9)
-
 
 3. Which of the following two lists has a bigger average? 
 
@@ -647,8 +819,8 @@ The new answer is now 66.5 inches or 5 feet 6 inches.
 
 5. For registered students at universities in the U.S., which is larger: average age or median age?
 
-*Average age because we expect most students to be between 18-22 but also older students which does a long right tail.
-*
+*Average age because we expect most students to be between 18-22 but also older students which does a long right tail.*
+
 ##### Chapter 4 Exercise Set C (1,3)
 
 1. Find the average and RMS size of the numbers on the list: $1, -3, 5, -6, 3$. 
@@ -848,8 +1020,6 @@ e. What is the chance of getting the star at least once in the two draws? $1-\fr
 
 #### Exercises 
 
-##### FPP Chapter 8 Exercise Set A (1,5,6)
-
 ##### FPP Chapter 8 Exercise Set B (1,2,6,9)
 
 1. Would the correlation between the age of a second hand car and its price be positive or negative? Why? *Negative, in general older cars are cheaper.* 
@@ -919,6 +1089,8 @@ r(c(1,1,2,2), c(2,3,1,2))
 ```
 ### M+S Chapter 11: Continuous Distributions 
 
+There are no exercises for this chapter, but it is good to read.
+
 ### FPP Chapter 10,11,12,16,17
 
 #### Exercises 
@@ -937,70 +1109,151 @@ A.5 Suppose $r = -1$. Can you explain why a one-SD increase in $x$ is matched by
 
 *In this case, the variables are perfectly negatively correlated. Since in a bivariate regression, the coefficient of interest is $\rho\frac{\sigma_y}{\sigma_x}$, that means that any increase in the standard deviation of $x$ must be meant by a corresponding decrease in the standard deviation of $y$*
 
-B.1
+B.1 From the picture. True or false: There is a positive association between husband's income and wife's income? 
 
-B.3
+*True. We can imagine that individuals pair with other individuals who are higher earners.* 
 
-D.1
+Why is the dot at 127,500 so far below the regression line?
 
-D.2
+*Chance error. There are few couples behind this dot.* 
 
-D.3
+If you use the regression line to estimate wife's income from husband's income would your estimates generally be a little to high, *little too low*, or just right for the couples in the sample with husbands income in the range 65k to 80k. 
 
-E.1
+B.3 This is a picture clue 
 
-E.2
+D.1 The criticism of all landings is not warranted. This is a textbook case of regression to the mean. 
 
-E.3
+D.2 No, tutoring appears to have an effect in this case because students scored above the standardized average. The regression effect would simply pull their scorers closer to the standardized average. 
+
+D.3. This is a picture clue.
+
+E.1 For the men age 18-24 in the HANES5 sample, the ones who were 63 inches tall averaged 138 pounds in weight. True or false, the ones who weighed 138 pounds must have averaged 63 inches in height. 
+
+*False. This is a different group of men.* 
+
+E.2 In Pearson's study, the sons of the 72 inch fathers only averaged 71 inches in height. True or false, if you take the 71 inch sons, their fathers will average about 72 inches in height. 
+
+*False, this is mixing up the regression lines.* 
+
+E.3. This question will also be false for similar reasons as above. 
 
 ##### FPP Chapter 11 
 
-A.3
+A.3 Compute the prediction errors and rms error of the regression line for the following dataset. 
 
-A.4
+```{r}
+rms = function(y, yp){
+  e = y - yp
+  print(e)
+  return(sqrt(mean((yp - y)^2)))
+}
+y = c(57,63,43,51,49)
+yp = c(64,62,40,52,45)
 
-A.6
+rms(y, yp)
+```
 
-B.1
+A.4 This is a picture clue
 
-B.2
+A.6 An admissions officer is trying to choose between two methods of predicting first year scores. One method has a RMS error of 12, the other 7. All else being equal *he should choose the one with a lower RMS*
 
-B.3
+B.1 The RMS error for a regresion line of y on x can be figured as $\sqrt{1-r^2}\sigma_y$. In this problem, that means $10\sqrt{1-.6^2}$.
 
-D.3
+B.2 If you have no information about x, you guess the mean of y, which here is 65, your rms would be 10. If you have information, you'd use the regression line and your rms would be the same as B.1.
 
-D.7
+B.3 At a certain college, first year GPAs average around 3.0 with an SD of about 0.5; they are correlated about 0.6 with high-school GPA. Person A predicts first year GPAs using just the average. Person B predicts via regression using high school GPAs. 
 
-E.1
+It is better to use the second method as it will be smaller by a factor of $\sqrt{1-.6^2}$.
+
+D.3 You have average education = 13, SD = 3.4. Average income = 18000, SD 20000, r $\approx .37$. Find the RMSE of the regression line for predicting income from education. 
+
+$20000\sqrt{1-.37^2} = 18580.64$
+
+Predict the income of a woman with 16 years of education. *Using regression you'll find this is 24,500*.
+
+The prediction is likely off by *can't be determined with this information.*
+
+D.7 In one study of identical male twins, the average height was found to be about 68 inches with a SD of 3. The correlation between the heights of the twins was about .95 and the scatter diagram was football shaped. 
+
+a. You have to guess the height of one of the twins without any further information. *Guess the average*
+
+b. Find the RMS for the method in (a). *3, the RMS is just the SD*. 
+
+c. One twin of the pair is standing in front of you. You have to guess the height of the other twin. *Use the regression line*
+
+d. Find the RMS for the method in c. $3\sqrt{1-.95^2} \approx .9$
+
+E.1 You'll find the answers are 2% and 4% respectively. 
 
 ##### FPP Chapter 12
 
-A.1. 
+A.1. A regression equation for predicting average income from education is: predicted income = 2000(Edu) + 5000. Predict the income for one of these men who has
 
-A.3. 
+a. 8 years of schooling $2000(8) + 5000 = 21,000$
+b. 12 years of schooling $2000(12) + 5000 = 29,000$
+c. 16 years of schooling $2000(16) + 5000 = 37,000$
 
-A.4. 
+A.3. The average height of fathers is $\approx 68$ inches with a SD of 2.7. The average height of sons is $\approx 69$ inches with a SD of 2.7. $r \approx 0.5$. Find the regression line for predicting the height of a son from the height of a father. Find the reverse regression line. 
 
-B.1
+The slope coefficient is $\frac{.5(2.7)}{2.7} = .5$. The intercept is $69(.5)=34.5$. The line is $.5F + 34.5$. For the reverse, the only change is the intercept $.5S + 33.5$. 
 
-B.3
+A.4. An expert witness offers testimony that "regression is a substitute for controlled experiments. It provides a precise estimate of the effect of one variable on another." 
+
+*This is false regression only says something about how the average value of one variable relates to values of another variable in the population being observed, and says nothing without further assumptions about how y would respond if you intervene to change the value of x. It also presumes a linear relationship which may or may not be accurate. Note though that the analysis of controlled experiments has a regression interpretation, but this is outside of the mechanics of regression.*
+
+B.1 For men age 25-34 in the HNES2 sample, the regression equation for predicting height from education is predicted height = (.25in)(education) + 66.75 inches. Predict the height of a man with 12 years of education; with 16 years of education. Does going to college increase a man's height? Explain. 
+
+*The first value is 69.75. The second is 70.75. No going to college does not increase a man's height. The regression has an omitted variable (among other issues).*
+
+B.3 A study is made of Math and Verbal SAT scores for the entering class at a certain college. The summary statistics are average M-SAT = 560, SD 120, average V-SAT = 540, SD 110, r = 0.66. The inestigator uses the SD line to predict V-SAT from the M-SAT score. 
+
+a. if a student scores 680 on the M-SAT, the predidcted V-SAT score is *540+110 =650*
+
+b. If a student scores 560 on the M-SAT, the predicted V-SAT score is *540* 
+
+c. The investigator's rms error is *greater than* $\sqrt{1-.66^2}110$. 
+
 ##### FPP Chapter 16
 
-A.1
+A.1 A machine has been designed to toss a coin automatically and keep track of the number of heads. After 1000 tosses, it has 550 heads. Express the chance error both in absolute terms and as a percentage of the number of tosses. 
 
-A.4
+*50, 5%*
 
-A.6
+A.4 A coin is tossed and you win a dollar if there are more than 60% heads. Which is better 10 tosses or 100? 
 
-A.9
+*The former. There is more chance variability and so a greater likelihood of winning. Again assuming a fair coin.*
 
-B.2
+b. Same as above but 40% heads. 
 
-B.5
+*The latter now. The coin will have less chance variability.* 
 
-B.7
+c. Same as above but now if between 40% and 60% heads. 
 
-C.1
+*Same as b.*
+
+d. Same as above but exactly 50% heads. 
+
+*The former. There is more chance error and so more ways to come up with a specific number. We can actually show this in this case by noting that the coins follow a binomial distribution. In the first case, we have n = 10 and p = 0.5. In the second we have n = 100 and p = 0.5.*
+
+$P(X = 5) = {10\choose5}(.5)^5(.5)^5 \approx .25$ while $P(X = 50) = {100\choose50}(.5)^50(.5)^50 \approx .08$
+
+A.6 A box contains 20% red marbles and 80% blue marbles. A thousand marbles are drawn at random with replacement. One of the following statements is true and why? 
+
+*About 200 marbles are going to be red, give or take a dozen or so is the right answer. The first statement doesn't take into account the chance error.*
+
+A.9 It is possible for the swings to be negative in this problem because the chance error can be negative. 
+
+B.2 One hundred draws are made at random with replacement from the box [1,2]. How small can the sum be? How large? How many times do you expect the ticket 1 to turn up? The ticket 2? About how much do you expect the sum to be?
+
+*100 is the smallest. 200 is the largest. We'd expect both tickets to turn up about half the time. We expect the sum to be 150*
+
+B.5 One ticket will be drawn at random from the box [1:10]. What is the chance that it will be 1? That it will be 3 or less? 4 or more?
+
+$\frac{1}{10}$, $P(X \leq 3) = P(X=1)+P(X=2)+P(X=3) = .3$, $P(X \geq 4) = 1 - P(X \leq 3) = .7$
+
+B.7 The first two options to this question are equivalent and correct. 
+
+C.1 The first two options are equivalent for this problem. The third option is worse than the first. 
 
 ##### FPP Chapter 17 
 
