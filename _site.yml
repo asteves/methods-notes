@@ -15,6 +15,8 @@ navbar:
       href: about.html
     - text: "Lecture Notes"
       menu:
+        - text: "Calculus"
+          href: optim.html 
         - text: "Causal Inference"
           href: causal.html
         - text: "Game Theory"
@@ -23,8 +25,6 @@ navbar:
           href: linalg.html
         - text: "Machine Learning"
           href: ml.html
-        - text: "Optimization"
-          href: optim.html 
         - text: "Probability"
           href: prob.html 
         - text: "Statistics"

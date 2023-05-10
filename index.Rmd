@@ -29,6 +29,12 @@ I have benefited greatly in my own methods education from the teaching of profes
 
 In addition to classroom teaching and tutoring, the underlying materials on this website are drawn from many resources. Below is a non-exhaustive list of books from which these materials are drawn by subject. I encourage individuals who reach this page for self-study to consult them for more detail. I have put in **bold** the text or sets of texts that strike me as the most reasonable entry point in each category. 
 
+### Calculus 
+
+Simon, Carl P., and Lawrence E. Blume. 1994. Mathematics for Economists. 1. ed. New York: Norton.
+
+**Stewart, J. 2016. Calculus: Early Transcendentals. 8th ed. Boston, MA, USA: Cengage Learning.**
+
 ### Causal Inference 
 
 Angrist, J, & Pischke J.S. 2009. Mostly Harmless Econometrics: An Empiricist’s Companion. Princeton: Princeton University Press.
@@ -84,12 +90,6 @@ Zhang, Aston, Zachary C Lipton, Mu Li, and Alexander J Smola. 2022. Dive into De
 Gill, J. 2006. Essential Mathematics for Political and Social Research. Cambridge: Cambridge University Press. 
 
 **Moore, Will H., and David A. Siegel. 2013. A Mathematics Course for Political and Social Research. Princeton, NJ: Princeton University Pres.**
-
-### Optimization 
-
-Simon, Carl P., and Lawrence E. Blume. 1994. Mathematics for Economists. 1. ed. New York: Norton.
-
-**Stewart, J. 2016. Calculus: Early Transcendentals. 8th ed. Boston, MA, USA: Cengage Learning.**
 
 ### Probability 
 
