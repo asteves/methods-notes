@@ -16,6 +16,8 @@ site: distill::distill_website
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## What's here? {#top}
+
 This page provides code in R and Python for doing linear algebra. In Python, we make use of the [NumPy](https://numpy.org/doc/stable/index.html) library and the PyTorch library.
 
 ```{python}
@@ -123,6 +125,8 @@ In python
 ```{python}
 np.random.randn(3)
 ```
+[Return to Top](#top)
+
 ## Vector Addition and Multiplication 
 
 If x and y are vectors of the same size, then x+y and x-y give their element wise sum and difference respectively. R by default computes most vector operations element wise. 
@@ -183,7 +187,6 @@ out = (p_f - p_i)/p_i
 print(out)
 ```
 ### Using what we've learned to confirm the distributive property 
-
 The distributive property $\beta(a+b) = \beta a + \beta b$ holds for any two n-vector *a* and *b* and any scalar $\beta$. 
 
 ```{r}
@@ -233,6 +236,7 @@ np.inner(x,y)
 x @ y
 ```
 
+[Return to Top](#top)
 
 ## Matrices 
 
@@ -280,6 +284,8 @@ np.identity(4)
 np.zeros((4,4))
 np.ones((4,4))
 ```
+
+[Return to Top](#top)
 
 ### Additional Definitions 
 
@@ -338,6 +344,7 @@ A = np.array([[1,-2,3], [0,2,2], [-4,-4,-4]])
 np.linalg.inv(A)
 ```
 
+[Return to Top](#top)
 
 ### Matrix Arithmetic 
 
@@ -380,6 +387,8 @@ np.matmul(A,B)
 
 np.matmul(A.T, A)
 ```
+
+[Return to Top](#top)
 
 ## Norms 
 
@@ -474,6 +483,8 @@ v = np.array([2,4,6,8])
 np.linalg.norm(u-v)
 ```
 
+[Return to Top](#top)
+
 ## Taylor Approximation 
 
 The (first order) Taylor approximation of some function $f: \textbf{R}^n \rightarrow \textbf{R}$ at the point $z$ is the affine function $\hat{f}(x) = f(z) + \nabla f(z)'(x-z)$
@@ -490,6 +501,9 @@ f_hat = lambda x: f(z) + grad_f(z) @ (x-z)
 f([1,2]), f_hat([1,2])
 f([.96, 1.98]), f_hat([.96, 1.98])
 ```
+
+[Return to Top](#top)
+
 ## Root Mean Square 
 
 The root mean square of a vector $x$ is $\frac{\lVert x\rVert}{\sqrt{n}}$. 
@@ -514,6 +528,8 @@ x = np.cos(10*t) - 2*np.sin(11*t)
 rms(x)
 ```
 
+[Return to Top](#top)
+
 ## Common Transformations 
 
 ### Demeaning a Vector 
@@ -531,6 +547,7 @@ scale_h = function(x){
 x = c(2,4,5,7)
 scale_h(x)
 ```
+
 In python 
 
 ```{python}
@@ -575,9 +592,11 @@ y = np.array([6.2, 11.2, 14.2, 14.2, 8.2, 2.2, -3.8, -4.8, -1.8, 4.2])
 corr_c(x,y)
 ```
 
+[Return to Top](#top)
+
 ## Ordinary Least Squares
 
-The simplest linear model expresses the dependence of a dependent or response variable y on independent variables $x_1,.., x_p$ and is usually written $y = X\beta + \epsilon$. See the [Lecture Notes](lectures.html) for more details on the properties of this model. 
+The simplest linear model expresses the dependence of a dependent or response variable y on independent variables $x_1,.., x_p$ and is usually written $y = X\beta + \epsilon$. See the [Lecture Notes](stats.html) for more details on the properties of this model. 
 
 Define the design matrix as the $n \times p$ matrix of independent variables $x_1,..,x_p$ and assume that the first columns is a column of ones and that the design matrix has full rank. Then the usual OLS estimator is defined as $(X'X)^{-1}X'Y$
 
@@ -615,6 +634,8 @@ X = np.column_stack((ones, x1, x2))
 # (X'X)^-1X'y
 np.linalg.inv(X.T @ X) @ X.T @ y
 ```
+
+[Return to Top](#top)
 
 ## Covariance Matrices and Standard Errors
 
@@ -763,6 +784,7 @@ print("betas:", betas)
 print("SE:", se)
 ```
 
+[Return to Top](#top)
 
 ## Principal Components Analysis 
 
@@ -851,7 +873,11 @@ transformed[:6]
 
 ```
 
+[Return to Top](#top)
+
 ## K-Means 
+
+[Return to Top](#top)
 
 ## Tensors 
 
@@ -867,3 +893,5 @@ In python using `PyTorch`
 t1 = torch.tensor(1.0)
 t1
 ```
+
+[Return to Top](#top)

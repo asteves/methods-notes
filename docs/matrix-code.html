@@ -2167,6 +2167,7 @@ Coding
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
+<li><a href="#top" id="toc-top">What’s here?</a></li>
 <li><a href="#vectors" id="toc-vectors">Vectors</a>
 <ul>
 <li><a href="#block-and-stacked-vectors" id="toc-block-and-stacked-vectors">Block and stacked vectors</a></li>
@@ -2212,6 +2213,7 @@ Coding
 </ul>
 </nav>
 </div>
+<h2 id="top">What’s here?</h2>
 <p>This page provides code in R and Python for doing linear algebra. In Python, we make use of the <a href="https://numpy.org/doc/stable/index.html">NumPy</a> library and the PyTorch library.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
@@ -2299,7 +2301,7 @@ Coding
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">## By default this is on the [0,1) interval. </span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>np.random.random(<span class="dv">3</span>)</span></code></pre></div>
-<pre><code>array([0.5214412 , 0.29198501, 0.30263653])</code></pre>
+<pre><code>array([0.61095465, 0.24394227, 0.78732346])</code></pre>
 </div>
 We can generate additional vectors from certain distributions. The most common from a simulation standpoint are standard normal.
 <div class="layout-chunk" data-layout="l-body">
@@ -2311,8 +2313,9 @@ We can generate additional vectors from certain distributions. The most common f
 <p>In python</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>np.random.randn(<span class="dv">3</span>)</span></code></pre></div>
-<pre><code>array([-2.01424194, -0.41678375, -0.49227505])</code></pre>
+<pre><code>array([ 1.30385734,  1.62952488, -1.09235248])</code></pre>
 </div>
+<p><a href="#top">Return to Top</a></p>
 <h2 id="vector-addition-and-multiplication">Vector Addition and Multiplication</h2>
 <p>If x and y are vectors of the same size, then x+y and x-y give their element wise sum and difference respectively. R by default computes most vector operations element wise.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2433,6 +2436,7 @@ We can generate additional vectors from certain distributions. The most common f
 <div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">@</span> y</span></code></pre></div>
 <pre><code>57</code></pre>
 </div>
+<p><a href="#top">Return to Top</a></p>
 <h2 id="matrices">Matrices</h2>
 <p>A matrix <span class="math inline">\(\textbf{X}\)</span> is an <span class="math inline">\(m\)</span> x <span class="math inline">\(n\)</span> data structure that is a rectangular array of scalar numbers. The numbers <span class="math inline">\(x_{ij}\)</span> are components or elements of <span class="math inline">\(\textbf{X}\)</span>. The transpose of a matrix is the <span class="math inline">\(n\)</span> x <span class="math inline">\(m\)</span> matrix <span class="math inline">\(\textbf{X}&#39;\)</span></p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2509,6 +2513,7 @@ We can generate additional vectors from certain distributions. The most common f
        [1., 1., 1., 1.],
        [1., 1., 1., 1.]])</code></pre>
 </div>
+<p><a href="#top">Return to Top</a></p>
 <h3 id="additional-definitions">Additional Definitions</h3>
 <h4 id="transpose">Transpose</h4>
 <p>The transpose in R</p>
@@ -2578,6 +2583,7 @@ We can generate additional vectors from certain distributions. The most common f
        [-2.00000000e-01,  2.00000000e-01, -5.00000000e-02],
        [ 2.00000000e-01,  3.00000000e-01,  5.00000000e-02]])</code></pre>
 </div>
+<p><a href="#top">Return to Top</a></p>
 <h3 id="matrix-arithmetic">Matrix Arithmetic</h3>
 <p>Addition and subtraction of matrices of the same order are performed element by element. Scalar multiplication is element by element</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2643,6 +2649,7 @@ We can generate additional vectors from certain distributions. The most common f
        [ 78,  93, 108],
        [ 90, 108, 126]])</code></pre>
 </div>
+<p><a href="#top">Return to Top</a></p>
 <h2 id="norms">Norms</h2>
 <h3 id="conceptual-definition">Conceptual Definition</h3>
 <p>Informally, the norm of a vector tells us how <em>big</em> it is. Formally, a norm is a function <span class="math inline">\(\lVert \cdot \rVert\)</span> that maps a vector to a scalar which satisfies:</p>
@@ -2735,6 +2742,7 @@ The distance between two vectors is <span class="math inline">\(d(x,y) = \lVert 
 <span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a>np.linalg.norm(u<span class="op">-</span>v)</span></code></pre></div>
 <pre><code>16.00124995117569</code></pre>
 </div>
+<p><a href="#top">Return to Top</a></p>
 <h2 id="taylor-approximation">Taylor Approximation</h2>
 <p>The (first order) Taylor approximation of some function <span class="math inline">\(f: \textbf{R}^n \rightarrow \textbf{R}\)</span> at the point <span class="math inline">\(z\)</span> is the affine function <span class="math inline">\(\hat{f}(x) = f(z) + \nabla f(z)&#39;(x-z)\)</span></p>
 <p>In python</p>
@@ -2750,6 +2758,7 @@ The distance between two vectors is <span class="math inline">\(d(x,y) = \lVert 
 <div class="sourceCode" id="cb97"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>f([<span class="fl">.96</span>, <span class="fl">1.98</span>]), f_hat([<span class="fl">.96</span>, <span class="fl">1.98</span>])</span></code></pre></div>
 <pre><code>(3.7331947639642977, 3.732647465028226)</code></pre>
 </div>
+<p><a href="#top">Return to Top</a></p>
 <h2 id="root-mean-square">Root Mean Square</h2>
 <p>The root mean square of a vector <span class="math inline">\(x\)</span> is <span class="math inline">\(\frac{\lVert x\rVert}{\sqrt{n}}\)</span>.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2774,6 +2783,7 @@ The distance between two vectors is <span class="math inline">\(d(x,y) = \lVert 
 <span id="cb100-4"><a href="#cb100-4" aria-hidden="true" tabindex="-1"></a>rms(x)</span></code></pre></div>
 <pre><code>1.0093902676233697</code></pre>
 </div>
+<p><a href="#top">Return to Top</a></p>
 <h2 id="common-transformations">Common Transformations</h2>
 <h3 id="demeaning-a-vector">Demeaning a Vector</h3>
 <p>A demeaned vector is the result of performing <span class="math inline">\({x - E[x]\textbf{1}}\)</span>. If we want this to be normalized, we then divide by the standard deviation <span class="math inline">\(\sigma_x = \frac{\lVert x - E[x]\textbf{1}\rVert}{\sqrt{n}}\)</span>.</p>
@@ -2834,8 +2844,9 @@ The distance between two vectors is <span class="math inline">\(d(x,y) = \lVert 
 <span id="cb106-9"><a href="#cb106-9" aria-hidden="true" tabindex="-1"></a>corr_c(x,y)</span></code></pre></div>
 <pre><code>0.9678196342570434</code></pre>
 </div>
+<p><a href="#top">Return to Top</a></p>
 <h2 id="ordinary-least-squares">Ordinary Least Squares</h2>
-<p>The simplest linear model expresses the dependence of a dependent or response variable y on independent variables <span class="math inline">\(x_1,.., x_p\)</span> and is usually written <span class="math inline">\(y = X\beta + \epsilon\)</span>. See the <a href="lectures.html">Lecture Notes</a> for more details on the properties of this model.</p>
+<p>The simplest linear model expresses the dependence of a dependent or response variable y on independent variables <span class="math inline">\(x_1,.., x_p\)</span> and is usually written <span class="math inline">\(y = X\beta + \epsilon\)</span>. See the <a href="stats.html">Lecture Notes</a> for more details on the properties of this model.</p>
 <p>Define the design matrix as the <span class="math inline">\(n \times p\)</span> matrix of independent variables <span class="math inline">\(x_1,..,x_p\)</span> and assume that the first columns is a column of ones and that the design matrix has full rank. Then the usual OLS estimator is defined as <span class="math inline">\((X&#39;X)^{-1}X&#39;Y\)</span></p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
@@ -2873,8 +2884,9 @@ x2 4.0020879</code></pre>
 <span id="cb109-10"><a href="#cb109-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb109-11"><a href="#cb109-11" aria-hidden="true" tabindex="-1"></a><span class="co"># (X&#39;X)^-1X&#39;y</span></span>
 <span id="cb109-12"><a href="#cb109-12" aria-hidden="true" tabindex="-1"></a>np.linalg.inv(X.T <span class="op">@</span> X) <span class="op">@</span> X.T <span class="op">@</span> y</span></code></pre></div>
-<pre><code>array([0.49057823, 2.00917272, 4.00361887])</code></pre>
+<pre><code>array([0.47988319, 2.00897253, 4.00299385])</code></pre>
 </div>
+<p><a href="#top">Return to Top</a></p>
 <h2 id="covariance-matrices-and-standard-errors">Covariance Matrices and Standard Errors</h2>
 <h3 id="classical-standard-errors">Classical Standard Errors</h3>
 <p>The least squares solution gives us point estimates for coefficients, but if we want to do inference, we need to get standard errors. See the <a href="lectures.html">Lecture Notes</a> for more details.</p>
@@ -3037,6 +3049,7 @@ $se
 <div class="sourceCode" id="cb119"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;SE:&quot;</span>, se)</span></code></pre></div>
 <pre><code>SE: [0.00924844 0.00929687 0.00910509]</code></pre>
 </div>
+<p><a href="#top">Return to Top</a></p>
 <h2 id="principal-components-analysis">Principal Components Analysis</h2>
 <p>Suppose we have a collection of points in <span class="math inline">\(\mathbb{R}^n\)</span> and we want to encode these points to represent a lower-dimensional version of them. If <span class="math inline">\(X&#39;\)</span> is a <span class="math inline">\(n \times p\)</span> matrix, then the first principal component of <span class="math inline">\(X&#39;\)</span> is the linear combination of the <span class="math inline">\(p\)</span> variables <span class="math inline">\(y&#39;_1 = (X-\bar{X})&#39;a_1\)</span> s.t <span class="math inline">\(V(y_1)&#39;\)</span> is maximized subject to the constraint that <span class="math inline">\(a_1&#39;a_1 =1\)</span>. Subsequent principal components are defined successively in a similar way.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -3157,7 +3170,9 @@ Colorado    1.4993407 -0.9776297  1.08400162 -0.001450164</code></pre>
        [ 2.49861285, -1.52742672,  0.592541  , -0.33855924],
        [ 1.49934074, -0.97762966,  1.08400162,  0.00145016]])</code></pre>
 </div>
+<p><a href="#top">Return to Top</a></p>
 <h2 id="k-means">K-Means</h2>
+<p><a href="#top">Return to Top</a></p>
 <h2 id="tensors">Tensors</h2>
 <p>Tensors are generic <span class="math inline">\(n^{th}\)</span> order arrays. Vectors are a 1st order tensor. Matrices are a second order tensor.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -3171,6 +3186,7 @@ Colorado    1.4993407 -0.9776297  1.08400162 -0.001450164</code></pre>
 <span id="cb129-2"><a href="#cb129-2" aria-hidden="true" tabindex="-1"></a>t1</span></code></pre></div>
 <pre><code>tensor(1.)</code></pre>
 </div>
+<p><a href="#top">Return to Top</a></p>
 <div class="sourceCode" id="cb131"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
