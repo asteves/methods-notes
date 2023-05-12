@@ -7,7 +7,7 @@ author:
 output:
   distill::distill_article:
     toc: true
-    toc_depth: 3
+    toc_depth: 4
     hightlight: haddock
 ---
 
@@ -15,10 +15,47 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-Distill is a publication format for scientific and technical writing, native to the web. 
+```{python, message = F, warning = F}
+import numpy as np 
+import pandas as pd 
+import statsmodels.api as sm
+import statsmodels.formula.api as smf 
+import torch 
+```
 
-Learn more about using Distill for R Markdown at <https://rstudio.github.io/distill>.
+## Basic Python Operations 
 
+### Data Types 
+
+#### Vectors 
+
+#### Lists 
+
+#### Matrices 
+
+#### Data Frames 
+
+### Subsetting 
+
+### Control Operations 
+
+### Functions
+
+## Graphing in Python 
+
+### The Basics 
+
+### Useful Plots for Political Science 
+
+#### Coefficient Plot 
+
+#### Added Variable Plots 
+
+#### Marginal Effects Plots 
+
+## Simulations in Python
+
+### The Birthday Problem 
 
 
 

@@ -596,6 +596,8 @@ corr_c(x,y)
 
 ## Ordinary Least Squares
 
+### OLS in Matrix Form 
+
 The simplest linear model expresses the dependence of a dependent or response variable y on independent variables $x_1,.., x_p$ and is usually written $y = X\beta + \epsilon$. See the [Lecture Notes](stats.html) for more details on the properties of this model. 
 
 Define the design matrix as the $n \times p$ matrix of independent variables $x_1,..,x_p$ and assume that the first columns is a column of ones and that the design matrix has full rank. Then the usual OLS estimator is defined as $(X'X)^{-1}X'Y$
@@ -634,6 +636,23 @@ X = np.column_stack((ones, x1, x2))
 # (X'X)^-1X'y
 np.linalg.inv(X.T @ X) @ X.T @ y
 ```
+
+### Frisch-Waugh-Lovell (FWL)
+
+FWL states that any coefficient in an OLS fit is equivalent to the coefficient estimated from a bivariate model in which the residualized outcome is regressed onto the residualized component of the predictors, and the residuals are taken from models regressing the outcome and the coefficient on all other coefficients in the OLS fit separately. 
+
+```{r}
+fwl = function(){
+  
+}
+```
+
+In python
+
+```{python}
+def FWL():
+```
+
 
 [Return to Top](#top)
 
