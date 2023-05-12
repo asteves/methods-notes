@@ -23,6 +23,7 @@ library(dplyr)
 library(fixest)
 library(ggplot2)
 library(marginaleffects)
+library(purrr)
 ```
 
 ## Basic R Operations 

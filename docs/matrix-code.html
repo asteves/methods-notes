@@ -2201,7 +2201,11 @@ Coding
 <li><a href="#demeaning-a-vector" id="toc-demeaning-a-vector">Demeaning a Vector</a></li>
 <li><a href="#correlation" id="toc-correlation">Correlation</a></li>
 </ul></li>
-<li><a href="#ordinary-least-squares" id="toc-ordinary-least-squares">Ordinary Least Squares</a></li>
+<li><a href="#ordinary-least-squares" id="toc-ordinary-least-squares">Ordinary Least Squares</a>
+<ul>
+<li><a href="#ols-in-matrix-form" id="toc-ols-in-matrix-form">OLS in Matrix Form</a></li>
+<li><a href="#frisch-waugh-lovell-fwl" id="toc-frisch-waugh-lovell-fwl">Frisch-Waugh-Lovell (FWL)</a></li>
+</ul></li>
 <li><a href="#covariance-matrices-and-standard-errors" id="toc-covariance-matrices-and-standard-errors">Covariance Matrices and Standard Errors</a>
 <ul>
 <li><a href="#classical-standard-errors" id="toc-classical-standard-errors">Classical Standard Errors</a></li>
@@ -2301,7 +2305,7 @@ Coding
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">## By default this is on the [0,1) interval. </span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>np.random.random(<span class="dv">3</span>)</span></code></pre></div>
-<pre><code>array([0.30993149, 0.85516084, 0.30513395])</code></pre>
+<pre><code>array([0.74476984, 0.30983113, 0.91237134])</code></pre>
 </div>
 We can generate additional vectors from certain distributions. The most common from a simulation standpoint are standard normal.
 <div class="layout-chunk" data-layout="l-body">
@@ -2313,7 +2317,7 @@ We can generate additional vectors from certain distributions. The most common f
 <p>In python</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>np.random.randn(<span class="dv">3</span>)</span></code></pre></div>
-<pre><code>array([0.89535041, 1.59915314, 0.16096623])</code></pre>
+<pre><code>array([0.22438554, 0.39950741, 1.42653451])</code></pre>
 </div>
 <p><a href="#top">Return to Top</a></p>
 <h2 id="vector-addition-and-multiplication">Vector Addition and Multiplication</h2>
@@ -2846,6 +2850,7 @@ The distance between two vectors is <span class="math inline">\(d(x,y) = \lVert 
 </div>
 <p><a href="#top">Return to Top</a></p>
 <h2 id="ordinary-least-squares">Ordinary Least Squares</h2>
+<h3 id="ols-in-matrix-form">OLS in Matrix Form</h3>
 <p>The simplest linear model expresses the dependence of a dependent or response variable y on independent variables <span class="math inline">\(x_1,.., x_p\)</span> and is usually written <span class="math inline">\(y = X\beta + \epsilon\)</span>. See the <a href="stats.html">Lecture Notes</a> for more details on the properties of this model.</p>
 <p>Define the design matrix as the <span class="math inline">\(n \times p\)</span> matrix of independent variables <span class="math inline">\(x_1,..,x_p\)</span> and assume that the first columns is a column of ones and that the design matrix has full rank. Then the usual OLS estimator is defined as <span class="math inline">\((X&#39;X)^{-1}X&#39;Y\)</span></p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2884,7 +2889,21 @@ x2 4.0020879</code></pre>
 <span id="cb109-10"><a href="#cb109-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb109-11"><a href="#cb109-11" aria-hidden="true" tabindex="-1"></a><span class="co"># (X&#39;X)^-1X&#39;y</span></span>
 <span id="cb109-12"><a href="#cb109-12" aria-hidden="true" tabindex="-1"></a>np.linalg.inv(X.T <span class="op">@</span> X) <span class="op">@</span> X.T <span class="op">@</span> y</span></code></pre></div>
-<pre><code>array([0.51103907, 1.99744688, 4.00583243])</code></pre>
+<pre><code>array([0.52211431, 2.01006103, 4.00494079])</code></pre>
+</div>
+<h3 id="frisch-waugh-lovell-fwl">Frisch-Waugh-Lovell (FWL)</h3>
+<p>FWL states that any coefficient in an OLS fit is equivalent to the coefficient estimated from a bivariate model in which the residualized outcome is regressed onto the residualized component of the predictors, and the residuals are taken from models regressing the outcome and the coefficient on all other coefficients in the OLS fit separately.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>fwl</span> <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='op'>)</span><span class='op'>{</span></span>
+<span>  </span>
+<span><span class='op'>}</span></span></code></pre>
+</div>
+</div>
+<p>In python</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode" id="cb111"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> FWL():</span>
+<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">pass</span></span></code></pre></div>
 </div>
 <p><a href="#top">Return to Top</a></p>
 <h2 id="covariance-matrices-and-standard-errors">Covariance Matrices and Standard Errors</h2>
@@ -2950,30 +2969,30 @@ $se
 </div>
 <p>In python</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode" id="cb112"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> betas_and_se(X,y):</span>
-<span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a>  betas <span class="op">=</span> np.linalg.inv(X.T <span class="op">@</span> X) <span class="op">@</span> X.T <span class="op">@</span> y</span>
-<span id="cb112-3"><a href="#cb112-3" aria-hidden="true" tabindex="-1"></a>  residuals <span class="op">=</span> y <span class="op">-</span> X <span class="op">@</span> betas</span>
-<span id="cb112-4"><a href="#cb112-4" aria-hidden="true" tabindex="-1"></a>  df <span class="op">=</span> X.shape[<span class="dv">0</span>] <span class="op">-</span> X.shape[<span class="dv">1</span>]</span>
-<span id="cb112-5"><a href="#cb112-5" aria-hidden="true" tabindex="-1"></a>  res_var <span class="op">=</span> np.<span class="bu">sum</span>(residuals<span class="op">**</span><span class="dv">2</span>) <span class="op">/</span> df</span>
-<span id="cb112-6"><a href="#cb112-6" aria-hidden="true" tabindex="-1"></a>  cov_mat <span class="op">=</span> res_var <span class="op">*</span> np.linalg.inv(X.T <span class="op">@</span> X)</span>
-<span id="cb112-7"><a href="#cb112-7" aria-hidden="true" tabindex="-1"></a>  se <span class="op">=</span> np.sqrt(np.diag(cov_mat))</span>
-<span id="cb112-8"><a href="#cb112-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> betas, se</span>
-<span id="cb112-9"><a href="#cb112-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb112-10"><a href="#cb112-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb112-11"><a href="#cb112-11" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> np.loadtxt(<span class="st">&quot;x1.csv&quot;</span>, delimiter <span class="op">=</span> <span class="st">&quot;,&quot;</span>, dtype <span class="op">=</span> <span class="bu">float</span>)</span>
-<span id="cb112-12"><a href="#cb112-12" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> np.loadtxt(<span class="st">&quot;x2.csv&quot;</span>, delimiter <span class="op">=</span> <span class="st">&quot;,&quot;</span>, dtype <span class="op">=</span> <span class="bu">float</span>)</span>
-<span id="cb112-13"><a href="#cb112-13" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.loadtxt(<span class="st">&quot;y.csv&quot;</span>, delimiter <span class="op">=</span> <span class="st">&quot;,&quot;</span>, dtype <span class="op">=</span> <span class="bu">float</span>)</span>
-<span id="cb112-14"><a href="#cb112-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb112-15"><a href="#cb112-15" aria-hidden="true" tabindex="-1"></a><span class="co"># One way to make a matrix from vectors </span></span>
-<span id="cb112-16"><a href="#cb112-16" aria-hidden="true" tabindex="-1"></a><span class="co"># X = np.concatenate((ones, x1, x2)).reshape((-1,3), order = &#39;F&#39;)</span></span>
-<span id="cb112-17"><a href="#cb112-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb112-18"><a href="#cb112-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternatively we can make a matrix with column_stack()</span></span>
-<span id="cb112-19"><a href="#cb112-19" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.column_stack((ones, x1, x2))</span>
-<span id="cb112-20"><a href="#cb112-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb112-21"><a href="#cb112-21" aria-hidden="true" tabindex="-1"></a>betas, se <span class="op">=</span> betas_and_se(X,y)</span>
-<span id="cb112-22"><a href="#cb112-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;betas:&quot;</span>, betas)</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> betas_and_se(X,y):</span>
+<span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a>  betas <span class="op">=</span> np.linalg.inv(X.T <span class="op">@</span> X) <span class="op">@</span> X.T <span class="op">@</span> y</span>
+<span id="cb113-3"><a href="#cb113-3" aria-hidden="true" tabindex="-1"></a>  residuals <span class="op">=</span> y <span class="op">-</span> X <span class="op">@</span> betas</span>
+<span id="cb113-4"><a href="#cb113-4" aria-hidden="true" tabindex="-1"></a>  df <span class="op">=</span> X.shape[<span class="dv">0</span>] <span class="op">-</span> X.shape[<span class="dv">1</span>]</span>
+<span id="cb113-5"><a href="#cb113-5" aria-hidden="true" tabindex="-1"></a>  res_var <span class="op">=</span> np.<span class="bu">sum</span>(residuals<span class="op">**</span><span class="dv">2</span>) <span class="op">/</span> df</span>
+<span id="cb113-6"><a href="#cb113-6" aria-hidden="true" tabindex="-1"></a>  cov_mat <span class="op">=</span> res_var <span class="op">*</span> np.linalg.inv(X.T <span class="op">@</span> X)</span>
+<span id="cb113-7"><a href="#cb113-7" aria-hidden="true" tabindex="-1"></a>  se <span class="op">=</span> np.sqrt(np.diag(cov_mat))</span>
+<span id="cb113-8"><a href="#cb113-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> betas, se</span>
+<span id="cb113-9"><a href="#cb113-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-10"><a href="#cb113-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-11"><a href="#cb113-11" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> np.loadtxt(<span class="st">&quot;x1.csv&quot;</span>, delimiter <span class="op">=</span> <span class="st">&quot;,&quot;</span>, dtype <span class="op">=</span> <span class="bu">float</span>)</span>
+<span id="cb113-12"><a href="#cb113-12" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> np.loadtxt(<span class="st">&quot;x2.csv&quot;</span>, delimiter <span class="op">=</span> <span class="st">&quot;,&quot;</span>, dtype <span class="op">=</span> <span class="bu">float</span>)</span>
+<span id="cb113-13"><a href="#cb113-13" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.loadtxt(<span class="st">&quot;y.csv&quot;</span>, delimiter <span class="op">=</span> <span class="st">&quot;,&quot;</span>, dtype <span class="op">=</span> <span class="bu">float</span>)</span>
+<span id="cb113-14"><a href="#cb113-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-15"><a href="#cb113-15" aria-hidden="true" tabindex="-1"></a><span class="co"># One way to make a matrix from vectors </span></span>
+<span id="cb113-16"><a href="#cb113-16" aria-hidden="true" tabindex="-1"></a><span class="co"># X = np.concatenate((ones, x1, x2)).reshape((-1,3), order = &#39;F&#39;)</span></span>
+<span id="cb113-17"><a href="#cb113-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-18"><a href="#cb113-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternatively we can make a matrix with column_stack()</span></span>
+<span id="cb113-19"><a href="#cb113-19" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.column_stack((ones, x1, x2))</span>
+<span id="cb113-20"><a href="#cb113-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-21"><a href="#cb113-21" aria-hidden="true" tabindex="-1"></a>betas, se <span class="op">=</span> betas_and_se(X,y)</span>
+<span id="cb113-22"><a href="#cb113-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;betas:&quot;</span>, betas)</span></code></pre></div>
 <pre><code>betas: [0.48443399 2.00528572 3.99471469]</code></pre>
-<div class="sourceCode" id="cb114"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;SE:&quot;</span>, se)</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;SE:&quot;</span>, se)</span></code></pre></div>
 <pre><code>SE: [0.00924498 0.00919862 0.00920177]</code></pre>
 </div>
 <h3 id="sandwich-standard-errors">Sandwich Standard Errors</h3>
@@ -3023,30 +3042,30 @@ $se
 </div>
 <p>In python</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode" id="cb117"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> betas_and_std_errors_sandwich(X,y):</span>
-<span id="cb117-2"><a href="#cb117-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">## Calculate Beta coefficients</span></span>
-<span id="cb117-3"><a href="#cb117-3" aria-hidden="true" tabindex="-1"></a>  betas <span class="op">=</span> np.linalg.inv(X.T <span class="op">@</span> X) <span class="op">@</span> X.T <span class="op">@</span> y</span>
-<span id="cb117-4"><a href="#cb117-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb117-5"><a href="#cb117-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">## Get residuals, degree of freedom, and squared residuals</span></span>
-<span id="cb117-6"><a href="#cb117-6" aria-hidden="true" tabindex="-1"></a>  residuals <span class="op">=</span> y <span class="op">-</span> X <span class="op">@</span> betas</span>
-<span id="cb117-7"><a href="#cb117-7" aria-hidden="true" tabindex="-1"></a>  df <span class="op">=</span> X.shape[<span class="dv">0</span>] <span class="op">-</span> X.shape[<span class="dv">1</span>]</span>
-<span id="cb117-8"><a href="#cb117-8" aria-hidden="true" tabindex="-1"></a>  u2 <span class="op">=</span> residuals<span class="op">**</span><span class="dv">2</span></span>
-<span id="cb117-9"><a href="#cb117-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-10"><a href="#cb117-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">## apply the HC1 formula with appropriate correction </span></span>
-<span id="cb117-11"><a href="#cb117-11" aria-hidden="true" tabindex="-1"></a>  beta_cov <span class="op">=</span> (X.shape[<span class="dv">0</span>]<span class="op">/</span>df) <span class="op">*</span> np.linalg.inv(X.T <span class="op">@</span> X) <span class="op">@</span> X.T <span class="op">@</span> np.diag(u2) <span class="op">@</span> X <span class="op">@</span> np.linalg.inv(X.T <span class="op">@</span> X)</span>
-<span id="cb117-12"><a href="#cb117-12" aria-hidden="true" tabindex="-1"></a>  se <span class="op">=</span> np.sqrt(np.diag(beta_cov))</span>
-<span id="cb117-13"><a href="#cb117-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> betas, se</span>
-<span id="cb117-14"><a href="#cb117-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-15"><a href="#cb117-15" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> np.loadtxt(<span class="st">&quot;x1.csv&quot;</span>, delimiter <span class="op">=</span> <span class="st">&quot;,&quot;</span>, dtype <span class="op">=</span> <span class="bu">float</span>)</span>
-<span id="cb117-16"><a href="#cb117-16" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> np.loadtxt(<span class="st">&quot;x2.csv&quot;</span>, delimiter <span class="op">=</span> <span class="st">&quot;,&quot;</span>, dtype <span class="op">=</span> <span class="bu">float</span>)</span>
-<span id="cb117-17"><a href="#cb117-17" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.loadtxt(<span class="st">&quot;y.csv&quot;</span>, delimiter <span class="op">=</span> <span class="st">&quot;,&quot;</span>, dtype <span class="op">=</span> <span class="bu">float</span>)</span>
-<span id="cb117-18"><a href="#cb117-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-19"><a href="#cb117-19" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.column_stack((ones, x1, x2))</span>
-<span id="cb117-20"><a href="#cb117-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-21"><a href="#cb117-21" aria-hidden="true" tabindex="-1"></a>betas, se <span class="op">=</span> betas_and_std_errors_sandwich(X,y)</span>
-<span id="cb117-22"><a href="#cb117-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;betas:&quot;</span>, betas)</span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> betas_and_std_errors_sandwich(X,y):</span>
+<span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">## Calculate Beta coefficients</span></span>
+<span id="cb118-3"><a href="#cb118-3" aria-hidden="true" tabindex="-1"></a>  betas <span class="op">=</span> np.linalg.inv(X.T <span class="op">@</span> X) <span class="op">@</span> X.T <span class="op">@</span> y</span>
+<span id="cb118-4"><a href="#cb118-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb118-5"><a href="#cb118-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">## Get residuals, degree of freedom, and squared residuals</span></span>
+<span id="cb118-6"><a href="#cb118-6" aria-hidden="true" tabindex="-1"></a>  residuals <span class="op">=</span> y <span class="op">-</span> X <span class="op">@</span> betas</span>
+<span id="cb118-7"><a href="#cb118-7" aria-hidden="true" tabindex="-1"></a>  df <span class="op">=</span> X.shape[<span class="dv">0</span>] <span class="op">-</span> X.shape[<span class="dv">1</span>]</span>
+<span id="cb118-8"><a href="#cb118-8" aria-hidden="true" tabindex="-1"></a>  u2 <span class="op">=</span> residuals<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb118-9"><a href="#cb118-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-10"><a href="#cb118-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">## apply the HC1 formula with appropriate correction </span></span>
+<span id="cb118-11"><a href="#cb118-11" aria-hidden="true" tabindex="-1"></a>  beta_cov <span class="op">=</span> (X.shape[<span class="dv">0</span>]<span class="op">/</span>df) <span class="op">*</span> np.linalg.inv(X.T <span class="op">@</span> X) <span class="op">@</span> X.T <span class="op">@</span> np.diag(u2) <span class="op">@</span> X <span class="op">@</span> np.linalg.inv(X.T <span class="op">@</span> X)</span>
+<span id="cb118-12"><a href="#cb118-12" aria-hidden="true" tabindex="-1"></a>  se <span class="op">=</span> np.sqrt(np.diag(beta_cov))</span>
+<span id="cb118-13"><a href="#cb118-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> betas, se</span>
+<span id="cb118-14"><a href="#cb118-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-15"><a href="#cb118-15" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> np.loadtxt(<span class="st">&quot;x1.csv&quot;</span>, delimiter <span class="op">=</span> <span class="st">&quot;,&quot;</span>, dtype <span class="op">=</span> <span class="bu">float</span>)</span>
+<span id="cb118-16"><a href="#cb118-16" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> np.loadtxt(<span class="st">&quot;x2.csv&quot;</span>, delimiter <span class="op">=</span> <span class="st">&quot;,&quot;</span>, dtype <span class="op">=</span> <span class="bu">float</span>)</span>
+<span id="cb118-17"><a href="#cb118-17" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.loadtxt(<span class="st">&quot;y.csv&quot;</span>, delimiter <span class="op">=</span> <span class="st">&quot;,&quot;</span>, dtype <span class="op">=</span> <span class="bu">float</span>)</span>
+<span id="cb118-18"><a href="#cb118-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-19"><a href="#cb118-19" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.column_stack((ones, x1, x2))</span>
+<span id="cb118-20"><a href="#cb118-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-21"><a href="#cb118-21" aria-hidden="true" tabindex="-1"></a>betas, se <span class="op">=</span> betas_and_std_errors_sandwich(X,y)</span>
+<span id="cb118-22"><a href="#cb118-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;betas:&quot;</span>, betas)</span></code></pre></div>
 <pre><code>betas: [0.48443399 2.00528572 3.99471469]</code></pre>
-<div class="sourceCode" id="cb119"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;SE:&quot;</span>, se)</span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;SE:&quot;</span>, se)</span></code></pre></div>
 <pre><code>SE: [0.00924844 0.00929687 0.00910509]</code></pre>
 </div>
 <p><a href="#top">Return to Top</a></p>
@@ -3128,41 +3147,41 @@ Colorado    1.4993407 -0.9776297  1.08400162 -0.001450164</code></pre>
 </div>
 <p>In python</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode" id="cb125"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a>np.set_printoptions(suppress<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb125-2"><a href="#cb125-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb125-3"><a href="#cb125-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> scale(mat):</span>
-<span id="cb125-4"><a href="#cb125-4" aria-hidden="true" tabindex="-1"></a>  center <span class="op">=</span> mat <span class="op">-</span> np.mean(mat, axis <span class="op">=</span> <span class="dv">0</span>)</span>
-<span id="cb125-5"><a href="#cb125-5" aria-hidden="true" tabindex="-1"></a>  scale <span class="op">=</span> center <span class="op">/</span> np.std(mat, axis <span class="op">=</span> <span class="dv">0</span>, ddof <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb125-6"><a href="#cb125-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> scale</span>
-<span id="cb125-7"><a href="#cb125-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb125-8"><a href="#cb125-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pca(mat):</span>
-<span id="cb125-9"><a href="#cb125-9" aria-hidden="true" tabindex="-1"></a>  center <span class="op">=</span> mat <span class="op">-</span> np.mean(mat, axis <span class="op">=</span> <span class="dv">0</span>)</span>
-<span id="cb125-10"><a href="#cb125-10" aria-hidden="true" tabindex="-1"></a>  scale <span class="op">=</span> center <span class="op">/</span> np.std(mat, axis <span class="op">=</span> <span class="dv">0</span>, ddof <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb125-11"><a href="#cb125-11" aria-hidden="true" tabindex="-1"></a>  cov_mat <span class="op">=</span> np.cov(scale, rowvar <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb125-12"><a href="#cb125-12" aria-hidden="true" tabindex="-1"></a>  vals, vec <span class="op">=</span> np.linalg.eig(cov_mat)</span>
-<span id="cb125-13"><a href="#cb125-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb125-14"><a href="#cb125-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">## Sort eigen vectors and eigen values in order </span></span>
-<span id="cb125-15"><a href="#cb125-15" aria-hidden="true" tabindex="-1"></a>  idx <span class="op">=</span> (<span class="op">-</span>vals).argsort()</span>
-<span id="cb125-16"><a href="#cb125-16" aria-hidden="true" tabindex="-1"></a>  vals <span class="op">=</span> vals[idx]</span>
-<span id="cb125-17"><a href="#cb125-17" aria-hidden="true" tabindex="-1"></a>  vec <span class="op">=</span> vec[:, idx]</span>
-<span id="cb125-18"><a href="#cb125-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">## Calculate new dataset </span></span>
-<span id="cb125-19"><a href="#cb125-19" aria-hidden="true" tabindex="-1"></a>  A_new <span class="op">=</span> (vec.T <span class="op">@</span> scale.T).T</span>
-<span id="cb125-20"><a href="#cb125-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> vec, A_new</span>
-<span id="cb125-21"><a href="#cb125-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb125-22"><a href="#cb125-22" aria-hidden="true" tabindex="-1"></a><span class="co">## Test with the same UArrests dataset </span></span>
-<span id="cb125-23"><a href="#cb125-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb125-24"><a href="#cb125-24" aria-hidden="true" tabindex="-1"></a><span class="co">## We need to do a bit of cleaning of the raw dataset to </span></span>
-<span id="cb125-25"><a href="#cb125-25" aria-hidden="true" tabindex="-1"></a><span class="co">## turn it into an appropriate matrix</span></span>
-<span id="cb125-26"><a href="#cb125-26" aria-hidden="true" tabindex="-1"></a>usarrests <span class="op">=</span> np.loadtxt(<span class="st">&quot;USArrests.csv&quot;</span>, delimiter <span class="op">=</span> <span class="st">&quot;,&quot;</span>, dtype <span class="op">=</span> <span class="bu">str</span>, skiprows <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb125-27"><a href="#cb125-27" aria-hidden="true" tabindex="-1"></a>usarrests <span class="op">=</span> np.delete(usarrests, (<span class="dv">0</span>), axis <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb125-28"><a href="#cb125-28" aria-hidden="true" tabindex="-1"></a>usarrests <span class="op">=</span> usarrests.astype(dtype <span class="op">=</span> <span class="st">&quot;float&quot;</span>)</span>
-<span id="cb125-29"><a href="#cb125-29" aria-hidden="true" tabindex="-1"></a>vec, transformed <span class="op">=</span> pca(usarrests)</span>
-<span id="cb125-30"><a href="#cb125-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;Principal Components:&#39;</span>, vec)</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a>np.set_printoptions(suppress<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb126-2"><a href="#cb126-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb126-3"><a href="#cb126-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> scale(mat):</span>
+<span id="cb126-4"><a href="#cb126-4" aria-hidden="true" tabindex="-1"></a>  center <span class="op">=</span> mat <span class="op">-</span> np.mean(mat, axis <span class="op">=</span> <span class="dv">0</span>)</span>
+<span id="cb126-5"><a href="#cb126-5" aria-hidden="true" tabindex="-1"></a>  scale <span class="op">=</span> center <span class="op">/</span> np.std(mat, axis <span class="op">=</span> <span class="dv">0</span>, ddof <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb126-6"><a href="#cb126-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> scale</span>
+<span id="cb126-7"><a href="#cb126-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb126-8"><a href="#cb126-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pca(mat):</span>
+<span id="cb126-9"><a href="#cb126-9" aria-hidden="true" tabindex="-1"></a>  center <span class="op">=</span> mat <span class="op">-</span> np.mean(mat, axis <span class="op">=</span> <span class="dv">0</span>)</span>
+<span id="cb126-10"><a href="#cb126-10" aria-hidden="true" tabindex="-1"></a>  scale <span class="op">=</span> center <span class="op">/</span> np.std(mat, axis <span class="op">=</span> <span class="dv">0</span>, ddof <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb126-11"><a href="#cb126-11" aria-hidden="true" tabindex="-1"></a>  cov_mat <span class="op">=</span> np.cov(scale, rowvar <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb126-12"><a href="#cb126-12" aria-hidden="true" tabindex="-1"></a>  vals, vec <span class="op">=</span> np.linalg.eig(cov_mat)</span>
+<span id="cb126-13"><a href="#cb126-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb126-14"><a href="#cb126-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">## Sort eigen vectors and eigen values in order </span></span>
+<span id="cb126-15"><a href="#cb126-15" aria-hidden="true" tabindex="-1"></a>  idx <span class="op">=</span> (<span class="op">-</span>vals).argsort()</span>
+<span id="cb126-16"><a href="#cb126-16" aria-hidden="true" tabindex="-1"></a>  vals <span class="op">=</span> vals[idx]</span>
+<span id="cb126-17"><a href="#cb126-17" aria-hidden="true" tabindex="-1"></a>  vec <span class="op">=</span> vec[:, idx]</span>
+<span id="cb126-18"><a href="#cb126-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">## Calculate new dataset </span></span>
+<span id="cb126-19"><a href="#cb126-19" aria-hidden="true" tabindex="-1"></a>  A_new <span class="op">=</span> (vec.T <span class="op">@</span> scale.T).T</span>
+<span id="cb126-20"><a href="#cb126-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> vec, A_new</span>
+<span id="cb126-21"><a href="#cb126-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb126-22"><a href="#cb126-22" aria-hidden="true" tabindex="-1"></a><span class="co">## Test with the same UArrests dataset </span></span>
+<span id="cb126-23"><a href="#cb126-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb126-24"><a href="#cb126-24" aria-hidden="true" tabindex="-1"></a><span class="co">## We need to do a bit of cleaning of the raw dataset to </span></span>
+<span id="cb126-25"><a href="#cb126-25" aria-hidden="true" tabindex="-1"></a><span class="co">## turn it into an appropriate matrix</span></span>
+<span id="cb126-26"><a href="#cb126-26" aria-hidden="true" tabindex="-1"></a>usarrests <span class="op">=</span> np.loadtxt(<span class="st">&quot;USArrests.csv&quot;</span>, delimiter <span class="op">=</span> <span class="st">&quot;,&quot;</span>, dtype <span class="op">=</span> <span class="bu">str</span>, skiprows <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb126-27"><a href="#cb126-27" aria-hidden="true" tabindex="-1"></a>usarrests <span class="op">=</span> np.delete(usarrests, (<span class="dv">0</span>), axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb126-28"><a href="#cb126-28" aria-hidden="true" tabindex="-1"></a>usarrests <span class="op">=</span> usarrests.astype(dtype <span class="op">=</span> <span class="st">&quot;float&quot;</span>)</span>
+<span id="cb126-29"><a href="#cb126-29" aria-hidden="true" tabindex="-1"></a>vec, transformed <span class="op">=</span> pca(usarrests)</span>
+<span id="cb126-30"><a href="#cb126-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;Principal Components:&#39;</span>, vec)</span></code></pre></div>
 <pre><code>Principal Components: [[ 0.53589947  0.41818087 -0.34123273  0.6492278 ]
  [ 0.58318363  0.1879856  -0.26814843 -0.74340748]
  [ 0.27819087 -0.87280619 -0.37801579  0.13387773]
  [ 0.54343209 -0.16731864  0.81777791  0.08902432]]</code></pre>
-<div class="sourceCode" id="cb127"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a>transformed[:<span class="dv">6</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a>transformed[:<span class="dv">6</span>]</span></code></pre></div>
 <pre><code>array([[ 0.97566045,  1.12200121, -0.43980366,  0.15469658],
        [ 1.93053788,  1.06242692,  2.01950027, -0.43417545],
        [ 1.74544285, -0.73845954,  0.05423025, -0.82626424],
@@ -3182,12 +3201,12 @@ Colorado    1.4993407 -0.9776297  1.08400162 -0.001450164</code></pre>
 </div>
 <p>In python using <code>PyTorch</code></p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode" id="cb129"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> torch.tensor(<span class="fl">1.0</span>)</span>
-<span id="cb129-2"><a href="#cb129-2" aria-hidden="true" tabindex="-1"></a>t1</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> torch.tensor(<span class="fl">1.0</span>)</span>
+<span id="cb130-2"><a href="#cb130-2" aria-hidden="true" tabindex="-1"></a>t1</span></code></pre></div>
 <pre><code>tensor(1.)</code></pre>
 </div>
 <p><a href="#top">Return to Top</a></p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

@@ -18,6 +18,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ```{python, message = F, warning = F}
 import numpy as np 
 import pandas as pd 
+import seaborn as sns 
 import statsmodels.api as sm
 import statsmodels.formula.api as smf 
 import torch 
