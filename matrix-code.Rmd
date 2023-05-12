@@ -864,7 +864,7 @@ def pca(mat):
 
 ## We need to do a bit of cleaning of the raw dataset to 
 ## turn it into an appropriate matrix
-usarrests = np.loadtxt("https://raw.githubusercontent.com/JWarmenhoven/ISLR-python/master/Notebooks/Data/USArrests.csv", delimiter = ",", dtype = str, skiprows = 1)
+usarrests = np.loadtxt("USArrests.csv", delimiter = ",", dtype = str, skiprows = 1)
 usarrests = np.delete(usarrests, (0), axis = 1)
 usarrests = usarrests.astype(dtype = "float")
 vec, transformed = pca(usarrests)

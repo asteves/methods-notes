@@ -2301,7 +2301,7 @@ Coding
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">## By default this is on the [0,1) interval. </span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>np.random.random(<span class="dv">3</span>)</span></code></pre></div>
-<pre><code>array([0.61095465, 0.24394227, 0.78732346])</code></pre>
+<pre><code>array([0.30993149, 0.85516084, 0.30513395])</code></pre>
 </div>
 We can generate additional vectors from certain distributions. The most common from a simulation standpoint are standard normal.
 <div class="layout-chunk" data-layout="l-body">
@@ -2313,7 +2313,7 @@ We can generate additional vectors from certain distributions. The most common f
 <p>In python</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>np.random.randn(<span class="dv">3</span>)</span></code></pre></div>
-<pre><code>array([ 1.30385734,  1.62952488, -1.09235248])</code></pre>
+<pre><code>array([0.89535041, 1.59915314, 0.16096623])</code></pre>
 </div>
 <p><a href="#top">Return to Top</a></p>
 <h2 id="vector-addition-and-multiplication">Vector Addition and Multiplication</h2>
@@ -2884,7 +2884,7 @@ x2 4.0020879</code></pre>
 <span id="cb109-10"><a href="#cb109-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb109-11"><a href="#cb109-11" aria-hidden="true" tabindex="-1"></a><span class="co"># (X&#39;X)^-1X&#39;y</span></span>
 <span id="cb109-12"><a href="#cb109-12" aria-hidden="true" tabindex="-1"></a>np.linalg.inv(X.T <span class="op">@</span> X) <span class="op">@</span> X.T <span class="op">@</span> y</span></code></pre></div>
-<pre><code>array([0.47988319, 2.00897253, 4.00299385])</code></pre>
+<pre><code>array([0.51103907, 1.99744688, 4.00583243])</code></pre>
 </div>
 <p><a href="#top">Return to Top</a></p>
 <h2 id="covariance-matrices-and-standard-errors">Covariance Matrices and Standard Errors</h2>
@@ -3153,7 +3153,7 @@ Colorado    1.4993407 -0.9776297  1.08400162 -0.001450164</code></pre>
 <span id="cb125-23"><a href="#cb125-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb125-24"><a href="#cb125-24" aria-hidden="true" tabindex="-1"></a><span class="co">## We need to do a bit of cleaning of the raw dataset to </span></span>
 <span id="cb125-25"><a href="#cb125-25" aria-hidden="true" tabindex="-1"></a><span class="co">## turn it into an appropriate matrix</span></span>
-<span id="cb125-26"><a href="#cb125-26" aria-hidden="true" tabindex="-1"></a>usarrests <span class="op">=</span> np.loadtxt(<span class="st">&quot;https://raw.githubusercontent.com/JWarmenhoven/ISLR-python/master/Notebooks/Data/USArrests.csv&quot;</span>, delimiter <span class="op">=</span> <span class="st">&quot;,&quot;</span>, dtype <span class="op">=</span> <span class="bu">str</span>, skiprows <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb125-26"><a href="#cb125-26" aria-hidden="true" tabindex="-1"></a>usarrests <span class="op">=</span> np.loadtxt(<span class="st">&quot;USArrests.csv&quot;</span>, delimiter <span class="op">=</span> <span class="st">&quot;,&quot;</span>, dtype <span class="op">=</span> <span class="bu">str</span>, skiprows <span class="op">=</span> <span class="dv">1</span>)</span>
 <span id="cb125-27"><a href="#cb125-27" aria-hidden="true" tabindex="-1"></a>usarrests <span class="op">=</span> np.delete(usarrests, (<span class="dv">0</span>), axis <span class="op">=</span> <span class="dv">1</span>)</span>
 <span id="cb125-28"><a href="#cb125-28" aria-hidden="true" tabindex="-1"></a>usarrests <span class="op">=</span> usarrests.astype(dtype <span class="op">=</span> <span class="st">&quot;float&quot;</span>)</span>
 <span id="cb125-29"><a href="#cb125-29" aria-hidden="true" tabindex="-1"></a>vec, transformed <span class="op">=</span> pca(usarrests)</span>
