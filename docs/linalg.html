@@ -2184,6 +2184,12 @@ Coding
 <li><a href="#inner-product" id="toc-inner-product">Inner Product</a></li>
 <li><a href="#matrix-multiplication" id="toc-matrix-multiplication">Matrix Multiplication</a></li>
 <li><a href="#scalar-multiplication" id="toc-scalar-multiplication">Scalar Multiplication</a></li>
+<li><a href="#vector-sums" id="toc-vector-sums">Vector Sums</a></li>
+<li><a href="#centering-matrix" id="toc-centering-matrix">Centering Matrix</a></li>
+</ul></li>
+<li><a href="#matrix-geometry" id="toc-matrix-geometry">Matrix Geometry</a>
+<ul>
+<li><a href="#vector-spaces" id="toc-vector-spaces">Vector Spaces</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -2376,6 +2382,30 @@ BA &amp;= \begin{pmatrix}
 <li>Transpose of an extended product: <strong>(ABC)’ = C’B’A’</strong></li>
 </ol>
 <p>Proof:</p>
+<h3 id="vector-sums">Vector Sums</h3>
+<p>There are some common summations that are useful to see in matrix form.</p>
+<p>Let <strong>i</strong> be a column vector of ones. <span class="math inline">\(\textbf{ix} = \sum_{i=1}^nx_i\)</span>.</p>
+<p>For any constant <em>c</em> then <span class="math inline">\(\textbf{x} = c\textbf{i} = \sum_{i=1}^ncx_i = c\sum_{i=1}^nx_i = a\textbf{i}^T\textbf{x}\)</span>.
+The <em>sum of squares</em> of the elements of <strong>x</strong> is <span class="math inline">\(\textbf{x}^T\textbf{x}\)</span>.</p>
+<h3 id="centering-matrix">Centering Matrix</h3>
+<p>A fundamental matrix that we use to transform data to deviations from their mean is the <em>centering matrix</em></p>
+<p><span class="math display">\[\begin{aligned}
+\textbf{i}\bar{x} &amp;= \textbf{i}\frac{1}{n}\textbf{i}^T\textbf{x} \\
+\textbf{i}\bar{x} &amp;= \begin{pmatrix} \bar{x} \\ \bar{x} \\\cdot \\ \cdot \\ \bar{x}\end{pmatrix} \\
+\textbf{i}\bar{x} &amp;= \frac{1}{n}\textbf{i}\textbf{i}^T\textbf{x}
+\end{aligned}\]</span></p>
+<p>The first matrix <span class="math inline">\(\frac{1}{n}ii^T\)</span> is an <span class="math inline">\(n \times n\)</span> matrix with every element equal to <span class="math inline">\(\frac{1}{2}\)</span>. This means that the set of values is <span class="math inline">\(\textbf{x} - \frac{1}{2}ii^Tx\)</span>.</p>
+<p>Since <span class="math inline">\(x = \mathbb{I}x\)</span> this implies that we can write this as <span class="math inline">\([\mathbb{I} - \frac{1}{n}ii^T]x = \textbf{M}^0\textbf{x}\)</span>. <span class="math inline">\(M^0\)</span> is an idempotent matrix, which means that it is equal to its square, and it is symmetric so <span class="math inline">\((M^0)^TM^0 = M^0\)</span>.</p>
+<p>The matrix is particularly useful when computing sums of squared deviations. For example, for a single variable <strong>x</strong> the sum of squared deviations about the mean is <span class="math inline">\(\sum_{i=1}^n(x_i - \bar{x})^2 = (\sum_{i=1}^nx_i^2) - n\bar{x}^2\)</span>.</p>
+<p>The equivalent in matrix notation is:</p>
+<p><span class="math display">\[\begin{aligned}
+\sum_{i=1}^n(x_i - \bar{x})^2 &amp;= (\textbf{x} - \bar{x}\textbf{i})(\textbf{x} - \bar{x}\textbf{i}) \\
+\sum_{i=1}^n(x_i - \bar{x})^2 &amp;= (M^0x)^T(M^0x) \\
+\sum_{i=1}^n(x_i - \bar{x})^2 &amp;= x^TM^0M^0x \\
+\sum_{i=1}^n(x_i - \bar{x})^2 &amp;= x^TM^0x
+\end{aligned}\]</span></p>
+<h2 id="matrix-geometry">Matrix Geometry</h2>
+<h3 id="vector-spaces">Vector Spaces</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr />

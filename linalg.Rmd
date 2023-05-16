@@ -258,5 +258,43 @@ Proof:
 
 Proof:
 
+### Vector Sums 
+
+There are some common summations that are useful to see in matrix form.
+
+Let **i** be a column vector of ones. $\textbf{ix} = \sum_{i=1}^nx_i$.  
+
+For any constant *c* then $\textbf{x} = c\textbf{i} = \sum_{i=1}^ncx_i = c\sum_{i=1}^nx_i = a\textbf{i}^T\textbf{x}$. 
+The *sum of squares* of the elements of **x** is $\textbf{x}^T\textbf{x}$. 
+
+### Centering Matrix 
+
+A fundamental matrix that we use to transform data to deviations from their mean is the *centering matrix* 
+
+$$\begin{aligned}
+\textbf{i}\bar{x} &= \textbf{i}\frac{1}{n}\textbf{i}^T\textbf{x} \\
+\textbf{i}\bar{x} &= \begin{pmatrix} \bar{x} \\ \bar{x} \\\cdot \\ \cdot \\ \bar{x}\end{pmatrix} \\
+\textbf{i}\bar{x} &= \frac{1}{n}\textbf{i}\textbf{i}^T\textbf{x}
+\end{aligned}$$
+
+The first matrix $\frac{1}{n}ii^T$ is an $n \times n$ matrix with every element equal to $\frac{1}{2}$. This means that the set of values is $\textbf{x} - \frac{1}{2}ii^Tx$. 
+
+Since $x = \mathbb{I}x$ this implies that we can write this as $[\mathbb{I} - \frac{1}{n}ii^T]x = \textbf{M}^0\textbf{x}$. $M^0$ is an idempotent matrix, which means that it is equal to its square, and it is symmetric so $(M^0)^TM^0 = M^0$. 
+
+The matrix is particularly useful when computing sums of squared deviations. For example, for a single variable **x** the sum of squared deviations about the mean is $\sum_{i=1}^n(x_i - \bar{x})^2 = (\sum_{i=1}^nx_i^2) - n\bar{x}^2$. 
+
+The equivalent in matrix notation is: 
+
+$$\begin{aligned}
+\sum_{i=1}^n(x_i - \bar{x})^2 &= (\textbf{x} - \bar{x}\textbf{i})(\textbf{x} - \bar{x}\textbf{i}) \\
+\sum_{i=1}^n(x_i - \bar{x})^2 &= (M^0x)^T(M^0x) \\
+\sum_{i=1}^n(x_i - \bar{x})^2 &= x^TM^0M^0x \\
+\sum_{i=1}^n(x_i - \bar{x})^2 &= x^TM^0x
+\end{aligned}$$
+
+## Matrix Geometry 
+
+### Vector Spaces 
+
 
 
