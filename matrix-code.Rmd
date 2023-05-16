@@ -31,6 +31,8 @@ For tensor processing in R, we'll use the R port of `torch`
 library(torch)
 ```
 
+For more on the theory of Linear Algebra consult the [Linear Algebra Notes](linalg.html). 
+
 ## Vectors 
 
 The simplest way to represent vectors in R is by using the vector data structure. 
@@ -643,7 +645,15 @@ FWL states that any coefficient in an OLS fit is equivalent to the coefficient e
 
 ```{r}
 fwl = function(){
+  ### Regress X1 on X2 (Partialling out/orthogonalization)
   
+  ### Compute the residuals x1_tilde (variation not explained by X2)
+  
+  ### regress Y on X2 
+  
+  ### Compute residuals y_tilde (variation not explained by X2)
+  
+  ### regress y_tilde on x1_tilde
 }
 ```
 

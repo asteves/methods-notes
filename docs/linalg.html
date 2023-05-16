@@ -2167,331 +2167,222 @@ Coding
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
-<li><a href="#vectors" id="toc-vectors">Vectors</a>
+<li><a href="#top" id="toc-top">Matrices</a>
 <ul>
-<li><a href="#vector-addition" id="toc-vector-addition">Vector Addition</a></li>
-<li><a href="#scalar-vector-multiplication" id="toc-scalar-vector-multiplication">Scalar-vector multiplication</a></li>
+<li><a href="#matrix-definition" id="toc-matrix-definition">Matrix Definition</a></li>
+<li><a href="#square-matrix" id="toc-square-matrix">Square Matrix</a></li>
+<li><a href="#symmetric-matrix" id="toc-symmetric-matrix">Symmetric Matrix</a></li>
+<li><a href="#diagonal-matrix" id="toc-diagonal-matrix">Diagonal Matrix</a></li>
+<li><a href="#scalar-matrix" id="toc-scalar-matrix">Scalar Matrix</a></li>
+<li><a href="#triangular" id="toc-triangular">Triangular</a></li>
+<li><a href="#identity-matrix" id="toc-identity-matrix">Identity Matrix</a></li>
+</ul></li>
+<li><a href="#matrix-manipulation" id="toc-matrix-manipulation">Matrix Manipulation</a>
+<ul>
+<li><a href="#transpose" id="toc-transpose">Transpose</a></li>
+<li><a href="#matrix-addition" id="toc-matrix-addition">Matrix Addition</a></li>
 <li><a href="#inner-product" id="toc-inner-product">Inner Product</a></li>
-</ul></li>
-<li><a href="#linear-functions" id="toc-linear-functions">Linear Functions</a>
-<ul>
-<li><a href="#defining-linear-and-affine-functions" id="toc-defining-linear-and-affine-functions">Defining Linear and Affine Functions</a></li>
-<li><a href="#taylor-approximation" id="toc-taylor-approximation">Taylor Approximation</a></li>
-<li><a href="#regression-model" id="toc-regression-model">Regression Model</a></li>
-</ul></li>
-<li><a href="#norm-and-distance" id="toc-norm-and-distance">Norm and distance</a>
-<ul>
-<li><a href="#distance" id="toc-distance">Distance</a></li>
-<li><a href="#standard-deviation" id="toc-standard-deviation">Standard Deviation</a></li>
-<li><a href="#angle" id="toc-angle">Angle</a></li>
-</ul></li>
-<li><a href="#linear-independence" id="toc-linear-independence">Linear Independence</a>
-<ul>
-<li><a href="#linear-dependence-and-independence" id="toc-linear-dependence-and-independence">Linear Dependence and Independence</a></li>
-<li><a href="#basis" id="toc-basis">Basis</a></li>
-</ul></li>
-<li><a href="#matrices" id="toc-matrices">Matrices</a>
-<ul>
-<li><a href="#transpose-addition-norm" id="toc-transpose-addition-norm">Transpose, Addition, Norm</a></li>
-<li><a href="#matrix-vector-multiplication" id="toc-matrix-vector-multiplication">Matrix-vector Multiplication</a></li>
-</ul></li>
-<li><a href="#matrix-matrix-multiplication" id="toc-matrix-matrix-multiplication">Matrix-matrix multiplication</a>
-<ul>
-<li><a href="#properties-of-matrix-multiplication" id="toc-properties-of-matrix-multiplication">Properties of Matrix Multiplication</a></li>
-<li><a href="#matrix-power" id="toc-matrix-power">Matrix Power</a></li>
-<li><a href="#qr-factorization" id="toc-qr-factorization">QR Factorization</a></li>
-</ul></li>
-<li><a href="#chapter-11-matrix-inverses" id="toc-chapter-11-matrix-inverses">Chapter 11: Matrix Inverses</a>
-<ul>
-<li><a href="#inverse" id="toc-inverse">Inverse</a></li>
-<li><a href="#solving-linear-equations" id="toc-solving-linear-equations">Solving linear equations</a></li>
-</ul></li>
-<li><a href="#least-squares" id="toc-least-squares">Least Squares</a>
-<ul>
-<li><a href="#solving-a-least-squares-problem" id="toc-solving-a-least-squares-problem">Solving a Least Squares Problem</a></li>
+<li><a href="#matrix-multiplication" id="toc-matrix-multiplication">Matrix Multiplication</a></li>
+<li><a href="#scalar-multiplication" id="toc-scalar-multiplication">Scalar Multiplication</a></li>
 </ul></li>
 </ul>
 </nav>
 </div>
-<h2 id="vectors">Vectors</h2>
-<p>A <em>vector</em> is an ordered list of numbers. Vectors are equal <span class="math inline">\(a = b\)</span> when they have the same size and same corresponding entries. Block (or stacked) vectors are made by concatenating two or more vectors.</p>
-<p>Subvectors are made by slicing a vector into sub-elements. Usually colon notation is used <span class="math inline">\(a_{r:s}\)</span> where the subscript is the <em>index range</em>. While most computer languages index starting at 0, R follows standard mathematical notation where vectors are indexed beginning at 1.</p>
-<p>Zero vectors are vectors with all elements equal to 0. Unsurprisingly, the Ones vector is a vector with all elements equal to 1.</p>
-<p>Sparsity is an attribute of a vector and a vector is said to be sparse if many of its entries are zero. The number of nonzero entries of a n vector is denoted <code>nnz()</code>.</p>
-<h3 id="vector-addition">Vector Addition</h3>
-<p>Two vectors of the same size can be added together by adding the corresponding elements. This forms a new vector of the same size, called the <em>sum</em> of the vectors. Subtraction is a different form of addition so works the same way.</p>
-<h4 id="properties-of-vector-addition">Properties of Vector Addition</h4>
+<p>This page provides notes on linear algebra with a bias towards results that are particularly useful to doing statistics and machine learning. Most of the notation comes from Greene (2017) and Boyd and Vandenberghe (2018).</p>
+<h2 id="top">Matrices</h2>
+<h3 id="matrix-definition">Matrix Definition</h3>
+<p>First we need some terminology. A <strong>matrix</strong> is a rectangular array of numbers.</p>
+<p><span class="math display">\[\begin{aligned}
+A &amp;= [a_{jk}]  \\
+A &amp;= [A]_{ik} \\
+A &amp;= \begin{pmatrix} a_{11} &amp; a_{12} &amp; ... &amp; a_{1k} \\
+... &amp; ... &amp; ... &amp; ... \\
+a_{n1} &amp; a_{n2} &amp; ... &amp; a_{nk}
+\end{pmatrix}
+\end{aligned}\]</span></p>
+<p>We always read any subscripted element of a matrix as “a row, column”. For example</p>
+<p><span class="math display">\[\begin{aligned}
+A &amp;= \begin{pmatrix} 1 &amp; 2 &amp; 3 \\
+4 &amp; 5 &amp; 6  \\
+7 &amp; 8 &amp; 9
+\end{pmatrix}
+\end{aligned}\]</span></p>
+<p>Then <span class="math inline">\(A_{11} = 1\)</span>.</p>
+<p>A matrix is made up of a vectors. A vector is an ordered set of numbers arranged either in a row or column. A column vector can be thought of as a matrix with one column. A row vector can be thought of a matrix with one row.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<h3 id="square-matrix">Square Matrix</h3>
+<p>A <strong>square matrix</strong> is a matrix where the number of rows is equal to the number of columns.</p>
+<h3 id="symmetric-matrix">Symmetric Matrix</h3>
+<p>There are a few matrices that are very common in statistics. The first is a <strong>symmetric matrix</strong> which is where <span class="math inline">\(a_{ik} = a_{ki}, \forall i, k\)</span></p>
+<p><span class="math display">\[\begin{aligned}
+\begin{pmatrix}
+  1 &amp; 2 &amp; 5 \\
+  2 &amp; 3 &amp; 6 \\
+  5 &amp; 6 &amp; 4
+\end{pmatrix}
+\end{aligned}\]</span> is symmetric.</p>
+<h3 id="diagonal-matrix">Diagonal Matrix</h3>
+<p>A <strong>diagonal matrix</strong> is a square matrix where all off-diagonal elements are 0, and the only non-zero elements are on the main diagonal.</p>
+<p><span class="math display">\[\begin{aligned}
+\begin{pmatrix}
+  1 &amp; 0 &amp; 0 \\
+  0 &amp; 3 &amp; 0 \\
+  0 &amp; 0 &amp; 4
+\end{pmatrix}
+\end{aligned}\]</span></p>
+<h3 id="scalar-matrix">Scalar Matrix</h3>
+<p>A <strong>scalar matrix</strong> is a square matrix where every diagonal element is the same.</p>
+<p><span class="math display">\[\begin{aligned}
+\begin{pmatrix}
+  2 &amp; 0 &amp; 0 \\
+  0 &amp; 2 &amp; 0 \\
+  0 &amp; 0 &amp; 2
+\end{pmatrix}
+\end{aligned}\]</span></p>
+<h3 id="triangular">Triangular</h3>
+<p>A <strong>triangular matrix</strong> is a matrix that has only zeros either above or below the main diagonal. If the zeros are above the diagonal, it is <em>lower triangular.</em> If the zeros are below the diagonal, it is <em>upper triangular</em>.</p>
+<p><span class="math display">\[\begin{aligned}
+\begin{pmatrix}
+  1 &amp; 0 &amp; 0 \\
+  2 &amp; 3 &amp; 0 \\
+  5 &amp; 6 &amp; 4
+\end{pmatrix}
+\end{aligned}\]</span></p>
+<h3 id="identity-matrix">Identity Matrix</h3>
+<p>A special kind of scalar, diagonal, symmetric, and triangular matrix is the <strong>idential matrix</strong>. We always denote this as <span class="math inline">\(\textbf{I}\)</span> with a subscript to denote the number of columns (the order).</p>
+<p><span class="math display">\[\begin{aligned}
+\textbf{I}_3\begin{pmatrix}
+  1 &amp; 0 &amp; 0 \\
+  0 &amp; 1 &amp; 0 \\
+  0 &amp; 0 &amp; 1
+\end{pmatrix}
+\end{aligned}\]</span></p>
+<p><a href="#top">Return to Top</a></p>
+<h2 id="matrix-manipulation">Matrix Manipulation</h2>
+<p>Two matrices <span class="math inline">\(\textbf{A}\)</span> and <span class="math inline">\(\textbf{B}\)</span> are equal if and only if they have the same dimensions <em>and</em> each element of <span class="math inline">\(\textbf{A}\)</span> is the same as each element in <span class="math inline">\(\textbf{B}\)</span>.</p>
+<p>For example,</p>
+<p><span class="math display">\[\begin{aligned}
+\textbf{A} &amp;= \begin{pmatrix}
+  1 &amp; 2 &amp; 5 \\
+  2 &amp; 3 &amp; 6 \\
+  5 &amp; 6 &amp; 4
+\end{pmatrix} \\
+\textbf{B} &amp;= \begin{pmatrix}
+  1 &amp; 2 &amp; 5 \\
+  2 &amp; 3 &amp; 6 \\
+  5 &amp; 6 &amp; 4
+\end{pmatrix}
+\end{aligned}\]</span></p>
+<p>are equal to each other.</p>
+<h3 id="transpose">Transpose</h3>
+<p>The transpose of a matrix is denoted <span class="math inline">\(\textbf{A}^T\)</span> or <span class="math inline">\(\textbf{A}^{&#39;}\)</span> is the matrix that we get by rotating the rows and columns of <span class="math inline">\(\textbf{A}\)</span>. Formally <span class="math inline">\(\textbf{B} = \textbf{A}^T \iff b_{ik} = a_{ki}\)</span>.</p>
+<p>An immediate implication of this definition is that any symmetric matrix <span class="math inline">\(\textbf{A}\)</span> is equal to <span class="math inline">\(\textbf{A}^T\)</span> <em>and</em> any matrix <span class="math inline">\(\textbf{A} = (\textbf{A}^{T})^T\)</span>.</p>
+<p><span class="math display">\[\begin{aligned}
+\textbf{A} &amp;= \begin{pmatrix}
+  1 &amp; 2 &amp; 3 \\
+  4 &amp; 5 &amp; 6 \\
+  7 &amp; 8 &amp; 9
+\end{pmatrix} \\
+\textbf{A}^T &amp;= \begin{pmatrix}
+  1 &amp; 4 &amp; 7 \\
+  2 &amp; 5 &amp; 8 \\
+  3 &amp; 6 &amp; 9
+\end{pmatrix}
+\end{aligned}\]</span></p>
+<h3 id="matrix-addition">Matrix Addition</h3>
+<p>We can add and subtract any two matrices of equal sizes (<strong>conformable</strong>). <span class="math inline">\(\textbf{C} = \textbf{A} + \textbf{B} = [a_{ik} + b_{ik}]\)</span>. A special matrix known as the <strong>zero matrix</strong> is one where all elements are zero and can be any order. It plays the same role as zero does in regular addition.</p>
+<h4 id="properties-of-matrix-addition">Properties of Matrix Addition</h4>
 <ol type="1">
-<li>Commutative: <span class="math inline">\(a + b = b + a\)</span></li>
-<li>Associative: <span class="math inline">\((a + b) + c = a + (b + c) = a + b + c\)</span></li>
-<li>Adding the zero vector leads to to no change in the original vector.</li>
-<li>Subtracting a vector from itself yields the 0 vector</li>
+<li>Matrix addition is commutative. <span class="math inline">\(\textbf{A} + \textbf{B} = \textbf{B} + \textbf{A}\)</span></li>
 </ol>
-<h3 id="scalar-vector-multiplication">Scalar-vector multiplication</h3>
-<p><em>Scalar multiplication</em> is when each element of a vector is multiplied by a scalar. A scalar means a number like 1, 46, or 3/5.</p>
-<h4 id="properties">Properties</h4>
-<ol type="1">
-<li>Commutative: <span class="math inline">\(\alpha a = a\alpha\)</span></li>
-<li>Associative: <span class="math inline">\((\beta\gamma)a = \beta(\gamma a)\)</span></li>
-<li>If a is a vector, <span class="math inline">\((\beta + \gamma)a = \beta a + \gamma a\)</span></li>
+<p>The proof is straight forward. Suppose <span class="math inline">\(\textbf{A}_{m \times n}\)</span> and <span class="math inline">\(\textbf{B}_{m \times n}\)</span>. Let <span class="math inline">\(\textbf{C}_{m \times n}\)</span> be the result of adding <span class="math inline">\(\textbf{A} + \textbf{B}\)</span>. Let <span class="math inline">\(\textbf{D}_{m \times n} = \textbf{B} + \textbf{A}\)</span>. Then:</p>
+<p><span class="math display">\[\begin{aligned}
+c_{ij} &amp;= a_{ij} + b_{ij} \\
+d_{ij} &amp;= b_{ij} + a_{ij} \\
+c_{ij} &amp;= d_{ij}
+\end{aligned}\]</span></p>
+<ol start="2" type="1">
+<li>Matrix addition is associative. <span class="math inline">\((\textbf{A} + \textbf{B}) + \textbf{B} = \textbf{A} + (\textbf{B} + \textbf{C})\)</span></li>
 </ol>
+<p>The proof is slightly more involved, but only slightly. Assume all three matrices are the same order. Let <span class="math inline">\(\textbf{D} = \textbf{B} + \textbf{C}\)</span>, <span class="math inline">\(\textbf{E} = \textbf{A} + \textbf{B}\)</span>, <span class="math inline">\(\textbf{F} = \textbf{A} + \textbf{D}\)</span>, and <span class="math inline">\(\textbf{G} = \textbf{E} + \textbf{C}\)</span>. Then:</p>
+<p><span class="math display">\[\begin{aligned}
+d_{ij} &amp;= b_{ij} + c_{ij} \\
+e_{ij} &amp;= a_{ij} + b_{ij} \\
+f_{ij} &amp;= a_{ij} + d_{ij} \rightarrow a_{ij} + b_{ij} + c_{ij}\\
+g_{ij} &amp;= e_{ij} + c_{ij} \rightarrow a_{ij} + b_{ij} + c_{ij}
+\end{aligned}\]</span>.</p>
+<p>We observe that both the new matrices <strong>F</strong> and <strong>G</strong> are the same order and that their elements are the same, completing the proof.</p>
+<ol start="3" type="1">
+<li>Matrix addition with transposes follows <span class="math inline">\((\textbf{A} +\textbf{B})^T = \textbf{A}^T + \textbf{B}^T\)</span>.</li>
+</ol>
+<p>The proof is straight forward. The <span class="math inline">\((i,j)\)</span> entry of <span class="math inline">\((\textbf{A} +\textbf{B})^T\)</span> is the sum of <span class="math inline">\((i,j)\)</span> entries of <span class="math inline">\(\textbf{A}^T + \textbf{B}^T\)</span>. which are <span class="math inline">\((j,i)\)</span> entries of <strong>A</strong> and <strong>B</strong>. That means that the <span class="math inline">\((i,j)\)</span> entry of <span class="math inline">\(\textbf{A}^T + \textbf{B}^T\)</span> is the <span class="math inline">\((j,i)\)</span> entry of the sum of <span class="math inline">\(\textbf{A} +\textbf{B}\)</span> , which is equal to the <span class="math inline">\((i,j)\)</span> entry of the transpose <span class="math inline">\((\textbf{A} +\textbf{B})^T\)</span>.</p>
 <h3 id="inner-product">Inner Product</h3>
-<p>The standard <em>inner product</em> (aka “dot product”) of two n-vectors is defined as the the scalar <span class="math inline">\(a^Tb = a_1b_1 + ... + a_nb_n\)</span> or the sum or the products of corresponding entries.</p>
-<h4 id="properties-1">Properties</h4>
+<p>We multiply matrices and vector by using the inner product (also known as the dot product). The <strong>inner product</strong> of two vectors <strong>a</strong> and <strong>b</strong> is <span class="math inline">\(a^Tb = a_1b_1 + ... + a_nb_n\)</span>. Of course provided they are conformable it is also the case that <span class="math inline">\(a^Tb = b^Ta\)</span>.</p>
+<h3 id="matrix-multiplication">Matrix Multiplication</h3>
+<p>For an <span class="math inline">\(n \times k\)</span> matrix <strong>A</strong> and a <span class="math inline">\(k \times m\)</span> matrix <strong>B</strong>, the product matrix <span class="math inline">\(\textbf{C} = \textbf{A}\textbf{B}\)</span> is a <span class="math inline">\(n \times m\)</span> matrix whose <span class="math inline">\(ik^{th}\)</span> element is the inner product of row <em>i</em> in <strong>A</strong> and column <em>k</em> in <strong>B</strong>.</p>
+<p><span class="math display">\[\begin{aligned}
+\textbf{C} = \textbf{A}\textbf{B} \rightarrow c_{ik} = a_i^Tb_k
+\end{aligned}\]</span></p>
+<p>Matrices can only be multiplied if they are conformable. In simple terms, the number of columns in <strong>A</strong> must be equal to the number of rows in <strong>B</strong>. It is not generally the case that matrix multiplication is commutative. For example consider the two matrices:</p>
+$$
+<span class="math display">\[\begin{aligned}
+A &amp;= \begin{pmatrix}
+1 &amp; 2 \\
+3 &amp; 4
+\end{pmatrix} \\
+
+B &amp;= \begin{pmatrix}
+1 &amp; 2 &amp; 3 \\
+4 &amp; 5 &amp; 6
+\end{pmatrix}
+\end{aligned}\]</span>
+<p>$$</p>
+<p>It is possible to multiply <strong>AB</strong>, but not possible to multiply <strong>BA</strong> because the latter has non-conformable arguments. Even when <strong>A</strong> and <strong>B</strong> have the same dimensions, it is generally the case that they will not be equal. Here’s a simple example.</p>
+<p><span class="math display">\[\begin{aligned}
+AB &amp;= \begin{pmatrix}
+1 &amp; 2 \\
+3 &amp; 4
+\end{pmatrix}
+\begin{pmatrix}
+5 &amp; 6 \\
+7 &amp; 8
+\end{pmatrix} = \begin{pmatrix} 19 &amp; 22 \\ 43 &amp;50 \end{pmatrix} \\
+BA &amp;= \begin{pmatrix}
+5 &amp; 6 \\
+7 &amp; 8
+\end{pmatrix}
+\begin{pmatrix}
+1 &amp; 2 \\
+4 &amp; 5
+\end{pmatrix} = \begin{pmatrix} 23 &amp; 34 \\ 31 &amp; 46 \end{pmatrix}
+\end{aligned}\]</span></p>
+<p>Because it is not the case that matrix multiplication is commutative, we have two different ways of multiplying. We can <strong>premultiply</strong> or <strong>postmultiply</strong>. In <strong>AB</strong>, <strong>B</strong> is <em>premultiplied</em> by <strong>A</strong> and <strong>A</strong> is <em>postmultiplied</em> by <strong>B</strong>.</p>
+<h3 id="scalar-multiplication">Scalar Multiplication</h3>
+<p>For any matrix (or vector), <strong>scalar multiplication</strong> is the operation of multiplying every element by a given scalar <span class="math inline">\(c\textbf{A} = [ca_{ik}]\)</span>.</p>
+<p>The product of a matrix and a vector is written <span class="math inline">\(\textbf{c} = \textbf{A}\textbf{b}\)</span>. In order to perform this operation, the number of elements in <strong>b</strong> must be equal to the number of columns in <strong>A</strong>. It’s the equivalent of multiplying a <span class="math inline">\(n \times k\)</span> matrix by a <span class="math inline">\(k \times 1\)</span> matrix.</p>
+<h4 id="properties-of-matrix-multiplication">Properties of Matrix Multiplication</h4>
 <ol type="1">
-<li>Commutativity: <span class="math inline">\(a^Tb = b^Ta\)</span>. This means that order does not matter for the arguments in the inner product.</li>
-<li>Associatitivy with scalar multiplication: <span class="math inline">\((\gamma a)^Tb = \gamma(a^Tb) = \gamma a^Tb\)</span></li>
-<li>Distributivity with vector additions <span class="math inline">\((a + b)^Tc = a^Tc + b^Tc\)</span></li>
-<li>“Expand the product”: <span class="math inline">\((a + b)^T(c+d) = a^Tc + a^Td + b^Tc + b^Td\)</span>. Note that on the left hand side the “+” means vector addition and on the right the sums means scalar addition.</li>
+<li>Associative Law: <strong>(AB)C = A(BC)</strong></li>
 </ol>
-<p>For block vectors, if vectors <em>a</em> and <em>b</em> are block vectors and the corresponding blocks have the same size (they’re conformable) then: <span class="math inline">\(a^Tb = a_1^Tb_1 + ... a_k^Tb_k\)</span></p>
-<p>The inner product of the block vectors is the sum of the inner products of the block. An example of where the inner product can be useful is giving the expected value of a quantity.</p>
-<h2 id="linear-functions">Linear Functions</h2>
-<h3 id="defining-linear-and-affine-functions">Defining Linear and Affine Functions</h3>
-<p><span class="math inline">\(f:R^n \rightarrow R\)</span> means that <span class="math inline">\(f\)</span> is a function that maps real n-vectors to real numbers. A function <span class="math inline">\(f:R^n \rightarrow R\)</span> must specify what value <span class="math inline">\(f\)</span> takes for any possible argument <span class="math inline">\(x \in R^n\)</span></p>
-<p>If <span class="math inline">\(x\)</span> is an n-vector then <span class="math inline">\(f(x)\)</span> which is a scalar denotes the <em>value</em> of the function <span class="math inline">\(f\)</span> at <span class="math inline">\(x\)</span>.</p>
-<p>We can also interpret <span class="math inline">\(f\)</span> as a function of n scalar arguments in which case <span class="math inline">\(f(x) = f(x_1,..., x_n)\)</span>.</p>
-<p><strong>The Inner product function</strong>: Suppose <span class="math inline">\(a\)</span> is an n-vector, then the inner product function for any n-vector x is: <span class="math inline">\(f(x) = a^Tx = a_1x_1 +...+a_nx_n\)</span>.</p>
-<ul>
-<li>We can think of <span class="math inline">\(f\)</span> as a weighted sum of the elements of x where the elements of a give the weights.</li>
-<li>Note that if a function is linear then it can be expressed as the inner product of its argument with some fixed vector</li>
-</ul>
-<p><strong>Superposition and Linearity</strong>: The inner product function satisfies</p>
-<p><span class="math display">\[\begin{aligned}
-f(\alpha x + \beta y) &amp;= a^T(\alpha x + \beta y) \\
-f(\alpha x + \beta y) &amp;= a^T(\alpha x) + a^T(\beta y) \\
-f(\alpha x + \beta y) &amp;= \alpha(a^T) + \beta(a^Ty) \\
-f(\alpha x + \beta y) &amp;= \alpha f(x) + \beta f(y) \\
-\end{aligned}\]</span></p>
-<p>for all n-vectors x, y and all scalars <span class="math inline">\(\alpha, \beta\)</span>. This property is called <em>superposition</em>. Any function that has this property is called <em>linear</em>.</p>
-<p>Superposition can be broken down into two properties. A function <span class="math inline">\(f: R^n \rightarrow R\)</span> is linear if it satisfies:</p>
-<ul>
-<li>Homogeneity: For any n-vector x and any scalar <span class="math inline">\(\alpha\)</span> <span class="math inline">\(f(\alpha x) = \alpha f(x)\)</span>.</li>
-<li>Additivity: For any n-vectors x, y: <span class="math inline">\(f(x+y) = f(x) + f(y)\)</span></li>
-</ul>
-<p><strong>Affine Function</strong>: A linear function plus a constant. Formally, a function <span class="math inline">\(f: R^n \rightarrow R\)</span> is affine <span class="math inline">\(iff\)</span> it can be expressed <span class="math inline">\(f(x) = a^Tx + b\)</span> for some n-vector a and scalar b.</p>
-<ul>
-<li>b is sometimes called the offset</li>
-<li>Any affine scalar valued function satisfies the variation on superposition <span class="math inline">\(f(\alpha x + \beta y) = \alpha f(x) + \beta f(y)\)</span> for all n-vectors x,y, and all scalars <span class="math inline">\(\alpha, \beta\)</span> that satisfy <span class="math inline">\(\alpha + \beta = 1\)</span>
-<ul>
-<li>For linear functions superposition holds for any coefficient pair <span class="math inline">\(\alpha, \beta\)</span></li>
-</ul></li>
-</ul>
-<h3 id="taylor-approximation">Taylor Approximation</h3>
-<p><strong>Taylor Approximation</strong>: Suppose that <span class="math inline">\(f: R^n \rightarrow R\)</span> is differentiable (its partial derivatives exist). Let <span class="math inline">\(z\)</span> be an n-vector. The first order <em>Taylor Approximation</em> of <span class="math inline">\(f\)</span> near the point <span class="math inline">\(z\)</span> is the function <span class="math inline">\(\hat{f}(x)\)</span> defined as:</p>
-<p><span class="math inline">\(\hat{f}(x) = f(z) + \frac{\partial f}{\partial x_1}(z)(x_1 - z_1) + ... \frac{\partial f}{\partial x_n}(z)(x_n - z_n)\)</span></p>
-<ul>
-<li>A Taylor approximation is an affine function of x</li>
-<li>Compact notation with inner product notation as <span class="math inline">\(\hat{f}(x) = f(z) + \nabla f(z)^T(x-z)\)</span> where <span class="math inline">\(\nabla f(z)\)</span> is the gradient of <span class="math inline">\(f\)</span> as the point z.</li>
-<li>With this notation we see that the first term is the constant <span class="math inline">\(f(z)\)</span> which is the value of the function when x = z. The second term is the inner product of the gradient of f at z and the deviation or perturbation of x from z (e.g. x - z)</li>
-</ul>
-<h3 id="regression-model">Regression Model</h3>
-<p>The affine function of x <span class="math inline">\(\hat{y} = x^T\beta + v\)</span> where <span class="math inline">\(\beta\)</span> is an n-vector and <span class="math inline">\(v\)</span> is a scalar is called a <em>regression model</em></p>
-<ul>
-<li><span class="math inline">\(\beta_i\)</span> is the amount by which <span class="math inline">\(\hat{y}\)</span> changes when feature <span class="math inline">\(i\)</span> increases by 1, holding all other features the same.</li>
-<li><span class="math inline">\(v\)</span> is the value of the <span class="math inline">\(\hat{y}\)</span> when all features have value 0</li>
-</ul>
-<p>We can use vector stacking to put the weights and offset into a single parameter vector.</p>
-<p><span class="math inline">\(\hat{y} = x^Tb + v = \begin{bmatrix} 1 \\ x \end{bmatrix}^T \begin{bmatrix} v \\ \beta \end{bmatrix} = \tilde{x}^T\tilde{\beta}\)</span></p>
-<p>where the first feature always has the value 1. This constant guarantees an intercept.</p>
-<h2 id="norm-and-distance">Norm and distance</h2>
-<p><strong>Norm</strong>: The Euclidean norm of an n-vector <em>x</em> denoted <span class="math inline">\(\lVert x \rVert\)</span> is the square root of the sum of the squares of its elements.</p>
-<p><span class="math display">\[\begin{aligned}
-\lVert x \rVert = \sqrt{x_1^2 + x_2^2 + ... + x_n^2}
-\end{aligned}\]</span></p>
-<p>As an example <span class="math inline">\(\lVert \begin{bmatrix} 2 \\ -1 \\2 \end{bmatrix} \rVert = \sqrt{9} = 3\)</span></p>
-<h5 id="properties-of-norm">Properties of norm</h5>
-<ul>
-<li>Nonnegative homogeneity. <span class="math inline">\(\lVert\beta x\rVert = \lVert\beta\rVert \lVert x \rVert\)</span>. Multiplying a vector by a scalar multiplies the norm by the absolute value of the scalar.</li>
-<li>Triangle inequality. <span class="math inline">\(\lVert x + y \rVert \leq \lVert x \rVert + \lVert y \rVert\)</span>. The norm of a sum of two vectors is no more than the sum of the norms.</li>
-<li>Also known as subadditivity.</li>
-<li>Nonnegativity. <span class="math inline">\(\lVert x \rVert &gt; 0\)</span>$</li>
-<li>Definiteness. <span class="math inline">\(\lVert x \rVert = 0 \iff x = 0\)</span></li>
-</ul>
-<p><strong>Root Mean Square Value</strong> The norm is related the RMSE value of an n-vector x is defined as <span class="math inline">\(\sqrt{\frac{x_1^2 + ... + x_n^2}{n}} = \frac{\lVert x \lVert}{\sqrt{n}}\)</span></p>
-<p><strong>Norm of a sum</strong>. The norm of a sum of two vectors x and y</p>
-<p><span class="math display">\[\begin{aligned}
-\lVert x + y \lVert ^2 &amp;= (x+y)^T(x+y) \\
-\lVert x + y \lVert ^2 &amp;= x^Tx + x^ty + y^Tx + y^Ty \\
-\lVert x + y \lVert ^2 &amp;= \lVert x\lVert ^2 + 2x^Ty + \lVert y\lVert ^2 \\
-\lVert x + y \lVert  &amp;= \sqrt{\lVert x\lVert ^2 + 2x^Ty + \lVert y\lVert ^2}
-\end{aligned}\]</span></p>
-<p><strong>Norm of blocked vectors</strong>. For the block vector d = (a,b,c) where a,b,c are vectors.</p>
-<p>$(a,b,c)= = (a, b, c) = d$</p>
-<p>In words, the norm of a stacked vector is the norm of the vector formed by the norms of the subvectors.</p>
-<p><strong>Chebyshev’s Inequality</strong>. Suppose that x is an n-vector and that k of its entries satisfy <span class="math inline">\(|x_i| \geq a, a &gt; 0\)</span>. Then k of its entries satisfy <span class="math inline">\(x_i^2 \geq a^2\)</span>.</p>
-<p>It follows from this that <span class="math inline">\(\lVert x\lVert ^2 \geq ka^2\)</span> since k of the numbers in the sum are at least <span class="math inline">\(a^2\)</span> and the other n-k numbers are nonnegative.</p>
-<p>We conclude from this Chebyshev’s Inequality <span class="math inline">\(k \leq \frac{\lVert x\lVert ^2}{a^2}\)</span>. An alternative way to write this is <span class="math inline">\(\frac{k}{n} \leq (\frac{rms(x)}{a})^2\)</span> where k is the number of entries of x with absolute value at least a. The LHS is the fraction of entries of the vector that are at least a in absolute value.</p>
-<h3 id="distance">Distance</h3>
-<p><strong>Euclidean Distance</strong>: dist(a,b) = $a - b$.</p>
-<p>As an example consider the following. <span class="math inline">\(u = \begin{bmatrix} 1.8 \\ 2.0 \\ -3.7 \\ 4.7 \end{bmatrix}\)</span>, <span class="math inline">\(v = \begin{bmatrix} 0.6 \\ 2.1 \\ 1.9 \\ -1.4 \end{bmatrix}\)</span>, <span class="math inline">\(w = \begin{bmatrix} 2.0 \\ 1.9 \\ -4.0 \\ 4.6 \end{bmatrix}\)</span>.</p>
-<p>Then, the distances between pairs are <span class="math inline">\(\lVert u - v\lVert = 8.368\)</span>, <span class="math inline">\(\lVert u - w\lVert = 0.387\)</span>, and <span class="math inline">\(\lVert v - w\lVert = 8.533\)</span></p>
-<h3 id="standard-deviation">Standard Deviation</h3>
-<p><strong>De-meaned vector</strong>: For any vector x, the vector <span class="math inline">\(\tilde{x} = x - avg(x)\textbf{1}\)</span> is the de-meaned vector.</p>
-<p><strong>Standard Deviation</strong>: The RMS value of the de-meaned vector. Defined as <span class="math inline">\(\sigma_x = \sqrt{\frac{(x_1 - \bar{x})^2 +...+(x_n - \bar{x})^2}{n}}\)</span>.</p>
-<p>We can represent this with inner products as <span class="math inline">\(\sigma_x = \frac{\lVert x - (\textbf{1}^Tx/n)\textbf{1}}{\sqrt{n}}\)</span></p>
-<h5 id="properties-of-standard-deviation">Properties of Standard Deviation</h5>
-<ul>
-<li>Adding a constant to every entry of a vector does not change its standard deviation</li>
-<li>Multiplying a vector by a scalar multiplies the standard deviation by the absolut value of the scalar.</li>
-</ul>
-<p><strong>Standardization</strong> For any de-meaned vector x, dividing by the standard deviation gives us a standardized version of x.</p>
-<p><span class="math inline">\(z = \frac{1}{\sigma_x}(x - \mu_x\textbf{1})\)</span></p>
-<h3 id="angle">Angle</h3>
-<p><strong>Cauchy-Schwarz Inequality</strong>: $|a^Tb| ab$ for any n-vectors a and b.</p>
-<p><strong>Angle between vectors</strong>: The angle between two nonzero vectors a, b is defined by <span class="math inline">\(\theta = arccos(\frac{a^Tb}{\lVert a\lVert \lVert b\lVert })\)</span> where arccos denotes the inverse cosine normalized to lie in the interval <span class="math inline">\([0, \pi]\)</span>.</p>
-<p>This is equivalent to <span class="math inline">\(\theta\)</span> being the unique number in that interval that satisfies <span class="math inline">\(a^Tb = \lVert a\lVert \lVert b\lVert cos\theta\)</span></p>
-<p><strong>Norms of sum via angles</strong>: For vectors x and y:</p>
-<p><span class="math inline">\(\lVert x+y\lVert ^2 = \lVert x\lVert ^2 + 2x^Ty + \lVert y\lVert ^2 = \lVert x\lVert ^2 + 2\lVert x\lVert \lVert y\lVert cos\theta + \lVert y\lVert ^2\)</span></p>
-<ul>
-<li>If x and y are aligned <span class="math inline">\(\theta = 0\)</span> then the norms add.</li>
-<li>If x and y are orthogonal, then we have the pythogorean theorem for norms.</li>
-</ul>
-<p><strong>Correlation Coefficient</strong>: Suppose a and b are vectors and we de-mean them. Assuming the de-meaned vectors are not zero, we define the correlation coefficient as.</p>
-<p><span class="math inline">\(\rho = \frac{\tilde{a}^T\tilde{b}}{\lVert \tilde{a}\lVert \lVert \tilde{b}\lVert }\)</span></p>
-<p><strong>Standard Deviation of a sum</strong>: <span class="math inline">\(\sigma_{a+b} = \sqrt{\sigma_a^2 + 2\rho\sigma_a\sigma_b + \sigma_b^2}\)</span></p>
-<p>Note when a and b are uncorrelated (<span class="math inline">\(\rho = 0\)</span>) then this reduces to the sum of the standard deviations.</p>
-<h2 id="linear-independence">Linear Independence</h2>
-<h3 id="linear-dependence-and-independence">Linear Dependence and Independence</h3>
-<p><strong>Linear Dependence</strong>: A collection of n-vectors <span class="math inline">\(a_1, a_2,..., a_k\)</span> with <span class="math inline">\(k\geq1\)</span> is linearly dependent if <span class="math inline">\(\beta_1a_1 + ... + \beta_ka_k = 0\)</span> holds from some <span class="math inline">\(\beta_1,..., \beta_k\)</span> that are not all zero.</p>
-<ul>
-<li>When a collection of vectors are linearly dependent, at least one vector can be expressed as a linear combination of the other vectors.</li>
-</ul>
-<p><strong>Linear Independence</strong> The above definition only holds for when <span class="math inline">\(\beta_1 = \beta_2 = ... = \beta_k = 0\)</span>. E.g. the only linear combination of vectors that equals the zero vector is the linear combination with all coefficients = 0.</p>
-<p><strong>Linear Combination of Independent Vectors</strong>: Suppose we have a vector <em>x</em> that is a linear combination of <span class="math inline">\(a_1,..., a_k\)</span>. When the vectors <span class="math inline">\(a_1,...,a_k\)</span> are linearly independent then the coefficients that form x are unique.</p>
-<h3 id="basis">Basis</h3>
-<p><strong>Independence-dimension inequality</strong>: If n-vectors <span class="math inline">\(a_1,...,a_k\)</span> are linearly independent then <span class="math inline">\(k \leq n\)</span>.</p>
-<ul>
-<li>In words “A linearly independent collection of n-vectors can have at most n elements.”</li>
-</ul>
-<p><strong>Basis</strong>: A collection of linearly independent n-vectors.</p>
-<ul>
-<li>If the n-vectors <span class="math inline">\(a_1, ..., a_n\)</span> are a basis then any n-vector <span class="math inline">\(b\)</span> can be written as a linear combination of them.</li>
-<li>Since we know any linear combination of linearly independent vectors can only be expressed in one way we have the implication that <em>any n-vector <span class="math inline">\(b\)</span> can be written in a unique way as a linear combination of a basis <span class="math inline">\(a_1,...,a_n\)</span></em></li>
-</ul>
-<h2 id="matrices">Matrices</h2>
-<p><strong>Matrix</strong>: a rectangular array of numbers written between brackets. The size of a matrix is the number of columns and the number of rows. For example, a matrix with 3 rows and 4 columns is a 3x4 matrix. In general, a matrix of size m x n is called an m x n matrix.</p>
-<p><strong>Square Matrix</strong>: a matrix that has an equal number of rows and columns. <code>mat</code> above is a square matrix.</p>
-<p><strong>Zero Matrix</strong>: A matrix with all elements set to zero</p>
-<p><strong>Identity Matrix</strong>: A square matrix with diagonal elements equal to 1 and off diagonal elements equal to 0.</p>
-<p><strong>Diagonal matrix</strong>: A matrix is diagonal if <span class="math inline">\(A_{ij} = 0, \forall i \neq j\)</span></p>
-<p><strong>Triangular Matrix</strong>: A square matrix A is <em>upper triangular</em> if <span class="math inline">\(A_{ij} = 0, i &gt; j\)</span> and is *lower triangular if <span class="math inline">\(A_{ij} = 0, i &lt; j\)</span>.</p>
-<ul>
-<li>Diagonal matrices are both upper and lower triangular.</li>
-</ul>
-<h3 id="transpose-addition-norm">Transpose, Addition, Norm</h3>
-<p>Like vectors, we can take the transpose of a matrix. Transposing twice returns original matrix.</p>
-<p>Two matrices of the same size can be added together. Addition is element-wise.</p>
-<p><strong>Properties of Matrix addition</strong></p>
-<ul>
-<li>Commutativity: A + B = B + A</li>
-<li>Associativity: A + (B + C) = (A + B) + C</li>
-<li>Addition with Zero matrix: A + 0 = A</li>
-<li>Transpose of sum: <span class="math inline">\((A + B)^T = A^T + B^T\)</span></li>
-</ul>
-<p>Scalar-matrix multiplication is also elementwise and defined similarly as with vectors</p>
-<p><strong>Matrix Norm</strong>: The norm of a matrix Ais the square root of the sum of the squares of its entries</p>
-<h3 id="matrix-vector-multiplication">Matrix-vector Multiplication</h3>
-<p>The matrix vector product y = Ax is the m-vector y with elements <span class="math inline">\(\sum_{k=1}^n A_{ik}x_k\)</span></p>
-<p><strong>Linear Dependence of Columns</strong>: The columns of a matrix are linearly dependent (do not have full rank) if <span class="math inline">\(Ax = 0\)</span> for some <span class="math inline">\(x \neq 0\)</span>. The columns of a matrix are linearly independent if <span class="math inline">\(Ax = 0 \implies x = 0\)</span></p>
-<p><strong>Properties of matrix-vector multiplication</strong>:</p>
-<ul>
-<li>multiplication distributes across the vector argument. <span class="math inline">\(A(u + v) = Au + Av\)</span></li>
-<li>multiplication distributes across the matrix argument <span class="math inline">\((A + B)u = Au + Bu\)</span></li>
-</ul>
-<h2 id="matrix-matrix-multiplication">Matrix-matrix multiplication</h2>
-<p>It is possible to multiply two matrices with compatible dimensions. Multiplying by the identity matrix will return the original matrix. Note that in general matrix multiplication is not commutative.</p>
-<h3 id="properties-of-matrix-multiplication">Properties of Matrix Multiplication</h3>
-<ul>
-<li><p>Associativity: (AB)C = A(BC). We can write the product as ABC</p></li>
-<li><p>Associativity with scalar multiplication: <span class="math inline">\(\gamma(AB)=(\gamma A)B\)</span></p></li>
-<li><p>Distributivity with addition: <span class="math inline">\(A(B+C) == (A+B)C = AC + BC\)</span></p></li>
-<li><p>Transpose of product: The transpose of a product is the product of the transposes in opposite order <span class="math inline">\((AB)^T = B^T A^T\)</span></p></li>
-</ul>
-<p>A fact about inner product and matrix-vector products. If A is m x n, x is an n-vector, and y is an m-vector, then <span class="math inline">\(y^T(Ax) = (y^T A)x = (A^Ty)^Tx\)</span>. This means that the inner product of y and Ax is equal to the inner product of x and <span class="math inline">\(A^Ty\)</span></p>
-<p><strong>Gram Matrix</strong>: For an m x n matrix A, with columns <span class="math inline">\(a_1,...,a_n\)</span> the matrix product <span class="math inline">\(G= A^TA\)</span>.</p>
-<ul>
-<li>Note, using the transpose of product rule <span class="math inline">\(G^T = (A^TA)^T = (A^T)(A^T) = A^TA = G\)</span></li>
-</ul>
-<h3 id="matrix-power">Matrix Power</h3>
-<p>If A is a square matrix then we can note <span class="math inline">\(AA = A^2\)</span> and more generally if k and l are positive integers <span class="math inline">\(A^kA^l = A^{k+l}\)</span></p>
-<h3 id="qr-factorization">QR Factorization</h3>
-<p>With a Gram matrix, we can express the condition that the n-vectors are orthonormal in notation by <span class="math inline">\(A^TA = I\)</span>. A square matrix that satisfies this property is called <strong>orthogonal</strong> and its columns are an orthonormal basis.</p>
-<h2 id="chapter-11-matrix-inverses">Chapter 11: Matrix Inverses</h2>
-<p><strong>Left Inverse</strong>: A matrix X that satisfies <span class="math inline">\(XA = I\)</span> is called a left inverse of A. The matrix is said to be <em>left invertible</em> if a left inverse exists.</p>
-<ul>
-<li>If A has a left inverse C then the columns of A are linearly independent. The converse is also true. A matrix has a left inverse iff its columns are linearly independent.</li>
-</ul>
-<p><strong>Right Inverse</strong>: A matrix A that satisfies <span class="math inline">\(AX = I\)</span> is called a right inverse of A. The matrix is <em>right invertible</em> if a right inverse exists.</p>
-<ul>
-<li>A matrix is right invertible iff its rows are linearly independent.</li>
-<li>Only square or wide matrices can be right invertible</li>
-<li>A right inverse can be used to find a solution of a square or underdetermined set of linear equations, for any vector b</li>
-</ul>
-<h3 id="inverse">Inverse</h3>
-<p>If a matrix is left and right invertible then the left and right inverses are unique and equal. When a matrix has both a left and right inverse then it is <em>nonsingular</em></p>
-<ul>
-<li>Inverible matrices must be square. A matrix A and its inverse (if it exists) satisfies <span class="math inline">\(AA{^-1} = A^{-1}A = I\)</span></li>
-<li>The square system of linear equations <span class="math inline">\(Ax = b\)</span> with A invertible has the unique solution <span class="math inline">\(x = A^{-1}b\)</span> for any n-vector b.</li>
-</ul>
-<p>For a square matrix the following are equivalent:</p>
-<ol type="1">
-<li>A is invertible</li>
-<li>The columns of A are linearly independent</li>
-<li>The rows of A are linearly independent</li>
-<li>A has a left inverse</li>
-<li>A has a right inverse</li>
+<p>Proof:</p>
+<ol start="2" type="1">
+<li>Distributive Law: <strong>A(B + C) = AB + AC</strong></li>
 </ol>
-<p>Triangular matrices with nonzero diagonal elements are invertible</p>
-<h3 id="solving-linear-equations">Solving linear equations</h3>
-<h4 id="back-substitution">Back Substitution</h4>
-<p>Given a <span class="math inline">\(n \times n\)</span> upper triangular matrix R with nonzero diagonal entries, and an n-vector <span class="math inline">\(b\)</span>.</p>
-<p>For <span class="math inline">\(i = n,...,1\)</span>,
-<span class="math inline">\(x_i = (b_i = R{i, {i+1}}x_{i+1}-...-R_{i,{n}}x_n))/R_{ii}\)</span></p>
-<p>For lower triangular matrices with non-zero diagonal elements we can solve using forward substitution, which is the reverse of this process.</p>
-<h2 id="least-squares">Least Squares</h2>
-<p>Suppose that the <span class="math inline">\(m \times n\)</span> matrix A is tall so that system of linear equations <span class="math inline">\(Ax = b\)</span> where <span class="math inline">\(b\)</span> is an m-vector is over-determined. Such an equation only has a solution if <span class="math inline">\(b\)</span> is a linear combination of the columns of A.</p>
-<ul>
-<li>This rarely happens in practice, so we seek an x for which <span class="math inline">\(r = Ax -b\)</span> is as small as possible. <span class="math inline">\(r = Ax -b\)</span> is referred to as the <em>residual</em></li>
-<li>The best way to do this is to minimize the norm of the residual $Ax - b$</li>
-</ul>
-<p>Minimizing the norm of a residual and the square of a norm are the same problem, so we minimize <span class="math inline">\(\lVert Ax - b\lVert ^2\)</span>.</p>
-<p>This approximation is often referred to as <em>linear least squares regression</em></p>
-<h3 id="solving-a-least-squares-problem">Solving a Least Squares Problem</h3>
-<p>We assume that the columns of A are full rank (e.g. linearly independent)</p>
-<h4 id="via-calculus">Via Calculus</h4>
-<p>Minimizing <span class="math inline">\(\lVert Ax -b \lVert ^2\)</span> must satsify <span class="math inline">\(\frac{\partial f}{\partial x_i} = 0\)</span>.
-We can express this as the vector equation <span class="math inline">\(\nabla f(\hat{x}) = 0\)</span> where the LHS is the gradient of <span class="math inline">\(f\)</span> evaluated at <span class="math inline">\(\hat{x}\)</span>. In matrix form this is <span class="math inline">\(\nabla f(\hat{x}) = 2A^T(Ax-b)\)</span>.</p>
-<p>We can verify this is true by deriving that from scratch. The least squares object as a sum is <span class="math inline">\(f(x) = \lVert Ax-b\lVert ^2 = \sum_{i=1}^m (\sum_{j=1}^n A_{ij}x_j - b_i)^2\)</span></p>
-<p>Take the partial derivative of <span class="math inline">\(f\)</span> with respect to <span class="math inline">\(x_k\)</span>. Differentiating by terms we get.</p>
-<p><span class="math display">\[\begin{aligned}
-\nabla f(x)_k &amp;= \frac{\partial f}{\partial x_k}(x) \\
-\nabla f(x)_k &amp;= \sum_{i=1}^m 2(\sum_{j=1}^nA_{ij}x_j -b_i)(A_{ik}) \\
-\nabla f(x)_k &amp;= \sum_{i=1}^m 2(A^T)_{ki}(Ax-b)_i \\
-\nabla f(x)_k &amp;=  (2A^T(Ax-b))_k
-\end{aligned}\]</span></p>
-<p>Any minimizer of that must be equal to zero which we can write as <span class="math inline">\(A^TA\hat{x} = A^Tb\)</span>. These are the normal equations. Because <span class="math inline">\(A^TA\)</span> is a Gram matrix and we have assumed full rank, it is invertible. This implies.</p>
-<p><span class="math inline">\(\hat{x} = (A^TA)^{-1}A^Tb\)</span> is the only solution of the normal equations and is therefore unique.</p>
-<h4 id="direct-verification">Direct Verification</h4>
-<p>We will directly show the proceeding derivation without calculus by showing that for any <span class="math inline">\(x \neq \hat{x}\)</span> we have <span class="math inline">\(\lVert A\hat{x}-b\lVert ^2 &lt; \lVert Ax-b\lVert ^2\)</span> and that will establish that <span class="math inline">\(\hat{x}\)</span> is the unique vector that minimizes our problem.</p>
-<p><span class="math display">\[\begin{aligned}
-\lVert Ax-b\lVert ^2 &amp;= \lVert (Ax-A\hat{x}) + (A\hat{x} = b)\lVert ^2 \\
-\lVert Ax-b\lVert ^2 &amp;= \lVert Ax-A\hat{x}\lVert ^2 + \lVert A\hat{x} - b\lVert ^2 + 2(Ax - A\hat{x})^T(A\hat{x}-b)\\
-\lVert Ax-b\lVert ^2 &amp;= \lVert Ax-A\hat{x}\lVert ^2 + \lVert A\hat{x} - b\lVert ^2 + (x-\hat{x})^TA^T(A\hat{x} - b)\\
-\lVert Ax-b\lVert ^2 &amp;= \lVert Ax-A\hat{x}\lVert ^2 + \lVert A\hat{x} - b\lVert ^2 + (x-\hat{x})^T(A^TA\hat{x}-A^Tb) \\
-\lVert Ax-b\lVert ^2 &amp;= \lVert Ax-A\hat{x}\lVert ^2 + \lVert A\hat{x} - b\lVert ^2 + (x - \hat{x})^T(A^TA\hat{x}- A^Tb) \\
-\lVert Ax-b\lVert ^2 &amp;= \lVert Ax-A\hat{x}\lVert ^2 + \lVert A\hat{x} - b\lVert ^2 + (x-\hat{x})0\\
-\lVert Ax-b\lVert ^2 &amp;= \lVert Ax-A\hat{x}\lVert ^2 + \lVert A\hat{x} - b\lVert ^2
-\end{aligned}\]</span></p>
-<p>Note that we made use of an inequality by plugging in the normal equations to make the 3rd term disappear. We are left with an equation that shows that <span class="math inline">\(\lVert A\hat{x}-b\lVert ^2 \leq \lVert Ax-b\lVert ^2\)</span>. To show unique minimization suppose the equality holds exactly.</p>
-<p><span class="math display">\[\begin{aligned}
-\lVert A\hat{x}-b\lVert ^2 \leq \lVert Ax-b\lVert ^2 \\
-\lVert A(x-\hat{x})\lVert ^2 &amp;= 0 \\
-A(x-\hat{x}) &amp;= 0
-\end{aligned}\]</span></p>
-<p>Since A has linearly independent columns <span class="math inline">\(x -\hat{x} = 0\)</span>. The only <span class="math inline">\(x\)</span> with the equality property is when <span class="math inline">\(x = \hat{x}\)</span></p>
-<p><strong>Orthogonality Principle</strong>: The optimal residual is orthogonal to the columns of A and therefore is orthogonal to any linear combination of the columns of A.</p>
+<p>Proof:</p>
+<ol start="3" type="1">
+<li>Transpose of a Product: <strong>(AB)’ = B’A’</strong></li>
+</ol>
+<p>Proof:</p>
+<ol start="4" type="1">
+<li>Transpose of an extended product: <strong>(ABC)’ = C’B’A’</strong></li>
+</ol>
+<p>Proof:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Unless otherwise noted, a vector is always a column vector.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

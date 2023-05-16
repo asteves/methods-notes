@@ -16,397 +16,247 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Vectors 
+This page provides notes on linear algebra with a bias towards results that are particularly useful to doing statistics and machine learning. Most of the notation comes from Greene (2017) and Boyd and Vandenberghe (2018). 
 
-A *vector* is an ordered list of numbers. Vectors are equal $a = b$ when they have the same size and same corresponding entries. Block (or stacked) vectors are made by concatenating two or more vectors.
+## Matrices {#top}
 
-Subvectors are made by slicing a vector into sub-elements. Usually colon notation is used $a_{r:s}$ where the subscript is the *index range*. While most computer languages index starting at 0, R follows standard mathematical notation where vectors are indexed beginning at 1. 
+### Matrix Definition
 
-Zero vectors are vectors with all elements equal to 0. Unsurprisingly, the Ones vector is a vector with all elements equal to 1.
+First we need some terminology. A **matrix** is a rectangular array of numbers. 
 
-Sparsity is an attribute of a vector and a vector is said to be sparse if many of its entries are zero. The number of nonzero entries of a n vector is denoted `nnz()`.
+$$\begin{aligned}
+A &= [a_{jk}]  \\
+A &= [A]_{ik} \\
+A &= \begin{pmatrix} a_{11} & a_{12} & ... & a_{1k} \\
+... & ... & ... & ... \\
+a_{n1} & a_{n2} & ... & a_{nk}
+\end{pmatrix}
+\end{aligned}$$
 
-### Vector Addition 
+We always read any subscripted element of a matrix as "a row, column". For example 
 
-Two vectors of the same size can be added together by adding the corresponding elements. This forms a new vector of the same size, called the *sum* of the vectors. Subtraction is a different form of addition so works the same way.
+$$\begin{aligned}
+A &= \begin{pmatrix} 1 & 2 & 3 \\
+4 & 5 & 6  \\
+7 & 8 & 9 
+\end{pmatrix}
+\end{aligned}$$
 
+Then $A_{11} = 1$. 
 
-#### Properties of Vector Addition 
+A matrix is made up of a vectors. A vector is an ordered set of numbers arranged either in a row or column. A column vector can be thought of as a matrix with one column. A row vector can be thought of a matrix with one row.^[Unless otherwise noted, a vector is always a column vector.] 
 
-1. Commutative: $a + b = b + a$
-2. Associative: $(a + b) + c = a + (b + c) = a + b + c$
-3. Adding the zero vector leads to to no change in the original vector. 
-4. Subtracting a vector from itself yields the 0 vector 
+### Square Matrix 
 
-### Scalar-vector multiplication 
+A **square matrix** is a matrix where the number of rows is equal to the number of columns. 
 
-*Scalar multiplication* is when each element of a vector is multiplied by a scalar. A scalar means a number like 1, 46, or 3/5. 
+### Symmetric Matrix 
 
-#### Properties 
+There are a few matrices that are very common in statistics. The first is a **symmetric matrix** which is where $a_{ik} = a_{ki}, \forall i, k$
 
-1. Commutative: $\alpha a = a\alpha$
-2. Associative: $(\beta\gamma)a = \beta(\gamma a)$
-3. If a is a vector, $(\beta + \gamma)a = \beta a + \gamma a$
+$$\begin{aligned}
+ \begin{pmatrix}
+  1 & 2 & 5 \\
+  2 & 3 & 6 \\
+  5 & 6 & 4
+ \end{pmatrix}
+\end{aligned}$$ is symmetric. 
 
+### Diagonal Matrix 
+
+A **diagonal matrix** is a square matrix where all off-diagonal elements are 0, and the only non-zero elements are on the main diagonal. 
+
+$$\begin{aligned}
+\begin{pmatrix}
+  1 & 0 & 0 \\
+  0 & 3 & 0 \\
+  0 & 0 & 4
+ \end{pmatrix}
+\end{aligned}$$
+
+### Scalar Matrix 
+
+A **scalar matrix** is a square matrix where every diagonal element is the same. 
+
+$$\begin{aligned}
+\begin{pmatrix}
+  2 & 0 & 0 \\
+  0 & 2 & 0 \\
+  0 & 0 & 2
+ \end{pmatrix}
+\end{aligned}$$
+
+### Triangular
+
+A **triangular matrix** is a matrix that has only zeros either above or below the main diagonal. If the zeros are above the diagonal, it is *lower triangular.* If the zeros are below the diagonal, it is *upper triangular*. 
+
+$$\begin{aligned}
+ \begin{pmatrix}
+  1 & 0 & 0 \\
+  2 & 3 & 0 \\
+  5 & 6 & 4
+ \end{pmatrix}
+\end{aligned}$$
+
+### Identity Matrix 
+
+A special kind of scalar, diagonal, symmetric, and triangular matrix is the **idential matrix**. We always denote this as $\textbf{I}$ with a subscript to denote the number of columns (the order). 
+
+$$\begin{aligned}
+\textbf{I}_3\begin{pmatrix}
+  1 & 0 & 0 \\
+  0 & 1 & 0 \\
+  0 & 0 & 1
+ \end{pmatrix}
+\end{aligned}$$
+
+[Return to Top](#top)
+
+## Matrix Manipulation 
+
+Two matrices $\textbf{A}$ and $\textbf{B}$ are equal if and only if they have the same dimensions *and* each element of $\textbf{A}$ is the same as each element in $\textbf{B}$. 
+
+For example, 
+
+$$\begin{aligned}
+\textbf{A} &= \begin{pmatrix}
+  1 & 2 & 5 \\
+  2 & 3 & 6 \\
+  5 & 6 & 4
+ \end{pmatrix} \\
+ \textbf{B} &= \begin{pmatrix}
+  1 & 2 & 5 \\
+  2 & 3 & 6 \\
+  5 & 6 & 4
+ \end{pmatrix}
+\end{aligned}$$
+
+are equal to each other. 
+
+### Transpose 
+
+The transpose of a matrix is denoted $\textbf{A}^T$ or $\textbf{A}^{'}$ is the matrix that we get by rotating the rows and columns of $\textbf{A}$. Formally $\textbf{B} = \textbf{A}^T \iff b_{ik} = a_{ki}$. 
+
+An immediate implication of this definition is that any symmetric matrix $\textbf{A}$ is equal to $\textbf{A}^T$ *and* any matrix $\textbf{A} = (\textbf{A}^{T})^T$. 
+
+$$\begin{aligned}
+\textbf{A} &= \begin{pmatrix}
+  1 & 2 & 3 \\
+  4 & 5 & 6 \\
+  7 & 8 & 9
+ \end{pmatrix} \\
+\textbf{A}^T &= \begin{pmatrix}
+  1 & 4 & 7 \\
+  2 & 5 & 8 \\
+  3 & 6 & 9
+ \end{pmatrix}
+\end{aligned}$$
+
+### Matrix Addition 
+
+We can add and subtract any two matrices of equal sizes (**conformable**). $\textbf{C} = \textbf{A} + \textbf{B} = [a_{ik} + b_{ik}]$. A special matrix known as the **zero matrix** is one where all elements are zero and can be any order. It plays the same role as zero does in regular addition. 
+
+#### Properties of Matrix Addition 
+
+1. Matrix addition is commutative. $\textbf{A} + \textbf{B} = \textbf{B} + \textbf{A}$
+
+The proof is straight forward. Suppose $\textbf{A}_{m \times n}$ and $\textbf{B}_{m \times n}$. Let $\textbf{C}_{m \times n}$ be the result of adding $\textbf{A} + \textbf{B}$. Let $\textbf{D}_{m \times n} = \textbf{B} + \textbf{A}$. Then:
+
+$$\begin{aligned}
+c_{ij} &= a_{ij} + b_{ij} \\
+d_{ij} &= b_{ij} + a_{ij} \\
+c_{ij} &= d_{ij}
+\end{aligned}$$
+
+2. Matrix addition is associative. $(\textbf{A} + \textbf{B}) + \textbf{B} = \textbf{A} + (\textbf{B} + \textbf{C})$
+
+The proof is slightly more involved, but only slightly. Assume all three matrices are the same order. Let $\textbf{D} = \textbf{B} + \textbf{C}$, $\textbf{E} = \textbf{A} + \textbf{B}$, $\textbf{F} = \textbf{A} + \textbf{D}$, and $\textbf{G} = \textbf{E} + \textbf{C}$. Then: 
+
+$$\begin{aligned}
+d_{ij} &= b_{ij} + c_{ij} \\
+e_{ij} &= a_{ij} + b_{ij} \\
+f_{ij} &= a_{ij} + d_{ij} \rightarrow a_{ij} + b_{ij} + c_{ij}\\
+g_{ij} &= e_{ij} + c_{ij} \rightarrow a_{ij} + b_{ij} + c_{ij}
+\end{aligned}$$. 
+
+We observe that both the new matrices **F** and **G** are the same order and that their elements are the same, completing the proof. 
+
+3. Matrix addition with transposes follows $(\textbf{A} +\textbf{B})^T = \textbf{A}^T + \textbf{B}^T$. 
+
+The proof is straight forward.  The $(i,j)$ entry of $(\textbf{A} +\textbf{B})^T$ is the sum of $(i,j)$ entries of $\textbf{A}^T + \textbf{B}^T$. which are $(j,i)$ entries of **A** and **B**. That means that the $(i,j)$ entry of $\textbf{A}^T + \textbf{B}^T$ is the $(j,i)$ entry of the sum of $\textbf{A} +\textbf{B}$ , which is equal to the $(i,j)$ entry of the transpose $(\textbf{A} +\textbf{B})^T$.  
 
 ### Inner Product 
 
-The standard *inner product* (aka "dot product") of two n-vectors is defined as the the scalar $a^Tb = a_1b_1 + ... + a_nb_n$ or the sum or the products of corresponding entries. 
+We multiply matrices and vector by using the inner product (also known as the dot product). The **inner product** of two vectors **a** and **b** is $a^Tb = a_1b_1 + ... + a_nb_n$. Of course provided they are conformable it is also the case that $a^Tb = b^Ta$. 
 
+### Matrix Multiplication 
 
-#### Properties 
-
-1. Commutativity: $a^Tb = b^Ta$. This means that order does not matter for the arguments in the inner product. 
-2. Associatitivy with scalar multiplication: $(\gamma a)^Tb = \gamma(a^Tb) = \gamma a^Tb$
-3. Distributivity with vector additions $(a + b)^Tc = a^Tc + b^Tc$
-4. "Expand the product": $(a + b)^T(c+d) = a^Tc + a^Td + b^Tc + b^Td$. Note that on the left hand side the "+" means vector addition and on the right the sums means scalar addition. 
-
-For block vectors, if vectors *a* and *b* are block vectors and the corresponding blocks have the same size (they're conformable) then: $a^Tb = a_1^Tb_1 + ... a_k^Tb_k$
-
-The inner product of the block vectors is the sum of the inner products of the block. An example of where the inner product can be useful is giving the expected value of a quantity. 
-
-
-## Linear Functions 
-
-### Defining Linear and Affine Functions 
-$f:R^n \rightarrow R$ means that $f$ is a function that maps real n-vectors to real numbers. A function $f:R^n \rightarrow R$ must specify what value $f$ takes for any possible argument $x \in R^n$
-
-If $x$ is an n-vector then $f(x)$ which is a scalar denotes the *value* of the function $f$ at $x$. 
-
-We can also interpret $f$ as a function of n scalar arguments in which case $f(x) = f(x_1,..., x_n)$.
-
-**The Inner product function**: Suppose $a$ is an n-vector, then the inner product function for any n-vector x is: $f(x) = a^Tx = a_1x_1 +...+a_nx_n$. 
-
-- We can think of $f$ as a weighted sum of the elements of x where the elements of a give the weights.
-- Note that if a function is linear then it can be expressed as the inner product of its argument with some fixed vector
-
-**Superposition and Linearity**: The inner product function satisfies 
+For an $n \times k$ matrix **A** and a $k \times m$ matrix **B**, the product matrix $\textbf{C} = \textbf{A}\textbf{B}$ is a $n \times m$ matrix whose $ik^{th}$ element is the inner product of row *i* in **A** and column *k* in **B**. 
 
 $$\begin{aligned}
-f(\alpha x + \beta y) &= a^T(\alpha x + \beta y) \\
-f(\alpha x + \beta y) &= a^T(\alpha x) + a^T(\beta y) \\
-f(\alpha x + \beta y) &= \alpha(a^T) + \beta(a^Ty) \\
-f(\alpha x + \beta y) &= \alpha f(x) + \beta f(y) \\
+\textbf{C} = \textbf{A}\textbf{B} \rightarrow c_{ik} = a_i^Tb_k
 \end{aligned}$$
 
-for all n-vectors x, y and all scalars $\alpha, \beta$. This property is called *superposition*. Any function that has this property is called *linear*. 
-
-Superposition can be broken down into two properties. A function $f: R^n \rightarrow R$ is linear if it satisfies: 
-
-- Homogeneity: For any n-vector x and any scalar $\alpha$ $f(\alpha x) = \alpha f(x)$. 
-- Additivity: For any n-vectors x, y: $f(x+y) = f(x) + f(y)$
-
-**Affine Function**: A linear function plus a constant. Formally, a function $f: R^n \rightarrow R$ is affine $iff$ it can be expressed $f(x) = a^Tx + b$ for some n-vector a and scalar b. 
-
-- b is sometimes called the offset
-- Any affine scalar valued function satisfies the variation on superposition $f(\alpha x + \beta y) = \alpha f(x) + \beta f(y)$ for all n-vectors x,y, and all scalars $\alpha, \beta$ that satisfy $\alpha + \beta = 1$
-    - For linear functions superposition holds for any coefficient pair $\alpha, \beta$
-    
-### Taylor Approximation 
-
-**Taylor Approximation**: Suppose that $f: R^n \rightarrow R$ is differentiable (its partial derivatives exist). Let $z$ be an n-vector. The first order *Taylor Approximation* of $f$ near the point $z$ is the function $\hat{f}(x)$ defined as: 
-
-$\hat{f}(x) = f(z) + \frac{\partial f}{\partial x_1}(z)(x_1 - z_1) + ... \frac{\partial f}{\partial x_n}(z)(x_n - z_n)$
-
-- A Taylor approximation is an affine function of x 
-- Compact notation with inner product notation as $\hat{f}(x) = f(z) + \nabla f(z)^T(x-z)$ where $\nabla f(z)$ is the gradient of $f$ as the point z. 
-- With this notation we see that the first term is the constant $f(z)$ which is the value of the function when x = z. The second term is the inner product of the gradient of f at z and the deviation or perturbation of x from z (e.g. x - z)
-
-### Regression Model 
-
-The affine function of x $\hat{y} = x^T\beta + v$ where $\beta$ is an n-vector and $v$ is a scalar is called a *regression model* 
-
-- $\beta_i$ is the amount by which $\hat{y}$ changes when feature $i$ increases by 1, holding all other features the same. 
--  $v$ is the value of the $\hat{y}$ when all features have value 0 
-
-We can use vector stacking to put the weights and offset into a single parameter vector. 
-
-$\hat{y} = x^Tb + v = \begin{bmatrix} 1 \\ x  \end{bmatrix}^T \begin{bmatrix} v \\ \beta  \end{bmatrix} = \tilde{x}^T\tilde{\beta}$ 
-
-where the first feature always has the value 1. This constant guarantees an intercept. 
-
-## Norm and distance 
-
-**Norm**: The Euclidean norm of an n-vector *x* denoted $\lVert x \rVert$ is the square root of the sum of the squares of its elements. 
+Matrices can only be multiplied if they are conformable. In simple terms, the number of columns in **A** must be equal to the number of rows in **B**. It is not generally the case that matrix multiplication is commutative. For example consider the two matrices: 
 
 $$\begin{aligned}
-\lVert x \rVert = \sqrt{x_1^2 + x_2^2 + ... + x_n^2}
+A &= \begin{pmatrix}
+1 & 2 \\ 
+3 & 4 
+\end{pmatrix} \\
+
+B &= \begin{pmatrix}
+1 & 2 & 3 \\
+4 & 5 & 6
+\end{pmatrix}
 \end{aligned}$$
 
-As an example $\lVert \begin{bmatrix} 2 \\ -1 \\2  \end{bmatrix} \rVert = \sqrt{9} = 3$
-
-##### Properties of norm 
-
-- Nonnegative homogeneity. $\lVert\beta x\rVert = \lVert\beta\rVert \lVert x \rVert$. Multiplying a vector by a scalar multiplies the norm by the absolute value of the scalar. 
-- Triangle inequality. $\lVert x + y \rVert \leq \lVert x \rVert + \lVert y \rVert$. The norm of a sum of two vectors is no more than the sum of the norms. 
-- Also known as subadditivity. 
-- Nonnegativity. $\lVert x \rVert > 0$$
-- Definiteness. $\lVert x \rVert = 0 \iff x = 0$
-
-**Root Mean Square Value** The norm is related the RMSE value of an n-vector x is defined as $\sqrt{\frac{x_1^2 + ... + x_n^2}{n}} = \frac{\lVert x \lVert}{\sqrt{n}}$
-
-**Norm of a sum**. The norm of a sum of two vectors x and y 
+It is possible to multiply **AB**, but not possible to multiply **BA** because the latter has non-conformable arguments. Even when **A** and **B** have the same dimensions, it is generally the case that they will not be equal. Here's a simple example. 
 
 $$\begin{aligned}
-\lVert x + y \lVert ^2 &= (x+y)^T(x+y) \\
-\lVert x + y \lVert ^2 &= x^Tx + x^ty + y^Tx + y^Ty \\
-\lVert x + y \lVert ^2 &= \lVert x\lVert ^2 + 2x^Ty + \lVert y\lVert ^2 \\
-\lVert x + y \lVert  &= \sqrt{\lVert x\lVert ^2 + 2x^Ty + \lVert y\lVert ^2}
+AB &= \begin{pmatrix}
+1 & 2 \\ 
+3 & 4 
+\end{pmatrix} 
+\begin{pmatrix}
+ 5 & 6 \\
+ 7 & 8
+\end{pmatrix} = \begin{pmatrix} 19 & 22 \\ 43 &50 \end{pmatrix} \\
+BA &= \begin{pmatrix}
+5 & 6 \\ 
+7 & 8 
+\end{pmatrix} 
+\begin{pmatrix}
+1 & 2 \\
+4 & 5 
+\end{pmatrix} = \begin{pmatrix} 23 & 34 \\ 31 & 46 \end{pmatrix}
 \end{aligned}$$
 
-**Norm of blocked vectors**. For the block vector d = (a,b,c) where a,b,c are vectors. 
+Because it is not the case that matrix multiplication is commutative, we have two different ways of multiplying. We can **premultiply** or **postmultiply**. In **AB**, **B** is *premultiplied* by **A** and **A** is *postmultiplied* by **B**. 
 
-$\lVert (a,b,c)\lVert  = \sqrt{\lVert a\lVert ^2 + \lVert b\lVert ^2 + \lVert c\lVert ^2} = (\lVert a\lVert , \lVert b\lVert , \lVert c\lVert ) = \lVert d\lVert $
+### Scalar Multiplication 
 
-In words, the norm of a stacked vector is the norm of the vector formed by the norms of the subvectors. 
+For any matrix (or vector), **scalar multiplication** is the operation of multiplying every element by a given scalar $c\textbf{A} = [ca_{ik}]$. 
 
-**Chebyshev's Inequality**. Suppose that x is an n-vector and that k of its entries satisfy $|x_i| \geq a, a > 0$. Then k of its entries satisfy $x_i^2 \geq a^2$. 
+The product of a matrix and a vector is written $\textbf{c} = \textbf{A}\textbf{b}$. In order to perform this operation, the number of elements in **b** must be equal to the number of columns in **A**. It's the equivalent of multiplying a $n \times k$ matrix by a $k \times 1$ matrix.
 
-It follows from this that $\lVert x\lVert ^2 \geq ka^2$ since k of the numbers in the sum are at least $a^2$ and the other n-k numbers are nonnegative. 
+#### Properties of Matrix Multiplication 
 
-We conclude from this Chebyshev's Inequality $k \leq \frac{\lVert x\lVert ^2}{a^2}$. An alternative way to write this is $\frac{k}{n} \leq (\frac{rms(x)}{a})^2$ where k is the number of entries of x with absolute value at least a. The LHS is the fraction of entries of the vector that are at least a in absolute value. 
+1. Associative Law: **(AB)C = A(BC)**
 
-### Distance 
+Proof: 
 
-**Euclidean Distance**: dist(a,b) = $\lVert a - b\lVert $. 
+2. Distributive Law: **A(B + C) = AB + AC**
 
-As an example consider the following. $u = \begin{bmatrix} 1.8 \\ 2.0 \\ -3.7 \\ 4.7 \end{bmatrix}$, $v = \begin{bmatrix} 0.6 \\ 2.1 \\ 1.9 \\ -1.4 \end{bmatrix}$, $w = \begin{bmatrix} 2.0 \\ 1.9 \\ -4.0 \\ 4.6 \end{bmatrix}$. 
+Proof: 
 
-Then, the distances between pairs are $\lVert u - v\lVert  = 8.368$, $\lVert u - w\lVert  = 0.387$, and $\lVert v - w\lVert  = 8.533$
+3. Transpose of a Product: **(AB)' = B'A'** 
 
-### Standard Deviation 
+Proof:
 
-**De-meaned vector**: For any vector x, the vector $\tilde{x} = x - avg(x)\textbf{1}$ is the de-meaned vector. 
+4. Transpose of an extended product: **(ABC)' = C'B'A'**
 
-**Standard Deviation**: The RMS value of the de-meaned vector. Defined as $\sigma_x = \sqrt{\frac{(x_1 - \bar{x})^2 +...+(x_n - \bar{x})^2}{n}}$. 
+Proof:
 
-We can represent this with inner products as $\sigma_x = \frac{\lVert x - (\textbf{1}^Tx/n)\textbf{1}}{\sqrt{n}}$
 
-##### Properties of Standard Deviation 
-
-- Adding a constant to every entry of a vector does not change its standard deviation 
-- Multiplying a vector by a scalar multiplies the standard deviation by the absolut value of the scalar. 
-
-**Standardization** For any de-meaned vector x, dividing by the standard deviation gives us a standardized version of x. 
-
-$z = \frac{1}{\sigma_x}(x - \mu_x\textbf{1})$
-
-### Angle 
-
-**Cauchy-Schwarz Inequality**: $|a^Tb| \leq \lVert a\lVert  \lVert b\lVert $ for any n-vectors a and b. 
-
-**Angle between vectors**: The angle between two nonzero vectors a, b is defined by $\theta = arccos(\frac{a^Tb}{\lVert a\lVert \lVert b\lVert })$ where arccos denotes the inverse cosine normalized to lie in the interval $[0, \pi]$. 
-
-This is equivalent to $\theta$ being the unique number in that interval that satisfies $a^Tb = \lVert a\lVert \lVert b\lVert cos\theta$ 
-
-**Norms of sum via angles**: For vectors x and y: 
-
-$\lVert x+y\lVert ^2 = \lVert x\lVert ^2 + 2x^Ty + \lVert y\lVert ^2 = \lVert x\lVert ^2 + 2\lVert x\lVert \lVert y\lVert cos\theta + \lVert y\lVert ^2$ 
-
-- If x and y are aligned $\theta = 0$ then the norms add. 
-- If x and y are orthogonal, then we have the pythogorean theorem for norms. 
-
-**Correlation Coefficient**: Suppose a and b are vectors and we de-mean them. Assuming the de-meaned vectors are not zero, we define the correlation coefficient as. 
-
-$\rho = \frac{\tilde{a}^T\tilde{b}}{\lVert \tilde{a}\lVert \lVert \tilde{b}\lVert }$ 
-
-
-**Standard Deviation of a sum**: $\sigma_{a+b} = \sqrt{\sigma_a^2 + 2\rho\sigma_a\sigma_b + \sigma_b^2}$
-
-Note when a and b are uncorrelated ($\rho = 0$) then this reduces to the sum of the standard deviations. 
-
-## Linear Independence 
-
-### Linear Dependence and Independence 
-
-**Linear Dependence**: A collection of n-vectors $a_1, a_2,..., a_k$ with $k\geq1$ is linearly dependent if $\beta_1a_1 + ... + \beta_ka_k = 0$ holds from some $\beta_1,..., \beta_k$ that are not all zero. 
-
-- When a collection of vectors are linearly dependent, at least one vector can be expressed as a linear combination of the other vectors. 
-
-**Linear Independence** The above definition only holds for when $\beta_1 = \beta_2 = ... = \beta_k = 0$. E.g. the only linear combination of vectors that equals the zero vector is the linear combination with all coefficients = 0. 
-
-**Linear Combination of Independent Vectors**: Suppose we have a vector *x* that is a linear combination of $a_1,..., a_k$. When the vectors $a_1,...,a_k$ are linearly independent then the coefficients that form x are unique. 
-
-### Basis 
-
-**Independence-dimension inequality**: If n-vectors $a_1,...,a_k$ are linearly independent then $k \leq n$. 
-
-- In words "A linearly independent collection of n-vectors can have at most n elements." 
-
-**Basis**: A collection of linearly independent n-vectors. 
-
-- If the n-vectors $a_1, ..., a_n$ are a basis then any n-vector $b$ can be written as a linear combination of them. 
-- Since we know any linear combination of linearly independent vectors can only be expressed in one way we have the implication that *any n-vector $b$ can be written in a unique way as a linear combination of a basis $a_1,...,a_n$* 
-
-## Matrices 
-
-**Matrix**: a rectangular array of numbers written between brackets. The size of a matrix is the number of columns and the number of rows. For example, a matrix with 3 rows and 4 columns is a 3x4 matrix. In general, a matrix of size m x n is called an m x n matrix. 
-
-**Square Matrix**: a matrix that has an equal number of rows and columns. `mat` above is a square matrix. 
-
-**Zero Matrix**: A matrix with all elements set to zero 
-
-**Identity Matrix**: A square matrix with diagonal elements equal to 1 and off diagonal elements equal to 0. 
-
-**Diagonal matrix**:  A matrix is diagonal if $A_{ij} = 0, \forall i \neq j$ 
-
-**Triangular Matrix**: A square matrix A is *upper triangular* if $A_{ij} = 0, i > j$ and is *lower triangular if $A_{ij} = 0, i < j$. 
-
-- Diagonal matrices are both upper and lower triangular. 
-
-### Transpose, Addition, Norm 
-
-Like vectors, we can take the transpose of a matrix. Transposing twice returns original matrix. 
-
-Two matrices of the same size can be added together. Addition is element-wise.  
-
-**Properties of Matrix addition**
-
-- Commutativity: A + B = B + A 
-- Associativity: A + (B + C) = (A + B) + C 
-- Addition with Zero matrix: A + 0 = A 
-- Transpose of sum: $(A + B)^T = A^T + B^T$
-
-Scalar-matrix multiplication is also elementwise and defined similarly as with vectors 
-
-**Matrix Norm**: The norm of a matrix \lVert A\lVert  is the square root of the sum of the squares of its entries 
-
-### Matrix-vector Multiplication 
-
-The matrix vector product y = Ax is the m-vector y with elements $\sum_{k=1}^n A_{ik}x_k$ 
-
-**Linear Dependence of Columns**: The columns of a matrix are linearly dependent (do not have full rank) if $Ax = 0$ for some $x \neq 0$. The columns of a matrix are linearly independent if $Ax = 0 \implies x = 0$
-
-**Properties of matrix-vector multiplication**: 
-
-- multiplication distributes across the vector argument. $A(u + v) = Au + Av$
-- multiplication distributes across the matrix argument $(A + B)u = Au + Bu$
-
-## Matrix-matrix multiplication 
-
-It is possible to multiply two matrices with compatible dimensions. Multiplying by the identity matrix will return the original matrix. Note that in general matrix multiplication is not commutative.
-
-### Properties of Matrix Multiplication 
-
-- Associativity: (AB)C = A(BC). We can write the product as ABC 
-- Associativity with scalar multiplication: $\gamma(AB)=(\gamma A)B$ 
-
-- Distributivity with addition: $A(B+C) == (A+B)C = AC + BC$
-
-- Transpose of product: The transpose of a product is the product of the transposes in opposite order $(AB)^T = B^T A^T$
-
-A fact about inner product and matrix-vector products. If A is m x n, x is an n-vector, and y is an m-vector, then $y^T(Ax) = (y^T A)x = (A^Ty)^Tx$. This means that the inner product of y and Ax is equal to the inner product of x and $A^Ty$
-
-**Gram Matrix**: For an m x n matrix A, with columns $a_1,...,a_n$ the matrix product $G= A^TA$. 
-
-- Note, using the transpose of product rule $G^T = (A^TA)^T = (A^T)(A^T) = A^TA = G$
-
-### Matrix Power 
-
-If A is a square matrix then we can note $AA = A^2$ and more generally if k and l are positive integers $A^kA^l = A^{k+l}$
-
-### QR Factorization 
-
-With a Gram matrix, we can express the condition that the n-vectors are orthonormal in notation by $A^TA = I$. A square matrix that satisfies this property is called **orthogonal** and its columns are an orthonormal basis. 
-
-## Chapter 11: Matrix Inverses 
-
-**Left Inverse**: A matrix X that satisfies $XA = I$ is called a left inverse of A. The matrix is said to be *left invertible* if a left inverse exists. 
-
-- If A has a left inverse C then the columns of A are linearly independent. The converse is also true. A matrix has a left inverse iff its columns are linearly independent.
-
-**Right Inverse**: A matrix A that satisfies $AX = I$ is called a right inverse of A. The matrix is *right invertible* if a right inverse exists. 
-
-- A matrix is right invertible iff its rows are linearly independent. 
-- Only square or wide matrices can be right invertible 
-- A right inverse can be used to find a solution of a square or underdetermined set of linear equations, for any vector b 
-    
-### Inverse 
-
-If a matrix is left and right invertible then the left and right inverses are unique and equal. When a matrix has both a left and right inverse then it is *nonsingular* 
-
-- Inverible matrices must be square. A matrix A and its inverse (if it exists) satisfies $AA{^-1} = A^{-1}A = I$
-- The square system of linear equations $Ax = b$ with A invertible has the unique solution $x = A^{-1}b$ for any n-vector b. 
-
-For a square matrix the following are equivalent: 
-
-1. A is invertible 
-2. The columns of A are linearly independent 
-3. The rows of A are linearly independent 
-4. A has a left inverse 
-5. A has a right inverse 
-
-Triangular matrices with nonzero diagonal elements are invertible 
-
-### Solving linear equations 
-
-#### Back Substitution 
-
-Given a $n \times n$ upper triangular matrix R with nonzero diagonal entries, and an n-vector $b$. 
-
-For $i = n,...,1$, 
-    $x_i = (b_i = R{i, {i+1}}x_{i+1}-...-R_{i,{n}}x_n))/R_{ii}$
-
-For lower triangular matrices with non-zero diagonal elements we can solve using forward substitution, which is the reverse of this process. 
-
-## Least Squares 
-
-Suppose that the $m \times n$ matrix A is tall so that system of linear equations $Ax = b$ where $b$ is an m-vector is over-determined. Such an equation only has a solution if $b$ is a linear combination of the columns of A. 
-
-- This rarely happens in practice, so we seek an x for which $r = Ax -b$ is as small as possible. $r = Ax -b$ is referred to as the *residual* 
-- The best way to do this is to minimize the norm of the residual $\lVert Ax - b\lVert $ 
-
-Minimizing the norm of a residual and the square of a norm are the same problem, so we minimize $\lVert Ax - b\lVert ^2$. 
-
-This approximation is often referred to as *linear least squares regression*
-
-### Solving a Least Squares Problem 
-
-We assume that the columns of A are full rank (e.g. linearly independent)
-
-#### Via Calculus 
-
-Minimizing $\lVert Ax -b \lVert ^2$ must satsify $\frac{\partial f}{\partial x_i} = 0$. 
-We can express this as the vector equation $\nabla f(\hat{x}) = 0$ where the LHS is the gradient of $f$ evaluated at $\hat{x}$. In matrix form this is $\nabla f(\hat{x}) = 2A^T(Ax-b)$. 
-
-We can verify this is true by deriving that from scratch. The least squares object as a sum is $f(x) = \lVert Ax-b\lVert ^2 = \sum_{i=1}^m (\sum_{j=1}^n A_{ij}x_j - b_i)^2$ 
-
-Take the partial derivative of $f$ with respect to $x_k$. Differentiating by terms we get. 
-
-$$\begin{aligned}
-\nabla f(x)_k &= \frac{\partial f}{\partial x_k}(x) \\
-\nabla f(x)_k &= \sum_{i=1}^m 2(\sum_{j=1}^nA_{ij}x_j -b_i)(A_{ik}) \\
-\nabla f(x)_k &= \sum_{i=1}^m 2(A^T)_{ki}(Ax-b)_i \\
-\nabla f(x)_k &=  (2A^T(Ax-b))_k
-\end{aligned}$$
-
-Any minimizer of that must be equal to zero which we can write as $A^TA\hat{x} = A^Tb$. These are the normal equations. Because $A^TA$ is a Gram matrix and we have assumed full rank, it is invertible. This implies. 
-
-$\hat{x} = (A^TA)^{-1}A^Tb$ is the only solution of the normal equations and is therefore unique. 
-
-#### Direct Verification 
-
-We will directly show the proceeding derivation without calculus by showing that for any $x \neq \hat{x}$ we have $\lVert A\hat{x}-b\lVert ^2 < \lVert Ax-b\lVert ^2$ and that will establish that $\hat{x}$ is the unique vector that minimizes our problem. 
-
-$$\begin{aligned}
-\lVert Ax-b\lVert ^2 &= \lVert (Ax-A\hat{x}) + (A\hat{x} = b)\lVert ^2 \\
-\lVert Ax-b\lVert ^2 &= \lVert Ax-A\hat{x}\lVert ^2 + \lVert A\hat{x} - b\lVert ^2 + 2(Ax - A\hat{x})^T(A\hat{x}-b)\\
-\lVert Ax-b\lVert ^2 &= \lVert Ax-A\hat{x}\lVert ^2 + \lVert A\hat{x} - b\lVert ^2 + (x-\hat{x})^TA^T(A\hat{x} - b)\\
-\lVert Ax-b\lVert ^2 &= \lVert Ax-A\hat{x}\lVert ^2 + \lVert A\hat{x} - b\lVert ^2 + (x-\hat{x})^T(A^TA\hat{x}-A^Tb) \\
-\lVert Ax-b\lVert ^2 &= \lVert Ax-A\hat{x}\lVert ^2 + \lVert A\hat{x} - b\lVert ^2 + (x - \hat{x})^T(A^TA\hat{x}- A^Tb) \\
-\lVert Ax-b\lVert ^2 &= \lVert Ax-A\hat{x}\lVert ^2 + \lVert A\hat{x} - b\lVert ^2 + (x-\hat{x})0\\
-\lVert Ax-b\lVert ^2 &= \lVert Ax-A\hat{x}\lVert ^2 + \lVert A\hat{x} - b\lVert ^2
-\end{aligned}$$
-
-Note that we made use of an inequality by plugging in the normal equations to make the 3rd term disappear. We are left with an equation that shows that $\lVert A\hat{x}-b\lVert ^2 \leq \lVert Ax-b\lVert ^2$. To show unique minimization suppose the equality holds exactly. 
-
-$$\begin{aligned}
-\lVert A\hat{x}-b\lVert ^2 \leq \lVert Ax-b\lVert ^2 \\
-\lVert A(x-\hat{x})\lVert ^2 &= 0 \\
-A(x-\hat{x}) &= 0 
-\end{aligned}$$
-
-Since A has linearly independent columns $x -\hat{x} = 0$. The only $x$ with the equality property is when $x = \hat{x}$ 
-
-**Orthogonality Principle**: The optimal residual is orthogonal to the columns of A and therefore is orthogonal to any linear combination of the columns of A. 
 
