@@ -295,5 +295,75 @@ $$\begin{aligned}
 
 ### Vector Spaces 
 
+A **vector space** is any set of vectors that is closed under scalar multiplication and addition. 
+  - Closed under multiplication means that every scalar multiple of a vector is also in the set of vectors. 
+  - Closed under addition means that the sum of any two vectors in the space is also a vector in the space. 
+  
+A **basis** is a set of vectors in a vector space that are linearly independent and any vector in the vector space can be written as a linear combination of that set of vectors.
 
+For example, consider three arbitrary vectors in $\mathbb{R}^2$, **a**,**b**, **c**. If **a** and **b** are a basis, then we can find some numbers $\alpha_1$ and $\alpha_2$ such that $c = \alpha_1 a + \alpha_2 b$. The solutions to this problem turn out to be: 
 
+$$\begin{aligned}
+\alpha_1 = \frac{b_2c_1 - b_1c_2}{a_1b_2 - b_1a_2} \\
+\alpha_2 = \frac{a_1c_2 - a_2c_1}{a_1b_2 - b_1a_2}
+\end{aligned}$$
+
+These solution are unique unless the denominator is zero. In a world where this is true, it implies that **b** is a multiple of **a** and therefore does not point in different directions. Any basis of a vector space is not unqiue, but for any specific basis only one linear combination will produce another particularly vector in the vector space. 
+
+### Linear Dependence 
+
+A set of $k \geq 2$ vectors is **linearly dependent** if at least one of the vectors in the set can be written as a linear combination of the others. 
+
+For example consider the vectors $a = [1,2]^T, b = [3,3]^T, c = [10,14]^T$. As a whole they are linearly dependent $2a + b - .5c = 0$, but any two of them are linearly independent. 
+
+A set of vectors is **linearly independent** if and only if the only solution to $\alpha_1 a_1 + \cdot\cdot\cdot + \alpha_k a_k = 0$ is where all the coefficients are zero $\alpha_i = 0, \forall i \in 1,..., k$. 
+
+A consequence of this is that another definition of a basis is any set of linearly independent vectors in the vector space. Because any $(K+1)st$ vector can be written as a linear combination of the K basis vectors, this also implies that any set of more than K vectors in $\mathbb{R}^K$ must be linearly dependent. 
+
+The **spanning vectors** are the set of all linear combinations of a set of vectors.
+
+### Rank 
+
+A matrix is a set of column vectors. The number of columns in the matrix is equivalent to the number of vectors in the set, and the number of rows is the number of coordinates in each column vector. 
+
+A **column space** of a matrix is the vector space that is spanned by its column vectors. The **column rank** of a matrix is the dimension of a vector space that is spanned by its column vectors. 
+
+It turns out to be the case (and an important theorem) that the column rank and the row rank of a matrix is the same, which also means that the row space and the column space have the same dimension. We say a matrix has full rank when all columns (or rows) are linearly independent of each other. 
+
+A useful fact about the rank is that the rank of a matrix A $rank(A) = rank(A^TA) = rank(AA^T)$
+
+### Determinants 
+
+The determinant of a square matrix is a function of the elements of a matrix. Importantly, the determinant of a matrix is nonzero and that matrix is therefore non-singular if and only if it has full rank. 
+
+Determinants matter in part because a matrix is nonsingular if and only if its inverse exists, and in order for this to be true, the determinant of said matrix cannot be zero. 
+
+### Norms 
+
+The Euclidean length or **norm** of a vector e is given by the Pythagorean theorem: $\lVert e \rVert = \sqrt{e^Te}$. 
+
+#### Orthogonal Vectors 
+
+Two nonzero vectors are **orthogonal** written as $a \perp b$ if and only if $a^Tb = b^Ta = 0$
+
+### The Cosine Law 
+
+The angle $\theta$ between two vectors satisfies $cos(\theta) = \frac{a^Tb}{\lVert a \rVert \lVert b \rVert}$
+
+## Solving Systems of Linear Equations 
+
+### Types of Systems 
+
+There are two types of systems of equations. A **homogeneous** system is of the form $Ax = 0$. By definition, we know that a nonzero solution to this system exists if and only if the matrix **A** does not have full rank. A **nonhomogeneous** system of equations is of the form $Ax = b$ where **b** is a nonzero vector. 
+
+### Inverse Matrix 
+
+To solve nonhomogeneous systems, we need a square matrix **B** such that 
+
+$$\begin{aligned}
+BAx &= Ix \\
+BAx &= x \\
+BAx &= Bb
+\end{aligned}$$
+
+If such a matrix exists, then it is the **inverse** of **A** and denoted $A^{-1}$. If **A** is nonsingular, then the unique solution to the nonhomogeneous systems equation is $x = A^{-1}b$

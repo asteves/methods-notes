@@ -2190,6 +2190,16 @@ Coding
 <li><a href="#matrix-geometry" id="toc-matrix-geometry">Matrix Geometry</a>
 <ul>
 <li><a href="#vector-spaces" id="toc-vector-spaces">Vector Spaces</a></li>
+<li><a href="#linear-dependence" id="toc-linear-dependence">Linear Dependence</a></li>
+<li><a href="#rank" id="toc-rank">Rank</a></li>
+<li><a href="#determinants" id="toc-determinants">Determinants</a></li>
+<li><a href="#norms" id="toc-norms">Norms</a></li>
+<li><a href="#the-cosine-law" id="toc-the-cosine-law">The Cosine Law</a></li>
+</ul></li>
+<li><a href="#solving-systems-of-linear-equations" id="toc-solving-systems-of-linear-equations">Solving Systems of Linear Equations</a>
+<ul>
+<li><a href="#types-of-systems" id="toc-types-of-systems">Types of Systems</a></li>
+<li><a href="#inverse-matrix" id="toc-inverse-matrix">Inverse Matrix</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -2403,6 +2413,47 @@ The <em>sum of squares</em> of the elements of <strong>x</strong> is <span class
 \end{aligned}\]</span></p>
 <h2 id="matrix-geometry">Matrix Geometry</h2>
 <h3 id="vector-spaces">Vector Spaces</h3>
+<p>A <strong>vector space</strong> is any set of vectors that is closed under scalar multiplication and addition.
+- Closed under multiplication means that every scalar multiple of a vector is also in the set of vectors.
+- Closed under addition means that the sum of any two vectors in the space is also a vector in the space.</p>
+<p>A <strong>basis</strong> is a set of vectors in a vector space that are linearly independent and any vector in the vector space can be written as a linear combination of that set of vectors.</p>
+<p>For example, consider three arbitrary vectors in <span class="math inline">\(\mathbb{R}^2\)</span>, <strong>a</strong>,<strong>b</strong>, <strong>c</strong>. If <strong>a</strong> and <strong>b</strong> are a basis, then we can find some numbers <span class="math inline">\(\alpha_1\)</span> and <span class="math inline">\(\alpha_2\)</span> such that <span class="math inline">\(c = \alpha_1 a + \alpha_2 b\)</span>. The solutions to this problem turn out to be:</p>
+<p><span class="math display">\[\begin{aligned}
+\alpha_1 = \frac{b_2c_1 - b_1c_2}{a_1b_2 - b_1a_2} \\
+\alpha_2 = \frac{a_1c_2 - a_2c_1}{a_1b_2 - b_1a_2}
+\end{aligned}\]</span></p>
+<p>These solution are unique unless the denominator is zero. In a world where this is true, it implies that <strong>b</strong> is a multiple of <strong>a</strong> and therefore does not point in different directions. Any basis of a vector space is not unqiue, but for any specific basis only one linear combination will produce another particularly vector in the vector space.</p>
+<h3 id="linear-dependence">Linear Dependence</h3>
+<p>A set of <span class="math inline">\(k \geq 2\)</span> vectors is <strong>linearly dependent</strong> if at least one of the vectors in the set can be written as a linear combination of the others.</p>
+<p>For example consider the vectors <span class="math inline">\(a = [1,2]^T, b = [3,3]^T, c = [10,14]^T\)</span>. As a whole they are linearly dependent <span class="math inline">\(2a + b - .5c = 0\)</span>, but any two of them are linearly independent.</p>
+<p>A set of vectors is <strong>linearly independent</strong> if and only if the only solution to <span class="math inline">\(\alpha_1 a_1 + \cdot\cdot\cdot + \alpha_k a_k = 0\)</span> is where all the coefficients are zero <span class="math inline">\(\alpha_i = 0, \forall i \in 1,..., k\)</span>.</p>
+<p>A consequence of this is that another definition of a basis is any set of linearly independent vectors in the vector space. Because any <span class="math inline">\((K+1)st\)</span> vector can be written as a linear combination of the K basis vectors, this also implies that any set of more than K vectors in <span class="math inline">\(\mathbb{R}^K\)</span> must be linearly dependent.</p>
+<p>The <strong>spanning vectors</strong> are the set of all linear combinations of a set of vectors.</p>
+<h3 id="rank">Rank</h3>
+<p>A matrix is a set of column vectors. The number of columns in the matrix is equivalent to the number of vectors in the set, and the number of rows is the number of coordinates in each column vector.</p>
+<p>A <strong>column space</strong> of a matrix is the vector space that is spanned by its column vectors. The <strong>column rank</strong> of a matrix is the dimension of a vector space that is spanned by its column vectors.</p>
+<p>It turns out to be the case (and an important theorem) that the column rank and the row rank of a matrix is the same, which also means that the row space and the column space have the same dimension. We say a matrix has full rank when all columns (or rows) are linearly independent of each other.</p>
+<p>A useful fact about the rank is that the rank of a matrix A <span class="math inline">\(rank(A) = rank(A^TA) = rank(AA^T)\)</span></p>
+<h3 id="determinants">Determinants</h3>
+<p>The determinant of a square matrix is a function of the elements of a matrix. Importantly, the determinant of a matrix is nonzero and that matrix is therefore non-singular if and only if it has full rank.</p>
+<p>Determinants matter in part because a matrix is nonsingular if and only if its inverse exists, and in order for this to be true, the determinant of said matrix cannot be zero.</p>
+<h3 id="norms">Norms</h3>
+<p>The Euclidean length or <strong>norm</strong> of a vector e is given by the Pythagorean theorem: <span class="math inline">\(\lVert e \rVert = \sqrt{e^Te}\)</span>.</p>
+<h4 id="orthogonal-vectors">Orthogonal Vectors</h4>
+<p>Two nonzero vectors are <strong>orthogonal</strong> written as <span class="math inline">\(a \perp b\)</span> if and only if <span class="math inline">\(a^Tb = b^Ta = 0\)</span></p>
+<h3 id="the-cosine-law">The Cosine Law</h3>
+<p>The angle <span class="math inline">\(\theta\)</span> between two vectors satisfies <span class="math inline">\(cos(\theta) = \frac{a^Tb}{\lVert a \rVert \lVert b \rVert}\)</span></p>
+<h2 id="solving-systems-of-linear-equations">Solving Systems of Linear Equations</h2>
+<h3 id="types-of-systems">Types of Systems</h3>
+<p>There are two types of systems of equations. A <strong>homogeneous</strong> system is of the form <span class="math inline">\(Ax = 0\)</span>. By definition, we know that a nonzero solution to this system exists if and only if the matrix <strong>A</strong> does not have full rank. A <strong>nonhomogeneous</strong> system of equations is of the form <span class="math inline">\(Ax = b\)</span> where <strong>b</strong> is a nonzero vector.</p>
+<h3 id="inverse-matrix">Inverse Matrix</h3>
+<p>To solve nonhomogeneous systems, we need a square matrix <strong>B</strong> such that</p>
+<p><span class="math display">\[\begin{aligned}
+BAx &amp;= Ix \\
+BAx &amp;= x \\
+BAx &amp;= Bb
+\end{aligned}\]</span></p>
+<p>If such a matrix exists, then it is the <strong>inverse</strong> of <strong>A</strong> and denoted <span class="math inline">\(A^{-1}\)</span>. If <strong>A</strong> is nonsingular, then the unique solution to the nonhomogeneous systems equation is <span class="math inline">\(x = A^{-1}b\)</span></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr />
