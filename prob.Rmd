@@ -12,14 +12,79 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Distill is a publication format for scientific and technical writing, native to the web. 
+The notes and notation come predominantly from Aronow and Miller (2019), Pittman (1993), and Casella and Berger (2002). 
 
-Learn more about using Distill for R Markdown at <https://rstudio.github.io/distill>.
+## Fundamentals 
 
+### Sample Spaces, Event Spaces, Probability Axioms 
 
+A set *S* of subsets of a sample space $\Omega$ is an event space if it satisfies: 
+  - Non-empty: $S \neq \emptyset$
+  - Closed under complements: $A \in S \implies A^C \in S$
+  - Closed under countable unions: $A_1,A_2,\cdot\cdot\cdot \in S \implies A_1 \cup A_2 \cup \cdot \cdot \cdot \in S$
 
+A set *S* of subsets of some other set $\Omega$ that satisfies these properties is known as a $\sigma$-algebra on $\Omega$.
 
+A **probability** measure is a function $P: S \rightarrow \mathbb{R}$ that assigns a probability to every event in the event space. 
+
+### Kolmogorov's Axioms 
+
+Let $\Omega, S, P$ be defined as above. Then $(\Omega, S, P)$ is a *probability space* if it satisfies: 
+  - Non-negativity: $\forall A \in S, P(A) \geq 0$ and $P(A)$ is finite and real. 
+  - Unitarity: $P(\Omega) = 1$
+  - Countable additivity: If $A_1, A_2, ... \in S$ are pairwise disjoint $\forall i \neq j A_i \cap A_j = \emptyset$ implies $P(A_1 \cup A_2 \cup ...) = P(A_1) + P(A_2) + \cdot \cdot \cdot = \sum_iP(A_i)$
+  
+### Basic Properties of Probability 
+
+Let $(\Omega, S, P)$ be a probability space. The following properties hold: 
+  - Monotonicity: $\forall A,B \in S$ if $A \subseteq B \implies P(A) \leq P(B)$
+  - Subtraction Rule: $\forall A,B \in S$ if $A \subseteq B \implies P(B\A) = P(B) - P(A)$
+  - Zero Probability of the empty set: $P(\emptyset) = 0$
+  - Probability Bounds: $\forall A \in S, 0 \leq P(A) \leq 1$
+  - Complement Rule: $\forall A \in S, P(A^C) = 1 - P(A)$
+
+### Joint and Continuous Probability 
+
+The **joint probability** for $A,B \in S$ of A and B is $P(A \cap B)$
+
+#### The Addition Rule 
+
+For $A,B \in S, P(A \cup B) = P(A) + P(B) - P(A \cap B)$. In words the probability of at least one of two events occurring is equal to the sum of the probabilities of each occurring minus the probability of both occurring. 
+
+#### Conditional Probability 
+
+For $A,B \in S$ the **conditional probability** of A given B is $P(A|B) = \frac{P(A \cap B)}{P(B)}$ where $P(B) > 0$. 
+
+The Multiplicative Law of Probability is a rearrangement $P(A|B)P(B) = P(A \cap B)$
+
+#### Bayes Rule 
+
+For $A,B \in S$ with $P(A) > 0$ and $P(B) > 0$
+
+$$\begin{aligned}
+P(A|B) = \frac{P(B|A)P(A)}{P(B)}
+\end{aligned}$$
+
+### The Law of Total Probability 
+
+To understand the definition (and the utility) of the Law of Total Probability, first define a **partition** as the case if $A_1, A_2,... \in S$ are nonempty and pairwise disjoint and $\Omega = A_1 \cup A_2 \cup ...$ then $\{A_1, A_2, ...\}$ is a partition of $\Omega$. 
+
+Partitions divide the sample space into mutually exclusive and exhaustive categories. Every outcome in the sample space is contained in exactly one event, so exactly one event in the partition occurs for any draw from the probability space. 
+
+The **Law of Total Probability** states: 
+
+If $\{A_1, A_2,... \}$ is a partition of $\Omega$ and $B \in S$ then $P(B) = \sum_i P(B \cap A_i)$. This can be equivalently stated as $P(B) = \sum_i P(B|A_i)P(A_i)$ in the event that $P(A_i) > 0, i = 1,2,3,...$.
+
+The probability of an event B is thus a weighted average of the conditional probabilities of that event. The weights are the probabilities of the events that are being conditioned on. 
+
+### Independence 
+
+Presuming we have a random generative process, then events $A,B \in S$ are **independent** if $P(A \cap B) = P(A)P(B)$. This also means that for $A,B \in S$ with $P(B) > 0$ A and B are independent if and only if $P(A|B) = P(A)$. 
+
+## Random Variables 
+
+A **random variable** is a variable that takes on a real value that is determined by a random generative process. Formally, it is a function $X: \Omega \rightarrow \mathbb{R}$ such that $\forall r \in \mathbb{R}, \{\omega \in \Omega : X(\omega) \leq r \} \in S$
 

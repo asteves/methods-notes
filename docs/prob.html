@@ -2163,8 +2163,66 @@ Coding
 </div>
 
 <div class="d-article">
-<p>Distill is a publication format for scientific and technical writing, native to the web.</p>
-<p>Learn more about using Distill for R Markdown at <a href="https://rstudio.github.io/distill" class="uri">https://rstudio.github.io/distill</a>.</p>
+<div class="d-contents d-contents-float">
+<nav class="l-text toc figcaption" id="TOC">
+<h3>Contents</h3>
+<ul>
+<li><a href="#fundamentals" id="toc-fundamentals">Fundamentals</a>
+<ul>
+<li><a href="#sample-spaces-event-spaces-probability-axioms" id="toc-sample-spaces-event-spaces-probability-axioms">Sample Spaces, Event Spaces, Probability Axioms</a></li>
+<li><a href="#kolmogorovs-axioms" id="toc-kolmogorovs-axioms">Kolmogorov’s Axioms</a></li>
+<li><a href="#basic-properties-of-probability" id="toc-basic-properties-of-probability">Basic Properties of Probability</a></li>
+<li><a href="#joint-and-continuous-probability" id="toc-joint-and-continuous-probability">Joint and Continuous Probability</a></li>
+<li><a href="#the-law-of-total-probability" id="toc-the-law-of-total-probability">The Law of Total Probability</a></li>
+<li><a href="#independence" id="toc-independence">Independence</a></li>
+</ul></li>
+<li><a href="#random-variables" id="toc-random-variables">Random Variables</a></li>
+</ul>
+</nav>
+</div>
+<p>The notes and notation come predominantly from Aronow and Miller (2019), Pittman (1993), and Casella and Berger (2002).</p>
+<h2 id="fundamentals">Fundamentals</h2>
+<h3 id="sample-spaces-event-spaces-probability-axioms">Sample Spaces, Event Spaces, Probability Axioms</h3>
+<p>A set <em>S</em> of subsets of a sample space <span class="math inline">\(\Omega\)</span> is an event space if it satisfies:
+- Non-empty: <span class="math inline">\(S \neq \emptyset\)</span>
+- Closed under complements: <span class="math inline">\(A \in S \implies A^C \in S\)</span>
+- Closed under countable unions: <span class="math inline">\(A_1,A_2,\cdot\cdot\cdot \in S \implies A_1 \cup A_2 \cup \cdot \cdot \cdot \in S\)</span></p>
+<p>A set <em>S</em> of subsets of some other set <span class="math inline">\(\Omega\)</span> that satisfies these properties is known as a <span class="math inline">\(\sigma\)</span>-algebra on <span class="math inline">\(\Omega\)</span>.</p>
+<p>A <strong>probability</strong> measure is a function <span class="math inline">\(P: S \rightarrow \mathbb{R}\)</span> that assigns a probability to every event in the event space.</p>
+<h3 id="kolmogorovs-axioms">Kolmogorov’s Axioms</h3>
+<p>Let <span class="math inline">\(\Omega, S, P\)</span> be defined as above. Then <span class="math inline">\((\Omega, S, P)\)</span> is a <em>probability space</em> if it satisfies:
+- Non-negativity: <span class="math inline">\(\forall A \in S, P(A) \geq 0\)</span> and <span class="math inline">\(P(A)\)</span> is finite and real.
+- Unitarity: <span class="math inline">\(P(\Omega) = 1\)</span>
+- Countable additivity: If <span class="math inline">\(A_1, A_2, ... \in S\)</span> are pairwise disjoint <span class="math inline">\(\forall i \neq j A_i \cap A_j = \emptyset\)</span> implies <span class="math inline">\(P(A_1 \cup A_2 \cup ...) = P(A_1) + P(A_2) + \cdot \cdot \cdot = \sum_iP(A_i)\)</span></p>
+<h3 id="basic-properties-of-probability">Basic Properties of Probability</h3>
+<p>Let <span class="math inline">\((\Omega, S, P)\)</span> be a probability space. The following properties hold:
+- Monotonicity: <span class="math inline">\(\forall A,B \in S\)</span> if <span class="math inline">\(A \subseteq B \implies P(A) \leq P(B)\)</span>
+- Subtraction Rule: <span class="math inline">\(\forall A,B \in S\)</span> if <span class="math inline">\(A \subseteq B \implies P(B\A) = P(B) - P(A)\)</span>
+- Zero Probability of the empty set: <span class="math inline">\(P(\emptyset) = 0\)</span>
+- Probability Bounds: <span class="math inline">\(\forall A \in S, 0 \leq P(A) \leq 1\)</span>
+- Complement Rule: <span class="math inline">\(\forall A \in S, P(A^C) = 1 - P(A)\)</span></p>
+<h3 id="joint-and-continuous-probability">Joint and Continuous Probability</h3>
+<p>The <strong>joint probability</strong> for <span class="math inline">\(A,B \in S\)</span> of A and B is <span class="math inline">\(P(A \cap B)\)</span></p>
+<h4 id="the-addition-rule">The Addition Rule</h4>
+<p>For <span class="math inline">\(A,B \in S, P(A \cup B) = P(A) + P(B) - P(A \cap B)\)</span>. In words the probability of at least one of two events occurring is equal to the sum of the probabilities of each occurring minus the probability of both occurring.</p>
+<h4 id="conditional-probability">Conditional Probability</h4>
+<p>For <span class="math inline">\(A,B \in S\)</span> the <strong>conditional probability</strong> of A given B is <span class="math inline">\(P(A|B) = \frac{P(A \cap B)}{P(B)}\)</span> where <span class="math inline">\(P(B) &gt; 0\)</span>.</p>
+<p>The Multiplicative Law of Probability is a rearrangement <span class="math inline">\(P(A|B)P(B) = P(A \cap B)\)</span></p>
+<h4 id="bayes-rule">Bayes Rule</h4>
+<p>For <span class="math inline">\(A,B \in S\)</span> with <span class="math inline">\(P(A) &gt; 0\)</span> and <span class="math inline">\(P(B) &gt; 0\)</span></p>
+<p><span class="math display">\[\begin{aligned}
+P(A|B) = \frac{P(B|A)P(A)}{P(B)}
+\end{aligned}\]</span></p>
+<h3 id="the-law-of-total-probability">The Law of Total Probability</h3>
+<p>To understand the definition (and the utility) of the Law of Total Probability, first define a <strong>partition</strong> as the case if <span class="math inline">\(A_1, A_2,... \in S\)</span> are nonempty and pairwise disjoint and <span class="math inline">\(\Omega = A_1 \cup A_2 \cup ...\)</span> then <span class="math inline">\(\{A_1, A_2, ...\}\)</span> is a partition of <span class="math inline">\(\Omega\)</span>.</p>
+<p>Partitions divide the sample space into mutually exclusive and exhaustive categories. Every outcome in the sample space is contained in exactly one event, so exactly one event in the partition occurs for any draw from the probability space.</p>
+<p>The <strong>Law of Total Probability</strong> states:</p>
+<p>If <span class="math inline">\(\{A_1, A_2,... \}\)</span> is a partition of <span class="math inline">\(\Omega\)</span> and <span class="math inline">\(B \in S\)</span> then <span class="math inline">\(P(B) = \sum_i P(B \cap A_i)\)</span>. This can be equivalently stated as <span class="math inline">\(P(B) = \sum_i P(B|A_i)P(A_i)\)</span> in the event that <span class="math inline">\(P(A_i) &gt; 0, i = 1,2,3,...\)</span>.</p>
+<p>The probability of an event B is thus a weighted average of the conditional probabilities of that event. The weights are the probabilities of the events that are being conditioned on.</p>
+<h3 id="independence">Independence</h3>
+<p>Presuming we have a random generative process, then events <span class="math inline">\(A,B \in S\)</span> are <strong>independent</strong> if <span class="math inline">\(P(A \cap B) = P(A)P(B)\)</span>. This also means that for <span class="math inline">\(A,B \in S\)</span> with <span class="math inline">\(P(B) &gt; 0\)</span> A and B are independent if and only if <span class="math inline">\(P(A|B) = P(A)\)</span>.</p>
+<h2 id="random-variables">Random Variables</h2>
+<p>A <strong>random variable</strong> is a variable that takes on a real value that is determined by a random generative process. Formally, it is a function <span class="math inline">\(X: \Omega \rightarrow \mathbb{R}\)</span> such that <span class="math inline">\(\forall r \in \mathbb{R}, \{\omega \in \Omega : X(\omega) \leq r \} \in S\)</span></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
@@ -2173,6 +2231,15 @@ Coding
 <div class="d-appendix">
 </div>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->

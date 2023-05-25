@@ -2306,7 +2306,7 @@ Coding
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">## By default this is on the [0,1) interval. </span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>np.random.random(<span class="dv">3</span>)</span></code></pre></div>
-<pre><code>array([0.0629999 , 0.55244158, 0.54704989])</code></pre>
+<pre><code>array([0.22840765, 0.78633992, 0.66844367])</code></pre>
 </div>
 We can generate additional vectors from certain distributions. The most common from a simulation standpoint are standard normal.
 <div class="layout-chunk" data-layout="l-body">
@@ -2318,7 +2318,7 @@ We can generate additional vectors from certain distributions. The most common f
 <p>In python</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>np.random.randn(<span class="dv">3</span>)</span></code></pre></div>
-<pre><code>array([-0.3291094 , -0.87175916, -0.58001903])</code></pre>
+<pre><code>array([ 0.98632227, -0.63423785, -0.445842  ])</code></pre>
 </div>
 <p><a href="#top">Return to Top</a></p>
 <h2 id="vector-addition-and-multiplication">Vector Addition and Multiplication</h2>
@@ -2890,7 +2890,7 @@ x2 4.0020879</code></pre>
 <span id="cb109-10"><a href="#cb109-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb109-11"><a href="#cb109-11" aria-hidden="true" tabindex="-1"></a><span class="co"># (X&#39;X)^-1X&#39;y</span></span>
 <span id="cb109-12"><a href="#cb109-12" aria-hidden="true" tabindex="-1"></a>np.linalg.inv(X.T <span class="op">@</span> X) <span class="op">@</span> X.T <span class="op">@</span> y</span></code></pre></div>
-<pre><code>array([0.50603295, 2.00866332, 4.00086781])</code></pre>
+<pre><code>array([0.48755912, 2.01478949, 3.9984688 ])</code></pre>
 </div>
 <h3 id="frisch-waugh-lovell-fwl">Frisch-Waugh-Lovell (FWL)</h3>
 <p>FWL states that any coefficient in an OLS fit is equivalent to the coefficient estimated from a bivariate model in which the residualized outcome is regressed onto the residualized component of the predictors, and the residuals are taken from models regressing the outcome and the coefficient on all other coefficients in the OLS fit separately.</p>
