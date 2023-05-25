@@ -12,7 +12,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{python}
@@ -28,17 +28,235 @@ import torch
 
 ### Data Types 
 
-#### Vectors 
+#### Numeric Types 
 
-#### Lists 
+Python has three numeric data types: integers, floating points and complex numbers (not used here). 
 
-#### Matrices 
+```{python}
+# Integer 
+x = 42 
+type(x)
 
-#### Data Frames 
+# Floating Point 
+y = 42.0
+type(y)
+```
+
+All of the common arithmetic operations works on numeric types. 
+
+```{python}
+x = 10 
+
+# Addition 
+x + 2 
+
+# Subtraction 
+x - 2 
+
+# Multiplication 
+x * 2 
+
+# Division 
+x / 2 
+
+# Exponentiation 
+x ** 2
+
+# Integer Division always rounds down
+x // 2
+
+# Modulo 
+x % 2
+```
+
+#### Strings 
+
+Text is stored as a data type called a string. Strings are sequences of characters. We enclose strings in either '' or "". 
+```{python}
+s = "Hello World!" 
+
+# To enclose a sequence that includes an apostrophe always
+# use double quotes
+s2 = "Hello World. Nice to meet'cha" 
+```
+
+#### String Methods 
+
+There are a variety of string methods in python. Some of the most useful are `.split()`, `.join()`, `.lower()` 
+
+```{python}
+s = "Here is a string" 
+s.lower()
+s.split()
+
+k = s.split()
+
+" ".join(k)
+```
+
+#### Boolean 
+
+Boolean types have two values. Either True or False. These are special and reserved words in Python.
+
+```{python}
+truth = True 
+
+lies = False 
+```
+
+Note that we can perform arithmetic operations on boolean types. 
+
+```{python}
+True ** 2
+False + 2
+```
+Boolean types often come about as a result of comparisons. 
+
+```{python}
+x = True 
+y = False 
+
+## Equality 
+x == y
+
+## Not equal 
+x != y
+
+## Greater than 
+x > y 
+
+## Greater than or equal 
+x >= y 
+
+## Less than 
+x < y 
+
+## Less than or equal 
+x <= y 
+
+## The same object 
+x is y 
+
+## are both true 
+x and y 
+
+## is at least one true 
+x or y 
+
+## is it false 
+not x 
+```
+
+### Changing between types 
+
+Sometimes we need to cast a value from one type to another. For example, we have read in a set of numbers as strings and we need to make them numeric types to do arithmetic. 
+
+```{python}
+x = "1" 
+y = 1
+z = "will not convert to numeric" 
+
+# Convert to float 
+float(x)
+
+# Convert to integer 
+int(x)
+
+# Convert to string 
+str(y)
+```
+
+```{python, eval = F}
+# A failure to cast because there is no clear numeric 
+float(z)
+```
+
+### Lists and Tuples 
+
+Lists and tuples allow us to store multiple elements in a single object. The elements are ordered and generally when we reference them we use zero-based indexing, which means that the first element is in the 0th position. List use [] as brackets.
+
+```{python}
+a_list = [1, 2, "skip", "to", "my", "lou"]
+
+# Get the length of the list
+len(a_list)
+
+# Get the first element 
+a_list[0]
+
+# Get the third element 
+a_list[2]
+
+# Get the last element
+a_list[-1]
+
+# Alternatively 
+a_list[5]
+
+# Get the third through fifth elements 
+a_list[2:5]
+```
+
+Note that our example list is holding different data types! Lists can hold any data type. Lists are objects, which means they have built in methods for interacting with their data. We call a method by using a period. For example: 
+
+```{python}
+b_list = [1,2,3,4]
+
+# Calling a method that adds 5 to the end of our list
+b_list.append(5)
+b_list
+
+## insert a number in between 3 and 4 
+b_list.insert(4, 37)
+b_list
+```
+The fact that we can use a method like insert means that we can change the list. In other words, a list is mutable. 
+
+Tuples are like lists but cannot be changed once created. They are "immutable." We use () to define them. 
+
+```{python}
+a_tuple = (1,2,3)
+len(a_tuple)
+```
+
+### Dictionaries 
+
+A dictionary is a mapping between key-value pairs and we use {} to define them. They become very useful once we introduce the `pandas` library. 
+
+```{python}
+mascots = {"Minnesota": "Goldy Gopher","Cal": "Oski Bear", "Michigan State": "Sparty","Stanford": 0,
+}
+mascots["Minnesota"]
+```
+### Matrices 
+
+### Data Frames 
 
 ### Subsetting 
 
-### Control Operations 
+### Conditionals
+
+Conditionals allow us to program code where only certain blocks of code are executing depending on the state of our program. 
+
+```{python}
+best_mascot = "Goldy Gopher"
+
+if best_mascot == "Goldy Gopher":
+  print("Correct")
+elif best_mascot == "Bucky Badger":
+  print("Extremely Wrong")
+else:
+  print("There is only one correct answer to this question.")
+```
+
+Python cares about white space, so notice that we use the keywords `if`, `elif`, and `else`, a : ends each conditional line, and we indent after appropriately. However, if we just have a single `if` statement we can write them on one line for simplicity. 
+
+```{python}
+if best_mascot == "Goldy Gopher": print("Correct")
+
+## We can also do one liner if else 
+print("Correct") if best_mascot == "Goldy Gopher" else print("incorrect")
+```
 
 ### Functions
 

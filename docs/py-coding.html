@@ -2171,13 +2171,18 @@ Coding
 <ul>
 <li><a href="#data-types" id="toc-data-types">Data Types</a>
 <ul>
-<li><a href="#vectors" id="toc-vectors">Vectors</a></li>
-<li><a href="#lists" id="toc-lists">Lists</a></li>
+<li><a href="#numeric-types" id="toc-numeric-types">Numeric Types</a></li>
+<li><a href="#strings" id="toc-strings">Strings</a></li>
+<li><a href="#string-methods" id="toc-string-methods">String Methods</a></li>
+<li><a href="#boolean" id="toc-boolean">Boolean</a></li>
+</ul></li>
+<li><a href="#changing-between-types" id="toc-changing-between-types">Changing between types</a></li>
+<li><a href="#lists-and-tuples" id="toc-lists-and-tuples">Lists and Tuples</a></li>
+<li><a href="#dictionaries" id="toc-dictionaries">Dictionaries</a></li>
 <li><a href="#matrices" id="toc-matrices">Matrices</a></li>
 <li><a href="#data-frames" id="toc-data-frames">Data Frames</a></li>
-</ul></li>
 <li><a href="#subsetting" id="toc-subsetting">Subsetting</a></li>
-<li><a href="#control-operations" id="toc-control-operations">Control Operations</a></li>
+<li><a href="#conditionals" id="toc-conditionals">Conditionals</a></li>
 <li><a href="#functions" id="toc-functions">Functions</a></li>
 </ul></li>
 <li><a href="#graphing-in-python" id="toc-graphing-in-python">Graphing in Python</a>
@@ -2198,16 +2203,247 @@ Coding
 </nav>
 </div>
 <div class="layout-chunk" data-layout="l-body">
-
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch </span></code></pre></div>
 </div>
 <h2 id="basic-python-operations">Basic Python Operations</h2>
 <h3 id="data-types">Data Types</h3>
-<h4 id="vectors">Vectors</h4>
-<h4 id="lists">Lists</h4>
-<h4 id="matrices">Matrices</h4>
-<h4 id="data-frames">Data Frames</h4>
+<h4 id="numeric-types">Numeric Types</h4>
+<p>Python has three numeric data types: integers, floating points and complex numbers (not used here).</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Integer </span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">42</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(x)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Floating Point </span></span></code></pre></div>
+<pre><code>&lt;class &#39;int&#39;&gt;</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="fl">42.0</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(y)</span></code></pre></div>
+<pre><code>&lt;class &#39;float&#39;&gt;</code></pre>
+</div>
+<p>All of the common arithmetic operations works on numeric types.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">10</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Addition </span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">+</span> <span class="dv">2</span> </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Subtraction </span></span></code></pre></div>
+<pre><code>12</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">-</span> <span class="dv">2</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiplication </span></span></code></pre></div>
+<pre><code>8</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">*</span> <span class="dv">2</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Division </span></span></code></pre></div>
+<pre><code>20</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">/</span> <span class="dv">2</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Exponentiation </span></span></code></pre></div>
+<pre><code>5.0</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Integer Division always rounds down</span></span></code></pre></div>
+<pre><code>100</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">//</span> <span class="dv">2</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Modulo </span></span></code></pre></div>
+<pre><code>5</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">%</span> <span class="dv">2</span></span></code></pre></div>
+<pre><code>0</code></pre>
+</div>
+<h4 id="strings">Strings</h4>
+Text is stored as a data type called a string. Strings are sequences of characters. We enclose strings in either ’’ or ““.
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> <span class="st">&quot;Hello World!&quot;</span> </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># To enclose a sequence that includes an apostrophe always</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># use double quotes</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>s2 <span class="op">=</span> <span class="st">&quot;Hello World. Nice to meet&#39;cha&quot;</span> </span></code></pre></div>
+</div>
+<h4 id="string-methods">String Methods</h4>
+<p>There are a variety of string methods in python. Some of the most useful are <code>.split()</code>, <code>.join()</code>, <code>.lower()</code></p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> <span class="st">&quot;Here is a string&quot;</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>s.lower()</span></code></pre></div>
+<pre><code>&#39;here is a string&#39;</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>s.split()</span></code></pre></div>
+<pre><code>[&#39;Here&#39;, &#39;is&#39;, &#39;a&#39;, &#39;string&#39;]</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> s.split()</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">&quot; &quot;</span>.join(k)</span></code></pre></div>
+<pre><code>&#39;Here is a string&#39;</code></pre>
+</div>
+<h4 id="boolean">Boolean</h4>
+<p>Boolean types have two values. Either True or False. These are special and reserved words in Python.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>truth <span class="op">=</span> <span class="va">True</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>lies <span class="op">=</span> <span class="va">False</span> </span></code></pre></div>
+</div>
+<p>Note that we can perform arithmetic operations on boolean types.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="va">True</span> <span class="op">**</span> <span class="dv">2</span></span></code></pre></div>
+<pre><code>1</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="va">False</span> <span class="op">+</span> <span class="dv">2</span></span></code></pre></div>
+<pre><code>2</code></pre>
+</div>
+<p>Boolean types often come about as a result of comparisons.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="va">True</span> </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="va">False</span> </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co">## Equality </span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">==</span> y</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co">## Not equal </span></span></code></pre></div>
+<pre><code>False</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">!=</span> y</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co">## Greater than </span></span></code></pre></div>
+<pre><code>True</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">&gt;</span> y </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co">## Greater than or equal </span></span></code></pre></div>
+<pre><code>True</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">&gt;=</span> y </span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co">## Less than </span></span></code></pre></div>
+<pre><code>True</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">&lt;</span> y </span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="co">## Less than or equal </span></span></code></pre></div>
+<pre><code>False</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">&lt;=</span> y </span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co">## The same object </span></span></code></pre></div>
+<pre><code>False</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>x <span class="kw">is</span> y </span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co">## are both true </span></span></code></pre></div>
+<pre><code>False</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>x <span class="kw">and</span> y </span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="co">## is at least one true </span></span></code></pre></div>
+<pre><code>False</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>x <span class="kw">or</span> y </span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="co">## is it false </span></span></code></pre></div>
+<pre><code>True</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="kw">not</span> x </span></code></pre></div>
+<pre><code>False</code></pre>
+</div>
+<h3 id="changing-between-types">Changing between types</h3>
+<p>Sometimes we need to cast a value from one type to another. For example, we have read in a set of numbers as strings and we need to make them numeric types to do arithmetic.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="st">&quot;1&quot;</span> </span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> <span class="st">&quot;will not convert to numeric&quot;</span> </span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to float </span></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a><span class="bu">float</span>(x)</span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to integer </span></span></code></pre></div>
+<pre><code>1.0</code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="bu">int</span>(x)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to string </span></span></code></pre></div>
+<pre><code>1</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>(y)</span></code></pre></div>
+<pre><code>&#39;1&#39;</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A failure to cast because there is no clear numeric </span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="bu">float</span>(z)</span></code></pre></div>
+</div>
+<h3 id="lists-and-tuples">Lists and Tuples</h3>
+<p>Lists and tuples allow us to store multiple elements in a single object. The elements are ordered and generally when we reference them we use zero-based indexing, which means that the first element is in the 0th position. List use [] as brackets.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode" id="cb59"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>a_list <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="st">&quot;skip&quot;</span>, <span class="st">&quot;to&quot;</span>, <span class="st">&quot;my&quot;</span>, <span class="st">&quot;lou&quot;</span>]</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the length of the list</span></span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(a_list)</span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the first element </span></span></code></pre></div>
+<pre><code>6</code></pre>
+<div class="sourceCode" id="cb61"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>a_list[<span class="dv">0</span>]</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the third element </span></span></code></pre></div>
+<pre><code>1</code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>a_list[<span class="dv">2</span>]</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the last element</span></span></code></pre></div>
+<pre><code>&#39;skip&#39;</code></pre>
+<div class="sourceCode" id="cb65"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>a_list[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternatively </span></span></code></pre></div>
+<pre><code>&#39;lou&#39;</code></pre>
+<div class="sourceCode" id="cb67"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>a_list[<span class="dv">5</span>]</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the third through fifth elements </span></span></code></pre></div>
+<pre><code>&#39;lou&#39;</code></pre>
+<div class="sourceCode" id="cb69"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>a_list[<span class="dv">2</span>:<span class="dv">5</span>]</span></code></pre></div>
+<pre><code>[&#39;skip&#39;, &#39;to&#39;, &#39;my&#39;]</code></pre>
+</div>
+<p>Note that our example list is holding different data types! Lists can hold any data type. Lists are objects, which means they have built in methods for interacting with their data. We call a method by using a period. For example:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode" id="cb71"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>b_list <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>]</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Calling a method that adds 5 to the end of our list</span></span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>b_list.append(<span class="dv">5</span>)</span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a>b_list</span>
+<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a><span class="co">## insert a number in between 3 and 4 </span></span></code></pre></div>
+<pre><code>[1, 2, 3, 4, 5]</code></pre>
+<div class="sourceCode" id="cb73"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>b_list.insert(<span class="dv">4</span>, <span class="dv">37</span>)</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>b_list</span></code></pre></div>
+<pre><code>[1, 2, 3, 4, 37, 5]</code></pre>
+</div>
+<p>The fact that we can use a method like insert means that we can change the list. In other words, a list is mutable.</p>
+<p>Tuples are like lists but cannot be changed once created. They are “immutable.” We use () to define them.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode" id="cb75"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>a_tuple <span class="op">=</span> (<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(a_tuple)</span></code></pre></div>
+<pre><code>3</code></pre>
+</div>
+<h3 id="dictionaries">Dictionaries</h3>
+<p>A dictionary is a mapping between key-value pairs and we use {} to define them. They become very useful once we introduce the <code>pandas</code> library.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode" id="cb77"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>mascots <span class="op">=</span> {<span class="st">&quot;Minnesota&quot;</span>: <span class="st">&quot;Goldy Gopher&quot;</span>,<span class="st">&quot;Cal&quot;</span>: <span class="st">&quot;Oski Bear&quot;</span>, <span class="st">&quot;Michigan State&quot;</span>: <span class="st">&quot;Sparty&quot;</span>,<span class="st">&quot;Stanford&quot;</span>: <span class="dv">0</span>,</span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>mascots[<span class="st">&quot;Minnesota&quot;</span>]</span></code></pre></div>
+<pre><code>&#39;Goldy Gopher&#39;</code></pre>
+</div>
+<h3 id="matrices">Matrices</h3>
+<h3 id="data-frames">Data Frames</h3>
 <h3 id="subsetting">Subsetting</h3>
-<h3 id="control-operations">Control Operations</h3>
+<h3 id="conditionals">Conditionals</h3>
+<p>Conditionals allow us to program code where only certain blocks of code are executing depending on the state of our program.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode" id="cb79"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>best_mascot <span class="op">=</span> <span class="st">&quot;Goldy Gopher&quot;</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> best_mascot <span class="op">==</span> <span class="st">&quot;Goldy Gopher&quot;</span>:</span>
+<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">&quot;Correct&quot;</span>)</span>
+<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> best_mascot <span class="op">==</span> <span class="st">&quot;Bucky Badger&quot;</span>:</span>
+<span id="cb79-6"><a href="#cb79-6" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">&quot;Extremely Wrong&quot;</span>)</span>
+<span id="cb79-7"><a href="#cb79-7" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb79-8"><a href="#cb79-8" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">&quot;There is only one correct answer to this question.&quot;</span>)</span></code></pre></div>
+<pre><code>Correct</code></pre>
+</div>
+<p>Python cares about white space, so notice that we use the keywords <code>if</code>, <code>elif</code>, and <code>else</code>, a : ends each conditional line, and we indent after appropriately. However, if we just have a single <code>if</code> statement we can write them on one line for simplicity.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode" id="cb81"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> best_mascot <span class="op">==</span> <span class="st">&quot;Goldy Gopher&quot;</span>: <span class="bu">print</span>(<span class="st">&quot;Correct&quot;</span>)</span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a><span class="co">## We can also do one liner if else </span></span></code></pre></div>
+<pre><code>Correct</code></pre>
+<div class="sourceCode" id="cb83"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Correct&quot;</span>) <span class="cf">if</span> best_mascot <span class="op">==</span> <span class="st">&quot;Goldy Gopher&quot;</span> <span class="cf">else</span> <span class="bu">print</span>(<span class="st">&quot;incorrect&quot;</span>)</span></code></pre></div>
+<pre><code>Correct</code></pre>
+</div>
 <h3 id="functions">Functions</h3>
 <h2 id="graphing-in-python">Graphing in Python</h2>
 <h3 id="the-basics">The Basics</h3>
@@ -2217,7 +2453,7 @@ Coding
 <h4 id="marginal-effects-plots">Marginal Effects Plots</h4>
 <h2 id="simulations-in-python">Simulations in Python</h2>
 <h3 id="the-birthday-problem">The Birthday Problem</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
