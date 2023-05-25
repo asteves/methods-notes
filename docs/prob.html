@@ -2176,7 +2176,13 @@ Coding
 <li><a href="#the-law-of-total-probability" id="toc-the-law-of-total-probability">The Law of Total Probability</a></li>
 <li><a href="#independence" id="toc-independence">Independence</a></li>
 </ul></li>
-<li><a href="#random-variables" id="toc-random-variables">Random Variables</a></li>
+<li><a href="#random-variables" id="toc-random-variables">Random Variables</a>
+<ul>
+<li><a href="#discrete-random-variables" id="toc-discrete-random-variables">Discrete Random Variables</a></li>
+<li><a href="#continuous-random-variables" id="toc-continuous-random-variables">Continuous Random Variables</a></li>
+</ul></li>
+<li><a href="#bivariate-relationships" id="toc-bivariate-relationships">Bivariate Relationships</a></li>
+<li><a href="#multivariate-relationships" id="toc-multivariate-relationships">Multivariate Relationships</a></li>
 </ul>
 </nav>
 </div>
@@ -2190,7 +2196,7 @@ Coding
 <li><p>Closed under countable unions: <span class="math inline">\(A_1,A_2,\cdot\cdot\cdot \in S \implies A_1 \cup A_2 \cup \cdot \cdot \cdot \in S\)</span></p></li>
 </ul>
 <p>A set <em>S</em> of subsets of some other set <span class="math inline">\(\Omega\)</span> that satisfies these properties is known as a <span class="math inline">\(\sigma\)</span>-algebra on <span class="math inline">\(\Omega\)</span>.</p>
-<p>A <strong>probability</strong> measure is a function <span class="math inline">\(P: S \rightarrow \mathbb{R}\)</span> that assigns a probability to every event in the event space.</p>
+<p>A <strong>probability measure</strong> is a function <span class="math inline">\(P: S \rightarrow \mathbb{R}\)</span> that assigns a probability to every event in the event space.</p>
 <h3 id="kolmogorovs-axioms">Kolmogorov’s Axioms</h3>
 <p>Let <span class="math inline">\(\Omega, S, P\)</span> be defined as above. Then <span class="math inline">\((\Omega, S, P)\)</span> is a <em>probability space</em> if it satisfies:</p>
 <ul>
@@ -2228,8 +2234,64 @@ P(A|B) = \frac{P(B|A)P(A)}{P(B)}
 <h3 id="independence">Independence</h3>
 <p>Presuming we have a random generative process, then events <span class="math inline">\(A,B \in S\)</span> are <strong>independent</strong> if <span class="math inline">\(P(A \cap B) = P(A)P(B)\)</span>. This also means that for <span class="math inline">\(A,B \in S\)</span> with <span class="math inline">\(P(B) &gt; 0\)</span> A and B are independent if and only if <span class="math inline">\(P(A|B) = P(A)\)</span>.</p>
 <h2 id="random-variables">Random Variables</h2>
-<p>A <strong>random variable</strong> is a variable that takes on a real value that is determined by a random generative process. Formally, it is a function <span class="math inline">\(X: \Omega \rightarrow \mathbb{R}\)</span> such that <span class="math inline">\(\forall r \in \mathbb{R}, \{\omega \in \Omega : X(\omega) \leq r \} \in S\)</span></p>
+<p>A <strong>random variable</strong> is a variable that takes on a real value that is determined by a random generative process. Formally, it is a function <span class="math inline">\(X: \Omega \rightarrow \mathbb{R}\)</span> such that <span class="math inline">\(\forall r \in \mathbb{R}, \{\omega \in \Omega : X(\omega) \leq r \} \in S\)</span>.</p>
+<p>We can think of random variables as mapping states of the world to a real number. There are two ways to apply a function to random variables. The first is to use the value of the random variable as an input to another function <span class="math inline">\(g\)</span>. Formally, let <span class="math inline">\(g: U \rightarrow mathbb{R}\)</span> be a function where <span class="math inline">\(X(\Omega) \subseteq U \subseteq \mathbb{R}\)</span>. If <span class="math inline">\(g \circ X: \Omega \rightarrow \mathbb{R}\)</span> is a random variable then we say that <span class="math inline">\(g\)</span> is a function of <span class="math inline">\(X\)</span>. The second is to operate on the function itself.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<h3 id="discrete-random-variables">Discrete Random Variables</h3>
+<p>A random variable X is <strong>discrete</strong> if its range <span class="math inline">\(X(\Omega)\)</span> is a countable set.</p>
+<p>Most variables tend to be discrete, though it can be mathematically simpler to represent some measurements that are discrete as continuous because we can use results from calculus.</p>
+<h4 id="probability-mass-function-pmf">Probability Mass Function (pmf)</h4>
+<p>Given some discrete random variable X, we summarize the probability of each outcome x occurring with the <strong>probability mass function</strong>. The probability mass function of X is <span class="math inline">\(f(x) = Pr[X=x], \forall x \in \mathbb{R}\)</span></p>
+<p>As an example of how a pmf works, suppose that we have a fair coin and we flip it repeatedly. Out of many coin flips, we expect heads and tails to come up half of the time. The pmf of the coin flip random variable is then:</p>
+<p><span class="math display">\[\begin{aligned}
+f(x) =\begin{cases}
+\frac{1}{2} &amp; x \in \{H, T\} \\
+0 &amp; otherwise
+\end{cases}
+\end{aligned}\]</span></p>
+<p>A pmf tells us everything about a random variable’s distribution.</p>
+<h4 id="discrete-pmf-properties">Discrete PMF properties</h4>
+<p>For a discrete random variable X with pmf <span class="math inline">\(f\)</span></p>
+<ul>
+<li><span class="math inline">\(\forall X \in \mathbb{R}, f(x) \geq 0\)</span></li>
+<li>_{x X()} f(x) = 1</li>
+</ul>
+<p>More generally, for any set of events <span class="math inline">\(D \subseteq \mathbb{R}\)</span> and <span class="math inline">\(A = \{X \in D\}\)</span>, <span class="math inline">\(P(A) = Pr[X \in D] = \sum_{x \in X(A)}f(x)\)</span>.</p>
+<h4 id="cumulative-distribution-function-cdf">Cumulative Distribution Function (cdf)</h4>
+<p>For a random variable X, the <strong>cumulative distribution function</strong> of X is <span class="math inline">\(F(x) = Pr[X \leq x], \forall x \in \mathbb{R}\)</span></p>
+<p>The cdf returns the probability that an outcome for a random variable will be less than or equal to some given value. The cdf of X tells us everything that there is to know about X.</p>
+<h4 id="properties-of-cdf">Properties of cdf</h4>
+<p>For a random variable X with cdf <span class="math inline">\(F\)</span>:</p>
+<ul>
+<li><span class="math inline">\(F\)</span> is nondecreasing: <span class="math inline">\(\forall x_1, x_2 \in \mathbb{R} x_1 &lt; x_2 \implies F(x_1) \leq F(X_2)\)</span></li>
+<li><span class="math inline">\(\lim_{x \rightarrow -\infty} F(x) = 0\)</span></li>
+<li><span class="math inline">\(\lim_{x \rightarrow \infty} F(x) = 1\)</span></li>
+<li><span class="math inline">\(\forall x \in \mathbb{R}, 1- F(x) = Pr[X &gt; x]\)</span></li>
+</ul>
+<h3 id="continuous-random-variables">Continuous Random Variables</h3>
+<p>If we are interested in some measurement that can take on an arbitrary degree of precision (e.g. time), we often represent this variable for mathematical convenience as a <strong>continuous</strong> random variable. Formally. a random variable X is continuous if there exists a non-negative function <span class="math inline">\(f: \mathbb{R} \rightarrow \mathbb{R}\)</span> such that the cdf of X is <span class="math inline">\(F(x) = Pr[X \leq x] = \int_{-\infty}^x f(u)du, \forall x \in \mathbb{R}\)</span></p>
+<h4 id="probability-density-function-pdf">Probability Density Function (pdf)</h4>
+<p>The function <span class="math inline">\(f\)</span> is the <strong>probability density function</strong>. Due to the Fundamental Theorem of Calculus, the pdf is unique for any continuous random variable.</p>
+<p>For a continuous random variable X with cdf <span class="math inline">\(F\)</span>, the <strong>probability density function</strong> of X is <span class="math inline">\(f(x) = \frac{dF(u)}{du}\big{|}_{u=x}, \forall x \in \mathbb{R}\)</span>.</p>
+<p>The pdf is the continuous analog to the pmf and consequently the properties of the pdf are analogous to the pmf.</p>
+<ul>
+<li><span class="math inline">\(\forall x \in \mathbb{R}, f(x) \geq 0\)</span></li>
+<li><span class="math inline">\(\int_{-\infty}^\infty f(x)dx = 1\)</span></li>
+</ul>
+<p>Because a continuous random variable is evaluated with an integral, <span class="math inline">\(\forall x \in \mathbb{R}, Pr[X = x] = 0\)</span>. Furthermore:</p>
+<ul>
+<li><span class="math inline">\(\forall x \in \mathbb{R}, Pr[X &lt; x] = Pr[X \leq x] = F(x) = \int_{-\infty}^x f(u)du\)</span></li>
+<li><span class="math inline">\(\forall x \in \mathbb{R}, Pr[X &gt; x] = Pr[X \geq x] = 1 - F(x) = \int_{x}^\infty f(u)du\)</span></li>
+<li><span class="math inline">\(\forall a,b \in \mathbb{R}, a \leq b, Pr[a &lt; X &lt; b] = Pr[a \leq X &lt; b] = Pr[a &lt; X \leq B] = Pr[a \leq X \leq B] = F(b) - F(a) = \int_{a}^bf(x)dx\)</span></li>
+</ul>
+<h2 id="bivariate-relationships">Bivariate Relationships</h2>
+<h2 id="multivariate-relationships">Multivariate Relationships</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p>All random variables are implicitly defined within some probability space.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

@@ -31,7 +31,7 @@ A set *S* of subsets of a sample space $\Omega$ is an event space if it satisfie
 
 A set *S* of subsets of some other set $\Omega$ that satisfies these properties is known as a $\sigma$-algebra on $\Omega$.
 
-A **probability** measure is a function $P: S \rightarrow \mathbb{R}$ that assigns a probability to every event in the event space. 
+A **probability measure** is a function $P: S \rightarrow \mathbb{R}$ that assigns a probability to every event in the event space. 
 
 ### Kolmogorov's Axioms 
 
@@ -97,5 +97,78 @@ Presuming we have a random generative process, then events $A,B \in S$ are **ind
 
 ## Random Variables 
 
-A **random variable** is a variable that takes on a real value that is determined by a random generative process. Formally, it is a function $X: \Omega \rightarrow \mathbb{R}$ such that $\forall r \in \mathbb{R}, \{\omega \in \Omega : X(\omega) \leq r \} \in S$
+A **random variable** is a variable that takes on a real value that is determined by a random generative process. Formally, it is a function $X: \Omega \rightarrow \mathbb{R}$ such that $\forall r \in \mathbb{R}, \{\omega \in \Omega : X(\omega) \leq r \} \in S$.
+
+We can think of random variables as mapping states of the world to a real number. There are two ways to apply a function to random variables. The first is to use the value of the random variable as an input to another function $g$. Formally, let $g: U \rightarrow mathbb{R}$ be a function where $X(\Omega) \subseteq U \subseteq \mathbb{R}$. If $g \circ X: \Omega \rightarrow \mathbb{R}$ is a random variable then we say that $g$ is a function of $X$. The second is to operate on the function itself.^[All random variables are implicitly defined within some probability space.]
+
+### Discrete Random Variables 
+
+A random variable X is **discrete** if its range $X(\Omega)$ is a countable set. 
+
+Most variables tend to be discrete, though it can be mathematically simpler to represent some measurements that are discrete as continuous because we can use results from calculus. 
+
+#### Probability Mass Function (pmf)
+
+Given some discrete random variable X, we summarize the probability of each outcome x occurring with the **probability mass function**. The probability mass function of X is $f(x) = Pr[X=x], \forall x \in \mathbb{R}$
+
+As an example of how a pmf works, suppose that we have a fair coin and we flip it repeatedly. Out of many coin flips, we expect heads and tails to come up half of the time. The pmf of the coin flip random variable is then:
+
+$$\begin{aligned}
+f(x) =\begin{cases}
+ \frac{1}{2} & x \in \{H, T\} \\
+ 0 & otherwise
+\end{cases}
+\end{aligned}$$
+
+A pmf tells us everything about a random variable's distribution. 
+
+#### Discrete PMF properties 
+
+For a discrete random variable X with pmf $f$
+
+  - $\forall X \in \mathbb{R}, f(x) \geq 0$
+  - \sum_{x \in X(\Omega)} f(x) = 1
+  
+More generally, for any set of events $D \subseteq \mathbb{R}$ and $A = \{X \in D\}$, $P(A) = Pr[X \in D] = \sum_{x \in X(A)}f(x)$. 
+
+#### Cumulative Distribution Function (cdf) 
+
+For a random variable X, the **cumulative distribution function** of X is $F(x) = Pr[X \leq x], \forall x \in \mathbb{R}$
+
+The cdf returns the probability that an outcome for a random variable will be less than or equal to some given value. The cdf of X tells us everything that there is to know about X. 
+
+#### Properties of cdf 
+
+For a random variable X with cdf $F$:
+
+  - $F$ is nondecreasing: $\forall x_1, x_2 \in \mathbb{R} x_1 < x_2 \implies F(x_1) \leq F(X_2)$
+  - $\lim_{x \rightarrow -\infty} F(x) = 0$
+  - $\lim_{x \rightarrow \infty} F(x) = 1$
+  - $\forall x \in \mathbb{R}, 1- F(x) = Pr[X > x]$
+
+
+### Continuous Random Variables 
+
+If we are interested in some measurement that can take on an arbitrary degree of precision (e.g. time), we often represent this variable for mathematical convenience as a **continuous** random variable. Formally. a random variable X is continuous if there exists a non-negative function $f: \mathbb{R} \rightarrow \mathbb{R}$ such that the cdf of X is $F(x) = Pr[X \leq x] = \int_{-\infty}^x f(u)du, \forall x \in \mathbb{R}$
+
+#### Probability Density Function (pdf)
+
+The function $f$ is the **probability density function**. Due to the Fundamental Theorem of Calculus, the pdf is unique for any continuous random variable.
+
+For a continuous random variable X with cdf $F$, the **probability density function** of X is $f(x) = \frac{dF(u)}{du}\big{|}_{u=x}, \forall x \in \mathbb{R}$. 
+
+The pdf is the continuous analog to the pmf and consequently the properties of the pdf are analogous to the pmf. 
+
+  - $\forall x \in \mathbb{R}, f(x) \geq 0$
+  - $\int_{-\infty}^\infty f(x)dx = 1$
+
+Because a continuous random variable is evaluated with an integral, $\forall x \in \mathbb{R}, Pr[X = x] = 0$. Furthermore: 
+
+  - $\forall x \in \mathbb{R}, Pr[X < x] = Pr[X \leq x] = F(x) = \int_{-\infty}^x f(u)du$
+  - $\forall x \in \mathbb{R}, Pr[X > x] = Pr[X \geq x] = 1 - F(x) = \int_{x}^\infty f(u)du$
+  - $\forall a,b \in \mathbb{R}, a \leq b, Pr[a < X < b] = Pr[a \leq X < b] = Pr[a < X \leq B] = Pr[a \leq X \leq B] = F(b) - F(a) = \int_{a}^bf(x)dx$
+
+## Bivariate Relationships 
+
+## Multivariate Relationships 
 
