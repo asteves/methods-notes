@@ -127,7 +127,7 @@ A pmf tells us everything about a random variable's distribution.
 For a discrete random variable X with pmf $f$
 
   - $\forall X \in \mathbb{R}, f(x) \geq 0$
-  - \sum_{x \in X(\Omega)} f(x) = 1
+  - $\sum_{x \in X(\Omega)} f(x) = 1$
   
 More generally, for any set of events $D \subseteq \mathbb{R}$ and $A = \{X \in D\}$, $P(A) = Pr[X \in D] = \sum_{x \in X(A)}f(x)$. 
 
@@ -167,6 +167,12 @@ Because a continuous random variable is evaluated with an integral, $\forall x \
   - $\forall x \in \mathbb{R}, Pr[X < x] = Pr[X \leq x] = F(x) = \int_{-\infty}^x f(u)du$
   - $\forall x \in \mathbb{R}, Pr[X > x] = Pr[X \geq x] = 1 - F(x) = \int_{x}^\infty f(u)du$
   - $\forall a,b \in \mathbb{R}, a \leq b, Pr[a < X < b] = Pr[a \leq X < b] = Pr[a < X \leq B] = Pr[a \leq X \leq B] = F(b) - F(a) = \int_{a}^bf(x)dx$
+
+### Support 
+
+Generally, we are interested in some subset of outcomes that could actually be observed for a given random variable. For example, no person has a negative height. The set of values at which the pmf/pdf of a random variable is positive is called its **support**. Formally the $Supp[X] = \{x \in \mathbb{R}: f(x) > 0 \}$
+
+For discrete random variables, the support is the set of values that the random variables takes with nonzero probability. For continuous random variables, the support is the set of values over which the random variable has nonzero probability density.
 
 ## Bivariate Relationships 
 

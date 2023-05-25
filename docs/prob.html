@@ -2180,6 +2180,7 @@ Coding
 <ul>
 <li><a href="#discrete-random-variables" id="toc-discrete-random-variables">Discrete Random Variables</a></li>
 <li><a href="#continuous-random-variables" id="toc-continuous-random-variables">Continuous Random Variables</a></li>
+<li><a href="#support" id="toc-support">Support</a></li>
 </ul></li>
 <li><a href="#bivariate-relationships" id="toc-bivariate-relationships">Bivariate Relationships</a></li>
 <li><a href="#multivariate-relationships" id="toc-multivariate-relationships">Multivariate Relationships</a></li>
@@ -2253,7 +2254,7 @@ f(x) =\begin{cases}
 <p>For a discrete random variable X with pmf <span class="math inline">\(f\)</span></p>
 <ul>
 <li><span class="math inline">\(\forall X \in \mathbb{R}, f(x) \geq 0\)</span></li>
-<li>_{x X()} f(x) = 1</li>
+<li><span class="math inline">\(\sum_{x \in X(\Omega)} f(x) = 1\)</span></li>
 </ul>
 <p>More generally, for any set of events <span class="math inline">\(D \subseteq \mathbb{R}\)</span> and <span class="math inline">\(A = \{X \in D\}\)</span>, <span class="math inline">\(P(A) = Pr[X \in D] = \sum_{x \in X(A)}f(x)\)</span>.</p>
 <h4 id="cumulative-distribution-function-cdf">Cumulative Distribution Function (cdf)</h4>
@@ -2283,6 +2284,9 @@ f(x) =\begin{cases}
 <li><span class="math inline">\(\forall x \in \mathbb{R}, Pr[X &gt; x] = Pr[X \geq x] = 1 - F(x) = \int_{x}^\infty f(u)du\)</span></li>
 <li><span class="math inline">\(\forall a,b \in \mathbb{R}, a \leq b, Pr[a &lt; X &lt; b] = Pr[a \leq X &lt; b] = Pr[a &lt; X \leq B] = Pr[a \leq X \leq B] = F(b) - F(a) = \int_{a}^bf(x)dx\)</span></li>
 </ul>
+<h3 id="support">Support</h3>
+<p>Generally, we are interested in some subset of outcomes that could actually be observed for a given random variable. For example, no person has a negative height. The set of values at which the pmf/pdf of a random variable is positive is called its <strong>support</strong>. Formally the <span class="math inline">\(Supp[X] = \{x \in \mathbb{R}: f(x) &gt; 0 \}\)</span></p>
+<p>For discrete random variables, the support is the set of values that the random variables takes with nonzero probability. For continuous random variables, the support is the set of values over which the random variable has nonzero probability density.</p>
 <h2 id="bivariate-relationships">Bivariate Relationships</h2>
 <h2 id="multivariate-relationships">Multivariate Relationships</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
