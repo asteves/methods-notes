@@ -22,8 +22,11 @@ The notes and notation come predominantly from Aronow and Miller (2019), Pittman
 ### Sample Spaces, Event Spaces, Probability Axioms 
 
 A set *S* of subsets of a sample space $\Omega$ is an event space if it satisfies: 
+
   - Non-empty: $S \neq \emptyset$
+  
   - Closed under complements: $A \in S \implies A^C \in S$
+  
   - Closed under countable unions: $A_1,A_2,\cdot\cdot\cdot \in S \implies A_1 \cup A_2 \cup \cdot \cdot \cdot \in S$
 
 A set *S* of subsets of some other set $\Omega$ that satisfies these properties is known as a $\sigma$-algebra on $\Omega$.
@@ -33,17 +36,25 @@ A **probability** measure is a function $P: S \rightarrow \mathbb{R}$ that assig
 ### Kolmogorov's Axioms 
 
 Let $\Omega, S, P$ be defined as above. Then $(\Omega, S, P)$ is a *probability space* if it satisfies: 
+
   - Non-negativity: $\forall A \in S, P(A) \geq 0$ and $P(A)$ is finite and real. 
+  
   - Unitarity: $P(\Omega) = 1$
+  
   - Countable additivity: If $A_1, A_2, ... \in S$ are pairwise disjoint $\forall i \neq j A_i \cap A_j = \emptyset$ implies $P(A_1 \cup A_2 \cup ...) = P(A_1) + P(A_2) + \cdot \cdot \cdot = \sum_iP(A_i)$
   
 ### Basic Properties of Probability 
 
 Let $(\Omega, S, P)$ be a probability space. The following properties hold: 
+
   - Monotonicity: $\forall A,B \in S$ if $A \subseteq B \implies P(A) \leq P(B)$
+  
   - Subtraction Rule: $\forall A,B \in S$ if $A \subseteq B \implies P(B\A) = P(B) - P(A)$
+  
   - Zero Probability of the empty set: $P(\emptyset) = 0$
+  
   - Probability Bounds: $\forall A \in S, 0 \leq P(A) \leq 1$
+  
   - Complement Rule: $\forall A \in S, P(A^C) = 1 - P(A)$
 
 ### Joint and Continuous Probability 

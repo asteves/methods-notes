@@ -2183,24 +2183,30 @@ Coding
 <p>The notes and notation come predominantly from Aronow and Miller (2019), Pittman (1993), and Casella and Berger (2002).</p>
 <h2 id="fundamentals">Fundamentals</h2>
 <h3 id="sample-spaces-event-spaces-probability-axioms">Sample Spaces, Event Spaces, Probability Axioms</h3>
-<p>A set <em>S</em> of subsets of a sample space <span class="math inline">\(\Omega\)</span> is an event space if it satisfies:
-- Non-empty: <span class="math inline">\(S \neq \emptyset\)</span>
-- Closed under complements: <span class="math inline">\(A \in S \implies A^C \in S\)</span>
-- Closed under countable unions: <span class="math inline">\(A_1,A_2,\cdot\cdot\cdot \in S \implies A_1 \cup A_2 \cup \cdot \cdot \cdot \in S\)</span></p>
+<p>A set <em>S</em> of subsets of a sample space <span class="math inline">\(\Omega\)</span> is an event space if it satisfies:</p>
+<ul>
+<li><p>Non-empty: <span class="math inline">\(S \neq \emptyset\)</span></p></li>
+<li><p>Closed under complements: <span class="math inline">\(A \in S \implies A^C \in S\)</span></p></li>
+<li><p>Closed under countable unions: <span class="math inline">\(A_1,A_2,\cdot\cdot\cdot \in S \implies A_1 \cup A_2 \cup \cdot \cdot \cdot \in S\)</span></p></li>
+</ul>
 <p>A set <em>S</em> of subsets of some other set <span class="math inline">\(\Omega\)</span> that satisfies these properties is known as a <span class="math inline">\(\sigma\)</span>-algebra on <span class="math inline">\(\Omega\)</span>.</p>
 <p>A <strong>probability</strong> measure is a function <span class="math inline">\(P: S \rightarrow \mathbb{R}\)</span> that assigns a probability to every event in the event space.</p>
 <h3 id="kolmogorovs-axioms">Kolmogorov’s Axioms</h3>
-<p>Let <span class="math inline">\(\Omega, S, P\)</span> be defined as above. Then <span class="math inline">\((\Omega, S, P)\)</span> is a <em>probability space</em> if it satisfies:
-- Non-negativity: <span class="math inline">\(\forall A \in S, P(A) \geq 0\)</span> and <span class="math inline">\(P(A)\)</span> is finite and real.
-- Unitarity: <span class="math inline">\(P(\Omega) = 1\)</span>
-- Countable additivity: If <span class="math inline">\(A_1, A_2, ... \in S\)</span> are pairwise disjoint <span class="math inline">\(\forall i \neq j A_i \cap A_j = \emptyset\)</span> implies <span class="math inline">\(P(A_1 \cup A_2 \cup ...) = P(A_1) + P(A_2) + \cdot \cdot \cdot = \sum_iP(A_i)\)</span></p>
+<p>Let <span class="math inline">\(\Omega, S, P\)</span> be defined as above. Then <span class="math inline">\((\Omega, S, P)\)</span> is a <em>probability space</em> if it satisfies:</p>
+<ul>
+<li><p>Non-negativity: <span class="math inline">\(\forall A \in S, P(A) \geq 0\)</span> and <span class="math inline">\(P(A)\)</span> is finite and real.</p></li>
+<li><p>Unitarity: <span class="math inline">\(P(\Omega) = 1\)</span></p></li>
+<li><p>Countable additivity: If <span class="math inline">\(A_1, A_2, ... \in S\)</span> are pairwise disjoint <span class="math inline">\(\forall i \neq j A_i \cap A_j = \emptyset\)</span> implies <span class="math inline">\(P(A_1 \cup A_2 \cup ...) = P(A_1) + P(A_2) + \cdot \cdot \cdot = \sum_iP(A_i)\)</span></p></li>
+</ul>
 <h3 id="basic-properties-of-probability">Basic Properties of Probability</h3>
-<p>Let <span class="math inline">\((\Omega, S, P)\)</span> be a probability space. The following properties hold:
-- Monotonicity: <span class="math inline">\(\forall A,B \in S\)</span> if <span class="math inline">\(A \subseteq B \implies P(A) \leq P(B)\)</span>
-- Subtraction Rule: <span class="math inline">\(\forall A,B \in S\)</span> if <span class="math inline">\(A \subseteq B \implies P(B\A) = P(B) - P(A)\)</span>
-- Zero Probability of the empty set: <span class="math inline">\(P(\emptyset) = 0\)</span>
-- Probability Bounds: <span class="math inline">\(\forall A \in S, 0 \leq P(A) \leq 1\)</span>
-- Complement Rule: <span class="math inline">\(\forall A \in S, P(A^C) = 1 - P(A)\)</span></p>
+<p>Let <span class="math inline">\((\Omega, S, P)\)</span> be a probability space. The following properties hold:</p>
+<ul>
+<li><p>Monotonicity: <span class="math inline">\(\forall A,B \in S\)</span> if <span class="math inline">\(A \subseteq B \implies P(A) \leq P(B)\)</span></p></li>
+<li><p>Subtraction Rule: <span class="math inline">\(\forall A,B \in S\)</span> if <span class="math inline">\(A \subseteq B \implies P(B\A) = P(B) - P(A)\)</span></p></li>
+<li><p>Zero Probability of the empty set: <span class="math inline">\(P(\emptyset) = 0\)</span></p></li>
+<li><p>Probability Bounds: <span class="math inline">\(\forall A \in S, 0 \leq P(A) \leq 1\)</span></p></li>
+<li><p>Complement Rule: <span class="math inline">\(\forall A \in S, P(A^C) = 1 - P(A)\)</span></p></li>
+</ul>
 <h3 id="joint-and-continuous-probability">Joint and Continuous Probability</h3>
 <p>The <strong>joint probability</strong> for <span class="math inline">\(A,B \in S\)</span> of A and B is <span class="math inline">\(P(A \cap B)\)</span></p>
 <h4 id="the-addition-rule">The Addition Rule</h4>
