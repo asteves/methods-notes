@@ -2182,7 +2182,14 @@ Coding
 <li><a href="#continuous-random-variables" id="toc-continuous-random-variables">Continuous Random Variables</a></li>
 <li><a href="#support" id="toc-support">Support</a></li>
 </ul></li>
-<li><a href="#bivariate-relationships" id="toc-bivariate-relationships">Bivariate Relationships</a></li>
+<li><a href="#bivariate-relationships" id="toc-bivariate-relationships">Bivariate Relationships</a>
+<ul>
+<li><a href="#joint-pmf" id="toc-joint-pmf">Joint PMF</a></li>
+<li><a href="#joint-cdf" id="toc-joint-cdf">Joint CDF</a></li>
+<li><a href="#marginal-pmf" id="toc-marginal-pmf">Marginal PMF</a></li>
+<li><a href="#conditional-pmf" id="toc-conditional-pmf">Conditional PMF</a></li>
+<li><a href="#multiplicative-law-for-pmfs" id="toc-multiplicative-law-for-pmfs">Multiplicative Law for PMFs</a></li>
+</ul></li>
 <li><a href="#multivariate-relationships" id="toc-multivariate-relationships">Multivariate Relationships</a></li>
 </ul>
 </nav>
@@ -2288,6 +2295,19 @@ f(x) =\begin{cases}
 <p>Generally, we are interested in some subset of outcomes that could actually be observed for a given random variable. For example, no person has a negative height. The set of values at which the pmf/pdf of a random variable is positive is called its <strong>support</strong>. Formally the <span class="math inline">\(Supp[X] = \{x \in \mathbb{R}: f(x) &gt; 0 \}\)</span></p>
 <p>For discrete random variables, the support is the set of values that the random variables takes with nonzero probability. For continuous random variables, the support is the set of values over which the random variable has nonzero probability density.</p>
 <h2 id="bivariate-relationships">Bivariate Relationships</h2>
+<p>In the same way that univariate random variables can be completely described by their pmf/pdf, bivariate distributions are completely described by their joint pmf/pdf.</p>
+<h3 id="joint-pmf">Joint PMF</h3>
+<p>For discrete random variables X and Y, the <strong>joint pmf</strong> of X and Y is <span class="math inline">\(f(x,y) = Pr[X=x, Y=y], \forall x,y \in \mathbb{R}\)</span></p>
+<h3 id="joint-cdf">Joint CDF</h3>
+<p>For random variables X and Y, the <strong>joint cdf</strong> of X and Y is <span class="math inline">\(F(x,y) = Pr[X \leq x, Y \leq y], \forall x,y \in \mathbb{R}\)</span></p>
+<h3 id="marginal-pmf">Marginal PMF</h3>
+<p>For discrete random variables X and Y with joint pmf <span class="math inline">\(f\)</span>, the <strong>marginal pmf</strong> of Y is <span class="math inline">\(f_y(y) = Pr[Y=y] = \sum_{x \in Supp[X]}f(x,y), \forall y \in \mathbb{R}\)</span></p>
+<p>The marginal pmf tells us the information about that variable ignoring its relationship with other variables.</p>
+<h3 id="conditional-pmf">Conditional PMF</h3>
+<p>For discrete random variables X and Y with joint pmf <span class="math inline">\(f\)</span>, the conditional pmf of Y given X = x is: <span class="math inline">\(f_{Y|X}(y|x) = Pr[Y=y|X=x] = \frac{Pr[X=x, Y=y]}{Pr[X=x]} = \frac{f(x,y)}{f_X(x)}, \forall y \in \mathbb{R}\)</span> and <span class="math inline">\(\forall x \in Supp[X]\)</span></p>
+<p>The conditional pmf tells us the probability that a given value of Y occurs given that a certain value of X occurs.</p>
+<h3 id="multiplicative-law-for-pmfs">Multiplicative Law for PMFs</h3>
+<p>Let X and Y be two discrete random variables with joint pmf <span class="math inline">\(f\)</span>. Then, <span class="math inline">\(\forall x \in \mathbb{R}\)</span> and <span class="math inline">\(\forall y \in Supp[Y]\)</span>, <span class="math inline">\(f_{X|Y}(x|y)f_Y(y) = f(x,y)\)</span></p>
 <h2 id="multivariate-relationships">Multivariate Relationships</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">

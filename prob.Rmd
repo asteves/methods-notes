@@ -176,5 +176,32 @@ For discrete random variables, the support is the set of values that the random 
 
 ## Bivariate Relationships 
 
+In the same way that univariate random variables can be completely described by their pmf/pdf, bivariate distributions are completely described by their joint pmf/pdf. 
+
+### Joint PMF
+
+For discrete random variables X and Y, the **joint pmf** of X and Y is $f(x,y) = Pr[X=x, Y=y], \forall x,y \in \mathbb{R}$
+
+### Joint CDF 
+
+For random variables X and Y, the **joint cdf** of X and Y is $F(x,y) = Pr[X \leq x, Y \leq y], \forall x,y \in \mathbb{R}$
+
+### Marginal PMF 
+
+For discrete random variables X and Y with joint pmf $f$, the **marginal pmf** of Y is $f_y(y) = Pr[Y=y] = \sum_{x \in Supp[X]}f(x,y), \forall y \in \mathbb{R}$
+
+The marginal pmf tells us the information about that variable ignoring its relationship with other variables. 
+
+### Conditional PMF 
+
+For discrete random variables X and Y with joint pmf $f$, the conditional pmf of Y given X = x is: $f_{Y|X}(y|x) = Pr[Y=y|X=x] = \frac{Pr[X=x, Y=y]}{Pr[X=x]} = \frac{f(x,y)}{f_X(x)}, \forall y \in \mathbb{R}$ and $\forall x \in Supp[X]$
+
+The conditional pmf tells us the probability that a given value of Y occurs given that a certain value of X occurs.  
+
+### Multiplicative Law for PMFs 
+
+Let X and Y be two discrete random variables with joint pmf $f$. Then, $\forall x \in \mathbb{R}$ and $\forall y \in Supp[Y]$, $f_{X|Y}(x|y)f_Y(y) = f(x,y)$
+
+
 ## Multivariate Relationships 
 
