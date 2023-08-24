@@ -202,6 +202,222 @@ The conditional pmf tells us the probability that a given value of Y occurs give
 
 Let X and Y be two discrete random variables with joint pmf $f$. Then, $\forall x \in \mathbb{R}$ and $\forall y \in Supp[Y]$, $f_{X|Y}(x|y)f_Y(y) = f(x,y)$
 
+### Jointly Continous Random Variables 
 
-## Multivariate Relationships 
+Two random variables X and Y are jointly continuous if there exists a non-negative function$f: \mathbb{R}^2 \rightarrow \mathbb{R}$ such that the joint cdf of X and Y is 
 
+$$\begin{aligned}
+F(x,y) = Pr[X \leq x, Y \leq y] = \int_{-\infty}^x \int_{-\infty}^y f(u,v) dvdu, \forall x,y \in \mathbb{R}
+\end{aligned}$$
+
+We refer to the function $f$ as the joint probability density function. Exactly like in the univariate case, we can derive the joint pdf by taking the mixed second order partial derivative of the joint cdf 
+
+### Joint PDF 
+
+For jointly continous random variables X and Y with joint cdf F, the **joint pdf** of X and Y is $\f(x,y) = \frac{\partial^2F(u,v)}{\partial u \partial v}\big|_{u=x, v=y}, \forall x,y \in \mathbb{R}$
+
+For any jointly continous variables X and Y with a joint pdf if $D \subseteq \mathbb{R}^2$ then $Pr[(X,Y) \in D] = \int\int f(x,y)dydx$
+
+For example the probability that (X,Y) falls within $\{0 \leq X \leq 5, Y \leq X\}$ is $\int_{0}^5\int_{0}^x f(x,y)dydx$
+
+### Marginal Joint PDF 
+
+For jointly continuous random variables X and Y with joint pdf $f$ the **marginal pdf** of Y is $f_Y(y) = \int_{-\infty}^\infty f(x,y)dx, \forall y \in \mathbb{R}$
+
+### Conditional Joint PDF
+
+For jointly continuous random variables X and Y with point pdf $f$ the **conditional pdf** of Y given X=x is $f_{Y|X}(y|x) = \frac{f(x,y)}{f_X(x)}, \forall y \in \mathbb{R}, \forall x \in Supp[X]$ 
+
+## Summarizing Distributions 
+
+### Expected Values 
+
+For a discrete random variable *X* with pmf *f* if $\sum_x |x|f(x) < \infty$, then the expected value of X is: 
+
+$$E[X] = \sum_x xf(x)$$ 
+
+For a continuous case with a pdf *f* with $\int_{-\infty}^\infty |x|f(x)dx < \infty$ the expected value of X is: 
+
+$$E[X] = \int_{-\infty}^\infty xf(x)dx$$ 
+
+A common distribution both for explication and for binary data is the *Bernoulli Distribution*. Let $X \sim Bernoulli(p)$. The expected value of this distribution is: 
+
+$$E[X] = \sum_{x=0}^1xf(x) = 0(1-p) + 1(p) = p$$ 
+
+Another example is the standard normal distribution. 
+
+$$\begin{aligned}E[X] &= \int_{-\infty}^\infty x \frac{e^{\frac{-x^2}{2}}}{\sqrt{2\pi}}dx \\
+E[X] &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty xe^{\frac{-x^2}{2}}dx \\
+E[X] &= \frac{1}{\sqrt{2\pi}}(-e^{\frac{-x^2}{2}})|_{-\infty}^\infty \\
+E[X] &= 0 
+\end{aligned}$$
+
+See the [Calculus](optim.html) notes for more details on the integration process.
+
+### Expectation of a Function of a Random Variable 
+
+Functions of random variables are themselves random variables. If X is a discrete random variable with pmf *f* and *g* is a function of X, then: 
+
+$$E[g(X)] = \sum_x g(x)f(x)$$ 
+
+Similarly the continuous case is: 
+
+$$E[g(X)] = \int_{-\infty}^infty g(x)f(x)dx$$ 
+
+An immediate implication of this theorem is that whenever you see a regression of any kind, it's a type of average. 
+
+### Properties of Expected values 
+
+For a random variable X
+
+- $\forall c \in \mathbb{R}, E[c] = c$
+- $\forall a \in \mathbb{R}, E[aX] = aE[X]$
+
+To prove the first, note that any constant can be considered a degenerate distribution with a pmf equaling one if x is the constant and 0 otherwise. Then: 
+
+$$\begin{aligned}
+E[c] &= \sum_x xf(x) \\
+E[c] &= cf(c) \\
+E[c] &= c(1) \\
+E[c] &= c
+\end{aligned}$$
+
+For the second, in the discrete case: 
+
+$$\begin{aligned}
+E[aX] &= E[g(X)] \\
+E[aX] &= \sum_x g(x)f(x) \\
+E[aX] &= \sum_x axf(x) \\
+E[aX] &= a \sum_x xf(x) \\
+E[aX] &= aE[X]
+\end{aligned}$$
+
+The continuous proof is analogous just with integrals instead of sum operators. 
+
+### Linearity of Expectation 
+
+Let X and Y be random variables. $\forall a,b,c \in \mathbb{R}$ 
+
+$$E[aX + bY + c] = aE[X] + bE[Y] + c$$ 
+
+The proof for linearity takes advantage of the fact that the expectation of a function of two random variables is $\sum_x \sum_y h(x,y)f(x,y)$ 
+
+$$\begin{aligned}
+E[aX + bY + c] &= \sum_x \sum_y h(x,y)f(x,y) \\
+E[aX + bY + c] &= (ax + by + c)f(x,y) \\
+E[aX + bY + c] &= a \sum_x \sum_y xf(x,y) + b \sum_x \sum_y yf(x,y) + c \sum_x \sum_y f(x,y) \\
+E[aX + bY + c] &= a \sum_x x \sum_y f(x,y) + b \sum_y y \sum_x f(x,y) + c \sum_x \sum_y f(x,y) \\
+E[aX + bY + c] &= a \sum_x x f_X(x) + b \sum_y yf_Y(y) + c \sum_x f_X(x) \\
+E[aX + bY + c] &= aE[X] + bE[Y] + c(1) \\
+E[aX + bY + c] &= aE[X] + bE[Y] + c
+\end{aligned}$$
+
+The continuous proof is again analogous with appropriate replacement of integrals for summations. 
+
+### Raw and Central Moments 
+
+For a random variable X and $j \in \mathbb{N}$ the $j^{th}$ raw moment of X is $\mu'_j = E[X^J]$ 
+
+The expected value is the first raw moments. Raw moments provide summary information about a distribution's shape and location. We often would like summary measures that reflect the shape and spread of a distribution and do not depend on the expected value of the distribution. The $j^{th}$ central moment is 
+
+$$\mu_j = E[(X - E[X])^j]$$ 
+
+### Variance 
+
+The variance is the second central moment and characterizes the variability or spread of a distribution. Higher variance implies greater unpredictability. The variance of a random variable X is defined as: 
+
+$$V[X] = E[(X - E[X])^2]$$ 
+
+We will often see an alternative formula $V[X] = E[X^2] - E[X]^$ and it is common for this to be proved. To do so: 
+
+$$\begin{aligned}
+V[X] &= E[(X - E[X])^2] \\
+V[X] &= E[X^2 - 2XE[X] + E[X^2]] \\
+V[X] &= E[X^2] - 2E[XE[X]] + E[E[X]^2] \\
+V[X] &= E[X^2] - 2E[X]E[X] + E[X]^2 \\
+V[X] &= E[X^2] - 2E[X]^2 + E[X]^2 \\
+V[X] &= E[X^2] - E[X]^2 
+\end{aligned}$$
+
+We are able to do this because E[X] is itself a constant and therefore we can treat it as such whenever we apply the linearity of expectations. 
+
+### Properties of variance
+
+For a random variable X 
+
+- $\forall c \in \mathbb{R}, V[X + c] = V[X]$
+- $\forall a \in \mathbb{R}, V[aX] = a^2V[X]$
+
+Proof for the first one: 
+
+$$\begin{aligned}
+V[X + c] &= E[(X + c - E[x + c])^2] \\
+V[X + c] &= E[(X + c - E[X] + c)^2] \\
+V[X + c] &= E[(x - E[X])^2] \\
+V[X + c] &= V[X]
+\end{aligned}$$
+
+To prove the second: 
+
+$$\begin{aligned}
+V[aX] &= E[(aX - E[aX])^2] \\
+V[aX] &= E[(aX - aE[X])^2] \\
+V[aX] &= E[a^2(X - E[X])^2] \\
+V[aX] &= a^2E[(X - E[X])^2] \\
+V[aX] &= a^2V[X]
+\end{aligned}$$
+
+### The standard deviation 
+
+The standard deviation is just the square root of the variance $\sigma[X] = \sqrt{V[X]}$ 
+
+### Properties of the standard deviation 
+
+For a random variable X: 
+
+- $\forall c \in \mathbb{R}, \sigma[X + c] = \sigma[X]$
+- $\forall a \in \mathbb{R}, \sigma[aX] = |a|\sigma[X]$
+
+A reason to prefer the standard deviation is that the variance is in units squared. The standard deviation is on the same scale as the random variable of interest. 
+
+### Chebyshev's Inequality 
+
+Knowing the mean and the standard deviation allows us to infer other features of a distribution. Chebyshev's inequality puts an upper bound on the probability that a draw from a distribution will be more than a given number of standard deviations from the mean. 
+
+Let X be a random variable with a finite variance. Then $\forall \epsilon > 0 Pr[|X - E[X]| \geq \epsilon \sigma [X]] \leq \frac{1}{\epsilon^2}$
+
+### The Normal Distribution 
+
+A continuous random variable X follows a normal if it has a pdf $f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^\frac{-(x-\mu)^2}{2\sigma^2}, \forall x \in \mathbb{R}$ 
+
+for some constants $\mu, \sigma \in \mathbb{R}$. If $X \sim N(\mu, \sigma^2)$ then: 
+
+- $E[X] = \mu$
+- $\sigma[X] = \sigma$
+
+### Properties of the Normal Distribution 
+Suppose $X \sim N(\mu_X, \sigma^2_X), Y \sim N(\mu_Y, \sigma^2_Y)$. Then: 
+
+- $\forall a,b \in \mathbb{R} a \neq 0, W = aX + b \implies W \sim N(a\mu_X + b, a^2\sigma^2_X)$ 
+- $X \perp \!\!\! \perp Y and Z = X + Y \implies Z \sim N(\mu_X + \mu_Y, \sigma^2_X + \sigma^2_Y)$
+
+An implication of this proof is that any linear combination of any number of mutually independent normal random variables is itself a normally distributed random variable. 
+
+### Mean Squared Error 
+
+For a random variable X and $c \in \mathbb{R}$ the MSE of X about c is $E[(X-c)^2]$. The RMSE (root mean squared error) is just the square root of this quantity. 
+
+There is an alternative formula for the MSE which is useful for other proofs. 
+
+$$\begin{aligned}
+E[(X - c)^2] &= E[X^2 - 2cX + c^2] \\
+E[(X - c)^2] &= E[X^2] - 2cE[X] + c^2 \\
+E[(X - c)^2] &= E[X^2] - E[X]^2 + E[X]^2 - 2cE[X] + c^2 \\
+E[(X - c)^2] &= (E[X^2] - E[X]^2) + [E[X]^2 - 2cE[X] + c^2] \\
+E[(X - c)^2] &= V[X] + (E[X] - c)^2
+\end{aligned}$$
+
+Using this formula we can see that the expected value of X minimizes the MSE. To prove this note that the first term in the decomposition does not depend on our choice of $c$. The second term is minimized when $(E[X] - c)^2$ is equal to 0 which occurs when $c = E[X]$. 
+
+
+### Covariance and Correlation 

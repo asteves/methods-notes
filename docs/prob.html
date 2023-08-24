@@ -2189,8 +2189,12 @@ Coding
 <li><a href="#marginal-pmf" id="toc-marginal-pmf">Marginal PMF</a></li>
 <li><a href="#conditional-pmf" id="toc-conditional-pmf">Conditional PMF</a></li>
 <li><a href="#multiplicative-law-for-pmfs" id="toc-multiplicative-law-for-pmfs">Multiplicative Law for PMFs</a></li>
+<li><a href="#jointly-continous-random-variables" id="toc-jointly-continous-random-variables">Jointly Continous Random Variables</a></li>
+<li><a href="#joint-pdf" id="toc-joint-pdf">Joint PDF</a></li>
+<li><a href="#marginal-joint-pdf" id="toc-marginal-joint-pdf">Marginal Joint PDF</a></li>
+<li><a href="#conditional-joint-pdf" id="toc-conditional-joint-pdf">Conditional Joint PDF</a></li>
 </ul></li>
-<li><a href="#multivariate-relationships" id="toc-multivariate-relationships">Multivariate Relationships</a></li>
+<li><a href="#summarizing-distributions" id="toc-summarizing-distributions">Summarizing Distributions</a></li>
 </ul>
 </nav>
 </div>
@@ -2308,7 +2312,21 @@ f(x) =\begin{cases}
 <p>The conditional pmf tells us the probability that a given value of Y occurs given that a certain value of X occurs.</p>
 <h3 id="multiplicative-law-for-pmfs">Multiplicative Law for PMFs</h3>
 <p>Let X and Y be two discrete random variables with joint pmf <span class="math inline">\(f\)</span>. Then, <span class="math inline">\(\forall x \in \mathbb{R}\)</span> and <span class="math inline">\(\forall y \in Supp[Y]\)</span>, <span class="math inline">\(f_{X|Y}(x|y)f_Y(y) = f(x,y)\)</span></p>
-<h2 id="multivariate-relationships">Multivariate Relationships</h2>
+<h3 id="jointly-continous-random-variables">Jointly Continous Random Variables</h3>
+<p>Two random variables X and Y are jointly continuous if there exists a non-negative function<span class="math inline">\(f: \mathbb{R}^2 \rightarrow \mathbb{R}\)</span> such that the joint cdf of X and Y is</p>
+<p><span class="math display">\[\begin{aligned}
+F(x,y) = Pr[X \leq x, Y \leq y] = \int_{-\infty}^x \int_{-\infty}^y f(u,v) dvdu, \forall x,y \in \mathbb{R}
+\end{aligned}\]</span></p>
+<p>We refer to the function <span class="math inline">\(f\)</span> as the joint probability density function. Exactly like in the univariate case, we can derive the joint pdf by taking the mixed second order partial derivative of the joint cdf</p>
+<h3 id="joint-pdf">Joint PDF</h3>
+<p>For jointly continous random variables X and Y with joint cdf F, the <strong>joint pdf</strong> of X and Y is <span class="math inline">\(\f(x,y) = \frac{\partial^2F(u,v)}{\partial u \partial v}\big|_{u=x, v=y}, \forall x,y \in \mathbb{R}\)</span></p>
+<p>For any jointly continous variables X and Y with a joint pdf if <span class="math inline">\(D \subseteq \mathbb{R}^2\)</span> then <span class="math inline">\(Pr[(X,Y) \in D] = \int\int f(x,y)dydx\)</span></p>
+<p>For example the probability that (X,Y) falls within <span class="math inline">\(\{0 \leq X \leq 5, Y \leq X\}\)</span> is <span class="math inline">\(\int_{0}^5\int_{0}^x f(x,y)dydx\)</span></p>
+<h3 id="marginal-joint-pdf">Marginal Joint PDF</h3>
+<p>For jointly continuous random variables X and Y with joint pdf <span class="math inline">\(f\)</span> the <strong>marginal pdf</strong> of Y is <span class="math inline">\(f_Y(y) = \int_{-\infty}^\infty f(x,y)dx, \forall y \in \mathbb{R}\)</span></p>
+<h3 id="conditional-joint-pdf">Conditional Joint PDF</h3>
+<p>For jointly continuous random variables X and Y with point pdf <span class="math inline">\(f\)</span> the <strong>conditional pdf</strong> of Y given X=x is <span class="math inline">\(f_{Y|X}(y|x) = \frac{f(x,y)}{f_X(x)}, \forall y \in \mathbb{R}, \forall x \in Supp[X]\)</span></p>
+<h2 id="summarizing-distributions">Summarizing Distributions</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr />

@@ -17,8 +17,7 @@ knitr::opts_chunk$set(echo = FALSE, eval = F)
 
 ## Sampling
 
-**Sampling**: Selecting some part of a population to observe so that we
-can estimate a population parameter
+**Sampling**: Selecting some part of a population to observe so that we can estimate a population parameter
 
 The basic setup of sampling:
 

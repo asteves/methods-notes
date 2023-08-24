@@ -27,7 +27,7 @@ import torch
 
 For tensor processing in R, we'll use the R port of `torch` 
 
-```{r}
+```{r, eval = F}
 library(torch)
 ```
 
