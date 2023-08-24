@@ -1,7 +1,7 @@
 ---
 title: "Linear Algebra Code"
 description: |
-  A Crash Course in Linear Algebra using R and Python
+  A Crash Course in Linear Algebra using R and python
 author: 
   - name: Alex Stephenson
 output:
@@ -18,16 +18,16 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## What's here? {#top}
 
-This page provides code in R and Python for doing linear algebra. In Python, we make use of the [NumPy](https://numpy.org/doc/stable/index.html) library and the PyTorch library.
+This page provides code in R and python for doing linear algebra. In python, we make use of the [NumPy](https://numpy.org/doc/stable/index.html) library and the PyTorch library.
 
 ```{python}
 import numpy as np 
-import torch
+#import torch
 ```
 
 For tensor processing in R, we'll use the R port of `torch` 
 
-```{r, eval = F}
+```{r r-packages, eval = F}
 library(torch)
 ```
 
@@ -37,7 +37,7 @@ For more on the theory of Linear Algebra consult the [Linear Algebra Notes](lina
 
 The simplest way to represent vectors in R is by using the vector data structure. 
 
-```{r}
+```{r r-vectors}
 x = c(-1.1, 0.0, 3.6, -7.2)
 length(x) ## 4 
 ```
@@ -53,7 +53,7 @@ len(x)
 
 In addition to creating vectors, we can concatenate vectors together to produce blocked and stacked vectors using the `c()` function.
 
-```{r}
+```{r r-stack}
 x = c(1,-2)
 y = c(1,1,0)
 z = c(x,y)
@@ -74,7 +74,7 @@ print(z)
 
 The Zeros vector is a default behavior of creating a vector with a given length. 
 
-```{r}
+```{r r-zeros}
 z = numeric(3)
 z
 ```
@@ -919,7 +919,7 @@ t1 = torch_tensor(1)
 
 In python using `PyTorch`
 
-```{python}
+```{python, eval = F}
 t1 = torch.tensor(1.0)
 t1
 ```

@@ -90,7 +90,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_meta_tags-->
   <title>Methods Tutoring: Linear Algebra Code</title>
 
-  <meta property="description" itemprop="description" content="A Crash Course in Linear Algebra using R and Python"/>
+  <meta property="description" itemprop="description" content="A Crash Course in Linear Algebra using R and python"/>
 
   <link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
 
@@ -99,21 +99,21 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:title" content="Methods Tutoring: Linear Algebra Code"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="A Crash Course in Linear Algebra using R and Python"/>
+  <meta property="og:description" content="A Crash Course in Linear Algebra using R and python"/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="Methods Tutoring"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
   <meta property="twitter:title" content="Methods Tutoring: Linear Algebra Code"/>
-  <meta property="twitter:description" content="A Crash Course in Linear Algebra using R and Python"/>
+  <meta property="twitter:description" content="A Crash Course in Linear Algebra using R and python"/>
   <meta property="twitter:site" content="@adastephenson"/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","output","site"]}},"value":[{"type":"character","attributes":{},"value":["Linear Algebra Code"]},{"type":"character","attributes":{},"value":["A Crash Course in Linear Algebra using R and Python\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Alex Stephenson"]}]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_depth","hightlight"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[3]},{"type":"character","attributes":{},"value":["haddock"]}]}]},{"type":"character","attributes":{},"value":["distill::distill_website"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","output","site"]}},"value":[{"type":"character","attributes":{},"value":["Linear Algebra Code"]},{"type":"character","attributes":{},"value":["A Crash Course in Linear Algebra using R and python\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Alex Stephenson"]}]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_depth","hightlight"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[3]},{"type":"character","attributes":{},"value":["haddock"]}]}]},{"type":"character","attributes":{},"value":["distill::distill_website"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -461,8 +461,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
 
   <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-  <link href="site_libs/font-awesome-6.4.0/css/all.min.css" rel="stylesheet"/>
-  <link href="site_libs/font-awesome-6.4.0/css/v4-shims.min.css" rel="stylesheet"/>
+  <link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet"/>
+  <link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet"/>
   <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
   <script src="site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
   <script src="site_libs/fuse-6.4.1/fuse.min.js"></script>
@@ -929,6 +929,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   d-article div.sourceCode pre {
     padding-left: 18px;
     font-size: 14px;
+  }
+
+  /* tweak for Pandoc numbered line within distill */
+  d-article pre.numberSource code > span {
+      left: -2em;
   }
 
   d-article pre {
@@ -1767,8 +1772,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     $('.distill-force-highlighting-css').parent().remove();
 
     // remove empty line numbers inserted by pandoc when using a
-    // custom syntax highlighting theme
-    $('code.sourceCode a:empty').remove();
+    // custom syntax highlighting theme, except when numbering line
+    // in code chunk
+    $('pre:not(.numberLines) code.sourceCode a:empty').remove();
 
     // load distill framework
     load_distill_framework();
@@ -2077,7 +2083,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2097,7 +2103,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Linear Algebra Code","description":"A Crash Course in Linear Algebra using R and Python","authors":[{"author":"Alex Stephenson","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}]}
+{"title":"Linear Algebra Code","description":"A Crash Course in Linear Algebra using R and python","authors":[{"author":"Alex Stephenson","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2151,9 +2157,10 @@ Coding
 
 <div class="d-title">
 <h1>Linear Algebra Code</h1>
+
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>A Crash Course in Linear Algebra using R and Python</p></p>
+<p><p>A Crash Course in Linear Algebra using R and python</p></p>
 </div>
 
 <div class="d-byline">
@@ -2218,10 +2225,10 @@ Coding
 </nav>
 </div>
 <h2 id="top">What’s here?</h2>
-<p>This page provides code in R and Python for doing linear algebra. In Python, we make use of the <a href="https://numpy.org/doc/stable/index.html">NumPy</a> library and the PyTorch library.</p>
+<p>This page provides code in R and python for doing linear algebra. In python, we make use of the <a href="https://numpy.org/doc/stable/index.html">NumPy</a> library and the PyTorch library.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span></code></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#import torch</span></span></code></pre></div>
 </div>
 <p>For tensor processing in R, we’ll use the R port of <code>torch</code></p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2300,25 +2307,25 @@ Coding
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>## Generate a vector of three values from a uniform distribution.</span></span>
 <span><span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span></span></code></pre>
 </div>
-<pre><code>[1] 0.1829365 0.5387020 0.4805885</code></pre>
+<pre><code>[1] 0.4805885 0.9784568 0.6175042</code></pre>
 </div>
 <p>In python</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">## By default this is on the [0,1) interval. </span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>np.random.random(<span class="dv">3</span>)</span></code></pre></div>
-<pre><code>array([0.10762894, 0.58320503, 0.94583718])</code></pre>
+<pre><code>array([0.93655451, 0.3586642 , 0.0071806 ])</code></pre>
 </div>
 We can generate additional vectors from certain distributions. The most common from a simulation standpoint are standard normal.
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span></span></code></pre>
 </div>
-<pre><code>[1]  2.0228722  1.7164500 -0.9018789</code></pre>
+<pre><code>[1]  1.7164500 -0.9018789  0.3458547</code></pre>
 </div>
 <p>In python</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>np.random.randn(<span class="dv">3</span>)</span></code></pre></div>
-<pre><code>array([ 1.11597033, -1.33289481, -2.7361315 ])</code></pre>
+<pre><code>array([ 0.90962932, -1.80680094,  1.47881754])</code></pre>
 </div>
 <p><a href="#top">Return to Top</a></p>
 <h2 id="vector-addition-and-multiplication">Vector Addition and Multiplication</h2>
@@ -2434,11 +2441,10 @@ We can generate additional vectors from certain distributions. The most common f
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>])</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.array([<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">7</span>])</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>np.inner(x,y) </span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternatively </span></span></code></pre></div>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>np.inner(x,y) </span></code></pre></div>
 <pre><code>57</code></pre>
-<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">@</span> y</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternatively </span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">@</span> y</span></code></pre></div>
 <pre><code>57</code></pre>
 </div>
 <p><a href="#top">Return to Top</a></p>
@@ -2639,13 +2645,12 @@ We can generate additional vectors from certain distributions. The most common f
 <pre><code>array([[ 2,  4,  6],
        [ 8, 10, 12],
        [14, 16, 18]])</code></pre>
-<div class="sourceCode" id="cb75"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>np.add(A,B)</span>
-<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiplication </span></span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>np.add(A,B)</span></code></pre></div>
 <pre><code>array([[ 2,  4,  6],
        [ 8, 10, 12],
        [14, 16, 18]])</code></pre>
-<div class="sourceCode" id="cb77"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>np.matmul(A,B)</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiplication </span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>np.matmul(A,B)</span></code></pre></div>
 <pre><code>array([[ 30,  36,  42],
        [ 66,  81,  96],
        [102, 126, 150]])</code></pre>
@@ -2890,7 +2895,7 @@ x2 4.0020879</code></pre>
 <span id="cb109-10"><a href="#cb109-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb109-11"><a href="#cb109-11" aria-hidden="true" tabindex="-1"></a><span class="co"># (X&#39;X)^-1X&#39;y</span></span>
 <span id="cb109-12"><a href="#cb109-12" aria-hidden="true" tabindex="-1"></a>np.linalg.inv(X.T <span class="op">@</span> X) <span class="op">@</span> X.T <span class="op">@</span> y</span></code></pre></div>
-<pre><code>array([0.50247137, 2.01183804, 3.99248736])</code></pre>
+<pre><code>array([0.48967586, 1.99014981, 3.98952554])</code></pre>
 </div>
 <h3 id="frisch-waugh-lovell-fwl">Frisch-Waugh-Lovell (FWL)</h3>
 <p>FWL states that any coefficient in an OLS fit is equivalent to the coefficient estimated from a bivariate model in which the residualized outcome is regressed onto the residualized component of the predictors, and the residuals are taken from models regressing the outcome and the coefficient on all other coefficients in the OLS fit separately.</p>
@@ -3212,10 +3217,9 @@ Colorado    1.4993407 -0.9776297  1.08400162 -0.001450164</code></pre>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode" id="cb130"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> torch.tensor(<span class="fl">1.0</span>)</span>
 <span id="cb130-2"><a href="#cb130-2" aria-hidden="true" tabindex="-1"></a>t1</span></code></pre></div>
-<pre><code>tensor(1.)</code></pre>
 </div>
 <p><a href="#top">Return to Top</a></p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

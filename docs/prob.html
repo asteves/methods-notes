@@ -461,8 +461,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
 
   <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-  <link href="site_libs/font-awesome-6.4.0/css/all.min.css" rel="stylesheet"/>
-  <link href="site_libs/font-awesome-6.4.0/css/v4-shims.min.css" rel="stylesheet"/>
+  <link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet"/>
+  <link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet"/>
   <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
   <script src="site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
   <script src="site_libs/fuse-6.4.1/fuse.min.js"></script>
@@ -929,6 +929,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   d-article div.sourceCode pre {
     padding-left: 18px;
     font-size: 14px;
+  }
+
+  /* tweak for Pandoc numbered line within distill */
+  d-article pre.numberSource code > span {
+      left: -2em;
   }
 
   d-article pre {
@@ -1767,8 +1772,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     $('.distill-force-highlighting-css').parent().remove();
 
     // remove empty line numbers inserted by pandoc when using a
-    // custom syntax highlighting theme
-    $('code.sourceCode a:empty').remove();
+    // custom syntax highlighting theme, except when numbering line
+    // in code chunk
+    $('pre:not(.numberLines) code.sourceCode a:empty').remove();
 
     // load distill framework
     load_distill_framework();
@@ -2077,7 +2083,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2151,6 +2157,7 @@ Coding
 
 <div class="d-title">
 <h1>Probability</h1>
+
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
 <p><p>Notes on Probability.</p></p>
@@ -2194,7 +2201,23 @@ Coding
 <li><a href="#marginal-joint-pdf" id="toc-marginal-joint-pdf">Marginal Joint PDF</a></li>
 <li><a href="#conditional-joint-pdf" id="toc-conditional-joint-pdf">Conditional Joint PDF</a></li>
 </ul></li>
-<li><a href="#summarizing-distributions" id="toc-summarizing-distributions">Summarizing Distributions</a></li>
+<li><a href="#summarizing-distributions" id="toc-summarizing-distributions">Summarizing Distributions</a>
+<ul>
+<li><a href="#expected-values" id="toc-expected-values">Expected Values</a></li>
+<li><a href="#expectation-of-a-function-of-a-random-variable" id="toc-expectation-of-a-function-of-a-random-variable">Expectation of a Function of a Random Variable</a></li>
+<li><a href="#properties-of-expected-values" id="toc-properties-of-expected-values">Properties of Expected values</a></li>
+<li><a href="#linearity-of-expectation" id="toc-linearity-of-expectation">Linearity of Expectation</a></li>
+<li><a href="#raw-and-central-moments" id="toc-raw-and-central-moments">Raw and Central Moments</a></li>
+<li><a href="#variance" id="toc-variance">Variance</a></li>
+<li><a href="#properties-of-variance" id="toc-properties-of-variance">Properties of variance</a></li>
+<li><a href="#the-standard-deviation" id="toc-the-standard-deviation">The standard deviation</a></li>
+<li><a href="#properties-of-the-standard-deviation" id="toc-properties-of-the-standard-deviation">Properties of the standard deviation</a></li>
+<li><a href="#chebyshevs-inequality" id="toc-chebyshevs-inequality">Chebyshev’s Inequality</a></li>
+<li><a href="#the-normal-distribution" id="toc-the-normal-distribution">The Normal Distribution</a></li>
+<li><a href="#properties-of-the-normal-distribution" id="toc-properties-of-the-normal-distribution">Properties of the Normal Distribution</a></li>
+<li><a href="#mean-squared-error" id="toc-mean-squared-error">Mean Squared Error</a></li>
+<li><a href="#covariance-and-correlation" id="toc-covariance-and-correlation">Covariance and Correlation</a></li>
+</ul></li>
 </ul>
 </nav>
 </div>
@@ -2327,6 +2350,138 @@ F(x,y) = Pr[X \leq x, Y \leq y] = \int_{-\infty}^x \int_{-\infty}^y f(u,v) dvdu,
 <h3 id="conditional-joint-pdf">Conditional Joint PDF</h3>
 <p>For jointly continuous random variables X and Y with point pdf <span class="math inline">\(f\)</span> the <strong>conditional pdf</strong> of Y given X=x is <span class="math inline">\(f_{Y|X}(y|x) = \frac{f(x,y)}{f_X(x)}, \forall y \in \mathbb{R}, \forall x \in Supp[X]\)</span></p>
 <h2 id="summarizing-distributions">Summarizing Distributions</h2>
+<h3 id="expected-values">Expected Values</h3>
+<p>For a discrete random variable <em>X</em> with pmf <em>f</em> if <span class="math inline">\(\sum_x |x|f(x) &lt; \infty\)</span>, then the expected value of X is:</p>
+<p><span class="math display">\[E[X] = \sum_x xf(x)\]</span></p>
+<p>For a continuous case with a pdf <em>f</em> with <span class="math inline">\(\int_{-\infty}^\infty |x|f(x)dx &lt; \infty\)</span> the expected value of X is:</p>
+<p><span class="math display">\[E[X] = \int_{-\infty}^\infty xf(x)dx\]</span></p>
+<p>A common distribution both for explication and for binary data is the <em>Bernoulli Distribution</em>. Let <span class="math inline">\(X \sim Bernoulli(p)\)</span>. The expected value of this distribution is:</p>
+<p><span class="math display">\[E[X] = \sum_{x=0}^1xf(x) = 0(1-p) + 1(p) = p\]</span></p>
+<p>Another example is the standard normal distribution.</p>
+<p><span class="math display">\[\begin{aligned}E[X] &amp;= \int_{-\infty}^\infty x \frac{e^{\frac{-x^2}{2}}}{\sqrt{2\pi}}dx \\
+E[X] &amp;= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty xe^{\frac{-x^2}{2}}dx \\
+E[X] &amp;= \frac{1}{\sqrt{2\pi}}(-e^{\frac{-x^2}{2}})|_{-\infty}^\infty \\
+E[X] &amp;= 0
+\end{aligned}\]</span></p>
+<p>See the <a href="optim.html">Calculus</a> notes for more details on the integration process.</p>
+<h3 id="expectation-of-a-function-of-a-random-variable">Expectation of a Function of a Random Variable</h3>
+<p>Functions of random variables are themselves random variables. If X is a discrete random variable with pmf <em>f</em> and <em>g</em> is a function of X, then:</p>
+<p><span class="math display">\[E[g(X)] = \sum_x g(x)f(x)\]</span></p>
+<p>Similarly the continuous case is:</p>
+<p><span class="math display">\[E[g(X)] = \int_{-\infty}^infty g(x)f(x)dx\]</span></p>
+<p>An immediate implication of this theorem is that whenever you see a regression of any kind, it’s a type of average.</p>
+<h3 id="properties-of-expected-values">Properties of Expected values</h3>
+<p>For a random variable X</p>
+<ul>
+<li><span class="math inline">\(\forall c \in \mathbb{R}, E[c] = c\)</span></li>
+<li><span class="math inline">\(\forall a \in \mathbb{R}, E[aX] = aE[X]\)</span></li>
+</ul>
+<p>To prove the first, note that any constant can be considered a degenerate distribution with a pmf equaling one if x is the constant and 0 otherwise. Then:</p>
+<p><span class="math display">\[\begin{aligned}
+E[c] &amp;= \sum_x xf(x) \\
+E[c] &amp;= cf(c) \\
+E[c] &amp;= c(1) \\
+E[c] &amp;= c
+\end{aligned}\]</span></p>
+<p>For the second, in the discrete case:</p>
+<p><span class="math display">\[\begin{aligned}
+E[aX] &amp;= E[g(X)] \\
+E[aX] &amp;= \sum_x g(x)f(x) \\
+E[aX] &amp;= \sum_x axf(x) \\
+E[aX] &amp;= a \sum_x xf(x) \\
+E[aX] &amp;= aE[X]
+\end{aligned}\]</span></p>
+<p>The continuous proof is analogous just with integrals instead of sum operators.</p>
+<h3 id="linearity-of-expectation">Linearity of Expectation</h3>
+<p>Let X and Y be random variables. <span class="math inline">\(\forall a,b,c \in \mathbb{R}\)</span></p>
+<p><span class="math display">\[E[aX + bY + c] = aE[X] + bE[Y] + c\]</span></p>
+<p>The proof for linearity takes advantage of the fact that the expectation of a function of two random variables is <span class="math inline">\(\sum_x \sum_y h(x,y)f(x,y)\)</span></p>
+<p><span class="math display">\[\begin{aligned}
+E[aX + bY + c] &amp;= \sum_x \sum_y h(x,y)f(x,y) \\
+E[aX + bY + c] &amp;= (ax + by + c)f(x,y) \\
+E[aX + bY + c] &amp;= a \sum_x \sum_y xf(x,y) + b \sum_x \sum_y yf(x,y) + c \sum_x \sum_y f(x,y) \\
+E[aX + bY + c] &amp;= a \sum_x x \sum_y f(x,y) + b \sum_y y \sum_x f(x,y) + c \sum_x \sum_y f(x,y) \\
+E[aX + bY + c] &amp;= a \sum_x x f_X(x) + b \sum_y yf_Y(y) + c \sum_x f_X(x) \\
+E[aX + bY + c] &amp;= aE[X] + bE[Y] + c(1) \\
+E[aX + bY + c] &amp;= aE[X] + bE[Y] + c
+\end{aligned}\]</span></p>
+<p>The continuous proof is again analogous with appropriate replacement of integrals for summations.</p>
+<h3 id="raw-and-central-moments">Raw and Central Moments</h3>
+<p>For a random variable X and <span class="math inline">\(j \in \mathbb{N}\)</span> the <span class="math inline">\(j^{th}\)</span> raw moment of X is <span class="math inline">\(\mu&#39;_j = E[X^J]\)</span></p>
+<p>The expected value is the first raw moments. Raw moments provide summary information about a distribution’s shape and location. We often would like summary measures that reflect the shape and spread of a distribution and do not depend on the expected value of the distribution. The <span class="math inline">\(j^{th}\)</span> central moment is</p>
+<p><span class="math display">\[\mu_j = E[(X - E[X])^j]\]</span></p>
+<h3 id="variance">Variance</h3>
+<p>The variance is the second central moment and characterizes the variability or spread of a distribution. Higher variance implies greater unpredictability. The variance of a random variable X is defined as:</p>
+<p><span class="math display">\[V[X] = E[(X - E[X])^2]\]</span></p>
+<p>We will often see an alternative formula <span class="math inline">\(V[X] = E[X^2] - E[X]^\)</span> and it is common for this to be proved. To do so:</p>
+<p><span class="math display">\[\begin{aligned}
+V[X] &amp;= E[(X - E[X])^2] \\
+V[X] &amp;= E[X^2 - 2XE[X] + E[X^2]] \\
+V[X] &amp;= E[X^2] - 2E[XE[X]] + E[E[X]^2] \\
+V[X] &amp;= E[X^2] - 2E[X]E[X] + E[X]^2 \\
+V[X] &amp;= E[X^2] - 2E[X]^2 + E[X]^2 \\
+V[X] &amp;= E[X^2] - E[X]^2
+\end{aligned}\]</span></p>
+<p>We are able to do this because E[X] is itself a constant and therefore we can treat it as such whenever we apply the linearity of expectations.</p>
+<h3 id="properties-of-variance">Properties of variance</h3>
+<p>For a random variable X</p>
+<ul>
+<li><span class="math inline">\(\forall c \in \mathbb{R}, V[X + c] = V[X]\)</span></li>
+<li><span class="math inline">\(\forall a \in \mathbb{R}, V[aX] = a^2V[X]\)</span></li>
+</ul>
+<p>Proof for the first one:</p>
+<p><span class="math display">\[\begin{aligned}
+V[X + c] &amp;= E[(X + c - E[x + c])^2] \\
+V[X + c] &amp;= E[(X + c - E[X] + c)^2] \\
+V[X + c] &amp;= E[(x - E[X])^2] \\
+V[X + c] &amp;= V[X]
+\end{aligned}\]</span></p>
+<p>To prove the second:</p>
+<p><span class="math display">\[\begin{aligned}
+V[aX] &amp;= E[(aX - E[aX])^2] \\
+V[aX] &amp;= E[(aX - aE[X])^2] \\
+V[aX] &amp;= E[a^2(X - E[X])^2] \\
+V[aX] &amp;= a^2E[(X - E[X])^2] \\
+V[aX] &amp;= a^2V[X]
+\end{aligned}\]</span></p>
+<h3 id="the-standard-deviation">The standard deviation</h3>
+<p>The standard deviation is just the square root of the variance <span class="math inline">\(\sigma[X] = \sqrt{V[X]}\)</span></p>
+<h3 id="properties-of-the-standard-deviation">Properties of the standard deviation</h3>
+<p>For a random variable X:</p>
+<ul>
+<li><span class="math inline">\(\forall c \in \mathbb{R}, \sigma[X + c] = \sigma[X]\)</span></li>
+<li><span class="math inline">\(\forall a \in \mathbb{R}, \sigma[aX] = |a|\sigma[X]\)</span></li>
+</ul>
+<p>A reason to prefer the standard deviation is that the variance is in units squared. The standard deviation is on the same scale as the random variable of interest.</p>
+<h3 id="chebyshevs-inequality">Chebyshev’s Inequality</h3>
+<p>Knowing the mean and the standard deviation allows us to infer other features of a distribution. Chebyshev’s inequality puts an upper bound on the probability that a draw from a distribution will be more than a given number of standard deviations from the mean.</p>
+<p>Let X be a random variable with a finite variance. Then <span class="math inline">\(\forall \epsilon &gt; 0 Pr[|X - E[X]| \geq \epsilon \sigma [X]] \leq \frac{1}{\epsilon^2}\)</span></p>
+<h3 id="the-normal-distribution">The Normal Distribution</h3>
+<p>A continuous random variable X follows a normal if it has a pdf <span class="math inline">\(f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^\frac{-(x-\mu)^2}{2\sigma^2}, \forall x \in \mathbb{R}\)</span></p>
+<p>for some constants <span class="math inline">\(\mu, \sigma \in \mathbb{R}\)</span>. If <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span> then:</p>
+<ul>
+<li><span class="math inline">\(E[X] = \mu\)</span></li>
+<li><span class="math inline">\(\sigma[X] = \sigma\)</span></li>
+</ul>
+<h3 id="properties-of-the-normal-distribution">Properties of the Normal Distribution</h3>
+<p>Suppose <span class="math inline">\(X \sim N(\mu_X, \sigma^2_X), Y \sim N(\mu_Y, \sigma^2_Y)\)</span>. Then:</p>
+<ul>
+<li><span class="math inline">\(\forall a,b \in \mathbb{R} a \neq 0, W = aX + b \implies W \sim N(a\mu_X + b, a^2\sigma^2_X)\)</span></li>
+<li><span class="math inline">\(X \perp \!\!\! \perp Y and Z = X + Y \implies Z \sim N(\mu_X + \mu_Y, \sigma^2_X + \sigma^2_Y)\)</span></li>
+</ul>
+<p>An implication of this proof is that any linear combination of any number of mutually independent normal random variables is itself a normally distributed random variable.</p>
+<h3 id="mean-squared-error">Mean Squared Error</h3>
+<p>For a random variable X and <span class="math inline">\(c \in \mathbb{R}\)</span> the MSE of X about c is <span class="math inline">\(E[(X-c)^2]\)</span>. The RMSE (root mean squared error) is just the square root of this quantity.</p>
+<p>There is an alternative formula for the MSE which is useful for other proofs.</p>
+<p><span class="math display">\[\begin{aligned}
+E[(X - c)^2] &amp;= E[X^2 - 2cX + c^2] \\
+E[(X - c)^2] &amp;= E[X^2] - 2cE[X] + c^2 \\
+E[(X - c)^2] &amp;= E[X^2] - E[X]^2 + E[X]^2 - 2cE[X] + c^2 \\
+E[(X - c)^2] &amp;= (E[X^2] - E[X]^2) + [E[X]^2 - 2cE[X] + c^2] \\
+E[(X - c)^2] &amp;= V[X] + (E[X] - c)^2
+\end{aligned}\]</span></p>
+<p>Using this formula we can see that the expected value of X minimizes the MSE. To prove this note that the first term in the decomposition does not depend on our choice of <span class="math inline">\(c\)</span>. The second term is minimized when <span class="math inline">\((E[X] - c)^2\)</span> is equal to 0 which occurs when <span class="math inline">\(c = E[X]\)</span>.</p>
+<h3 id="covariance-and-correlation">Covariance and Correlation</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr />
